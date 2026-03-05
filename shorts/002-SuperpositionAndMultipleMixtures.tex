@@ -49,32 +49,32 @@
 
 Given that the addition of state vectors in quantum mechanics does not represent a physically realizable operation, it is difficult to give quantum superpositions a direct, physically meaningful interpretation. Here we show that the existence of superpositions is equivalent to the existence of a statistical ensemble that can be prepared as a statistical mixture of different pure states, which is a physically meaningful operation. Given that mixtures of different classical states always yields a different ensemble, this insight also tells us why classical superpositions are not possible.
 
-\section{Premises}
+\section{Premises and conditions}
 
-Let us first describe the relevant premises. The base premise is that we are working with quantum states with their standard representation in terms of complex vector spaces.
+Let us first describe the relevant premises and conditions. The base premise is that we are working with quantum states with their standard representation in terms of complex vector spaces.
 
-\begin{premise}[QST]\label{QST}
+\begin{condition}[QST]\label{QST}
 	The state of a quantum system is represented by a ray of a complex inner product space $\mathcal{H}$ associated to that system. An ensemble is represented by a density operator $\rho : \mathcal{H} \to \mathcal{H}$, that is a positive semi-definite trace one self-adjoint operator.
-\end{premise}
+\end{condition}
 
-The first premise states that one state can be expressed as a superposition of other two.
+The first condition states that one state can be expressed as a superposition of other two.
 
-\begin{premise}[QSUP-PUR]\label{QSUP-PUR}
+\begin{condition}[QSUP-PUR]\label{QSUP-PUR}
 	A pure state $\phi$ can be expressed as a superposition of $\psi_1$ and $\psi_2$. That is, $|\phi\> = c_1 |\psi_1\> + c_2 | \psi_2\>$.
-\end{premise}
+\end{condition}
 
-The second premise states that we can find a mixed state $\rho$ that can be expressed as a mixture of $\psi_1$ and $\psi_2$ as well as a mixture of $\phi$ and something else.
+The second condition states that we can find a mixed state $\rho$ that can be expressed as a mixture of $\psi_1$ and $\psi_2$ as well as a mixture of $\phi$ and something else.
 
-\begin{premise}[QSUP-MIX]\label{QSUP-MIX}
+\begin{condition}[QSUP-MIX]\label{QSUP-MIX}
 	There exists a mixed state $\rho$ that is mixture of $\psi_1$ and $\psi_2$ and also a mixture of $\phi$ and some other states. That is, $\rho = p_{1} \rho_{\psi_1} + p_{2} \rho_{\psi_2} = p_{\phi} \rho_{\phi} + p_{\hat{\phi}} \rho_{\hat{\phi}}$.
-\end{premise}
+\end{condition}
 
 \section{Claim}
 
-The claim is that the two premises are equivalent over the base premise.
+The claim is that the two conditions are equivalent over the base premise.
 
 \begin{claim}
-	The premises \ref{QSUP-PUR} and\ref{QSUP-MIX} are equivalent over \ref{QST}.
+	Conditions \ref{QSUP-PUR} and \ref{QSUP-MIX} are equivalent over \ref{QST}.
 \end{claim}
 
 \begin{demonstration}

@@ -54,8 +54,8 @@
 \newtheorem{postulate}{Postulate}
 \renewcommand*{\thepostulate}{\Roman{postulate}}
 
-\newtheorem{premiseth}{Premise}
-\renewcommand*{\thepremiseth}{\Roman{premiseth}}
+\newtheorem{condth}{Condition}
+\renewcommand*{\thecondth}{\Roman{condth}}
 
 \newtheorem{axiom}[equation]{Axiom}
 \newtheorem{defn}[equation]{Definition}
@@ -83,21 +83,7 @@
 \renewenvironment{check}{\emph{Consistency check}.}{\qed}
 \newenvironment{demonstration}{\emph{Demonstration}.}{\qed}
 
-%\newenvironment{premise}[1][]{\renewcommand{\thepremiseth}{#1}\begin{premiseth}}
-%{\end{premiseth}\renewcommand{\theassump}}{\Roman{assump}}
-%\newenvironment{premise}[1][]{\renewcommand{\thepremiseth}{#1}}{\renewcommand{\theassump}{\Roman{assump}}}
-\newenvironment{premise}[1][]{\renewcommand{\thepremiseth}{#1}\begin{premiseth}}
-{\end{premiseth}\renewcommand{\theassump}{\Roman{assump}}}
-
-%
-%\newtheorem{premise}[equation]{Conjecture}
-%\renewcommand{\theassump}{DR}
-%\begin{assump}[Determinism and Reversibility]\label{assum_detrev}
-%	The system undergoes deterministic and reversible evolution. That is, specifying the state of the system at a particular time is equivalent to specifying the state at a future (determinism) or past (reversibility) time.
-%\end{assump}
-%\renewcommand{\theassump}{\Roman{assump}}
-
-
+\newenvironment{condition}[1][]{\renewcommand{\thecondth}{#1}\begin{condth}}{\end{condth}\renewcommand{\theassump}{\Roman{assump}}}
 
 % General math symbols
 % --------------------
