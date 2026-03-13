@@ -24,8 +24,15 @@ jobs:
           working_directory: repo/shorts
           root_file: "*.tex"
 
-      - name: List
-        run: ls -R
+      - name: Upload to autogen repository
+        run: |
+          # Clone autogen repository
+          git clone https://gcarcassi:${{ secrets.AUTOGEN_TOKEN }}@github.com/assumptionsofphysics/autogen autogen
+          ls -R
+          cd repo
+          find . -type f -iname '*.pdf' -print0 | rsync -0a --files-from=- --remove-source-files ./ ../autogen/
+          cd ..
+          ls -R
 
 #      - name: Upload to autogen repository
 #        run: |
