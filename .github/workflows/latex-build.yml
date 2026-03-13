@@ -22,7 +22,7 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/shorts
-          root_file: *.tex
+          root_file: "*.tex"
 
       - name: List
         run: ls -R
