@@ -44,7 +44,7 @@ jobs:
 #            git config user.email "gabriele.carcassi@gmail.com"
 #            git pull
 #            git commit -m "Updating book draft"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+#            git push
+#          else
+#            echo "No changes to commit."
+#          fi
