@@ -3,7 +3,7 @@ name: Build and publish
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   #push:
-  #  branches: [ "master" ]
+  # branches: [ "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
       - name: Compile articles
         uses: xu-cheng/latex-action@v4
         with:
-          working_directory: repo/shorts
+          working_directory: repo/briefs
           root_file: "*.tex"
 
       - name: Upload to autogen repository
@@ -33,6 +33,17 @@ jobs:
           find . -type f -iname '*.pdf' -print0 | rsync -0a --files-from=- --remove-source-files ./ ../autogen/
           cd ..
           ls -R
+          git add '**/*.pdf'
+          # Commit and push only if there were changes
+          if ! git diff --cached --quiet; then
+            git config user.name "gcarcassi[bot]"
+            git config user.email "gabriele.carcassi@gmail.com"
+            git pull
+            git commit -m "Updating book draft"
+            git status
+          else
+            echo "No changes to commit."
+          fi
 
 #      - name: Upload to autogen repository
 #        run: |
