@@ -1,45 +1,12 @@
-\documentclass{article}
-
-\usepackage{../common/assumptionsofphysics}
-
-
-\usepackage{graphicx} % Needed to include images
-\usepackage[destlabel]{hyperref}
-\hypersetup{
-	colorlinks=true,
-	urlcolor=blue,
-	linkcolor=blue
-}
-\urlstyle{same}
-
-\usepackage{lipsum,cuted,setspace,enumerate}
-\usepackage{changepage}
-\usepackage{tabularx}
-\usepackage{adjustbox}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{array}
-
-
+\documentclass{techbrief}
 
 \title{Directional vectors vs quantum state vectors}
 \author{Gabriele Carcassi for the AoP collaboration}
 \date{}
 
-\makeatletter\let\Title\@title\makeatother
-
 \begin{document}
 
-\makebox[\textwidth][c]{
-	\begin{tabular}[t]{b{15cm} m{2.5cm}}
-		\begin{tabular}{@{}l@{}}{\Large\fontfamily{phv}\selectfont\bfseries{Assumptions of Physics}} \vspace{0.15em} \\  {\large \emph{Technical Briefs}} \vspace{0.4em} \\  {\small \url{https://assumptionsofphysics.org}} \\ \end{tabular}
-		& \includegraphics[width=2.5cm] {../common/AssumptionsLogo1000.png}\\
-	\end{tabular}}
-	
-\begingroup
-\let\newpage\relax% Void the actions of \newpage
 \maketitle
-\endgroup
 	
 \begin{abstract}
 	We show why a direction in physical space is represented by a vector for the form $\cos \varphi \sin \theta e_x + \sin \varphi \sin \theta e_y + \cos \theta e_z$ while the state vector for a qubit, which also corresponds to a direction in physical space, is of the form $\cos \frac{\theta}{2} e^{-\imath \frac{\varphi}{2}} | z^+ \> + \sin \frac{\theta}{2} e^{\imath \frac{\varphi}{2}} | z^+ \>$.
