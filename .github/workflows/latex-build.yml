@@ -26,14 +26,19 @@ jobs:
 
       - name: Upload to autogen repository
         run: |
+          # Clone tools repository (it has the script)
+          git clone https://github.com/assumptionsofphysics/tools tools
           # Clone autogen repository
           git clone https://gcarcassi:${{ secrets.AUTOGEN_TOKEN }}@github.com/assumptionsofphysics/autogen autogen
           ls -R
+          # Run the script
+          python tools/problem-scraper/technicalBriefIndex.py autogen/briefs/briefs.json repo/briefs/*.tex 
           cd repo
           find . -type f -iname '*.pdf' -print0 | rsync -0a --files-from=- --remove-source-files ./ ../autogen/
           cd ../autogen
           ls -R
           git add '**/*.pdf'
+          git add 'briefs/briefs.json'
           # Commit and push only if there were changes
           if ! git diff --cached --quiet; then
             git config user.name "gcarcassi[bot]"
