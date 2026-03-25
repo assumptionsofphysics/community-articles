@@ -1,5 +1,9 @@
 \documentclass{techbrief}
 
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
 \title{Directional vectors vs quantum state vectors}
 \author{Gabriele Carcassi}
 \category{Quantum mechanics}
@@ -19,6 +23,49 @@ In this note we compare vectors as they are used to represent directions in spac
 
 \section{States and spatial directions}
 
+\begin{figure}[h]
+	\centering
+	\label{figure1}
+	% play with the scale parameter to adjust size.
+	\begin{tikzpicture}[scale = 1.0, line cap=round, line join=round, >=Triangle]
+		% equator
+		\draw [rotate around={0.:(0.,0.)},dash pattern=on 3pt off 3pt] (0,0) ellipse (2cm and 0.9cm);
+		% axis
+		\draw [lightgray] (0,-2) -- (0,2);
+		\draw [lightgray] (0.82,0.82) -- (-0.82,-0.82);
+		\draw [lightgray] (-2,0) -- (2,0);
+		% main circle
+		\draw(0,0) circle (2cm);
+		\clip(-2.19,-2.49) rectangle (2.66,2.58);
+		% angle
+		\draw [shift={(0,0)}, lightgray, fill, fill opacity=0.1] (0,0) -- (56.7:0.4) arc (56.7:90.:0.4) -- cycle;
+		% circles
+		% vectors
+		\draw (0,0) -- (0.70,1.07);
+		\draw [dashed] (0.7,1.08) -- (0.7,-0.46);
+		\draw [dashed] (1.16,0) -- (0.7,-0.46);
+		\draw [dotted] (0,0) -- (0.7,-0.46);
+		\draw [dashed] (0,1.54) -- (0.7,1.08);
+		\draw [dashed] (-0.46,-0.46) -- (0.7,-0.46);
+		\draw [->] (0,0) -- node[below left=-3] {$v_z$} (0,1.54);
+		\draw [->] (0,0) -- node[above=-2.5] {$v_x$} (1.16,0);
+		\draw [->] (0,0) -- node[above left=-4] {$v_y$}(-0.46,-0.46);
+		% symbols
+		\draw (0.01,0.9) node[anchor=north west] {$\theta$};
+		\draw (-1.15,-0.86) node[anchor=north west] {$y$};
+		\draw (2.07,0.3) node[anchor=north west] {$x$};
+		\draw (-0.2,2.4) node[anchor=north west] {$z$};
+		
+		%\draw (0.4,1.65) node[anchor=north west] {$|\psi\>$};
+		% decoration
+		\scriptsize
+		%\draw [fill] (0,0) circle (1.5pt);
+		%\draw [fill] (0.7,1.1) circle (0.5pt);
+	\end{tikzpicture} 
+	\caption{A direction in space or a pure state on the Bloch sphere.\protect\footnotemark}
+\end{figure}
+\footnotetext{\label{note1}Figures contributed by Aleksi Winstén}
+
 A direction in space is identified by a normalized vector in a three dimensional space. Though these can be identifies by two angles, the linearity is best expressed in Cartesian components.
 \begin{equation}
 	\begin{aligned}
@@ -32,14 +79,69 @@ Note how the basis is composed by orthogonal directions in space and that the co
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.40\textwidth]{tempimages/DirectionalVectors.jpg}
-	\caption{A pure state on the Bloch sphere.}\label{directionsInSpace}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.75\textwidth]{tempimages/QuantumProbabilities.jpg}
-	\caption{On the left, quantum states on the projective space. On the right, quantum state on the vector space.}\label{stateSpace}
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[scale = 1.0, line cap=round, line join=round, >=Triangle]
+			\clip(-2.5,-2.5) rectangle (2.66,2.58);
+			% angle
+			\draw [shift={(0,0)}, lightgray, fill, fill opacity=0.1] (0,0) -- (45:0.4) arc (45:90.:0.4) -- cycle;
+			% circle
+			\draw(0,0) circle (2cm);
+			% guides
+			\draw [lightgray] (-2,0)-- (2,0);
+			\draw [lightgray] (0,-2)-- (0,2);
+			% vector
+			\draw [->] (0,0) -- (1.41,1.41);
+			\draw [dashed] (0,1.41)-- (1.41,1.41);
+			% brackets
+			\draw[decorate,decoration={brace, amplitude = 6pt, raise = 0pt}] (0,-2) -- (0,1.41) node[midway, xshift = -18pt]{\footnotesize $p(z^+)$};
+			\draw[decorate,decoration={brace, amplitude = 6pt, raise = 0pt}] (0,1.41) -- (0,2) node[midway, xshift = -18pt, yshift = -4pt]{\footnotesize $p(z^-)$};
+			% symbols
+			\draw (0.01,0.9) node[anchor=north west] {$\theta$};
+			\draw (0,1.41) node[anchor=south west] {$A$};
+			\draw (1,1) node[anchor=north west] {$v$};
+			\draw (0,2.3) node[] {$z^+$};
+			\draw (0,-2.3) node[] {$z^-$};
+			% decoration
+			\scriptsize
+			\draw [fill] (0,1.41) circle (1pt);
+		\end{tikzpicture}
+		\par\small States (projective space)
+	\end{minipage}
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[scale = 1.0, line cap=round, line join=round, >=Triangle]
+			\clip(-2.5,-2.5) rectangle (2.66,2.58);
+			% angle
+			\draw [shift={(0,0)}, lightgray, fill, fill opacity=0.1] (0,0) -- (67.5:0.4) arc (67.5:90.:0.4) -- cycle;
+			% circle
+			\draw(0,0) circle (2cm);
+			% guides
+			\draw [lightgray] (-2,0)-- (2,0);
+			\draw [lightgray] (0,-2)-- (0,2);
+			\draw [lightgray] (-1.41,-1.41)-- (1.41,1.41);
+			\draw [lightgray] (1.41,-1.41)-- (-1.41,1.41);
+			% vector
+			\draw [->] (0,0) -- (0.765,1.848);
+			\draw [lightgray,dashed] (0,0) -- (-0.765,-1.848);
+			\draw [dashed] (0,1.848)-- (0.765,1.848);
+			\draw [dashed] (0.765,1.848)-- (0.765,0);
+			% brackets
+			\draw[decorate,decoration={brace, amplitude = 8pt, raise = 0pt}] (0,0) -- (0,1.848) node[midway, left = 6pt]{\footnotesize $\sqrt{p(z^+)}$};
+			\draw[decorate,decoration={brace, amplitude = 4pt, raise = 0pt, mirror}] (0,0) -- (0.765,0) node[midway, xshift = 0pt, yshift = -10pt]{\footnotesize $\sqrt{p(z^-)}$};
+			% symbols
+			\draw (0.15,0.9) node[] {$\frac{\theta}{2}$};
+			% \draw (1,1) node[anchor=north west] {$\mathbf {V}$};
+			\draw (0,2.3) node[] {$z^+$};
+			\draw (0,-2.3) node[] {$z^+$};
+			\draw (-2.3,0) node[] {$z^-$};
+			\draw (2.3,0) node[] {$z^-$};
+			% decoration
+			\scriptsize
+		\end{tikzpicture}
+		\par\small State vectors
+	\end{minipage}
+	\caption{On the left, quantum states on the projective space. On the right, quantum state on the vector space.\textsuperscript{\ref{note1}}}
 \end{figure}
 
 In quantum mechanics, we are interested in probability of outcomes of a directional measurement. If we fix a direction, two outcomes are possible. For any other state, the probability of outcome must be proportional to the component in that direction. For a measurement along the $z$ direction, the probabilities must be:
