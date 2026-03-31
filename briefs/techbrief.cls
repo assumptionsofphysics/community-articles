@@ -33,10 +33,16 @@
 \newcommand\@video{}
 
 % Redefine maketitle
+% - {\small \url{https://assumptionsofphysics.org}}
 \renewcommand{\maketitle}{
 	\makebox[\textwidth][c]{
 		\begin{tabular}[t]{b{15cm} m{2.5cm}}
-			\begin{tabular}{@{}l@{}}{\Large\fontfamily{phv}\selectfont\bfseries{Assumptions of Physics}} \vspace{0.15em} \\  {\large \emph{Technical Briefs}} \vspace{0.4em} \\  {\small \url{https://assumptionsofphysics.org}} \\ \end{tabular}
+			\begin{tabular}{@{}l@{}}
+			\includegraphics {../common/AssumptionsOfPhysics14pt.png}  \vspace{0.3em} \\
+			{\LARGE \fontfamily{qhv}\selectfont Technical Brief}
+		 	\vspace{0.2em} \\
+			{\scriptsize \emph{More technical briefs at \url{https://assumptionsofphysics.org/resources/briefs}}} \vspace{0.6em} \\
+			\end{tabular}
 			& \includegraphics[width=2.5cm] {../common/AssumptionsLogo1000.png}\\
 	\end{tabular}}
 
