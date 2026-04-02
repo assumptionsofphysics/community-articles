@@ -83,7 +83,8 @@
 \renewenvironment{check}{\emph{Consistency check}.}{\qed}
 \newenvironment{demonstration}{\emph{Demonstration}.}{\qed}
 
-\newenvironment{condition}[1][]{\renewcommand{\thecondth}{#1}\begin{condth}}{\end{condth}\renewcommand{\theassump}{\Roman{assump}}}
+\newenvironment{condition}[2][]{\renewcommand{\thecondth}{#2}\begin{condth}[#1]\label{#2}}{\end{condth}\renewcommand{\thecondth}{\Roman{condth}}}
+
 
 % General math symbols
 % --------------------
