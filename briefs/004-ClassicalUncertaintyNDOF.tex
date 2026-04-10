@@ -1,0 +1,165 @@
+\documentclass{techbrief}
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{positioning,calc,arrows,arrows.meta, shapes, decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+
+
+\title{Classical uncertainty principle}
+\author{Gabriele Carcassi}
+\category{Classical mechanics}
+\tags{Uncertainty principle, Covariance matrix, Entropy}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	We show that the lower bound on the entropy given by the third law of thermodynamics gives rise the classical uncertainty principle $ \sigma_q \sigma_p \geq \frac{\hbar}{e}$. For non-conjugate variables, the relationship becomes $\sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln |\{f,g\}|]}$, where $E[\ln |\{f,g\}|]$ is the expectation of the logarithm of the absolute value of the Poisson bracket.
+\end{abstract}
+
+\section{Introduction}
+
+The third law of thermodynamics states that the entropy of a system cannot be negative, imposing a lower bound on the entropy of any system. Here we show incorporating that bound in classical statistical mechanics recover a classical version of the quantum uncertainty principle:
+$$ \sigma_q \sigma_p \geq \frac{h}{2\pi e} = \frac{\hbar}{e}. $$
+In this context, $h$ is defined as a region of phase space for which a uniform distribution has zero entropy. The $2\pi e$ factor appears because the gaussian is the distribution that minimizes the uncertainty.
+
+Note: for convenience, the entropy is measured in nats, meaning that we use the natural logarithm and we set the Boltzman constant to $k_B=1$. Since we are looking at zero entropy, a change of units does not change the result.
+
+\section{Information vs physical entropy}
+
+\begin{condition}[Classical phase space]{CPS}
+	The space of states for a classical system with $n$ degrees of freedom (DOFs) is given by all possible values of position and momentum $(q_i,p_i) \in \mathbb{R}^{2n}$. The count of configurations for each DOF over a region $\Sigma$ is given $\int_{\Sigma} dp^i dq_i = \int_{\Sigma} \omega$ and the count of states is given by the Liouville measure $\mu(U) = \int_U dq^1\cdots dq^n dp_1 \cdots dp_n = \int_U \omega^n$.
+	
+	A statistical ensemble is given by a probability distribution $\rho(q^i, p_i)$ (i.e. a probability measure that is absolutely continuous with respect to the Liouville measure). The entropy is given by the Gibbs/Shannon entropy
+	$$ S[\rho] = - \int_M \rho \ln (h^n \rho) \, dq^1\cdots dq^n dp_1 \cdots dp_n,$$
+	where $h$ is a constant with units of phase space areas.
+\end{condition}
+
+Note that we introduced a constant $h$ to make the formula of the entropy dimensionally correct. The physical meaning of $h$ is connected to regions corresponding to zero entropy.
+
+\begin{coro}
+	Let $\rho_U$ be the uniform probability distribution over a region $U$ of phase space. Then $S[\rho_U] = 0$ if and only if $\mu(U) = h^n$.
+\end{coro}
+
+\begin{proof}
+	The entropy for a uniform distribution reduces to $S[\rho_U] = \ln \frac{\mu(U)}{h^n}$. The logarithm is zero if and only if $\frac{\mu(U)}{h^n} = 1$.
+\end{proof}
+
+The third law of thermodynamics imposes that the entropy of every physical system is non-negative. If a classical statistical ensemble corresponds to a physically realizable state, then its entropy must be non-negative as well. We have the following condition.
+
+\begin{condition}[Lower entropic bound]{ZENT}
+	The entropy of each independent DOF must be non-negative. That is, if $q$ and $p$ form an independent DOF, then $S[\rho(q,p)] \geq 0$ where $\rho(q,p)$ is the marginal over the DOF.
+\end{condition}
+
+The goal is to show that the following condition follows from the previous.
+
+\begin{condition}[Classical uncertainty principle]{CUP}
+	The uncertainty on each DOF is bounded by
+	$$ \sigma_q \sigma_p \geq \frac{\hbar}{e}. $$
+	The equality is obtained if and only if position and momentum are independent gaussian distributions.
+	
+	If $f$ and $g$ are two non-conjugate variables that span a DOF (i.e. there exists two conjugate variables $q$ and $p$ such that $(f(q,p), g(q,p))$ is invertible), then
+	$$ \sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln \{f,g\}]}.$$
+\end{condition}
+
+\begin{claim}
+	Condition \ref{ZENT} imples \ref{CUP} over \ref{CPS}.
+\end{claim}
+
+\begin{proof}
+We first show that the product of two independent gaussians minimizes the uncertainty for a given value of the entropy. We use Lagrange multipliers to minimize the product of the variances $\sigma_q^2 \sigma_p^2 \equiv \int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp$, where $\mu_q$ and $\mu_p$ are the mean position and momentum, under two constraints: $\rho$ integrates to 1 and its entropy is $S$. We have:
+
+\begin{align*}
+	L = &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
+	&+ \lambda_1(\int \rho dqdp - 1) + \lambda_2(- \int \rho \ln (h \rho) \, dqdp - S)\\
+	\delta L = &\int \delta \rho [(q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 +  \lambda_1 - \lambda_2 \ln (h \rho) - \lambda_2 ] dqdp = 0 \\
+	\lambda_2 \ln (h \rho) = &\lambda_1 - \lambda_2 + (q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 \\
+	\rho = &\frac{1}{h} e^{\frac{\lambda_1 - \lambda_2}{\lambda_2}}e^{\frac{(q-\mu_q)^2 \sigma_p^2}{\lambda_2}}e^{\frac{\sigma_q^2 (p-\mu_p)^2}{\lambda_2}}
+\end{align*}
+We recognize the distribution as the product of two independent Gaussians. We can therefore use the standard expression and calculate the entropy, which must be zero. We find:
+\begin{align*}
+	\rho_{\mathcal{c}} = &\frac{1}{ 2 \pi \sigma_q \sigma_p} e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}} e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}} \\
+	S[\rho] &= \ln \left( 2\pi e \frac{\sigma_q\sigma_p}{h}  \right) = S  \\
+	\sigma_q \sigma_p &= \frac{h}{2 \pi e} e^{S[\rho]} = \frac{\hbar}{e} e^{S[\rho]}
+\end{align*}
+where $\hbar = \frac{h}{2\pi}$. Since, by \ref{ZENT}, $S[\rho] \geq 0$, we have
+\begin{equation}\label{rp-cm-classicalUncertaintyPrinciple}
+	\sigma_q \sigma_p \geq \frac{\hbar}{e}
+\end{equation}
+for each DOF. Note that equality hold exactly when they the joint distribution is the product of two independent gaussians.
+
+Now, let $(q,p)$ and $(f,g)$ related by an invertible transformation. Moreover, let the product of their physical units be the same. Note that the Poisson bracket is exactly the Jacobian determinant of the tranformation. In fact
+\begin{equation}
+	\{f, g\} = \partial_q f \, \partial_p g - \partial_p f \, \partial_q g = \left|\begin{array}{ c c }
+		\partial_q f & \partial_p f \\
+		\partial_q g & \partial_p g \\
+	\end{array} \right|.
+\end{equation}
+Therefore, $\rho_{qp}(q,p) = \rho_{fg}(f,g) |\{f,g\}|$ and $|\{f,g\}|$ will be a pure number. Note the absolute value, as the Poisson bracket can be negative for if the map is not orientation preserving. If assume the transformation is order preserving, we have
+\begin{align*}
+	0 \leq S[\rho_{qp}] &= - \int \rho_{qp} \ln (h \rho_{qp}) dq dp \\ &=  - \int \rho_{fg} \{f,g\} \ln (h \rho_{fg} \{f,g\} ) dq dp \\
+	&= - \int \rho_{fg} \ln (h \rho_{fg} \{f,g\} ) df dg \\
+	&= - \int \rho_{fg} \ln (h \rho_{fg} ) df dg - \int \rho_{fg} \ln ( \{f,g\} ) df dg \\
+	&= - \int \rho_{fg} \ln (h \rho_{fg} ) df dg - \int \rho_{fg} \ln ( \{f,g\} ) df dg \\
+\end{align*}
+which means
+\begin{align*}
+	- \int \rho(f,g) \ln (h \rho(f,g) ) df dg \geq E[ \ln ( \{f,g\} ) ].
+\end{align*}
+The entropy as calculated on the new variable, then, have a lower bound given by the expectation of the logarithm of the Poisson bracket. Using again the fact that gaussian distributions minimize uncertainty, and noting the entropy does not change under non-orientation preserving changes of variables, we have
+\begin{equation}
+	\sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln |\{f,g\}|]}.
+\end{equation}
+\end{proof}
+
+\begin{remark}
+	The converse $\ref{CUP} \implies \ref{ZENT}$ does not hold. One can introduce an arbitrarily large correlation to $q$ and $p$ that would increase the uncertainty on those variables while keeping the entropy the same. Therefore, putting a lower bound on the uncertainty does not put a lower bound on the entropy.
+\end{remark}
+
+\section{Conclusion}
+
+We have found a classical analogue of the quantum uncertainty principle due to the lower bound on the entropy. Note this lower bound on the entropy is already present in quantum mechanics as pure states have zero entropy. We conclude that, in general, the uncertainty principle is a consequence of the entropic lower bound.
+
+\end{document}
+
+\begin{lemma}[Fischer's inequality]\label{FischerInequality}
+	Let $M$, $A$, $C$ be positive-semidefinite matrixes such that
+	$$M = \begin{bmatrix}
+		A & B \\ B^{\dagger} & C
+	\end{bmatrix}.$$
+	Then $\det(A) \det(B) \geq \det(M)$ with the equality holding if and only if $B = 0$.
+\end{lemma}
+
+\begin{defn}
+	Let $\rho(\xi^a)$ be a probability distribution over classical phase space with $n$ DOFs. The covariance matrix $\Sigma$ is defined as 	$$\Sigma = [cov(\xi^a, \xi^b)] = \begin{bmatrix}
+		\Sigma_{11} & \Sigma_{12} & \dots & \Sigma_{1n} \\
+		\Sigma_{21} & \Sigma_{22} & \dots & \Sigma_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\Sigma_{n1} & \Sigma_{n2} & \dots & \Sigma_{nn} \\
+	\end{bmatrix},$$
+	where $$\Sigma_{ii} = \begin{bmatrix} \sigma^2_{q^i} & cov(q^i,p_i) \\ cov(p_i, q^i) & \sigma^2_{p_i} \end{bmatrix}$$ represents the covariance matrix of the marginals within the $i$-th DOF and $\Sigma_{ij}$ represents the covariance, and therefore the correlation, between two DOFs.
+\end{defn}
+
+\begin{prop}
+	Given a covariance matrix $\Sigma$, 
+	\begin{equation}
+		\prod_{i=1}^{n} \sigma^2_{q^i}\sigma^2_{p^i} \geq \prod_{i=1}^{n} \det(\Sigma_{ii}) \geq \Sigma.
+	\end{equation}
+\end{prop}
+\begin{proof}
+	The claim follows by applying \ref{FischerInequality} multiple times. Let $\Sigma_{>ii}$ be the block matrix formed by all block matrices with indexes greater than $i$. Then
+	\begin{align}
+	 \det(M) &\leq \det(\Sigma_{11}) \det(\Sigma_{>22}) \leq \det(\Sigma_{11}) \det(\Sigma_{22}) \det(\Sigma_{>33}) \leq \dots \leq \prod_{i=1}^{n} \det(\Sigma_{ii}).
+	\end{align}
+	Within each $\Sigma_{ii}$, $\det(\Sigma_{ii}) \leq \det(\sigma^2_{q^i}) \det(\sigma^2_{p_i}) = \sigma^2_{q^i}\sigma^2_{p^i}$.
+\end{proof}
+
+\begin{equation}
+	\Sigma = \begin{bmatrix}
+		\Sigma_{11} & \Sigma_{12} & \dots & \Sigma_{1n} \\
+		\Sigma_{21} & \Sigma_{22} & \dots & \Sigma_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\Sigma_{n1} & \Sigma_{n2} & \dots & \Sigma_{nn} \\
+	\end{bmatrix}
+\end{equation}
