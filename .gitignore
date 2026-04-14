@@ -93,8 +93,3 @@ sympy-plots-for-*.tex/
 
 # todonotes
 *.tdo
-
-# xindy
-*.xdy
-*.bib
-*.tex~txs0
