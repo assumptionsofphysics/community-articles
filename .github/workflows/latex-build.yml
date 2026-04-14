@@ -18,10 +18,16 @@ jobs:
         with:
           path: repo
 
-      - name: Compile articles
+      - name: Compile briefs
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/briefs
+          root_file: "*.tex"
+
+      - name: Compile bareminima
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: repo/bareminima
           root_file: "*.tex"
 
       - name: Upload to autogen repository
