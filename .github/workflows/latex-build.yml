@@ -39,7 +39,7 @@ jobs:
           ls -R
           # Run the script
           python tools/problem-scraper/technicalBriefIndex.py autogen/briefs/briefs.json repo/briefs/*.tex 
-          python tools/problem-scraper/bareMinimumIndex.py autogen/briefs/bareminima.json repo/bareminima/*.tex 
+          python tools/problem-scraper/bareMinimumIndex.py autogen/bareminima/bareminima.json repo/bareminima/*.tex 
           cd repo
           find . -type f -iname '*.pdf' -print0 | rsync -0a --files-from=- --remove-source-files ./ ../autogen/
           cd ../autogen
