@@ -1,0 +1,524 @@
+\documentclass{bareminimum}
+
+\usepackage[all,pdf]{xy}
+
+\def\ordless{\prec}
+\def\ordleq{\preceq}
+\def\ordeq{\sim}
+\def\ordgeq{\succeq}
+
+\def\crdleq{\hookrightarrow}
+\def\crdeq{\leftrightarrow}
+\def\crdgeq{\hookleftarrow}
+
+\topic{Linear Algebra}
+\category{Mathematics}
+\tags{Linear Algebra, Vector spaces}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\SPAN}{span}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Introduction}
+	
+	Linear algebra studies linear relationships between spaces. Linear algebra is used throughout nearly every field of physics.
+	
+	For details on linear algebra, see for example \cite{axler2024linear, roman2008linear}.
+	
+	
+	\section{Vector spaces}
+	
+	
+	\subsection{Basic definitions}
+	
+	
+	\begin{defn}[Vector space]
+		A \textbf{(real) vector space} \marginleft{Vector space} is a set V equipped with a vector addition $+ : V \times V \to V$ and a scalar multiplication $\cdot : \mathbb{R} \times V \to V$ with the following properties for all $u,v,w \in V$ and  $a,b \in \mathbb{R}$:
+		\begin{description}
+			\item[Associativity of addition] $u + (v + w) = (u + v) + w$
+			\item[Existence of additive identity] $v + \mathbf{0} = v$ for some fixed $\mathbf{0} \in V$
+			\item[Existence of additive inverses] $\exists -v \in V$ s.t. $v + (-v) = \mathbf{0}$
+			\item[Commutativity of addition] $v + u = u + v$
+			\item[Distributivity over vector addition] $a(v + u) = av + au$
+			\item[Distributivity over scalar addition] $(a+b)v = av + bv$
+			\item[Compatibility of multiplication] $a(bv) = (ab)v$
+			\item[Identity element of scalar multiplication] $1v = v$.
+		\end{description}
+		A \textbf{vector} is an element of a vector space. A \textbf{scalar} is an element of $\mathbb{R}$.
+	\end{defn}
+	
+	\begin{remark}
+		In general, vector spaces can be defined over arbitrary fields (i.e. sets equipped with addition, multiplication and their inverses), most notably $\mathbb{C}$. Unless otherwise stated, we will assume that all vector spaces are real.
+	\end{remark}
+	
+	TODO: add examples
+	
+	\begin{defn}[Subspace]
+		Given a vector space $V$, \marginleft{Subspace} a subset of $V$ is a \textbf{subspace} of $V$ if it is a vector space with the same vector addition and scalar multiplication. A \textbf{proper subspace} is a subspace that is not equal to the vector space.
+	\end{defn}
+	
+	\begin{defn}[Linear combination]
+		Let $\{v_1, v_2, \dots, v_n\}$ \marginleft{Linear combination}be a finite set of vectors in a vector space $V$. A \textbf{linear combination} is a vector of the form $a_1 v_1 + a_2 v_2 + \ldots + a_n v_n$ where $a_i \in \mathbb{R}$.
+	\end{defn}
+	
+	\begin{defn}[Span]
+		Let $S$ be a nonempty set of vectors \marginleft{Span: $\SPAN(S)$} in a vector space $V$. The \textbf{span} of $S$, noted $\SPAN(S)$, is the set of all linear combinations of vectors in $S$.
+	\end{defn}
+	
+	\begin{remark}
+		When taking the span of an infinite set, we can only take the weighted sum of finitely many vectors. To make sense of an infinite sum $v_1 + v_2 + v_3 + \ldots$ we would need additional structure on the space, such as a topology or inner product, which is outside of the scope of this bare minimum.
+	\end{remark}
+	
+	\begin{prop}
+		The span of any set is the smallest subspace containing that set.
+	\end{prop}
+	
+	\begin{remark}
+		Let $v \in V$, $c \in \mathbb{R}$ and $A,B \subseteq V$, we define the following notation: $v + A = \{ v + a \mid a \in A \}$, $cA = \{ ca \mid a \in A \}$ and $A + B = \{ a + b \mid a \in A, b \in B \}$.
+	\end{remark}
+	
+	\begin{prop}[Subspace properties]
+		Let $W,U$ be subspaces of a vector space $V$. Then:
+		\begin{itemize}
+			\item $W \cap U$ is a subspace of $V$
+			\item $W + U$ is a subspace of $V$.
+		\end{itemize}
+	\end{prop}
+	
+	\begin{prop}
+		The span of a set is a closure operation. The set of all subspaces, ordered by inclusion, forms a bounded complemented modular lattice that is also an $\bigcap$-structure where $A \vee B= A + B$, and $A \wedge B = A \cap B$.
+	\end{prop}
+	
+	\begin{defn}[Linear independence/dependence]
+		A set of vectors $S$ \marginleft{Linear independence, dependence} is \textbf{linearly independent} if for any distinct $v_1, v_2, \ldots, v_n \in S$, a linear combination $a_1 v_1 + a_2 v_2 + \ldots + a_n v_n = \mathbf{0}$ if and only if $a_1 = a_2 = \ldots = a_n = 0$. Otherwise, the vectors are said to be \textbf{linearly dependent}.
+	\end{defn}
+	
+	\begin{defn}[Basis]
+		A \textbf{basis} \marginleft{Basis}, or Hamel basis, of a vector space $V$ is a set $\mathcal{B} \subseteq V$ that is linearly independent and spans V. An \textbf{ordered basis} is a basis equipped with a linear order.
+	\end{defn}
+	
+	\begin{remark}
+		Note that there are different notions of basis, such as Schauder basis for some Banach spaces and the orthogonal basis for inner product spaces. These coincide in the finite dimensional case, but they have radically different properties in the infinite dimensional case.
+	\end{remark}
+	
+	\begin{prop}
+		Let $V$ be a vector space with basis $\mathcal{B}$. Then for each vector $v \in V$ we can find finitely many base elements $\{e_i\}_{i=1}^n \subseteq \mathcal{B}$ and unique scalars $\{v^i\}_{i=1}^n \subseteq \mathbb{R}$ so that $v = \sum_{i=1}^n v^i e_i$.
+	\end{prop}
+	\begin{prop}
+		All bases of the same vector space have the same cardinality.
+	\end{prop}
+	
+	\begin{defn}[Dimension]
+		Let $V$ be a vector space \marginleft{Dimension: $\dim(V)$} with basis $\mathcal{B}$. The \textbf{dimension} of $V$, noted $\dim(V)$, is defined to be $|\mathcal{B}|$.
+	\end{defn}
+	
+	\begin{remark}
+		To properly handle infinite dimensional vector spaces, we need topological vector spaces.
+	\end{remark}
+	
+	\begin{defn}
+		Let $V$ be a finite dimensional vector space and let $\mathcal{B} = \{e_i\}_{i=1}^n$ be a basis. Then each vector $v \in V$ can be expressed a unique linear combination $v = \sum_{i=1}^n v^i e_i$. With the Einstein summation convention, we can write $v = v^i e_i$, where the summation is implied. The vector $\begin{bmatrix}
+			v^1 \\ v^2 \\ \vdots \\ v^n
+		\end{bmatrix} \in \mathbb{R}^n$ is the \textbf{coordinate vector} of $v$.
+	\end{defn}
+	
+	\begin{prop}[Dimension of subspace sum]
+		Let $W,U$ be subspaces of a vector space $V$. Then $\dim(W + U) = \dim(W) + \dim(U) - \dim(W \cap U)$.
+	\end{prop}
+	
+\subsection{Linear maps}
+
+
+\begin{defn}[Linear maps]
+	A \textbf{linear map} \marginleft{Linear maps} is a function $T : V \to W$ between two vector spaces such that the following properties hold:
+	\begin{description}
+		\item[Additivity] $T(v + u) = T(v) + T(u)$ for all $v,u \in V$
+		\item[Homogeneity] $T(av) = aT(v)$ for all $v \in V$ and $a \in \mathbb{R}$.
+	\end{description}
+\end{defn}
+
+\begin{defn}[Linear map operations]
+	We denote \marginleft{Linear map operations: $\mathcal{L}(V,W)$} the set of all linear maps from V to W by $\mathcal{L}(V,W)$. We define the following operations between two linear maps:
+	\begin{description}
+		\item[Addition] Noted $S + T$, the sum of $S,T \in \mathcal{L}(V,W)$  is defined by $(S+T)(v) = S(v) + T(v)$ for all $v \in V$.
+		\item[Scalar multiplication] Noted $aT$, the product of $a \in \mathbb{R}$ and $T \in \mathcal{L}(V,W)$ is defined by $(aT)(v) = a(T(v))$ for all $v \in V$.
+		\item[Product] Noted $ST$, the product of $S \in \mathcal{L}(U,W)$ and $T \in \mathcal{L}(V,U)$ is defined by the composition $(ST)(v) = S(T(v))$ for all $v \in V$.
+	\end{description}
+	With addition and scalar multiplication, $\mathcal{L}(V,W)$ satisfies the definition of a vector space.
+\end{defn}
+
+\begin{prop}
+	Given a \marginleft{Identity: $\Id_{V}$}  vector space $V$, the identity function $\Id_{V}$ is a linear map and it is the identity of the product of linear maps. That is, $T = T \Id_{V} = \Id_{V} T$ for all $T \in \mathcal{L}(V,V)$.
+\end{prop}
+
+\begin{defn}[Kernel]
+	The \textbf{kernel} \marginleft{Kernel: $\ker(T)$} of a linear transformation $T \in \mathcal{L}(V,W)$, noted $\ker(T)\subseteq V$, is the set of vectors in $V$ that map to $\mathbf{0}$. That is, $\ker(T) = \{ v \in V \mid T(v) = \mathbf{0} \}$.
+\end{defn}
+
+\begin{defn}[Image]
+	The \textbf{image} \marginleft{Image: $\im(T)$} of a linear transformation $T \in \mathcal{L}(V,W)$, noted $\im(T) \subseteq W$, is the set $\{ T(v) \mid v \in V \}$. 
+\end{defn}
+
+\begin{prop}
+	Given $T \in \mathcal{L}(V,W)$, then $\ker(T)$ is a subspace of $V$, and $\im(T)$ is a subspace of $W$.
+\end{prop}
+
+\begin{prop}
+	A linear map $T \in \mathcal{L}(V,W)$ is injective if and only if $\ker(T) = \{ \mathbf{0} \}$. It is surjective if and only if $\im(T) = W$.
+\end{prop}
+
+\begin{prop}[Fundamental theorem of linear maps]
+	Given $T \in \mathcal{L}(V,W)$, if $V$ is finite dimensional, then $\dim(V)  = \dim(\ker(T)) + \dim(\im(T))$.
+\end{prop}
+
+\begin{defn}[Inverse]
+	Let \marginleft{Inverse: $T^{-1}$} $T \in \mathcal{L}(V,W)$. We say $T$ is \textbf{invertible} if there exists $T^{-1} \in \mathcal{L}(W,V)$, called \textbf{inverse}, such that $ST = \Id_V$ and $TS = \Id_W$.
+\end{defn}
+
+\begin{prop}
+	A linear map is invertible if and only if it is bijective.
+\end{prop}
+
+\begin{defn}[Isomorphism and isomorphic]
+	An invertible linear map \marginleft{Isomorphism and isomorphic} is called an \textbf{isomorphism}. If there exists an isomorphism $T \in \mathcal{L}(V,W)$, we say V and W are \textbf{isomorphic}.
+\end{defn}
+
+\begin{prop}
+	Two finite dimensional vector spaces are isomorphic if and only if they have the same dimension.
+\end{prop}
+
+	
+	\subsection{Product and quotient spaces}
+	
+	
+	\begin{defn}[Product space]
+		Let \marginleft{Product space: $V_1 \times V_2$} $V_1,V_2,\ldots,V_n$ be vector spaces. The \textbf{product space}, noted $V_1 \times V_2 \times \ldots \times V_n$, is the set $\{ (v_1,\ldots,v_n) \mid v_1 \in V_1, \ldots, v_n \in V_n \}$ equipped with the following operations:
+		\begin{description}
+			\item[Addition] $(v_1, v_2, \ldots, v_n) + (w_1, w_2, \ldots, w_n) = (v_1+w_1, v_2+w_2, \ldots, v_n+w_n)$ for all $(v_1, v_2, \ldots, v_n), (w_1, w_2, \ldots, w_n) \in V_1 \times \ldots \times V_n$
+			\item[Scalar multiplication] $c(v_1, v_2, \ldots, v_n) = (cv_1, cv_2, \ldots, cv_n)$ for all $(v_1, v_2, \ldots, v_n) \in V_1 \times \ldots \times V_n$ and $c \in \mathbb{R}$.
+		\end{description}
+		With these operations, $V_1 \times \ldots \times V_n$ satisfies the definition of a vector space.
+	\end{defn}
+	
+	\begin{defn}[Quotient space and quotient map]
+		Let \marginleft{Quotient space: $V_{/U}$} $V$ be a vector space with a subspace $U$. Then the \textbf{quotient space} of $V$ over $U$, noted $V_{/U}$, is the set $\{ v + U \mid v \in V \}$ equipped with the following operations:
+		\begin{description}
+			\item[Addition] $(v_1 + U) + (v_2 + U) = (v_1 + v_2) + U$ for all $(v_1+U), (v_2+U) \in V_{/U}$
+			\item[Scalar multiplication] $c(v + U) = (cv) + U$ for all $v+U \in V_{/U}$ and for all $c \in \mathbb{R}$.
+		\end{description}
+		With these operations, $V_{/U}$ satisfies the definition of a vector space.
+		The \textbf{quotient map} $q : V \to V_{/U}$ is defined by $q(v) = v + U$ for all $v \in V$ and is a linear map.
+	\end{defn}
+	
+	\begin{prop}[Dimension of product and quotient spaces]
+		Let $V_1 \times V_2 \times \ldots \times V_n$ be a product space of finite dimensional vector spaces, and let $V_{/U}$ be a quotient space of a finite dimensional vector space. Then:
+		\begin{itemize}
+			\item $\dim(V_1 \times V_2 \times \ldots \times V_n) = \dim(V_1) + \dim(V_2) + \ldots + \dim(V_n)$
+			\item $\dim(V_{/U}) = \dim(V) - \dim(U)$.
+		\end{itemize}
+	\end{prop}
+	
+	
+	\section{Matrices}
+	
+	
+	\subsection{Basic definitions}
+	
+	
+	\begin{defn}[Matrix]
+		A \textbf{(real) $\mathbf{m \times n}$ matrix} \marginleft{Matrices: $\mathbb{R}^{m \times n}$} $A$ is a function $A : [1,m]_{\mathbb{N}} \times [1,n]_{\mathbb{N}} \to \mathbb{R}$. We can view $A$ as a rectangular array with m rows and n columns:
+		\begin{equation}
+			\begin{bmatrix} 
+				a_{11} & \ldots & a_{1n} \\  \vdots & \ddots & \vdots \\ a_{m1} & \ldots & a_{mn}
+			\end{bmatrix}
+		\end{equation}
+		The notation $a_{ij}$ or $(A)_{ij}$ refers to the entry in row i and column j. We denote the set of all (real) $m \times n$ matrices by $\mathbb{R}^{m \times n}$.
+	\end{defn}
+	
+	\begin{remark}
+		The indexes may be up or down depending on what the matrices represent.
+		
+		Similarly to vector spaces, matrices can be defined over arbitrary fields. For example, a complex $m \times n$ matrix A is a function $A : [1,m]_{\mathbb{N}} \times [1,n]_{\mathbb{N}} \to \mathbb{C}$. The set of all complex $m \times n$ matrices is noted $\mathbb{C}^{m \times n}$.
+	\end{remark}
+	
+	\begin{prop}[Matrix operations]
+		Let $A,B \in \mathbb{R}^{m \times n}$, $C \in \mathbb{R}^{n \times o}$ and $d \in \mathbb{R}$. Then the \textbf{matrix sum} $A + B$ is given by:
+		\begin{equation}
+			\begin{bmatrix}
+				a_{11} & \ldots & a_{1n} \\
+				\vdots & \ddots & \vdots  \\
+				a_{m1} & \ldots & a_{mn}
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+				b_{11} & \ldots & b_{1n} \\
+				\vdots & \ddots & \vdots  \\
+				b_{m1} & \ldots & b_{mn}
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				a_{11} + b_{11} & \ldots & a_{1n} + b_{1n} \\
+				\vdots & \ddots & \vdots  \\
+				a_{m1} + b_{m1} & \ldots & a_{mn} + b_{mn}
+			\end{bmatrix}
+		\end{equation}
+		That is, $(A+B)_{ij} = (A)_{ij} + (B)_{ij}$. The \textbf{scalar multiplication} $dA$ is given by:
+		\begin{equation}
+			d
+			\begin{bmatrix}
+				a_{11} & \ldots & a_{1n} \\
+				\vdots & \ddots & \vdots  \\
+				a_{m1} & \ldots & a_{mn}
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				da_{11} & \ldots & da_{1n} \\
+				\vdots & \ddots & \vdots  \\
+				da_{m1} & \ldots & da_{mn}
+			\end{bmatrix}
+		\end{equation}
+		That is, $(dA)_{ij} = d(A)_{ij}$. 
+		The \textbf{matrix multiplication} $AC$ is the $m \times o$ matrix given by $(AC)_{ij} = \sum_{k=1}^{n} a_{ik}c_{kj}$.
+	\end{prop}
+	
+	\begin{defn}[Identity matrix]
+		The \textbf{$\mathbf{n \times n}$ identity matrix} \marginleft{Identity matrix: $I_n$} is the $n \times n$ matrix $I_n$ such that $AI_n = I_nA = A$ for all $A \in 
+		\mathbb{R}^{n \times n}$. It is given by:
+		\begin{equation}
+			I_n = 
+			\begin{bmatrix}
+				1 & & 0 \\ & \ddots & \\
+				0 & & 1
+			\end{bmatrix}
+		\end{equation}
+	\end{defn}
+	
+	\begin{prop}
+		Let $\{e_i \mid i \in I\}$ be an ordered basis for $V$ and $\{w_i \mid i \in I\}$ be a set of vectors in $W$ indexed by $I$. There exists a unique linear map $T \in \mathcal{L}(V,W)$ such that $T(e_i) = w_i$ for each $i \in I$.
+	\end{prop}
+	
+	\begin{defn}[Matrix of a linear map]
+		Let \marginleft{Matrix of a linear map: $[T]_{\mathcal{B}_1}^{\mathcal{B}_2}$} $\mathcal{B}_1 = \{e_1,\ldots,e_n\}$ be an ordered basis of $V$, and let $\mathcal{B}_2 = \{e'_1,\ldots,e'_m\}$ be an ordered basis of $W$. Let $T \in \mathcal{L}(V,W)$. The \textbf{matrix of} $T$ with respect to $\mathcal{B}_1$ and $\mathcal{B}_2$, noted $[T]_{\mathcal{B}_1}^{\mathcal{B}_2}$, is the $m \times n$ matrix so that $T(e_i) = \sum_{j=1}^m([T]_{\mathcal{B}_1}^{\mathcal{B}_2})_{ji}e'_j$.
+	\end{defn}
+	
+	\begin{defn}[Column rank and row rank]
+		Let \marginleft{Column rank and row rank} $A \in \mathbb{R}^{m \times n}$. Then the \textbf{column rank} of $A$ is the dimension of the span of the columns of $A$ in $\mathbb{R}^m$, and the \textbf{row rank} of $A$ is the dimension of the span of the rows of $A$ in $\mathbb{R}^n$.
+	\end{defn}
+	
+	\begin{prop}[Rank]
+		Let $A \in \mathbb{R}^{m \times n}$. \marginleft{Rank} Then the row rank of $A$ equals the column rank of $A$. The \textbf{rank} of $A$ is defined to be the column rank, or equivalently the row rank.
+	\end{prop}
+	
+	\begin{defn}[Transpose, conjugate transpose]
+		Let $A \in \mathbb{C}^{m \times n}$. \marginleft{Transpose, conjugate transpose: $A^T, A^\dagger$} The \textbf{transpose} of $A$, noted $A^T$, is the $n \times m$ matrix obtained by swapping the rows and columns of $A$. That is, $(A^T)_{ij} = (A)_{ji}$. The \textbf{conjugate transpose} of $A$, noted $A^\dagger$, is the $n \times m$ matrix obtained by taking the complex conjugate of each entry in $A^T$. That is, $(A^\dagger)_{ij} = \overline{(A^T)_{ij}}$.
+	\end{defn}
+	
+	\begin{defn}[Invertible matrix]
+		A matrix $A \in \mathbb{R}^{n \times n}$ is \textbf{invertible} \marginleft{Invertible and inverse: $A^{-1}$} if there exists $B \in \mathbb{R}^{n \times n}$ such that $AB = BA = I_n$. If $A$ is invertible, we denote its \textbf{inverse} by $A^{-1}$. If $A$ is not invertible, then we say $A$ is \textbf{singular}.
+	\end{defn}
+	
+	\begin{prop}[Change of basis]
+		Let \marginleft{Change of basis} $\mathcal{B}_1$ and $\mathcal{B}_2$ be two ordered bases of $V$. Then $[T]_{\mathcal{B}_2}^{\mathcal{B}_2} = [\Id]_{\mathcal{B}_1}^{\mathcal{B}_2} [T]_{\mathcal{B}_1}^{\mathcal{B}_1} [\Id]_{\mathcal{B}_2}^{\mathcal{B}_1}$. Additionally, $[\Id]_{\mathcal{B}_1}^{\mathcal{B}_2} = ([\Id]_{\mathcal{B}_2}^{\mathcal{B}_1})^{-1}$.
+	\end{prop}
+	
+	\begin{defn}[Types of square matrices]
+		Let $A \in \mathbb{C}^{n \times n}$. Then A is said to be:
+		\begin{description}
+			\item[Upper triangular] if all entries below the diagonal are 0
+			\item[Lower triangular] if all entries above the diagonal are 0
+			\item[Diagonal] if all entries outside of the diagonal are 0
+			\item[Symmetric] if $A^T = A$
+			\item[Hermitian] if $A^\dagger = A$.
+		\end{description}
+	\end{defn}
+	
+	\begin{defn}[Trace]
+		The \textbf{trace} \marginleft{Trace: $\tr(A)$} of a square matrix is a function $\tr : \mathbb{R}^{n \times n} \to \mathbb{R}$ defined by $\tr(A) = \sum_{i = 1}^n a_{i i}$. 
+	\end{defn}
+	
+	\begin{prop}[Trace properties]
+		Let $A,B \in \mathbb{R}^{n \times n}$. The trace has the following properties:
+		\begin{itemize}
+			\item $\tr(AB) = \tr(BA)$
+			\item $\tr(A) = \tr(A^T)$
+		\end{itemize}
+	\end{prop}
+	
+	\begin{defn}[Commute]
+		Two linear transformations $T,S \in \mathcal{L}(V,V)$ \marginleft{Commute} \textbf{commute} if $ST = TS$. Two matrices $A,B \in \mathbb{C}^{n \times n}$ \textbf{commute} if $AB = BA$.
+	\end{defn}
+	
+	
+	\subsection{The determinant}
+	
+	
+	\begin{remark}
+		Recall that a \textbf{permutation} of the set $[1,n]_{\mathbb{N}}$ is a bijective function $\sigma : [1,n]_{\mathbb{N}} \to [1,n]_{\mathbb{N}}$. The set of all permutations on $[1,n]_{\mathbb{N}}$ is noted by $S_n$. A \textbf{transposition} is a permutation that swaps two elements only. The \textbf{sign} of a permutation $\sigma$, noted $\sgn(\sigma)$, is defined to be $+1$ if the permutation can be formed by the composition of an even number of transpositions, and $-1$ otherwise.
+	\end{remark}
+	
+	\begin{defn}
+		Given a matrix $A \in \mathbb{R}^{n \times n}$, the \textbf{determinant} \marginleft{Determinant: $|A|$} of $A$, noted $|A|$ or $\det(A)$, is defined to be
+		\begin{equation}
+			|A| = \sum_{\sigma \in S_n} \sgn(\sigma) \prod_{i=1}^n a_{i\sigma(i)}
+		\end{equation}
+	\end{defn}
+	
+	\begin{prop}
+		Let $T \in \mathcal{L}(V,V)$, where $V$ is finite dimensional. For any two bases $\mathcal{B}_1, \mathcal{B}_2$ of $V$, $\det([T]_{\mathcal{B}_1}) = \det([T]_{\mathcal{B}_2})$. We define the determinant of a linear transformation $T$ to be $\det([T]_{\mathcal{B}_1})$, where $\mathcal{B}_1$ is any basis of $V$.
+	\end{prop}
+	
+	\begin{prop}[Determinant properties]
+		Let $A, B \in \mathbb{R}^{n \times n}$. Then the determinant has the following properties:
+		\begin{itemize}
+			\item $A$ is triangular $\implies$ $|A| = \prod_{i=1}^n a_{ii}$
+			\item $|AB| = |A||B|$
+			\item $A$ is invertible $\iff$ $|A| \ne 0$
+			\item $A$ is invertible $\implies$ $|A^{-1}| = \frac{1}{|A|}$
+			\item $|A^T| = |A|$
+		\end{itemize}
+	\end{prop}
+	
+	
+	\subsection{Eigenvalues and eigenvectors}
+	
+	
+	\begin{defn}[Eigenvalues and eigenvectors]
+		Let $A \in \mathbb{C}^{n \times n}$. \marginleft{Eigenvalues and eigenvectors} An \textbf{eigenvalue} of $A$ is a scalar $\lambda \in \mathbb{C}$ such that there exists a non-zero $v \in \mathbb{C}^n$ so that $Av = \lambda v$. In this case, $v$ is called an \textbf{eigenvector} of $A$ corresponding to $\lambda$.
+	\end{defn}
+	
+	\begin{prop}[Eigenspace]
+		Given $A \in \mathbb{C}^{n \times n}$ and an eigenvalue $\lambda$ of $A$, the set of eigenvectors corresponding to $\lambda$ along with $\mathbf{0} \in \mathbb{C}^n$ constitutes a subspace of $\mathbb{C}^{n}$, called the \textbf{eigenspace} of $\lambda$.
+	\end{prop}
+	
+	\begin{prop}
+		Let $A \in \mathbb{C}^{n \times n}$ and $\lambda \in \mathbb{C}$. $\lambda$ is an eigenvalue of $A$ if and only if $\det(\lambda I - A) = 0$. The polynomial function $\det(x I - A)$ is called the \textbf{characteristic polynomial} of $A$.
+	\end{prop}
+	
+	\begin{defn} [Algebraic, geometric multiplicity]
+		Let $A \in \mathbb{C}^{n \times n}$ \marginleft{Algebraic, geometric multiplicity} with an eigenvalue $\lambda$. The \textbf{algebraic multiplicity} of $\lambda$ is the multiplicity of $\lambda$ as a root of the characteristic polynomial. The \textbf{geometric multiplicity} of $\lambda$ is the dimension of the eigenspace corresponding to $\lambda$.
+	\end{defn}
+	
+	\begin{prop}
+		Let $A \in \mathbb{C}^{n \times n}$ with eigenvalues $\lambda_1, \ldots, \lambda_n$ (with algebraic multiplicity). Then:
+		\begin{itemize}
+			\item $|A| = \prod_{i = 1}^n \lambda_i$
+			\item $\tr(A) = \sum_{i = 1}^n \lambda_i$.
+		\end{itemize}
+	\end{prop}
+	
+	
+	\section{Dual spaces}
+	
+	
+	\begin{defn}[Dual space]
+		The \textbf{dual space} \marginleft{Dual space: $V^*$} of a vector space $V$, noted $V^*$, is the vector space $\mathcal{L}(V, \mathbb{R})$. A \textbf{linear functional} is an element of the dual space.
+	\end{defn}
+	
+	\begin{defn}[Dual basis]
+		Let $\mathcal{B} = \{e_1, e_2, \ldots, e_n\}$ be an ordered basis of $V$. \marginleft{Dual basis: $\mathcal{B}^*$} The \textbf{dual basis} of $V^*$ with respect to $\mathcal{B}$, noted $\mathcal{B}^*$, is the ordered basis $\{e^1, e^2, \ldots, e^n\}$ of $V^*$ where each $e^j \in \mathcal{B}^*$ is uniquely defined by $e^j(e_i) = \delta_{ji}$ for all $i \in [1,n]$.
+	\end{defn}
+	
+	\begin{defn}[Dual map]
+		Let $T \in \mathcal{L}(V, W)$. \marginleft{Dual map: $T^*$} Then the \textbf{dual map} of $T$ is the linear map $T^* \in \mathcal{L}(W^*, V^*)$ uniquely defined by $T^*(f) = f \circ T$ for all $f \in W^*$.
+	\end{defn}
+	
+	\begin{prop}
+		Let $T \in \mathcal{L}(V,W)$, $\mathcal{B}_1$ be an ordered basis of $V$ and $\mathcal{B}_2$ be an ordered basis of $W$. Then $[T^*]_{\mathcal{B}_2^*}^{\mathcal{B}_1^*} = ([T]_{\mathcal{B}_1}^{\mathcal{B}_2})^T$.
+	\end{prop}
+	
+	\begin{defn}[Annihilator]
+		Let $S \subseteq V$. \marginleft{Annihilator: $S^0$} The \textbf{annihilator} of $S$, noted $S^0 \subseteq V^*$, is the set $S^0 = \{ f \in V^* \mid f(S) = \{ 0 \} \}$.
+	\end{defn}
+	
+	\begin{prop}[Annihilator properties]
+		Let $S \subseteq V$. The annihilator satisfies the following properties:
+		\begin{itemize}
+			\item $S^0$ is a subspace of $V^*$
+			\item If $\dim(V) < \infty$ and $S$ is a subspace, then $\dim(S^0) = \dim(V) - \dim(S)$.
+		\end{itemize}
+	\end{prop}
+	
+	
+	
+	
+	% \section{Inner product spaces}
+	
+	% \begin{defn}[Inner product space]
+		%     An \textbf{inner product} \marginleft{Inner product space: $\langle \cdot, \cdot \rangle$} is a function $\langle \cdot,\cdot \rangle : V \times V \to \mathbb{R}$ with the following properties:
+		%     \begin{description}
+			%         \item[Positivity] $\langle v,v \rangle \ge 0$ for all $v \in V$
+			%         \item[Definiteness] $\langle v,v \rangle = 0$ if and only if $v = 0$
+			%         \item[Linearity in the first argument] $\langle av + u,w \rangle = a\langle v,w \rangle + \langle u,w \rangle$ for all $v,w,u \in V$ and $a \in \mathbb{R}$
+			%         \item[Conjugate symmetry] $\overline{\langle v,w \rangle} = \langle w,v \rangle$.
+			%     \end{description}
+		%     A vector space equipped with an inner product is called a \textbf{inner product space}.
+		% \end{defn}
+	
+	% \begin{remark}
+		%     For the remainder of this section, unless otherwise stated, we will assume that all vector spaces are inner product spaces.
+		% \end{remark}
+	
+	% \begin{defn}[Norm]
+		%     A \textbf{norm} \marginleft{Norm: $\| \cdot \|$} is a function $\| \cdot \| : V \to \mathbb{R}$ with the following properties:
+		%     \begin{description}
+			%         \item[Non-negativity] $\| v \| \ge 0$ for all $v \in V$
+			%         \item[Absolute homogeneity] $\| av \| = \lvert a \rvert \| v \|$ for all $v \in V$ and $a \in \mathbb{R}$
+			%         \item[Positive definiteness] $\| v \| = 0$ if and only if $v = \mathbf{0}$
+			%         \item[Triangle inequality] $\| v + w \| \le \| v \| + \| w \|$ for all $v,w \in V$.
+			%     \end{description}
+		% \end{defn}
+	
+	% \begin{prop}
+		%     Given an inner product $\langle \cdot,\cdot \rangle : V \times V \to \mathbb{R}$, $\| v \| = \sqrt{\langle v,v \rangle}$ defines a norm.
+		% \end{prop}
+	
+	% \begin{defn}[Orthogonal]
+		%     Two vectors $v,w \in V$ are orthogonal, \marginleft{Orthogonal: $v \perp w$} noted $v \perp w$, if $\langle v,w \rangle = 0$.
+		% \end{defn}
+	
+	% \begin{prop}[Pythagorean theorem]
+		%     If $v,w \in V$ such that $v \perp w$, then $\| v+w \|^2 = \| v \|^2 + \| w \|^2$.
+		% \end{prop}
+	
+	% \begin{prop}[Cauchy-Schwarz inequality]
+		%     If $v,w \in V$, \marginleft{Cauchy-Schwarz inequality} then $\lvert \langle v,w \rangle \rvert \le \|v\| \|w\|$, with equality holding if and only if one of v or w is a scalar multiple of the other. 
+		% \end{prop}
+	
+	% \begin{prop}[Triangle inequality]
+		%     If $v,w \in V$, \marginleft{triangle inequality} then $\| v+w \| \le \|v\| + \|w\|$, with equality holding if and only if one of v or w is a nonnegative real multiple of the other.
+		% \end{prop}
+	
+	% \begin{remark}
+		%     The assumption that we have an inner product is equivalent to the assumption that we have a law of cosines.
+		% \end{remark}
+	
+	% \begin{defn}[Orthonormal]
+		%     A set of vectors is \textbf{orthonormal} \marginleft{Orthonormal} if each vector has norm 1 and is orthogonal to every other vector in the set.
+		% \end{defn}
+	
+	
+	% \subsection{Operators on inner product spaces}
+	
+	% \begin{defn}[Adjoint]
+		%     Suppose $T \in \mathcal{L}(V,W)$. \marginleft{Adjoint: $T^*$} the \textbf{adjoint} is the function $T^* : W \to V$ such that $\langle T(v),w \rangle = \langle v,T^*w \rangle$ for all $v \in V$ and $w \in W$.
+		% \end{defn}
+	
+	% \begin{prop}
+		%     Suppose $T \in \mathcal{L}(V,W)$. \marginleft{Adjoint properties} Then:
+		%     \begin{description}
+			%         \item $(S + T)^* = S^* + T^*$ for all $S \in \mathcal{L}(V,W)$
+			%         \item $(\lambda T)^* = \bar{\lambda}T^*$ for all $\lambda \in$
+			%         \item $(T^*)^* = T$
+			%         \item TODO add more?
+			%     \end{description}
+		% \end{prop}
+	
+	
+	\bibliographystyle{plain}
+	\bibliography{bibliography}
+	
+\end{document}
