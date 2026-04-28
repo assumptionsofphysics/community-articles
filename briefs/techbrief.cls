@@ -22,6 +22,8 @@
 \RequirePackage{graphicx}
 \RequirePackage{array}
 
+\frenchspacing
+
 % Save the original maketitle
 \let\oldmaketitle\maketitle
 
