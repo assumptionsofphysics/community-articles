@@ -1,0 +1,106 @@
+\documentclass{techbrief}
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{positioning,calc,arrows,arrows.meta, shapes, decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+
+\title{Quantum pure states are not enough}
+\author{Gabriele Carcassi}
+\category{Quantum mechanics}
+\tags{Quantum statistical mechanics, Convex spaces}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	We show that the space of quantum pure states is not enough to uniquely recover the space of quantum ensembles, and therefore it is not enough to characterize quantum mechanics. The space of statistical ensembles, on the other hand, is enough to distinguish between the two.
+\end{abstract}
+
+\section{Introduction}
+
+While most efforts within the foundations of quantum mechanics focus on pure states, we show they are not enough to characterize quantum mechanics. It is the space of statistical ensemble that marks the difference and, therefore, statistical mechanics plays a crucial role in the difference between the two theories.
+
+\section{Classical and quantum conditions}
+
+Let us first give a condition that characterizes the classical state space. We characterize the states, the ensembles and their conditional probability.
+
+\begin{condition}[Classical state space]{CST}
+	The state space is represented by a symplectic manifold $(X,\omega)$, typically charted by conjugate quantities (i.e. local Darboux coordinates) $(q_i,p_i) \in \mathbb{R}^{2n}$, where $n$ is the number of independent degrees of freedom (DOF). The count of configurations for each DOF over a region $\Sigma$ is given $\int_{\Sigma} dp^i dq_i = \int_{\Sigma} \omega$ and the count of states is given by the Liouville measure $\mu(U) = \int_U dq^1\cdots dq^n dp_1 \cdots dp_n = \int_U \omega^n$.
+	
+	The ensemble space is represented by th set of probability distributions $\rho(q^i, p_i)$ (i.e. probability measures that are absolutely continuous with respect to the Liouville measure).
+	
+	The conditional probability over states is given by $p(\xi_1 | \xi_2) = 0 = p(\xi_2 | \xi_1)$ for all $\xi_1, \xi_2 \in X$, meaning that all states represent mutually exclusive events.
+\end{condition}
+
+We now characterize quantum state space in the same way. However, we break up the three elements (i.e. state, ensembles, conditional probability) into three separate conditions.\footnote{Note that we require $\mathcal{H}$ to just be a complex inner product space, and not a Hilbert space as Hilbert spaces are problematic in the infinite dimension case. Given that our requirement is weaker, the results also hold for Hilbert spaces as well.}
+
+\begin{condition}[Quantum states]{QST}
+	States are rays (i.e. \ref{QP-RAY}), ensembles are density operators (i.e. \ref{QE-DENS}) and conditional probability is the Born rule (i.e. \ref{BR-BORN}). That is, \linebreak \ref{QST} $=$ \ref{QP-RAY} $\wedge$ \ref{QE-DENS} $\wedge$ \ref{BR-BORN}
+\end{condition}
+
+\begin{condition}[Quantum states are rays]{QP-RAY}
+	The state space of the system is represented by the projective space given by the rays of a complex vector space $\mathcal{H}$. That is, a state $\psi \in P(\mathcal{H})$ is a ray $\psi = \{c |\psi\> \mid c \in \mathbb{C} \}$ of a complex projective space.
+\end{condition}
+
+\begin{condition}[Quantum ensembles are density operators]{QE-DENS}
+	The ensemble space of the system is represented by the set of density operators acting on a complex inner product space $\mathcal{H}$. That is, an ensemble $\rho \in D(\mathcal{H})$ is a positive semi-definite trace one self-adjoint operator $\rho : \mathcal{H} \to \mathcal{H}$. 
+\end{condition}
+
+\begin{condition}[Conditional expectation from Born rule]{BR-BORN}
+	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\end{condition}
+
+\section{Theorems}
+
+The main observation is that we can satisfy \ref{QP-RAY} and \ref{CST} at the same time. The complex nature of the inner product space makes sure that the projective space is symplectic, and therefore it can be used in the context of classical mechanics.
+
+\begin{thrm}
+	Conditions \ref{QP-RAY} and \ref{CST} are consistent. In fact, they are consistent if and only if $1\leq\dim(\mathcal{H})<\infty$.
+\end{thrm}
+
+\begin{proof}
+	Suppose \ref{QP-RAY} and \ref{CST} are assumed. Then the state space $X$ is both a symplectic manifold and a complex projective space. Since $X$ is a symplectic manifold, then $2 \leq \dim(X) < \infty$. This means that $1 \leq \dim(\mathcal{H}) < \infty$. We can then define statistical ensembles and entropy as given by \ref{QP-RAY}.
+\end{proof}
+
+We can, in fact, provide a simple example which is interesting to understand the difference between the hybrid and the true quantum case.
+
+\begin{example}[Classical qubit]
+	Let $\mathcal{H}$ be a two dimensional Hilbert space. The projective space is a two-sphere, which is a symplectic manifold with Darboux coordinate $z$ and $\theta_{xy}$. The Liouville measure is given by the areas on the sphere (i.e. the solid angle). The statistical ensembles are given by probability measures $\rho(z,\theta_{xy})$. Moreover, Hamiltonian evolution can be defined as exactly those diffeomorphism for which the volume, and therefore the entropy, is conserved. Quantum evolution corresponds exactly to rotations, which is the sub-case in which the Hamiltonian is linear (i.e. a function of a direction in the embedding three dimensional space of the sphere).
+\end{example}
+
+\begin{remark}
+	While the space of pure states of the classical and quantum qubits are the same, and therefore we still have a notion of superposition and other elements of quantum mechanics, the space of ensembles is radically different. The Born rule would have to be $p(\psi\vert\phi) = \delta_{\psi \phi}$, consistently with classical statistical mechanics, as all pure states are mutually exclusive.
+\end{remark}
+
+We now see that the notion of classical ensemble and quantum ensembles are different.
+
+\begin{thrm}
+	Conditions \ref{QE-DENS} and \ref{CST} are inconsistent.
+\end{thrm}
+\begin{proof}
+	Suppose \ref{QE-DENS} and \ref{CST} are assumed. Fix a two-dimensional subspace $A$. By \ref{CST}, the space of ensembles with support in $A$ correspond to the space of absolutely continuous probability measures over a sphere, which is an infinite dimensional space. By \ref{QE-DENS}, the space of ensembles with support in $A$ correspond to the Bloch ball, which is three dimensional. This is a contradiction, which means \ref{QE-DENS} and \ref{CST} are inconsistent.
+\end{proof}
+
+\begin{insight}
+	The space of statistical ensembles is necessary to distinguish between classical and quantum spaces.
+\end{insight}
+
+Lastly, we can show that each quantum ensemble is an equivalence class of classical distributions over the pure states.
+
+\begin{thrm}
+	Over \ref{QST}, let $M^1(P(\mathcal{H}))$ be the set of probability measures, non necessarily absolutely continuous, over the states. Then there exists an equivalence relationship $\sim \; \subseteq M^1(P(\mathcal{H})) \times M^1(P(\mathcal{H}))$ such that $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
+\end{thrm}
+
+\begin{proof}
+	Note that $D(\mathcal{H})$ is a convex set with $P(\mathcal{H})$ as extreme points. Therefore, for every probability measure $\mu \in M^1(P(\mathcal{H}))$, there exists an element $\rho \in D(\mathcal{H})$ represented by $\mu$ in the sense of Choquet theory. That is, for every continuous linear functional $f : D(\mathcal{H}) \to \mathbb{R}$, $f(\rho) = \int f(\psi) d\mu$. Let $r : M^1(P(\mathcal{H})) \to D(\mathcal{H})$ be the map between the probability measure and the ensemble it represents. Define $\mu_1 \sim \mu_2$ if $r(\mu_1) = r(\mu_2)$. Then $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
+\end{proof}
+
+The equivalence class keeps track of all possible decompositions of mixed ensembles in terms of pure ensembles. Note that $r$ defined about is affine, so any affine function of quantum ensembles is also an affine functional of the probability measures over quantum states. The converse is not true, and those are exactly the random variables that would distinguish between different possible preparations of the same ensemble.
+
+\section{Conclusion}
+
+Quantum mechanics cannot be understood by simply looking at pure states, their properties and their evolution. On the other hand, since the difference in the convex space of ensembles is enough to distinguish between the two theories, understanding the difference between classical and quantum mechanics requires understanding the difference between their statistical counterparts.
+
+\end{document}
+
