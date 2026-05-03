@@ -1,0 +1,82 @@
+\documentclass{techbrief}
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{positioning,calc,arrows,arrows.meta, shapes, decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+
+\title{Inconsistent convergence in Hilbert space}
+\author{Gabriele Carcassi}
+\category{Quantum mechanics}
+\tags{Hilbert space, Schwartz space, topology}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	Another problem with Hilbert spaces in quantum mechanics is that unbounded operators are not continuous over their own domain which leads to physical inconsistencies. We show this by creating a sequence of states for the Harmonic oscillator that converges to the ground state while the expected energy level converges to the first one.
+\end{abstract}
+
+\section{Introduction}
+
+Due to the completeness requirement, the domain of an unbounded self-adjoint operator cannot be the whole space. Similarly, any continuous linear operator must be bounded, since if it is defined on a dense subspace it could be extended to the whole space. This means that any unbounded operator not only is not defined over the whole space (e.g. the average position is not defined for all states), but it is not continuous in its own domain (i.e. small state changes can correspond to big average position changes). This means that states and observable can converge in different ways for the same sequence.
+
+\section{Sequence that converges in $\ell^2$ but not in $S(\mathbb{N})$}
+
+Recall that $\ell^2$ is the space of sequences $x_i$ such that $\sum_{i=1}^{\infty} |x_i|^2 < \infty$. Since a probability distribution over countably many elements is a sequence $p_i$ such that $p_i \in [0,1]$ and $\sum_{x=1}^{\infty} p_i = 1$, we have $p_i \in \ell^2$. Convergence in $\ell^2$ coincides with convergence of the inner product. That is, $\lim\limits_{j \to \infty} x^j_i \to y_i$ if and only if $\lim\limits_{j \to \infty} d(x^j_i, y_i) \to 0$ where $d(x^j_i, y_i) = |x^j_i - y_i|^2 = \sum_{i=1}^{\infty} (x^j_i - y_i)^2$.
+
+The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all sequences such that $\sum_{i=1}^{\infty} |i^n x_i|^2 < \infty$ for all $n$.
+
+\begin{prop}
+	Let $a_i$ be such that $a_1 = 1$ and $a_i = 0$ for all $i > 1$. Let  $\{b^j_i\}_{j=2}^{+\infty}$ be the sequence of sequences such that $b^j_i = 1$ if $i=j$ and $b^j_i = 0$ if $i \neq j$. Let $e^j_i = \sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i$. Then $\lim\limits_{j \to \infty}e^j_i = a_i$ in $\ell^2$ while $e^j_i$ does not converge in $S(\mathbb{N})$ since $\lim\limits_{j \to \infty} \sum_{i=1}^{\infty} |i e^j_i |^2 \to +\infty$.
+\end{prop}
+
+\begin{proof}
+	Intuitively, for a fixed $j$, $|b^j_i|^2$ is a probability distribution over the single element at $j$. Each probability distribution $b^j_i$ is in $S(\mathbb{N})$ but the sequence has no limit in either $S(\mathbb{N})$ or $\ell^2$ because the probability escapes at infinity.
+	
+	The convex combination $e^j_i$, instead, converges to $a_i$ in $\ell^2$ as $j \to \infty$. In fact
+	\begin{equation}
+	\begin{aligned}
+		d(e^j_i, a_i) &= \sum_{i=1}^{\infty} (e^j_i - a_i)^2 = \sum_{i=1}^{\infty} \left(\sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i - a_i\right)^2 \\
+		&= \left(\sqrt{\frac{j-1}{j}} - 1\right)^2 a_1^2 + \frac{1}{j} (b^j_j)^2 = \left(\sqrt{\frac{j-1}{j}} - 1\right)^2 + \frac{1}{j} \\
+		\lim_{j \to \infty} d(e^j_i, a_i) &= \lim_{j \to \infty} \left(\left(\sqrt{\frac{j-1}{j}} - 1\right)^2 + \frac{1}{j}\right) = 0
+	\end{aligned}
+	\end{equation}
+
+	Now consider $\sum_{i=1}^{\infty} |i a_i|^2$. Since $a_i \in S(\mathbb{N})$, $\sum_{i=1}^{\infty} |i a_i|^2 = k < \infty$. We have
+	\begin{equation}
+	\begin{aligned}
+		\sum_{i=1}^{\infty} |i \, e^j_i|^2 &= \sum_{i=1}^{\infty} i^2 \left(\sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i\right)^2 \\
+		&= 1^2 \cdot \frac{j-1}{j} \cdot a_1^2 + j^2 \cdot \frac{1}{j} \cdot (b^j_j)^2 = \frac{j-1}{j} + j \\
+		\lim_{j \to \infty} \sum_{i=1}^{\infty} |i \, e^j_i|^2 &= \lim_{j \to \infty} \left(\frac{j-1}{j} + j\right) = +\infty
+	\end{aligned}
+	\end{equation}
+\end{proof}
+
+The expectation calculation in section 3 has been rewritten in a way that's hard to follow. The original version was clearer. The issue is that the intermediate step $\langle e^j|\frac{j-1}{j} 0|0\rangle + \langle e^j|\frac{1}{j} j |j\rangle$ mixes scalars and kets in a confusing way, and the first term should contribute but is shown as vanishing without explanation.
+
+\section{Inconsistent convergence for energy levels}
+
+Now, consider the harmonic oscillator with energy eigenstates $|n\rangle$ and number operator $N = a^\dagger a$ where $N|n\> = n|n\>$. Based on the previous discussion, the sequence of states $|e^j\> = \sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state $|0\>$ in $\ell^2$. However, recalling that the cross terms vanish since $N$ is diagonal in the energy eigenbasis, the expected energy level is
+\begin{equation}
+	\langle e^j|N|e^j\rangle = \frac{j-1}{j}\langle 0|N|0\rangle + \frac{1}{j}\langle j|N|j\rangle = \frac{j-1}{j}(0) + \frac{1}{j}(j) = 1
+\end{equation}
+for all $j$. That is,
+\begin{equation}
+	\begin{aligned}
+		\lim_{j \to \infty} |e^j\> &= |0\> \\
+		\lim_{j \to \infty} \< e^j|N|e^j\>  &= 1
+	\end{aligned}
+\end{equation}
+the state converges to the ground state but the expected energy level to the first excited level, which is obviously physically inconsistent. This is because $\ell^2$ convergence only tracks the inner product, which is insensitive to how the state is distributed across high energy levels. The small but far component $\sqrt{\frac{1}{j}}|j\rangle$ vanishes in the $\ell^2$ norm but carries enough energy to keep the expectation fixed. A topology that keeps track of all moments, like the Schwartz topology, would not allow this kind of convergence.
+
+\section{Conclusion}
+
+As we have shown, we created a sequence of quantum states for the harmonic oscillator that, in the standard framework of Hilbert spaces, converge to the ground state while the expectation for the energy level converges to the first level. This is clearly physically inconsistent, and shows how and why Hilbert spaces are not suitable as a physically meaningful foundation for quantum mechanics. The problem is that the topology is too weak to take into account all conditions for a meaningful criterion of physical convergence.
+
+\end{document}
+
+
+%Equivalence of sup norms and averages
+%The two are not exactly equivalent in general. Let me be more careful. $\sup_i |i^n x_i| < \infty$ for all $n$ is the standard definition of $S(\mathbb{N})$. If $\sup_i |i^n x_i| < \infty$ for all $n$, then in particular $|i^n x_i| \leq C_n$ for all $i$. Then $|i^m x_i|^2 = |i^m x_i| \cdot |i^m x_i| \leq C_m \cdot |i^m x_i|$. But to sum this, you need $\sum |i^m x_i| < \infty$, which requires $|x_i|$ to decay faster than any polynomial — which is exactly what $\sup_i |i^n x_i| < \infty$ for all $n$ gives you. Specifically, $|x_i| \leq C_n / i^n$ for all $n$, so for $n$ large enough, $\sum |i^m x_i| \leq C_n \sum i^{m-n} < \infty$ when $n > m + 1$. So $\sup_i |i^n x_i| < \infty$ for all $n$ implies $\sum |i^n x_i|^2 < \infty$ for all $n$. The converse is not immediate. $\sum |i^n x_i|^2 < \infty$ for all $n$ implies $|i^n x_i|^2 \to 0$, hence $|i^n x_i| \to 0$, hence $\sup_i |i^n x_i| < \infty$ for each $n$. So actually they are equivalent.I retract my hesitation — they are equivalent. But the standard definition uses the $\sup$ seminorms.
+
