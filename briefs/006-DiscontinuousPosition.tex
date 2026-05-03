@@ -23,13 +23,12 @@ Due to the completeness requirement, the domain of an unbounded self-adjoint ope
 
 \section{Sequence that converges in $\ell^2$ but not in $S(\mathbb{N})$}
 
-Recall that $\ell^2$ is the space of sequences $x_i$ such that $\sum_{i=1}^{\infty} |x_i|^2 < \infty$. Since a probability distribution over countably many elements is a sequence $p_i$ such that $p_i \in [0,1]$ and $\sum_{i=1}^{\infty} p_i = 1$, we have $p_i \in \ell^2$. Convergence in $\ell^2$ coincides with convergence of the inner product. %TODO: Clarify what $j$ is.  
-That is, $\lim\limits_{j \to \infty} x^j_i \to y_i$ if and only if $\lim\limits_{j \to \infty} d(x^j_i, y_i) \to 0$ where $d(x^j_i, y_i) = |x^j_i - y_i|^2 = \sum_{i=1}^{\infty} (x^j_i - y_i)^2$.
+Recall that $\ell^2$ is the space of sequences $x_i$ such that $\sum_{i=1}^{\infty} |x_i|^2 < \infty$. Since a probability distribution over countably many elements is a sequence $p_i$ such that $p_i \in [0,1]$ and $\sum_{i=1}^{\infty} p_i = 1$, we have $p_i \in \ell^2$. Convergence in $\ell^2$ coincides with convergence of the inner product. That is, given a sequence of sequences $\{ x^j_i\}_{j=1}^{\infty}$, $\lim\limits_{j \to \infty} x^j_i \to y_i$ if and only if $\lim\limits_{j \to \infty} d(x^j_i, y_i) \to 0$ where $d(x^j_i, y_i) = |x^j_i - y_i|^2 = \sum_{i=1}^{\infty} (x^j_i - y_i)^2$.
 
 The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all sequences such that $\sum_{i=1}^{\infty} |i^n x_i|^2 < \infty$ for all $n$.
 
 \begin{prop}
-	Let $a_i$ be such that $a_1 = 1$ and $a_i = 0$ for all $i > 1$. Let  $\{b^j_i\}_{j=2}^{+\infty}$ be the sequence of sequences such that $b^j_i = 1$ if $i=j$ and $b^j_i = 0$ if $i \neq j$. Let $e^j_i = \sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i$. Then $\lim\limits_{j \to \infty}e^j_i = a_i$ in $\ell^2$ while $e^j_i$ does not converge in $S(\mathbb{N})$ since $\lim\limits_{j \to \infty} \sum_{i=1}^{\infty} |i e^j_i |^2 \to +\infty$.
+	Let $a_i$ be such that $a_1 = 1$ and $a_i = 0$ for all $i > 1$. Let  $\{b^j_i\}_{j=2}^{\infty}$ be the sequence of sequences such that $b^j_i = 1$ if $i=j$ and $b^j_i = 0$ if $i \neq j$. Let $e^j_i = \sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i$. Then $\lim\limits_{j \to \infty}e^j_i = a_i$ in $\ell^2$ while $e^j_i$ does not converge in $S(\mathbb{N})$ since $\lim\limits_{j \to \infty} \sum_{i=1}^{\infty} |i e^j_i |^2 \to +\infty$.
 \end{prop}
 
 \begin{proof}
@@ -39,6 +38,7 @@ The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all s
 	\begin{equation}
 	\begin{aligned}
 		d(e^j_i, a_i) &= \sum_{i=1}^{\infty} (e^j_i - a_i)^2 = \sum_{i=1}^{\infty} \left(\sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i - a_i\right)^2 \\
+		&= \sum_{i=1}^{1} \left(\sqrt{\frac{j-1}{j}} a_i- a_i\right)^2 + \sum_{i=2}^{\infty} \left(\sqrt{\frac{1}{j}} b^j_i \right)^2 \\
 		&= \left(\sqrt{\frac{j-1}{j}} - 1\right)^2 a_1^2 + \frac{1}{j} (b^j_j)^2 = \left(\sqrt{\frac{j-1}{j}} - 1\right)^2 + \frac{1}{j} \\
 		\lim_{j \to \infty} d(e^j_i, a_i) &= \lim_{j \to \infty} \left(\left(\sqrt{\frac{j-1}{j}} - 1\right)^2 + \frac{1}{j}\right) = 0
 	\end{aligned}
@@ -48,6 +48,7 @@ The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all s
 	\begin{equation}
 	\begin{aligned}
 		\sum_{i=1}^{\infty} |i \, e^j_i|^2 &= \sum_{i=1}^{\infty} i^2 \left(\sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i\right)^2 \\
+		&= \sum_{i=1}^{\infty} i^2 \left(\sqrt{\frac{j-1}{j}} a_i \right)^2 + \sum_{i=1}^{\infty} i^2 \left(\sqrt{\frac{1}{j}} b^j_i\right)^2 \\
 		&= 1^2 \cdot \frac{j-1}{j} \cdot a_1^2 + j^2 \cdot \frac{1}{j} \cdot (b^j_j)^2 = \frac{j-1}{j} + j \\
 		\lim_{j \to \infty} \sum_{i=1}^{\infty} |i \, e^j_i|^2 &= \lim_{j \to \infty} \left(\frac{j-1}{j} + j\right) = +\infty
 	\end{aligned}
@@ -59,7 +60,7 @@ The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all s
 
 Now, consider the harmonic oscillator with energy eigenstates $|n\rangle$ and number operator $N = a^\dagger a$ where $N|n\> = n|n\>$. Based on the previous discussion, the sequence of states $|e^j\> = \sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state $|0\>$ in $\ell^2$. However, recalling that the cross terms vanish since $N$ is diagonal in the energy eigenbasis, the expected energy level is
 \begin{equation}
-	\langle e^j|N|e^j\rangle = \frac{j-1}{j}\langle 0|N|0\rangle + \frac{1}{j}\langle j|N|j\rangle = \frac{j-1}{j}(0) + \frac{1}{j}(j) = 1
+	\langle e^j|N|e^j\rangle = \frac{j-1}{j}\langle 0|N|0\rangle + \frac{1}{j}\langle j|N|j\rangle = \frac{j-1}{j}0 + \frac{1}{j}j = 1
 \end{equation}
 for all $j$. That is,
 \begin{equation}
