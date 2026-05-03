@@ -14,16 +14,17 @@
 \maketitle
 	
 \begin{abstract}
-	Another problem with Hilbert spaces in quantum mechanics is that unbounded operators are not continuous over their own domain which leads to physical inconsistencies. We show this by creating a sequence of states for the Harmonic oscillator that converges to the ground state while the expected energy level converges to the first one.
+	Another problem with Hilbert spaces in quantum mechanics is that unbounded operators are not continuous over their own domain, which leads to physical inconsistencies. We show this by creating a sequence of states for the harmonic oscillator that converges to the ground state while the expected energy level converges to the first one.
 \end{abstract}
 
 \section{Introduction}
 
-Due to the completeness requirement, the domain of an unbounded self-adjoint operator cannot be the whole space. Similarly, any continuous linear operator must be bounded, since if it is defined on a dense subspace it could be extended to the whole space. This means that any unbounded operator not only is not defined over the whole space (e.g. the average position is not defined for all states), but it is not continuous in its own domain (i.e. small state changes can correspond to big average position changes). This means that states and observable can converge in different ways for the same sequence.
+Due to the completeness requirement, the domain of an unbounded self-adjoint operator cannot be the whole space. Similarly, any continuous linear operator must be bounded, since if it is defined on a dense subspace it could be extended to the whole space. This means that any unbounded operator not only is not defined over the whole space (e.g. the average position is not defined for all states), but it is not continuous in its own domain (i.e. small state changes can correspond to big average position changes). This means that states and observables can converge in different ways for the same sequence.
 
 \section{Sequence that converges in $\ell^2$ but not in $S(\mathbb{N})$}
 
-Recall that $\ell^2$ is the space of sequences $x_i$ such that $\sum_{i=1}^{\infty} |x_i|^2 < \infty$. Since a probability distribution over countably many elements is a sequence $p_i$ such that $p_i \in [0,1]$ and $\sum_{x=1}^{\infty} p_i = 1$, we have $p_i \in \ell^2$. Convergence in $\ell^2$ coincides with convergence of the inner product. That is, $\lim\limits_{j \to \infty} x^j_i \to y_i$ if and only if $\lim\limits_{j \to \infty} d(x^j_i, y_i) \to 0$ where $d(x^j_i, y_i) = |x^j_i - y_i|^2 = \sum_{i=1}^{\infty} (x^j_i - y_i)^2$.
+Recall that $\ell^2$ is the space of sequences $x_i$ such that $\sum_{i=1}^{\infty} |x_i|^2 < \infty$. Since a probability distribution over countably many elements is a sequence $p_i$ such that $p_i \in [0,1]$ and $\sum_{i=1}^{\infty} p_i = 1$, we have $p_i \in \ell^2$. Convergence in $\ell^2$ coincides with convergence of the inner product. %TODO: Clarify what $j$ is.  
+That is, $\lim\limits_{j \to \infty} x^j_i \to y_i$ if and only if $\lim\limits_{j \to \infty} d(x^j_i, y_i) \to 0$ where $d(x^j_i, y_i) = |x^j_i - y_i|^2 = \sum_{i=1}^{\infty} (x^j_i - y_i)^2$.
 
 The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all sequences such that $\sum_{i=1}^{\infty} |i^n x_i|^2 < \infty$ for all $n$.
 
@@ -43,7 +44,7 @@ The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all s
 	\end{aligned}
 	\end{equation}
 
-	Now consider $\sum_{i=1}^{\infty} |i a_i|^2$. Since $a_i \in S(\mathbb{N})$, $\sum_{i=1}^{\infty} |i a_i|^2 = k < \infty$. We have
+	We also have
 	\begin{equation}
 	\begin{aligned}
 		\sum_{i=1}^{\infty} |i \, e^j_i|^2 &= \sum_{i=1}^{\infty} i^2 \left(\sqrt{\frac{j-1}{j}} a_i + \sqrt{\frac{1}{j}} b^j_i\right)^2 \\
@@ -53,7 +54,6 @@ The space of Schwartz sequences $S(\mathbb{N}) \subset \ell^2$ consists of all s
 	\end{equation}
 \end{proof}
 
-The expectation calculation in section 3 has been rewritten in a way that's hard to follow. The original version was clearer. The issue is that the intermediate step $\langle e^j|\frac{j-1}{j} 0|0\rangle + \langle e^j|\frac{1}{j} j |j\rangle$ mixes scalars and kets in a confusing way, and the first term should contribute but is shown as vanishing without explanation.
 
 \section{Inconsistent convergence for energy levels}
 
@@ -72,7 +72,7 @@ the state converges to the ground state but the expected energy level to the fir
 
 \section{Conclusion}
 
-As we have shown, we created a sequence of quantum states for the harmonic oscillator that, in the standard framework of Hilbert spaces, converge to the ground state while the expectation for the energy level converges to the first level. This is clearly physically inconsistent, and shows how and why Hilbert spaces are not suitable as a physically meaningful foundation for quantum mechanics. The problem is that the topology is too weak to take into account all conditions for a meaningful criterion of physical convergence.
+As we have shown, we created a sequence of quantum states for the harmonic oscillator that, in the standard framework of Hilbert spaces, converges to the ground state while the expectation for the energy level converges to the first level. This is clearly physically inconsistent, and shows how and why Hilbert spaces are not suitable as a physically meaningful foundation for quantum mechanics. The problem is that the topology is too weak to take into account all conditions for a meaningful criterion of physical convergence.
 
 \end{document}
 
