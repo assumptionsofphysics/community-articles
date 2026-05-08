@@ -1,0 +1,51 @@
+\documentclass{techbrief}
+
+\usepackage{hyperref}
+
+\title{Non-uniqueness of the moment problem for Schwartz functions}
+\author{Gabriele Carcassi}
+\date{May 2026}
+\category{Quantum mechanics}
+\tags{Schwartz space, moment problem}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	We construct explicit counter examples to show that the moment problem is not uniquely solvable for Schwartz functions. In particular, we show that there are infinitely many different states that have the same expectation values for all moments of position and momentum.
+\end{abstract}
+
+\begin{thrm}
+    Schwartz functions are not uniquely determined by their moments of position and momentum. In other words, there exist two (linearly independent) Schwartz functions $\psi_1, \psi_2 \in \mathcal{S}(\mathbb{R})$ such that for all $m, n \in \mathbb{N}_0$: $\langle \psi_1 | X^m P^n | \psi_1 \rangle = \langle \psi_2 | X^m P^n | \psi_2 \rangle$.
+\end{thrm}
+\begin{proof}
+    We can construct explicit counter examples:
+    Take two functions $f, g \in \mathcal{S}(\mathbb{R})$ with compact and pairwise distinct support (see Figure \ref{fig:bumps} for an example). Define the family of functions $\psi_\theta = f + e^{i \theta} g$. Let's calculate the expectations value of $X^m P^n$ for all of them.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\linewidth]{tempimages/bump_functions.png}
+        \caption{Two \href{https://en.wikipedia.org/wiki/Bump_function}{bump functions} with disjoint support.}
+        \label{fig:bumps}
+    \end{figure}
+    \begin{equation}
+        \begin{split}
+            \langle \psi_\theta | X^m (-i \hbar \partial_x)^n | \psi_\theta \rangle =&\; \langle f + e^{i \theta} g | X^m (-i \hbar \partial_x)^n | f + e^{i \theta} g \rangle \\
+            =&\; \langle f  | X^m (-i \hbar \partial_x)^n | f \rangle \\
+            &+ e^{+i \theta} \langle f | X^m (-i \hbar \partial_x)^n | g \rangle \\
+            &+ e^{-i \theta} \langle g | X^m (-i \hbar \partial_x)^n | f \rangle \\
+            &+ \underbrace{e^{-i \theta} e^{+i \theta}}_{1} \langle g | X^m (-i \hbar \partial_x)^n | g \rangle
+        \end{split}
+    \end{equation}
+    Note that the functions $x^n \partial_x^n f(x)$ and $x^n \partial_x^n g(x)$ still have the same or smaller support. This means that for all $m, n \in \mathbb{N}_0$
+    \begin{equation}
+        \langle f | X^m \partial_x^n | g \rangle = \int_\mathbb{R} f^\star(x) x^m \partial_x^n g(x) \, \mathrm{d}x = 0
+    \end{equation}
+    and the same for $\langle g | X^m (-i \hbar \partial_x)^n | f \rangle$, i.e., both mixed terms vanish. In conclusion
+    \begin{equation}
+        \langle \psi_\theta | X^m (-i \hbar \partial_x)^n | \psi_\theta \rangle = \langle f  | X^m (-i \hbar \partial_x)^n | f \rangle + \langle g | X^m (-i \hbar \partial_x)^n | g \rangle
+    \end{equation}
+    which does not depend on $\theta$. Since $f$ and $g$ are linearly independent (even orthogonal), each $\theta$ defines a different physical state (element in the projective space).
+\end{proof}
+
+\end{document}
