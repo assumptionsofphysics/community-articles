@@ -1,0 +1,59 @@
+\documentclass{techbrief}
+\title{Schrödinger equation is equivalent to information conservation}\author{Gabriele Carcassi}\category{Quantum mechanics}\tags{Schrödinger equation, entropy, unitary evolution}
+\begin{document}
+	\maketitle
+	\begin{abstract}We show that the Schrödinger equation is equivalent to preservation of the von Neumann entropy. That is, the time evolution of a quantum system follows the Schrödinger equation if and only if it preserves information entropy.\end{abstract}
+\section{Introduction}
+
+In quantum mechanics, the time evolution for an isolated system is postulated to follow the Schrödinger equation (i.e. unitary evolution). Here we show that, once the basic structure of quantum theory is assumed, the same equation is equivalent to requiring the conservation of information entropy. Conceptually, this states that the time evolution is deterministic and reversible if and only if the amount of information given to identify the initial state is exactly the same as the information given to identify the final state, which is an information theoretic way to characterize determinism and reversibility.
+
+\section{Conditions}
+
+The following condition represents our base theory.
+\begin{condition}[Quantum states]{QST}
+	The state space of the system is represented by a complex projective space $P(\mathcal{H})$ of some complex inner product space $\mathcal{H}$. The ensemble space $E(\mathcal{H})$ is the convex set of density operators. The conditional probability is given by the Born rule: $p(\psi|\phi) = \frac{\langle \phi | \psi \rangle\langle \psi | \phi \rangle}{\langle \psi | \psi \rangle\langle \phi | \phi \rangle}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+\end{condition}
+
+Within our base theory, we can derive the following.
+\begin{coro}[Born rule is entropy]\label{QM-ENT-PROB}
+	Let $\psi, \phi \in P[\mathcal{H}]$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
+\end{coro}
+The expression of the entropy as a function of $\lambda$ is recovered with a straight calculation. The function is strictly decreasing and therefore invertible.
+
+Time evolution in quantum mechanics is given by the following.
+\begin{condition}[Schrödinger equation]{DR-SCEQ}
+	The evolution follows the equation $i\hbar \frac{d}{dt}\psi(t) = H\psi(t)$ where $H$ is a self-adjoint operator.
+\end{condition}
+
+We will want to show that the previous condition is equivalent to the following.
+\begin{condition}[Information preservation]{DR-INFO}
+	The evolution is differentiable and preserves von Neumann entropy: $S(\mathcal{E}(\rho)) = S(\rho)$ for all $\rho \in E(\mathcal{H})$.
+\end{condition}
+
+Note that \ref{DR-SCEQ} respects the following condition:
+\begin{condition}[Affine evolution]{EV-AFF}
+	The time evolution map $\mathcal{E} : E(\mathcal{H}) \to E(\mathcal{H})$ is affine: $\mathcal{E}(\sum_i p_i \rho_i) = \sum_i p_i \mathcal{E}(\rho_i)$.
+\end{condition}
+Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, we will take it as part of our base theory.
+
+\section{Theorem}
+\begin{thrm}[Schrödinger equation is information preservation]
+	Over \ref{QST} and \ref{EV-AFF}, conditions \ref{DR-SCEQ} and \ref{DR-INFO} are equivalent.
+\end{thrm}
+\begin{proof}
+	\ref{DR-SCEQ} $\implies$ \ref{DR-INFO}. Given that the Schrödinger equation is differentiable, it gives rise to the infinitesimal unitary evolution $U_{dt} = 1 + \frac{H}{\imath\hbar}dt$. Under unitary evolution, a density operator transforms as $\mathcal{T}_{dt}(\rho) = U_{dt}\rho U_{dt}^\dagger$. Since unitary conjugation preserves eigenvalues, and the von Neumann entropy depends only on eigenvalues, $S(\mathcal{T}_{dt}(\rho)) = S(\rho)$.
+	
+	For \ref{DR-INFO} $\implies$ \ref{DR-SCEQ}, since the evolution is differentiable, there exists an infinitesimal operator $\mathcal{T}_{dt} : E(\mathcal{H}) \to E(\mathcal{H})$. To show that this operator is unitary, we proceed in steps.
+	
+	\emph{Step 1: Pure states map to pure states.} Pure states are the unique states with $S(\rho) = 0$. Since entropy is preserved, states with zero entropy map to states with zero entropy. Therefore $\mathcal{T}_{dt}$ maps pure states to pure states.
+	
+	\emph{Step 2: The map on vectors is unitary.} Since $\mathcal{T}_{dt}$ maps pure states to pure states, there exists a map $U_{dt}$ on the Hilbert space such that $\mathcal{T}_{dt}(\rho_\psi) = \rho_{U_{dt}\psi}$. Consider the equal mixture of any two pure states $\psi$ and $\phi$. By EV-AFF, $\mathcal{T}_{dt}(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi) = \frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}$. By DR-INFO, $S(\frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}) = S(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi)$. Since by \ref{QM-ENT-PROB} the entropy of an equal mixture of two pure states is an invertible function of their conditional probability, we have $p(U_{dt}\psi|U_{dt}\phi) = p(\psi|\phi)$ for all pairs of states. That is, $U_{dt}$ preserves the modulus of the inner product: $|\langle U_{dt}\psi|U_{dt}\phi\rangle|^2 = |\langle\psi|\phi\rangle|^2$ for all $\psi, \phi$. By Wigner's theorem, $U_{dt}$ is either unitary or anti-unitary. For continuous (infinitesimal) evolution, anti-unitary is excluded, so $U_{dt}$ is unitary.
+	
+	\emph{Step 3: Unitary implies Schrödinger.} Since $U_{dt}$ is an infinitesimal unitary map, it can be written as $U_{dt} = 1 + Adt$, where $A = - A^\dagger$ is skew-adjoint. Setting $A = \frac{H}{i\hbar}$ with $H = H^\dagger$ recovers the Schrödinger equation.
+\end{proof}
+
+\section{Conclusion}
+
+We have seen that the Schrödinger equation is equivalent to the preservation of von Neumann entropy. This means that the dynamical law of quantum mechanics can be understood as the requirement that time evolution neither creates nor destroys information. This parallels the classical case where Hamiltonian evolution is equivalent to the preservation of Shannon entropy (Liouville's theorem) and of the definitional independence of degrees of freedom.
+
+\end{document}
