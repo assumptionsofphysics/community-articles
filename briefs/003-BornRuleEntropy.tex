@@ -15,7 +15,7 @@
 \maketitle
 	
 \begin{abstract}
-	We show that the Born rule in quantum mechanics coincides with the definition of entropy. That is, assuming that conditional probability is given by the Born rule is equivalent to as assuming that the entropy is given by the von Neumann entropy.
+	We show that the Born rule in quantum mechanics coincides with the definition of entropy. That is, assuming that conditional probability is given by the Born rule is equivalent to assuming that the entropy is given by the von Neumann entropy.
 \end{abstract}
 
 \section{Introduction}
@@ -24,7 +24,7 @@ In quantum mechanics, the Born rule
 \begin{equation}
 	p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}
 \end{equation}
-defines conditional probability for two states: the probability of measuring state $\phi$ given that $\psi$ was prepared. Similarly, the von Neumann entropy
+defines conditional probability for two states: the probability of measuring state $\psi$ given that $\phi$ was prepared. Similarly, the von Neumann entropy
 \begin{equation}
 	S(\rho) = - \tr(\rho \log \rho)
 \end{equation}
@@ -110,7 +110,7 @@ Let us first show that, once the full framework of quantum mechanics is assumed,
 		\end{tikzpicture}
 		\caption {Entropy of a mixture of two pure states as a function of their Born rule.} \label{fig_rp_qm_entropyVsProb}
 	\end{figure}
-	The relationship is plotted in Fig. \ref{fig_rp_qm_entropyVsProb}: it is strictly concave and, therefore, invertible. If we are given the entropy of all equal mixtures of pairs of states we would be able to recover the Born rule and vice-versa.
+	The relationship is plotted in Fig. \ref{fig_rp_qm_entropyVsProb}: it is strictly decreasing and, therefore, invertible. If we are given the entropy of all equal mixtures of pairs of states we would be able to recover the Born rule and vice-versa.
 \end{proof}
 
 \begin{coro}[Orthogonality is mutual exclusivity]\label{rp-qm-orthoIsMutex}
@@ -124,11 +124,11 @@ We now want to state the overall claim in terms of dependency of definitions.
 The following condition represents our base theory, and defines the space of ensembles together with basic necessary requirements for conditional probability and entropy.
 
 \begin{condition}[Ensembles and quantum states]{EQST}
-	The space of ensembles $E(\mathcal{H}$) of a quantum system is represented by the convex space of all density operators (i.e positive semi-definite trace one self-adjoint operators) over a suitable separable inner product space $\mathcal{H}$. The state space is the set of extreme points, which coincides with the projective space $P(\mathcal{H})$. The ensemble space is equipped with a function $S : E(\mathcal{H})$ where $S(\rho)$ returns the entropy for ensmble $\rho$. The ensemble space is also equipped with a function $p(\cdot | \cdot) : P(\mathcal{H}) \times E(\mathcal{H}) \to [0,1]$, where $p(\psi | \rho)$ returns the probability of finding $\psi$ having prepared $\rho$. This function is affine in the second argument (i.e. $p(\phi | \sum p_i \psi_i) = \sum_i p_i p(\phi | \psi_i)$ ) and returns one if and only if the initial and final states are the same (i.e. $p(\phi | \psi) = 1 \iff \phi = \psi$ for all $\psi, \phi \in P(\mathcal{H})$).
+	The space of ensembles $E(\mathcal{H}$) of a quantum system is represented by the convex space of all density operators (i.e positive semi-definite trace one self-adjoint operators) over a suitable separable inner product space $\mathcal{H}$. The state space is the set of extreme points, which coincides with the projective space $P(\mathcal{H})$. The ensemble space is equipped with a function $S : E(\mathcal{H}) \to \mathbb{R}$ where $S(\rho)$ returns the entropy for ensemble $\rho$. The ensemble space is also equipped with a function $p(\cdot | \cdot) : P(\mathcal{H}) \times E(\mathcal{H}) \to [0,1]$, where $p(\psi | \rho)$ returns the probability of finding $\psi$ having prepared $\rho$. This function is affine in the second argument (i.e. $p(\phi | \sum p_i \psi_i) = \sum_i p_i p(\phi | \psi_i)$ ) and returns one if and only if the initial and final states are the same (i.e. $p(\phi | \psi) = 1 \iff \phi = \psi$ for all $\psi, \phi \in P(\mathcal{H})$).
 \end{condition}
 
 \begin{coro}
-	Since every ensemble $\rho$ can be expressed as the convex combination of pure states, function $p$ is fully specified by its values on pure states.
+	Since every ensemble $\rho$ can be expressed as the convex combination of pure states, and $p$ is affine in its second argument, $p$ is fully specified by its values on pure states.
 \end{coro}
 
 The following condition links the inner product to the conditional probability.
@@ -140,7 +140,7 @@ The following condition links the inner product to the conditional probability.
 The following condition imposes that the entropy is the von Neumann entropy.
 
 \begin{condition}[Von Neumann entropy]{BR-ENT}
-	The entropy function $S$ is given by the Shannon entropy: $S(\rho) = \tr(\rho \log \rho)$.
+	The entropy function $S$ is given by the Shannon entropy: $S(\rho) = - \tr(\rho \log \rho)$.
 \end{condition}
 
 The following condition makes sure that mutual exclusivity is consistently defined across conditional probability and entropy.
@@ -154,9 +154,9 @@ The following condition makes sure that mutual exclusivity is consistently defin
 \end{thrm}
 
 \begin{proof}
-	Let us show that \ref{BR-BORN} and \ref{BR-ENT} imply \ref{MUTEX}. Given a sequence of states $\psi_i \in P(\mathcal{H})$, we can find a sequence of normalized representatives $|\psi_i\>$. Suppose $\psi_i$ are pairwise orthogonal, then $|\psi_i\>$ are orthogonal as well. Let $\rho = \sum_i p_i \psi_i$. Then $ - \rho \log \rho = - \sum_i p_i \log p_i \psi_i$ and $-\tr(\rho \log \rho) = - \sum_i p_i \log p_i$. Conversely, suppose $|\psi_i \>$ is a sequence of normalized representatives of not necessarily pairwise orthogonal states. Since $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$, in particular we will have $S\left(\frac{1}{2} \rho_{\psi_i} + \frac{1}{2} \rho_{\phi_j} \right) = 1$ for all $i \neq j$. By \ref{rp-qm-orthoIsMutex}, $p(\psi_i|\psi_j) = 0$ for all $i \neq j$.
+	Let us show that \ref{BR-BORN} and \ref{BR-ENT} imply \ref{MUTEX}. Given a sequence of states $\psi_i \in P(\mathcal{H})$, we can find a sequence of normalized representatives $|\psi_i\>$. Suppose $\psi_i$ are pairwise orthogonal, then $|\psi_i\>$ are orthogonal as well. Let $\rho = \sum_i p_i \psi_i$. Then $ - \rho \log \rho = - \sum_i p_i \log p_i \psi_i$ and $-\tr(\rho \log \rho) = - \sum_i p_i \log p_i$. Conversely, suppose $|\psi_i \>$ is a sequence of normalized representatives of not necessarily pairwise orthogonal states. Since $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$, in particular we will have $S\left(\frac{1}{2} \rho_{\psi_i} + \frac{1}{2} \rho_{\psi_j} \right) = 1$ for all $i \neq j$. By \ref{rp-qm-orthoIsMutex}, $p(\psi_i|\psi_j) = 0$ for all $i \neq j$.
 	
-	Let us show that \ref{BR-BORN} and \ref{MUTEX} imply \ref{BR-ENT}. Given an ensemble $\rho \in E(\mathcal{H})$ we can find a sequence of orthogonal states $\psi_i$ such that $\rho = p_i \psi_i$. Since they are orthogonal, by \ref{BR-BORN} we have $p(\psi_i|\psi_j) = \frac{\< \psi_i | \psi_j \>\< \psi_j | \psi_i \>}{\< \psi_i | \psi_i \>\< \psi_j | \psi_j \>} = 0$ for all $i \neq j$. By \ref{MUTEX}, $S(\rho) = - \sum_i p_i \log p_i = - \tr(\sum_i p_i \log p_i \psi_i) = - \tr(\rho \log \rho)$.
+	Let us show that \ref{BR-BORN} and \ref{MUTEX} imply \ref{BR-ENT}. Given an ensemble $\rho \in E(\mathcal{H})$ we can find a sequence of orthogonal states $\psi_i$ such that $\rho = \sum_i p_i \psi_i$. Since they are orthogonal, by \ref{BR-BORN} we have $p(\psi_i|\psi_j) = \frac{\< \psi_i | \psi_j \>\< \psi_j | \psi_i \>}{\< \psi_i | \psi_i \>\< \psi_j | \psi_j \>} = 0$ for all $i \neq j$. By \ref{MUTEX}, $S(\rho) = - \sum_i p_i \log p_i = - \tr(\sum_i p_i \log p_i \psi_i) = - \tr(\rho \log \rho)$.
 	
 	Let us show that \ref{BR-ENT} and \ref{MUTEX} imply \ref{BR-BORN}. Let $\psi, \phi \in P(\mathcal{H})$. By the same arguments used in the proof of \ref{rp-qm-geometricDiagonalization}, $\< \phi | \psi \> = 0$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) = 1$ and, by \ref{MUTEX}, if and only if $p(\phi | \psi) = 0$. Therefore, we recover the idea that orthogonality from the inner product corresponds to mutual exclusivity in terms of conditional probabilities. Now, let $\psi, \phi \in P(\mathcal{H})$ not necessarily orthogonal, and let $V \subseteq E(\mathcal{H})$ be the convex set of all ensembles that have support on the subspace defined by the span of $\psi$ and $\phi$. This will be a Bloch ball and will contain a unique state $\psi^{\perp}$ that is orthogonal to $\psi$. Consider $p(\psi | \rho)$ where $\rho \in V$. This is an affine function of the Bloch ball that will give one only on $\psi$ and zero only on $\psi^{\perp}$. Given that the range of $p$ is $[0,1]$, $p$ must take its extreme values on $\psi$ and $\phi$. Therefore, $\psi$ and $\psi^{\perp}$ must be opposite points on the ball, and $p(\psi | \phi)$ is given by the normalized distance between $\psi^{\perp}$ and the plane on which $\phi$ resides as shown in Fig. \ref{rp-qm-geometricConditionalProbability}. Following the same trigonometric arguments in the proof of \ref{rp-qm-geometricDiagonalization}, $p(\psi | \phi) = \frac{1 + \cos \theta_{\phi\psi}}{2} = \cos^2 \frac{\theta_{\psi\phi}}{2} = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$, which recovers \ref{BR-BORN}.
 
