@@ -30,18 +30,18 @@ Time evolution in quantum mechanics is given by the following.
 
 We will want to show that the previous condition is equivalent to the following.
 \begin{condition}[Information preservation]{DR-INFO}
-	The evolution is differentiable and preserves von Neumann entropy: $S(\mathcal{E}(\rho)) = S(\rho)$ for all $\rho \in E(\mathcal{H})$.
+	The evolution is differentiable and preserves von Neumann entropy: $S(\mathcal{T}(\rho)) = S(\rho)$ for all $\rho \in E(\mathcal{H})$.
 \end{condition}
 
 Note that \ref{DR-SCEQ} respects the following condition:
-\begin{condition}[Affine evolution]{EV-AFF}
-	The time evolution map $\mathcal{E} : E(\mathcal{H}) \to E(\mathcal{H})$ is affine: $\mathcal{E}(\sum_i p_i \rho_i) = \sum_i p_i \mathcal{E}(\rho_i)$.
+\begin{condition}[Evolution preserves mixtures]{[B]EVMIX}
+	Time evolution preserves statistical mixtures. That is, the time evolution map $\mathcal{T} : E(\mathcal{H}) \to E(\mathcal{H})$ is affine: $\mathcal{T}(\sum_i p_i \rho_i) = \sum_i p_i \mathcal{T}(\rho_i)$.
 \end{condition}
 Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, we will take it as part of our base theory.
 
 \section{Theorem}
 \begin{thrm}[Schrödinger equation is information preservation]
-	Over \ref{QST} and \ref{EV-AFF}, conditions \ref{DR-SCEQ} and \ref{DR-INFO} are equivalent.
+	Over \ref{QST} and \ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO} are equivalent.
 \end{thrm}
 \begin{proof}
 	\ref{DR-SCEQ} $\implies$ \ref{DR-INFO}. Given that the Schrödinger equation is differentiable, it gives rise to the infinitesimal unitary evolution $U_{dt} = 1 + \frac{H}{\imath\hbar}dt$. Under unitary evolution, a density operator transforms as $\mathcal{T}_{dt}(\rho) = U_{dt}\rho U_{dt}^\dagger$. Since unitary conjugation preserves eigenvalues, and the von Neumann entropy depends only on eigenvalues, $S(\mathcal{T}_{dt}(\rho)) = S(\rho)$.
@@ -50,7 +50,7 @@ Physically, the process is such that the output of a statistical mixture is the 
 	
 	\emph{Step 1: Pure states map to pure states.} Pure states are the unique states with $S(\rho) = 0$. Since entropy is preserved, states with zero entropy map to states with zero entropy. Therefore $\mathcal{T}_{dt}$ maps pure states to pure states.
 	
-	\emph{Step 2: The map on vectors is unitary.} Since $\mathcal{T}_{dt}$ maps pure states to pure states, there exists a map $U_{dt}$ on the Hilbert space such that $\mathcal{T}_{dt}(\rho_\psi) = \rho_{U_{dt}\psi}$. Consider the equal mixture of any two pure states $\psi$ and $\phi$. By EV-AFF, $\mathcal{T}_{dt}(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi) = \frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}$. By DR-INFO, $S(\frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}) = S(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi)$. Since by \ref{QM-ENT-PROB} the entropy of an equal mixture of two pure states is an invertible function of their conditional probability, we have $p(U_{dt}\psi|U_{dt}\phi) = p(\psi|\phi)$ for all pairs of states. That is, $U_{dt}$ preserves the modulus of the inner product: $|\langle U_{dt}\psi|U_{dt}\phi\rangle|^2 = |\langle\psi|\phi\rangle|^2$ for all $\psi, \phi$. By Wigner's theorem, $U_{dt}$ is either unitary or anti-unitary. For continuous (infinitesimal) evolution, anti-unitary is excluded, so $U_{dt}$ is unitary.
+	\emph{Step 2: The map on vectors is unitary.} Since $\mathcal{T}_{dt}$ maps pure states to pure states, there exists a map $U_{dt}$ on the Hilbert space such that $\mathcal{T}_{dt}(\rho_\psi) = \rho_{U_{dt}\psi}$. Consider the equal mixture of any two pure states $\psi$ and $\phi$. By \ref{[B]EVMIX}, $\mathcal{T}_{dt}(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi) = \frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}$. By \ref{DR-INFO}, $S(\frac{1}{2}\rho_{U_{dt}\psi} + \frac{1}{2}\rho_{U_{dt}\phi}) = S(\frac{1}{2}\rho_\psi + \frac{1}{2}\rho_\phi)$. Since by \ref{QM-ENT-PROB} the entropy of an equal mixture of two pure states is an invertible function of their conditional probability, we have $p(U_{dt}\psi|U_{dt}\phi) = p(\psi|\phi)$ for all pairs of states. That is, $U_{dt}$ preserves the modulus of the inner product: $|\langle U_{dt}\psi|U_{dt}\phi\rangle|^2 = |\langle\psi|\phi\rangle|^2$ for all $\psi, \phi$. By Wigner's theorem, $U_{dt}$ is either unitary or anti-unitary. For continuous (infinitesimal) evolution, anti-unitary is excluded, so $U_{dt}$ is unitary.
 	
 	\emph{Step 3: Unitary implies Schrödinger.} Since $U_{dt}$ is an infinitesimal unitary map, it can be written as $U_{dt} = 1 + Adt$, where $A = - A^\dagger$ is skew-adjoint. Setting $A = \frac{H}{i\hbar}$ with $H = H^\dagger$ recovers the Schrödinger equation.
 \end{proof}
