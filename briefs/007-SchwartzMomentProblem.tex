@@ -1,6 +1,8 @@
 \documentclass{techbrief}
 
 \usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
 \title{Non-uniqueness of the moment problem for Schwartz functions}
 \author{Gabriele Carcassi}
@@ -24,7 +26,16 @@
     Take two functions $f, g \in \mathcal{S}(\mathbb{R})$ with compact and pairwise distinct support (see Figure \ref{fig:bumps} for an example). Define the family of functions $\psi_\theta = f + e^{i \theta} g$. Let's calculate the expectations value of $X^m P^n$ for all of them.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\linewidth]{tempimages/bump_functions.png}
+        \begin{tikzpicture}[scale=2]
+        	\draw[->] (-3, 0) -- (3, 0);
+        	\draw[->] (0, -0.1) -- (0, 0.6);
+        	\draw[domain=-2.49:-0.51] plot (\x, {exp(1/((\x+1.5)*(\x+1.5)-1)});
+        	\draw[domain=0.51:2.49] plot (\x, {exp(1/((\x-1.5)*(\x-1.5)-1)});
+        	\draw[domain=0.51:2.49, dashed] plot (\x, {-exp(1/((\x-1.5)*(\x-1.5)-1)});
+        	\node at (-2.4, 0.4) {$f$};
+        	\node at (+2.4, 0.4) {$g$};
+        	\node at (+2.4, -0.4) {$-g$};
+        \end{tikzpicture}
         \caption{Two \href{https://en.wikipedia.org/wiki/Bump_function}{bump functions} with disjoint support.}
         \label{fig:bumps}
     \end{figure}
