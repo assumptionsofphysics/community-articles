@@ -17,18 +17,34 @@ jobs:
         uses: actions/checkout@v6
         with:
           path: repo
+          fetch-depth: 2  # Fetch the last 2 commits to compare changes
+
+      - name: Find modified TeX files
+        id: find_modified
+        run: |
+          cd repo
+          {
+            echo "briefs<<EOF"
+            git diff --name-only HEAD~1 | grep 'briefs/.*\.tex$' | sed 's|briefs/||'
+            echo "EOF"
+            echo "bareminima<<EOF"
+            git diff --name-only HEAD~1 | grep 'bareminima/.*\.tex$' | sed 's|bareminima/||'
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Compile briefs
+        if: steps.find_modified.outputs.briefs != ''
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/briefs
-          root_file: "*.tex"
+          root_file: ${{ steps.find_modified.outputs.briefs }}
 
       - name: Compile bareminima
+        if: steps.find_modified.outputs.bareminima != ''
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/bareminima
-          root_file: "*.tex"
+          root_file: ${{ steps.find_modified.outputs.bareminima }}
 
       - name: Upload to autogen repository
         run: |
