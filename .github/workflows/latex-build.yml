@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           path: repo
-          fetch-depth: 2  # Fetch the last 2 commits to compare changes
+          fetch-depth: 0
 
       - name: Find modified TeX files
         id: find_modified
@@ -25,10 +25,10 @@ jobs:
           cd repo
           {
             echo "briefs<<EOF"
-            git diff --name-only HEAD~1 | grep 'briefs/.*\.tex$' | sed 's|briefs/||'
+            git diff --name-only ${{ github.event.before }} | grep 'briefs/.*\.tex$' | sed 's|briefs/||'
             echo "EOF"
             echo "bareminima<<EOF"
-            git diff --name-only HEAD~1 | grep 'bareminima/.*\.tex$' | sed 's|bareminima/||'
+            git diff --name-only ${{ github.event.before }} | grep 'bareminima/.*\.tex$' | sed 's|bareminima/||'
             echo "EOF"
           } >> $GITHUB_OUTPUT
 
