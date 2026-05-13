@@ -23,12 +23,14 @@ jobs:
         with:
           working_directory: repo/briefs
           root_file: "*.tex"
+          pre_compile: "export SOURCE_DATE_EPOCH=0"
 
       - name: Compile bareminima
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/bareminima
           root_file: "*.tex"
+          pre_compile: "export SOURCE_DATE_EPOCH=0"
 
       - name: Upload to autogen repository
         run: |
