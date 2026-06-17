@@ -18,17 +18,37 @@ jobs:
         with:
           path: repo
 
+      - name: Checkout commit before push
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.before }}
+          path: before
+
+      - name: Find modified TeX files
+        id: find_modified
+        run: |
+          {
+            echo "briefs<<EOF"
+            diff -qr before/briefs repo/briefs | grep -oE '(repo|before)/briefs/.*\.tex' | sed 's|.*/briefs/||' || true
+            echo "EOF"
+            echo "bareminima<<EOF"
+            diff -qr before/bareminima repo/bareminima | grep -oE '(repo|before)/bareminima/.*\.tex' | sed 's|.*/bareminima/||' || true
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
       - name: Compile briefs
+        if: steps.find_modified.outputs.briefs != ''
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/briefs
-          root_file: "*.tex"
+          root_file: ${{ steps.find_modified.outputs.briefs }}
 
       - name: Compile bareminima
+        if: steps.find_modified.outputs.bareminima != ''
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: repo/bareminima
-          root_file: "*.tex"
+          root_file: ${{ steps.find_modified.outputs.bareminima }}
 
       - name: Upload to autogen repository
         run: |
