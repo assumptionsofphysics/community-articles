@@ -1,0 +1,86 @@
+\documentclass{techbrief}
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{positioning,calc,arrows,arrows.meta, shapes, decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+
+\title{Unphysicality of Hilbert spaces for quantum mechanics}
+\author{Gabriele Carcassi}
+\category{Quantum mechanics}
+\tags{Hilbert spaces, Functional analysis}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	We show that Hilbert spaces cannot faithfully represent the set of states for a physical system. In particular, since observables are not guaranteed to be continuous and well-defined over the whole space, small changes in state can correspond to large changes in expectation values and states cannot be equivalently expressed in all frames. Moreover, since all separable infinite-dimensional Hilbert spaces are isomorphic, the state spaces for systems with different number of particles are indistinguishable.
+\end{abstract}
+
+\section{Introduction}
+
+In this note we present some problems with using Hilbert spaces to represent states in quantum mechanics: small changes in state do not lead to small changes of observables (i.e. unbounded operators cannot be continuous), observables are not well defined in all frames and the state spaces for systems with different numbers of particles are indistinguishable.\footnote{If the reader is aware of other problems that should be added, do contact us.}
+
+While these problems are largely known in the mathematical community, they are a surprise to most physicists, as they usually do not impact calculations in physically meaningful cases. They, therefore, represent obstacles to a crisp understanding of the theory, not to the application of the theory to experimental settings.
+
+\section{Conditions}
+
+The following are conditions that we would expect any physical theory to obey, and therefore they should be considered part of a base theory for all of physics.
+
+\begin{condition}[Continuity of measurable quantities]{[B]COBS}
+	Small state changes lead to small changes of measurable quantities. That is, the expectation of a quantity is a continuous function of the state.
+\end{condition}
+
+\begin{condition}[Measurable quantities well-defined in all frames]{[B]WDQ}
+	All states can equivalently be expressed in all frames. That is, if a quantity is well-defined in one frame, the corresponding quantity in another frame will be well-defined.
+\end{condition}
+
+\begin{condition}[Distinguishability of different systems]{[B]STDIST}
+	Different physical systems have a different mathematical representation. That is, the mathematical representation of different physical systems must have enough structure to tell them apart.
+\end{condition}
+
+The following condition sums up the standard definition of quantum state on top of Hilbert spaces. We will test this against the above requirements.
+
+\begin{condition}[Quantum states on Hilbert space]{QSTH}
+	The state space of the system is represented by the projective space given by the rays of a complex vector space $\mathcal{H}$. That is, a state $\psi \in P(\mathcal{H})$ is a ray $\psi = \{c |\psi\> \mid c \in \mathbb{C} \}$ of a complex projective space. The ensemble space of the system is represented by the set of density operators acting on a complex inner product space $\mathcal{H}$. That is, an ensemble $\rho \in D(\mathcal{H})$ is a positive semi-definite trace one self-adjoint operator $\rho : \mathcal{H} \to \mathcal{H}$. The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\end{condition}
+
+\section{Theorem}
+
+Now we show that \ref{QSTH} is inconsistent with each of the above base conditions.
+
+\begin{thrm}
+	Condition \ref{QSTH} is inconsistent with \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST}.
+\end{thrm}
+
+\begin{proof}
+	Let $O$ be an unbounded observable, like position, momentum, energy or number of particles. Since the Hilbert space is a normed space, and on normed spaces \href{https://en.wikipedia.org/wiki/Bounded_operator#Equivalence_of_boundedness_and_continuity}{boundedness is equivalent to continuity}, the observable is not continuous. For example, if $|i\>$ represent the energy levels for a Harmonic oscillator, the sequence $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTH} is inconsistent with \ref{[B]COBS}.
+	
+	Moreover, by the \href{https://en.wikipedia.org/wiki/Hellinger%E2%80%93Toeplitz_theorem}{Hellinger–Toeplitz theorem} an everywhere-defined symmetric operator on a Hilbert space must be bounded, which means $O$ is not an everywhere-defined operator. Given that we can always connect two states through a unitary, we can find a unitary $U$ that connects operators with different domains.
+	
+	For example, let $X$ be the position operator in one frame and let $Y$ be the position operator in another frame connected by the change of coordinates $y(x) = \tan \left(\frac{\pi}{2} \erf(x) \right)$. This means that the first observer will use $X$ to describe and measure the position of the object, while the second will use $Y$. Let $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ be a Gaussian wave packet in the first frame. The same packet in the second frame will be $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$. This is because the square of the wave function must transform like a density and
+	\begin{equation}
+		\begin{aligned}
+		d\left(\frac{\tan^{-1}(y)}{\pi}\right) &= d \left(\frac{\erf (x)}{2}\right) \\
+		\frac{1}{\pi (y^2 + 1)} dy &= \frac{e^{-x^2}}{\sqrt{\pi}} dx.
+		\end{aligned}
+	\end{equation}
+	Since the Gaussian wave packet is Schwartz, $\psi(x)$ will be in domain of $X$. However, $\phi(y)$ goes to zero at infinity like $\frac{1}{y^2}$, which means it is not Schwartz and it is not in the domain of $Y$. Therefore, position is well-defined for the first observer but not for the second (e.g. the variance of the position for the second observer is infinite). This means \ref{QSTH} is inconsistent with \ref{[B]WDQ}.
+	
+	Lastly, recall that $L^2(\mathbb{R}^n)$ is a separable Hilbert space for any $n$ and that all separable Hilbert spaces are isomorphic. Since the quantum state spaces $n$ degrees of freedom is $L^2(\mathbb{R}^n)$, we would have, for example, that the state space for a single particle and the state space for all the particles in the universe are mathematically indistinguishable. This means \ref{QSTH} is inconsistent with \ref{[B]STDIST}.
+\end{proof}
+
+\section{Additional remarks}
+
+There are other problems of a more practical nature. We highlight them for completion.
+
+\textbf{Point-wise values not well-defined.} The wave function $\psi(x)$ is not defined at each point. The ray of a Hilbert space, in fact, is the equivalence class of all such wave-functions that behave the same in the inner product. If $\psi(x)$ and $\phi(x)$ are different over a measure zero set, then the two wave functions are equivalent. This means that the values at each point of $\psi(x)$ are not uniquely defined. This goes against the physical intuition of interpreting $|\psi(x)|^2$ as the probability density, as that is conceptually uniquely defined.
+
+\textbf{Commutators relationship must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
+
+\section{Conclusion}
+
+It should be understood that all the issues presented here are failures of the mathematical modeling, not failures of physicist to correctly apply the mathematical model. Therefore, the solution is not to find workarounds for these issues, but to fix the mathematical model to better reflect the physical requirements.
+
+\end{document}
+
