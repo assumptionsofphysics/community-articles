@@ -14,7 +14,7 @@
 }
 \urlstyle{same}
 
-\RequirePackage{lipsum,cuted,setspace,enumerate}
+\RequirePackage{lipsum,cuted,setspace}
 \RequirePackage{changepage}
 \RequirePackage{tabularx}
 \RequirePackage{adjustbox}
