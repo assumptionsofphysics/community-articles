@@ -60,13 +60,28 @@
 				H &= v^{i} p_{i} - L
 			\end{aligned}
 		\end{equation}
-		TODO: prove that the Euler-Lagrange equations imply Hamilton's equations
-		
-		Then we can find the Hamiltonian from the Lagrangian:
+		From the Euler-Lagrange equations:
 		\begin{equation}
-			\left| \partial_{v^i} \partial_{v^j} L \right| = \left| \partial_{v^i} p_j \right| = \left| \partial_{p_i} v^j \right|^{-1} = \left|\partial_{p_i}\partial_{p_j} H\right|^{-1}
+			\begin{aligned}
+				\partial_{x^{i}}L = d_{t}\partial_{v^{i}}L = d_{t}p_{i}
+			\end{aligned}
 		\end{equation}
-		Again, $\partial_{v^{i}}\partial_{v^{j}}L$ is invertible so this will always yield a result. \\
+		And by performing a total differentiation of the Hamiltonian:
+		\begin{equation}
+			\begin{aligned}
+				dH &= p_{i}dv + v^{i}dp - (\partial_{x^{i}}Ldx + \partial_{v^{i}}Ldv + \partial_{t}Ldt) \\
+				&= p_{i}dv + v^{i}dp - (d_{t}p_{i}dq + p_{i}dv + \partial_{t}Ldt) \\
+				&= -d_{t}p_{i}dq + d_{t}q^{i}dp - \partial_{t}Ldt \\
+				&= \partial_{q^{i}}Hdq + \partial_{p_{i}}Hdp + \partial_{t}Hdt
+			\end{aligned}
+		\end{equation}
+		By matching the components of the total derivative, we recover Hamilton's equations:
+		\begin{equation}
+			\begin{aligned}
+				d_{t}q^{i} = \partial_{p_{i}}H \\
+				d_{t}p_{i} = -\partial_{q^{i}}H
+			\end{aligned}
+		\end{equation}
 		
 		TODO: prove the converse. We have shown \ref{LM} implies both \ref{NM} and \ref{HM}, and therefore its equivalence.
 	\end{proof}
