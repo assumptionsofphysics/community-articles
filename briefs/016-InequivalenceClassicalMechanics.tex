@@ -2,6 +2,7 @@
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, calc}
+\usepackage{cancel}
 
 \title{Relationship between formulations of classical mechanics}
 \author{Matteo Carcassi}
@@ -83,7 +84,22 @@
 			\end{aligned}
 		\end{equation}
 		
-		TODO: prove the converse. We have shown \ref{LM} implies both \ref{NM} and \ref{HM}, and therefore its equivalence.
+		Now to show the converse. In order for both \ref{NM} and \ref{HM} to be true, there must exist a map between the states $(x^{i},v^{j},t)$ and $(q^{i},p_{j},t)$. Hamilton's equation gives a way to relate velocity and conjugate momentum:
+		\begin{equation}
+			\begin{aligned}
+				v^{i} = d_{t}q^{i} = \partial_{p_{i}}H
+			\end{aligned}
+		\end{equation}
+		Then from Hamilton's equations, we can recover the Euler-Lagrange equations:
+		\begin{equation}
+			\begin{aligned}
+				-\partial_{q^{i}}H &= d_{t}p_{i} = d_{t}\partial_{v^{i}}L \\
+				-\partial_{q^{i}}H &= - \partial_{q^{i}}(pv) + \partial_{q^{i}}L\\
+				&= - (\partial_{q^{i}}p_{i}) v^{i} - \cancel{(\partial_{q^{i}}v^{i}) p_{i}} + \partial_{p^{i}}H\partial_{q^{i}}p_{i} + \partial_{q^{i}}L \\
+				&= \partial_{q^{i}}p_{i}(\partial_{p_{i}}H - v) + \partial_{q^{i}}L \\
+				&= \partial_{x^{i}}L = d_{t}\partial_{v^{i}}L
+			\end{aligned}
+		\end{equation}
 	\end{proof}
 	\begin{thrm}
 		Conditions \ref{NM} and \ref{HM} are independent
@@ -110,12 +126,12 @@
 	\begin{figure}[h]
 		\centering
 		\begin{tikzpicture}
-			\node[ellipse, minimum width=10cm, minimum height=5cm, draw, left] (ns){};
+			\node[ellipse, minimum width=6cm, minimum height=3cm, draw, left] (ns){};
 			\node [align=left, above] at ([xshift=-6mm,yshift=1mm]ns.north west) {Newtonian \\systems};
 			
-			\node[ellipse, minimum width=6cm, minimum height=4.5cm, draw] (hs) at ([xshift=-1.7cm]ns.east){};
+			\node[ellipse, minimum width=4cm, minimum height=3cm, draw] (hs) at ([xshift=-1.5cm]ns.east){};
 			\node [align=right, above right] at ([xshift=8mm, yshift=-4mm]hs.north) {Hamiltonian\\ systems};
-			\node [align=center, right] at ([xshift=14
+			\node [align=center, right] at ([xshift=9
 			mm]hs.west) {Lagrangian \\systems};
 		\end{tikzpicture}
 		\caption {Not all Hamiltonian systems are Newtonian and not all Newtonian systems are Hamiltonian. All Lagrangian systems are both Newtonian and Hamiltonian.}\label{rp-cm-fig-vennDiagramEarly}
