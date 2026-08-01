@@ -61,22 +61,21 @@
 				H &= v^{i} p_{i} - L
 			\end{aligned}
 		\end{equation}
-		From the Euler-Lagrange equations:
+		Combining Euler--Lagrange equations and the definition of conjugate momentum, we have:
 		\begin{equation}
 			\begin{aligned}
 				\partial_{x^{i}}L = d_{t}\partial_{v^{i}}L = d_{t}p_{i}
 			\end{aligned}
 		\end{equation}
-		And by performing a total differentiation of the Hamiltonian:
+		Performing a total differentiation of the definition of the Hamiltonian, we have:
 		\begin{equation}
 			\begin{aligned}
 				dH &= p_{i}dv + v^{i}dp - (\partial_{x^{i}}Ldx + \partial_{v^{i}}Ldv + \partial_{t}Ldt) \\
 				&= p_{i}dv + v^{i}dp - (d_{t}p_{i}dq + p_{i}dv + \partial_{t}Ldt) \\
-				&= -d_{t}p_{i}dq + d_{t}q^{i}dp - \partial_{t}Ldt \\
-				&= \partial_{q^{i}}Hdq + \partial_{p_{i}}Hdp + \partial_{t}Hdt
+				&= -d_{t}p_{i}dq + d_{t}q^{i}dp - \partial_{t}Ldt.
 			\end{aligned}
 		\end{equation}
-		By matching the components of the total derivative, we recover Hamilton's equations:
+		Since $dH = \partial_{q^{i}}Hdq + \partial_{p_{i}}Hdp + \partial_{t}Hdt$, by matching the components of the total derivative, we recover Hamilton's equations:
 		\begin{equation}
 			\begin{aligned}
 				d_{t}q^{i} = \partial_{p_{i}}H \\
@@ -84,18 +83,24 @@
 			\end{aligned}
 		\end{equation}
 		
-		Now to show the converse. In order for both \ref{NM} and \ref{HM} to be true, there must exist a map between the states $(x^{i},v^{j},t)$ and $(q^{i},p_{j},t)$. Hamilton's equation gives a way to relate velocity and conjugate momentum:
+		Now to show the converse. Since both \ref{NM} and \ref{HM} are true, a state can both be identified by $(x^{i},v^{j},t)$ and $(q^{i},p_{j},t)$. Therefore, the momentum must be expressible as a function of position, velocity and time. Hamilton's equation gives a way to relate velocity and conjugate momentum:
 		\begin{equation}
 			\begin{aligned}
 				v^{i} = d_{t}q^{i} = \partial_{p_{i}}H
 			\end{aligned}
 		\end{equation}
-		Then from Hamilton's equations, we can recover the Euler-Lagrange equations:
+		We define the Lagrangian as $L = v^i p_i -H$. Noting that all partial derivatives are taken at fixed position, we have
 		\begin{equation}
 			\begin{aligned}
-				-\partial_{q^{i}}H &= d_{t}p_{i} = d_{t}\partial_{v^{i}}L \\
-				-\partial_{q^{i}}H &= - \partial_{q^{i}}(pv) + \partial_{q^{i}}L\\
-				&= - (\partial_{q^{i}}p_{i}) v^{i} - \cancel{(\partial_{q^{i}}v^{i}) p_{i}} + \partial_{p^{i}}H\partial_{q^{i}}p_{i} + \partial_{q^{i}}L \\
+				\partial_{v^i} L &= \partial_{v^i} (v^i p_i -H) = p_i + v^i \partial_{v^i} p_i - \partial_{v^i} H = p_i + d_t q^i \partial_{v^i} p_i - \partial_{v^i} H \\
+				&= p_i + \partial_{q^i} H \partial_{v^i} p_i - \partial_{v^i} H =  p_i + \partial_{v^i} H - \partial_{v^i} H = p_i.
+			\end{aligned}
+		\end{equation}
+		Therefore, $-\partial_{q^{i}}H = d_{t}p_{i} = d_{t}\partial_{v^{i}}L$. TODO: can't reconstruct the last step. Putting it all together, we have:
+		\begin{equation}
+			\begin{aligned}
+				d_{t}\partial_{v^{i}}L &= -\partial_{q^{i}}H = - \partial_{q^{i}}(p_i v^i - L) = - (\partial_{q^{i}}p_{i}) v^{i} - p_{i}(\partial_{q^{i}}v^{i}) + \partial_{q^{i}}L \\
+				&=  \partial_{p^{i}}H\partial_{q^{i}}p_{i} + \partial_{q^{i}}L \\
 				&= \partial_{q^{i}}p_{i}(\partial_{p_{i}}H - v) + \partial_{q^{i}}L \\
 				&= \partial_{x^{i}}L = d_{t}\partial_{v^{i}}L
 			\end{aligned}
@@ -137,6 +142,6 @@
 		\caption {Not all Hamiltonian systems are Newtonian and not all Newtonian systems are Hamiltonian. All Lagrangian systems are both Newtonian and Hamiltonian.}\label{rp-cm-fig-vennDiagramEarly}
 	\end{figure}
 	\section{Conclusion}
-		We have found a more precise relationship between the three formulations of classical mechanics. The realm of applicability of the different formulation can also be characterized in terms of physical assumptions within the larger work of Reverse Physics.
+		We have found a more precise relationship between the three formulations of classical mechanics, whose relationship is given in Fig. \ref{rp-cm-fig-vennDiagramEarly}. The realm of applicability of the different formulation can also be characterized in terms of physical assumptions within the larger work of Reverse Physics.
 	
 \end{document}
