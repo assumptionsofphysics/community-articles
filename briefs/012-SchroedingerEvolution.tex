@@ -12,22 +12,22 @@
 \maketitle
 
 \begin{abstract}
-	We show that the Schroedinger equation is equivalent to determinism and reversible evolution, which can be characterized in multiple ways: unitary evolution, one-to-one correspondence between past and future states, preservation of conditional probability or conservation of information entropy. The result holds in the infinite-dimensional case.
+	We show that the Schrödinger equation is equivalent to determinism and reversibility, which can be characterized in multiple ways: unitary evolution, one-to-one correspondence between past and future states, preservation of conditional probability or conservation of information entropy. The result holds in the infinite-dimensional case.
 \end{abstract}
 
 \section{Introduction}
 
-In quantum mechanics, time evolution for an isolated system is postulated to follow the Schrödinger equation. This is equivalent to saying that evolution is represented by a strongly continuous one-parameter group of unitary operators. Here we show that the same evolution can be characterized in more physical terms in terms of deterministic and reversible evolution: the future can be predicted from the past and the past reconstructed from the future. This same assumption can be implement either by requiring a one-to-one map between states, that the conditional probability is the same for past and future states or that future and past ensembles have the same information entropy.
+In quantum mechanics, time evolution for an isolated system is postulated to follow the Schrödinger equation. This is equivalent to saying that evolution is represented by a strongly continuous one-parameter group of unitary operators. Here we show that the same evolution can be characterized in more physical terms as deterministic and reversible evolution: the future can be predicted from the past and the past reconstructed from the future. This same assumption can be implemented by requiring a one-to-one correspondence between states, preservation of conditional probability or conservation of information entropy.
 
 \section{Mathematical prerequisites}
 
-We first show that an affine continuous map is a bijection on pure states if and only if it is a bijection on the whole ensemble space, and if and only if it corresponds either to a unitary or an anti-unitary.
+We first show that an affine continuous map is a bijection on pure states if and only if it is a bijection on the whole ensemble space, and if and only if it is implemented by either a unitary or an anti-unitary.
 
 \begin{prop}[Affine pure-state correspondence]\label{AFF-PURE}
 	Let $D(\mathcal{H})$ be the space of density operators of a Hilbert space $\mathcal{H}$. Let $T:D(\mathcal{H})\to D(\mathcal{H})$ be a trace-norm continuous affine map. Then the following are equivalent:
 	\begin{itemize}
-		\item $T$ is bijective over the pure states;
-		\item $T$ is bijective over the all density operators;
+		\item $T$ is bijective on the pure states;
+		\item $T$ is bijective on all density operators;
 		\item there exists either a unitary or an anti-unitary operator $W:\mathcal{H}\to\mathcal{H}$ such that $T(\rho)=W\rho W^\dagger$ for every $\rho\in D(\mathcal{H})$.
 	\end{itemize}
 \end{prop}
@@ -47,7 +47,7 @@ We first show that an affine continuous map is a bijection on pure states if and
 \end{proof}
 
 \begin{remark}
-	In finite dimension, it suffices that $T$ is injective on the pure states $P(\mathcal{H})$ as the compactness of $P(\mathcal{H})$ will force $T$ to be bijective over $P(\mathcal{H})$. In infinite dimension, this does not work: the map $|n\> \mapsto |n+1\>$  which shifts the energy levels of a harmonic oscillator is a counter-example.
+	In finite dimensions, it suffices that $T$ is injective on the pure states $P(\mathcal{H})$, as the compactness of $P(\mathcal{H})$ will force $T$ to be bijective on $P(\mathcal{H})$. In infinite dimensions, this does not work: the map $|n\> \mapsto |n+1\>$, which shifts the energy levels of a harmonic oscillator, is a counterexample.
 \end{remark}
 
 \section{Conditions}
@@ -62,12 +62,12 @@ Time evolution must preserve statistical mixtures.
 	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $T_{t_0,t_1}:D(\mathcal{H})\to D(\mathcal{H})$ such that $T_{t_0,t_0}=I$, $T_{t_1,t_2}\circ T_{t_0,t_1}=T_{t_0,t_2}$ and $(\rho,t_0,t_1)\mapsto T_{t_0,t_1}(\rho)$ is jointly continuous.
 \end{condition}
 
-We are going to restring the dynamics to the time-independent case.
+We are going to restrict the dynamics to the time-independent case.
 \begin{condition}[Time-independent evolution]{TIEV}
 	Evolution depends only on elapsed time. That is, $T_{t_0,t_1}=T_{t_1-t_0}$.
 \end{condition}
 
-Lastly, these are the five conditions we want to prove the equivalence for.
+Lastly, these are the five conditions whose equivalence we want to prove.
 \begin{condition}[Schrödinger equation]{DR-SCEQ}
 	The evolution follows the equation
 	\begin{equation}
@@ -81,15 +81,15 @@ Lastly, these are the five conditions we want to prove the equivalence for.
 \end{condition}
 
 \begin{condition}[Bijective map]{DR-EV}
-	Distinct past states map to distinct future states and vice-versa. That is, if $\psi_I$ and $\phi_I$ are two  initial states, $\psi_F$ and $\phi_F$ the corresponding evolved future states and $\psi_P$ and $\phi_P$ the corresponding reconstructed past states, then $\psi_I = \phi_I \iff \psi_F = \phi_F \iff \psi_P = \phi_P$.
+	Distinct past states map to distinct future states and vice-versa. That is, if $\psi_I$ and $\phi_I$ are two initial states, $\psi_F$ and $\phi_F$ are the corresponding evolved future states and $\psi_P$ and $\phi_P$ are the corresponding reconstructed past states, then $\psi_I = \phi_I \iff \psi_F = \phi_F \iff \psi_P = \phi_P$.
 \end{condition}
 
 \begin{condition}[Preservation of conditional probability]{DR-PROB}
-	Conditional probability remains the same across past and future states. That is, if $\psi_I$ and $\phi_I$ are two  initial states, $\psi_F$ and $\phi_F$ the corresponding evolved future states and $\psi_P$ and $\phi_P$ the corresponding reconstructed past states, then $p(\psi_I \mid \phi_I) = p(\psi_F \mid \phi_F) = p(\psi_P \mid \phi_P)$.
+	Conditional probability remains the same across past and future states. That is, if $\psi_I$ and $\phi_I$ are two initial states, $\psi_F$ and $\phi_F$ are the corresponding evolved future states and $\psi_P$ and $\phi_P$ are the corresponding reconstructed past states, then $p(\psi_I \mid \phi_I) = p(\psi_F \mid \phi_F) = p(\psi_P \mid \phi_P)$.
 \end{condition}
 
 \begin{condition}[Conservation of information entropy]{DR-INFO}
-	Future and past ensembles have the same information entropy. That is, if $\rho_I$ is an initial ensemble, $\rho_F$ is the corresponding evolved future ensemble and $\rho_P$ is the corresponding reconstructed ensemble, then $S(\rho_I) = S(\rho_F) = S(\rho_P)$
+	Future and past ensembles have the same information entropy. That is, if $\rho_I$ is an initial ensemble, $\rho_F$ is the corresponding evolved future ensemble and $\rho_P$ is the corresponding reconstructed ensemble, then $S(\rho_I) = S(\rho_F) = S(\rho_P)$.
 \end{condition}
 
 \section{Theorem}
@@ -144,6 +144,6 @@ Now we show the equivalence of the time evolution characterizations.
 
 \section{Conclusion}
 
-We have seen that the Schrödinger equation can be characterized in different way, based on bijective maps of pure state, preservation of probability and conservation of entropy. Conceptually, all these are equivalent to saying that the system is isolated, as future and past states depend and only depend on the present state of the system.
+We have seen that the Schrödinger equation can be characterized in different ways, based on bijective maps of pure states, preservation of probability and conservation of entropy. Conceptually, all these are equivalent to saying that the system is isolated, as future and past states are determined, and only determined, by the present state of the system.
 
 \end{document}
