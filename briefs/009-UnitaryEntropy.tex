@@ -25,7 +25,8 @@ The expression of the entropy as a function of $\lambda$ is recovered with a str
 
 Time evolution in quantum mechanics is given by the following.
 \begin{condition}[Schrödinger equation]{DR-SCEQ}
-	The evolution follows the equation $i\hbar \frac{d}{dt}\psi(t) = H(t)\psi(t)$ where $H(t)$ is a time-dependent self-adjoint operator.
+	The evolution follows the equation $i\hbar \frac{d}{dt}\psi(t) = H(t)\psi(t)$, where $H(t)$ is a sufficiently regular family of self-adjoint
+	operators so that the equation admits a differentiable unitary propagator (i.e. a solution).
 \end{condition}
 
 We will want to show that the previous condition is equivalent to the following conditions.
@@ -39,7 +40,7 @@ We will want to show that the previous condition is equivalent to the following 
 
 Note that \ref{DR-SCEQ} respects the following condition:
 \begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
-The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}(\mathcal{H})\to \mathcal{D}(\mathcal{H})$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
+	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}(\mathcal{H})\to \mathcal{D}(\mathcal{H})$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
 \end{condition}
 Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, we will take it as part of our base theory.
 
