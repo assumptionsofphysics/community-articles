@@ -14,34 +14,38 @@ In quantum mechanics, the time evolution for an isolated system is postulated to
 
 The following condition represents our base theory.
 \begin{condition}[Quantum states]{QST}
-	The state space of the system is represented by a complex projective space $P(\mathcal{H})$ of some complex inner product space $\mathcal{H}$. The ensemble space $E(\mathcal{H})$ is the convex set of density operators. The conditional probability is given by the Born rule: $p(\psi|\phi) = \frac{\langle \phi | \psi \rangle\langle \psi | \phi \rangle}{\langle \psi | \psi \rangle\langle \phi | \phi \rangle}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of the system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the space of density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule: $p(\psi|\phi) = \frac{\langle \phi | \psi \rangle\langle \psi | \phi \rangle}{\langle \psi | \psi \rangle\langle \phi | \phi \rangle}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 Within our base theory, we can derive the following.
 \begin{coro}[Born rule is entropy]\label{QM-ENT-PROB}
-	Let $\psi, \phi \in P[\mathcal{H}]$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
+	Let $\psi, \phi \in \mathcal{P}(\mathcal{H})$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
 \end{coro}
 The expression of the entropy as a function of $\lambda$ is recovered with a straight calculation. The function is strictly decreasing and therefore invertible.
 
 Time evolution in quantum mechanics is given by the following.
 \begin{condition}[Schrödinger equation]{DR-SCEQ}
-	The evolution follows the equation $i\hbar \frac{d}{dt}\psi(t) = H\psi(t)$ where $H$ is a self-adjoint operator.
+	The evolution follows the equation $i\hbar \frac{d}{dt}\psi(t) = H(t)\psi(t)$ where $H(t)$ is a time-dependent self-adjoint operator.
 \end{condition}
 
-We will want to show that the previous condition is equivalent to the following.
-\begin{condition}[Information preservation]{DR-INFO}
-	The evolution is differentiable and preserves von Neumann entropy: $S(\mathcal{T}(\rho)) = S(\rho)$ for all $\rho \in E(\mathcal{H})$.
+We will want to show that the previous condition is equivalent to the following conditions.
+\begin{condition}[Differentiable evolution]{EVDIFF}
+	The evolution is differentiable.
+\end{condition}
+
+\begin{condition}[Conservation of information entropy]{DR-INFO}
+	Future and past ensembles have the same information entropy. That is, if $\rho_I$ is an initial ensemble, $\rho_F$ is the corresponding evolved future ensemble and $\rho_P$ is the corresponding reconstructed ensemble, then $S(\rho_I) = S(\rho_F) = S(\rho_P)$.
 \end{condition}
 
 Note that \ref{DR-SCEQ} respects the following condition:
-\begin{condition}[Evolution preserves mixtures]{[B]EVMIX}
-	Time evolution preserves statistical mixtures. That is, the time evolution map $\mathcal{T} : E(\mathcal{H}) \to E(\mathcal{H})$ is affine: $\mathcal{T}(\sum_i p_i \rho_i) = \sum_i p_i \mathcal{T}(\rho_i)$.
+\begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
+The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}(\mathcal{H})\to \mathcal{D}(\mathcal{H})$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
 \end{condition}
 Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, we will take it as part of our base theory.
 
 \section{Theorem}
 \begin{thrm}[Schrödinger equation is information preservation]
-	Over \ref{QST} and \ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO} are equivalent.
+	Over \ref{QST}+\ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO}+\ref{EVDIFF} are equivalent.
 \end{thrm}
 \begin{proof}
 	\ref{DR-SCEQ} $\implies$ \ref{DR-INFO}. Given that the Schrödinger equation is differentiable, it gives rise to the infinitesimal unitary evolution $U_{dt} = 1 + \frac{H}{\imath\hbar}dt$. Under unitary evolution, a density operator transforms as $\mathcal{T}_{dt}(\rho) = U_{dt}\rho U_{dt}^\dagger$. Since unitary conjugation preserves eigenvalues, and the von Neumann entropy depends only on eigenvalues, $S(\mathcal{T}_{dt}(\rho)) = S(\rho)$.
