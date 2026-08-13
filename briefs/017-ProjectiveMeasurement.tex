@@ -10,7 +10,7 @@
 \maketitle
 
 \begin{abstract}
-	We characterize a projective measurement as a black-box process that returns the mixed state associated with the a priori post-measurement state. We show that this process can be understood as equilibration under a Lindblad equation or as selection of the closest ensemble commuting with the measured observable. In finite dimension, closeness can be expressed either through Hilbert--Schmidt distance or relative entropy.
+	We characterize a projective measurement as a black-box process that returns the a priori post-measurement ensemble. We show that this process can be understood as equilibration under a Lindblad equation or as selection of the closest ensemble commuting with the measured observable. In finite dimension, closeness can be expressed either through Hilbert--Schmidt distance or relative entropy.
 \end{abstract}
 
 \section{Introduction}
@@ -31,7 +31,6 @@ This optional condition is used for the finite-dimensional case.
 	The space of ensembles of the system is finite-dimensional.
 \end{condition}
 
-
 Black-box processes preserve statistical mixtures. This condition is not actually used as it is an automatic consequence of all other conditions. We leave it as a description of what we mean by black-box process.
 \begin{condition}[Processes preserve statistical mixtures]{[B]BBMIX}
 	The output of a statistical mixture under a black-box process is the statistical mixture of the outputs. That is, a black-box process $\Phi : \mathcal{D} \to \mathcal{D}$ is an affine map, where $\mathcal{D}$ is the ensemble space of the system.
@@ -47,11 +46,11 @@ We now give four characterizations of the projective-measurement prediction.
 \end{condition}
 
 \begin{condition}[Closest commuting ensemble]{EQ-HS}
-	Given an observable $X$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in Hilbert--Schmidt distance. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}\|\rho-\sigma\|^2_{HS}$.
+	Given an observable $X=\sum_x xP_x$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in Hilbert--Schmidt distance. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}\|\rho-\sigma\|^2_{HS}$.
 \end{condition}
 
 \begin{condition}[Closest commuting ensemble in information]{EQ-KL}
-	Given an observable $X$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in relative entropy. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}D(\rho\Vert\sigma)$.
+	Given an observable $X=\sum_x xP_x$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in relative entropy. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}D(\rho\Vert\sigma)$.
 \end{condition}
 
 \section{Theorem}
@@ -59,13 +58,13 @@ We now give four characterizations of the projective-measurement prediction.
 We now prove the equivalence.
 
 \begin{thrm}
-	Over \ref{QST:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QST:H}+\ref{[B]BBMIX}+\ref{FD}, condition \ref{EQ-KL} is also equivalent to the others.
+	Over \ref{QST:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QST:H}+\ref{FD}, condition \ref{EQ-KL} is also equivalent to the others.
 \end{thrm}
 
 \begin{proof}
 	Let $X=\sum_xxP_x$ and define $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. Condition \ref{EQ-MEAS} states that $\Phi_X=\mathcal{P}_X$. We show directly that each of the other conditions defines the same map.
 
-	\ref{EQ-LIND} $\iff$ \ref{EQ-MEAS}. Since $P_x$ are the projectors for the eigenspaces associated to each $x$, we can write the density matrix as
+	\ref{EQ-LIND} $\iff$ \ref{EQ-MEAS}. Since the $P_x$ are the projectors onto the eigenspaces associated with each $x$, we can write the density matrix as
 	\begin{equation}
 		\rho=\sum_{x,y}P_x\rho P_y.
 	\end{equation}
@@ -125,12 +124,12 @@ We now prove the equivalence.
 
 \textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ may be infinite. It can then happen that every density operator commuting with $X$ has infinite relative entropy from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. This is why \ref{FD} is included in the theorem. More generally, the equivalence holds for those incoming ensembles for which $D(\rho\Vert\mathcal{P}_X(\rho))$ is finite. This is likely a problem with the Hilbert space formalism, as it also does not guarantee that all density operators have finite entropy.
 
-\textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has a continuous spectrum, or, in over those parts of the spectrum that are continuous if both types are present. In fact, the pinching map cannot be defined; an operator $\rho$ that commutes with $X$ also has continuous spectrum (i.e. it would have to be multiplicative in the wave-function representation of the observable) and therefore is not trace-class; similarly, fixed points of the Lindblad equation would not be density operators. In other words, there are no equilibria and equilibration processes in that case.
+\textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has purely continuous spectrum, and they fail on the continuous part when both discrete and continuous spectra are present. In fact, the pinching map cannot be defined there as a sum over eigenspace projections. An operator $\rho$ supported on a non-atomic spectral sector and commuting with $X$ would be decomposable in the spectral representation of $X$ and cannot be a non-zero trace-class operator. Similarly, fixed points of the Lindblad equation supported on that sector would not be density operators. In other words, there are no density-operator equilibria or equilibration processes on the continuous part of the spectrum.
 
 \section{Conclusion}
 
 Projective measurements can be characterized as black-box equilibration processes that happen at a fast scale, leaving their implementation free to match different specific experimental conditions. The repeatability of the measurement is intrinsic in requiring that all outputs are equilibria of the process. The process, then, is an equilibration towards those outcomes. As the output of the process is a classical statistical mixture of possible measurement outcomes, the second part of the measurement (i.e. the update of the state based on the measurement outcome) is equivalent to what happens in the classical case.
 
-More in general, the black-box idea could be extended to destructive measurements. One can imagine a black-box process in which the input is the state of the system while the output is the final state of the measurement device.
+More generally, the black-box idea could be extended to destructive measurements. One can imagine a black-box process in which the input is the state of the system while the output is the final state of the measurement device.
 
 \end{document}
