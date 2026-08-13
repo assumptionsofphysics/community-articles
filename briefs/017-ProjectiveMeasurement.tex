@@ -1,0 +1,136 @@
+\documentclass{techbrief}
+
+\title{Projective measurements are equilibration processes}
+\author{Gabriele Carcassi}
+\category{Quantum mechanics}
+\tags{Projective measurement, Lindblad equation}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	We characterize a projective measurement as a black-box process that returns the mixed state associated with the a priori post-measurement state. We show that this process can be understood as equilibration under a Lindblad equation or as selection of the closest ensemble commuting with the measured observable. In finite dimension, closeness can be expressed either through Hilbert--Schmidt distance or relative entropy.
+\end{abstract}
+
+\section{Introduction}
+
+Projective measurement is usually presented together with state update: one measures an observable, obtains a particular value and assigns the corresponding conditional state. This combines two different questions. The first is the prediction of the outgoing ensemble given only the incoming ensemble and the measured observable. The second is the incorporation of the measurement outcome once it is known. Here we consider only the first.
+
+We treat measurement as a black-box process. The description refers only to incoming and outgoing ensembles and makes no claim about the internal mechanism by which the measurement is implemented. From this point of view, the usual projective-measurement prediction can be characterized in four ways. It is the standard pinching of the incoming ensemble, the equilibrium reached under a dephasing Lindblad equation and the closest ensemble compatible with the measured observable, either through the Hilbert--Schmidt distance or the relative entropy.
+
+\section{Conditions}
+
+The following condition represents the standard structure of quantum states on Hilbert space.
+\begin{condition}[Quantum states on Hilbert space]{QST:H}
+	The state space of the system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\langle \phi | \psi \rangle\langle \psi | \phi \rangle}{\langle \psi | \psi \rangle\langle \phi | \phi \rangle}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+\end{condition}
+
+This optional condition is used for the finite-dimensional case.
+\begin{condition}[Finite-dimensional system]{FD}
+	The space of ensembles of the system is finite-dimensional.
+\end{condition}
+
+
+Black-box processes preserve statistical mixtures. This condition is not actually used as it is an automatic consequence of all other conditions. We leave it as a description of what we mean by black-box process.
+\begin{condition}[Processes preserve statistical mixtures]{[B]BBMIX}
+	The output of a statistical mixture under a black-box process is the statistical mixture of the outputs. That is, a black-box process $\Phi : \mathcal{D} \to \mathcal{D}$ is an affine map, where $\mathcal{D}$ is the ensemble space of the system.
+\end{condition}
+
+We now give four characterizations of the projective-measurement prediction.
+\begin{condition}[Projective-measurement prediction]{EQ-MEAS}
+	Given an observable $X=\sum_x xP_x$, the output of the black-box process $\Phi_X$ is given by $\Phi_X(\rho)=\sum_x P_x \rho P_x$.
+\end{condition}
+
+\begin{condition}[Measurement equilibration]{EQ-LIND}
+	Given an observable $X=\sum_x xP_x$, the black-box process $\Phi_X$ can be described as equilibration under a Lindblad equation with vanishing Hamiltonian and jump operator $X$. That is, $\frac{d\rho}{dt}=X\rho X-\frac{1}{2}\{X^2,\rho\}$ and $\Phi_X(\rho)=\lim\limits_{t\to\infty}\rho(t)$, where $\rho = \rho(0)$.
+\end{condition}
+
+\begin{condition}[Closest commuting ensemble]{EQ-HS}
+	Given an observable $X$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in Hilbert--Schmidt distance. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}\|\rho-\sigma\|^2_{HS}$.
+\end{condition}
+
+\begin{condition}[Closest commuting ensemble in information]{EQ-KL}
+	Given an observable $X$, the output of the black-box process $\Phi_X$ is the ensemble commuting with $X$ that is closest to the incoming ensemble in relative entropy. That is, $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}D(\rho\Vert\sigma)$.
+\end{condition}
+
+\section{Theorem}
+
+We now prove the equivalence.
+
+\begin{thrm}
+	Over \ref{QST:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QST:H}+\ref{[B]BBMIX}+\ref{FD}, condition \ref{EQ-KL} is also equivalent to the others.
+\end{thrm}
+
+\begin{proof}
+	Let $X=\sum_xxP_x$ and define $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. Condition \ref{EQ-MEAS} states that $\Phi_X=\mathcal{P}_X$. We show directly that each of the other conditions defines the same map.
+
+	\ref{EQ-LIND} $\iff$ \ref{EQ-MEAS}. Since $P_x$ are the projectors for the eigenspaces associated to each $x$, we can write the density matrix as
+	\begin{equation}
+		\rho=\sum_{x,y}P_x\rho P_y.
+	\end{equation}
+	This is the block-matrix decomposition of $\rho$ with respect to the eigenspaces of $X$: the terms $P_x\rho P_x$ are the diagonal blocks and the terms $P_x\rho P_y$, with $x\neq y$, are the off-diagonal blocks. We now calculate the evolution of each block. Multiplying the Lindblad equation in \ref{EQ-LIND} on the left by $P_x$ and on the right by $P_y$ gives
+	\begin{equation}
+		P_x\frac{d\rho}{dt}P_y=P_xX\rho XP_y-\frac{1}{2}P_xX^2\rho P_y-\frac{1}{2}P_x\rho X^2P_y.
+	\end{equation}
+	Since $P_xX=xP_x$, $XP_y=yP_y$, $P_xX^2=x^2P_x$ and $X^2P_y=y^2P_y$, we have
+	\begin{equation}
+		\frac{d}{dt}P_x\rho(t)P_y=\left(xy-\frac{x^2}{2}-\frac{y^2}{2}\right)P_x\rho(t)P_y=-\frac{1}{2}(x-y)^2P_x\rho(t)P_y.
+	\end{equation}
+	Each block therefore satisfies a simple exponential-decay equation, whose solution is
+	\begin{equation}
+		P_x\rho(t)P_y=e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y.
+	\end{equation}
+	Note that, if $X$ is unbounded, the differential equation is initially valid only on the domain of its generator. The blockwise solution extends the resulting semigroup to every density operator. For $x=y$, the exponential is one and the diagonal block remains fixed. For $x\neq y$, the exponential tends to zero and the off-diagonal block disappears. To take the limit of all blocks at once, note that distinct blocks are orthogonal in the Hilbert--Schmidt inner product. Therefore
+	\begin{align}
+		\|\rho(t)-\mathcal{P}_X(\rho(0))\|^2_{HS}
+		&=\left\|\sum_{x\neq y}e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y\right\|^2_{HS}\\
+		&=\sum_{x\neq y}e^{-t(x-y)^2}\|P_x\rho(0)P_y\|^2_{HS}.
+	\end{align}
+	Moreover,
+	\begin{equation}
+		\sum_{x,y}\|P_x\rho(0)P_y\|^2_{HS}=\|\rho(0)\|^2_{HS}<\infty.
+	\end{equation}
+	Each term in the previous sum tends to zero and is bounded by the corresponding term in this convergent sum. Dominated convergence therefore gives
+	\begin{equation}
+		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_{HS}=0.
+	\end{equation}
+	Both $\rho(t)$ and $\mathcal{P}_X(\rho(0))$ are density operators. For density operators, Hilbert--Schmidt convergence to a density operator implies trace-norm convergence: this is the non-commutative Scheff\'e lemma. Hence
+	\begin{equation}
+		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_1=0,
+	\end{equation}
+	which means $\lim\limits_{t\to\infty} \rho(t) = \mathcal{P}_X(\rho(0))$. Therefore \ref{EQ-LIND} and \ref{EQ-MEAS} define the same black-box process.
+
+	\ref{EQ-HS} $\iff$ \ref{EQ-MEAS}. An operator commutes with $X$ if and only if it is block diagonal with respect to the eigenspaces of $X$. Therefore, $[\sigma,X]=0$, $\sigma$ has no off-diagonal blocks and $\mathcal{P}_X(\sigma)=\sigma$ are all equivalent statements. The difference $\rho-\mathcal{P}_X(\rho)$ contains only off-diagonal blocks, while $\mathcal{P}_X(\rho)-\sigma$ contains only diagonal blocks. They are orthogonal in the Hilbert--Schmidt inner product, and hence
+	\begin{equation}
+		\|\rho-\sigma\|^2_{HS}=\|\rho-\mathcal{P}_X(\rho)\|^2_{HS}+\|\mathcal{P}_X(\rho)-\sigma\|^2_{HS}.
+	\end{equation}
+	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer, so \ref{EQ-HS} and \ref{EQ-MEAS} define the same map.
+
+	Under \ref{FD}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
+	\begin{equation}
+	\begin{aligned}
+	D(\rho\Vert\sigma)
+	&=\tr(\rho\log\rho)-\tr(\rho\log\sigma) \\
+	&=\tr(\rho\log\rho)-\tr(\rho\log\mathcal{P}_X(\rho))+\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))-\tr(\mathcal{P}_X(\rho)\log\sigma)\\
+	&=D(\rho\Vert\mathcal{P}_X(\rho))+D(\mathcal{P}_X(\rho)\Vert\sigma).
+	\end{aligned}
+	\end{equation}
+	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus \ref{EQ-KL} and \ref{EQ-MEAS} define the same map in finite dimension, completing the proof.
+\end{proof}
+
+\section{Additional remarks}
+
+\textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
+
+\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ may be infinite. It can then happen that every density operator commuting with $X$ has infinite relative entropy from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. This is why \ref{FD} is included in the theorem. More generally, the equivalence holds for those incoming ensembles for which $D(\rho\Vert\mathcal{P}_X(\rho))$ is finite. This is likely a problem with the Hilbert space formalism, as it also does not guarantee that all density operators have finite entropy.
+
+\textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has a continuous spectrum, or, in over those parts of the spectrum that are continuous if both types are present. In fact, the pinching map cannot be defined; an operator $\rho$ that commutes with $X$ also has continuous spectrum (i.e. it would have to be multiplicative in the wave-function representation of the observable) and therefore is not trace-class; similarly, fixed points of the Lindblad equation would not be density operators. In other words, there are no equilibria and equilibration processes in that case.
+
+\section{Conclusion}
+
+Projective measurements can be characterized as black-box equilibration processes that happen at a fast scale, leaving their implementation free to match different specific experimental conditions. The repeatability of the measurement is intrinsic in requiring that all outputs are equilibria of the process. The process, then, is an equilibration towards those outcomes. As the output of the process is a classical statistical mixture of possible measurement outcomes, the second part of the measurement (i.e. the update of the state based on the measurement outcome) is equivalent to what happens in the classical case.
+
+More in general, the black-box idea could be extended to destructive measurements. One can imagine a black-box process in which the input is the state of the system while the output is the final state of the measurement device.
+
+\end{document}
