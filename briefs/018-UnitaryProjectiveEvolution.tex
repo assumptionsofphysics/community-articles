@@ -1,0 +1,223 @@
+\documentclass{techbrief}
+
+\title{Unitary evolution as infinitesimal projective processes}
+\author{Gabriele Carcassi}
+\category{Quantum mechanics}
+\tags{Unitary evolution, Projective measurement, Quantum Zeno effect}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	We show that unitary evolution can be characterized, in a precise sense, as the limit of repeated projective measurements. The key insight that there exist processes that can be understood either as an exponentially weighted average of the unitary trajectory or, for each incoming ensemble, as a projective measurement adapted to that ensemble. The result holds for separable Hilbert spaces, including unitary groups with unbounded generators.
+\end{abstract}
+
+\section{Introduction}
+
+Unitary evolution and projective measurement are usually presented as two distinct types of quantum processes. The first preserves pure states and is deterministic and reversible. The second generally turns a pure ensemble into a statistical mixture and is neither deterministic nor reversible. Nevertheless, unitary evolution can be recovered as the limit of projective processes, much as reversible quasi-static evolution in thermodynamics can be understood as a limit of equilibration processes.
+
+The projective decomposition that realizes the process cannot be fixed independently of the incoming ensemble. For each ensemble, the projective decomposition must be chosen so that one outcome predicts the next state with probability approaching one. At the same time, the process on ensembles must remain affine, so that its output does not depend on a particular decomposition of a mixed ensemble. We call such a process state-adaptive projective.
+
+The main mathematical idea is simple. Let $\mathcal{L}$ be the generator of the unitary evolution on density operators. The finite process of duration $\tau$ is the resolvent $(I-\tau\mathcal{L})^{-1}$. This map is an exponentially weighted average of the unitary trajectory. More surprisingly, for each incoming ensemble it is also exactly a projective-measurement process. Repeating it over shorter and shorter intervals recovers the unitary group.
+
+\section{Mathematical prerequisites}
+
+We define a state-adaptive projective process as a black-box process that can be understood as performing a projective measurement on each incoming ensemble. It is state-adaptive in the sense that the projective measurement depends on the incoming state.
+\begin{defn}[State-adaptive projective process]
+	A state-adaptive projective process is a process that acts as a projective measurement on each ensemble. That is, it is an affine map $\Psi:\mathcal{D}\to\mathcal{D}$ on the ensemble space such that, for every incoming ensemble $\rho$, there is a projective decomposition $\{P_a^\rho\}$ of the identity for which $\Psi(\rho)=\sum_aP_a^\rho\rho P_a^\rho$. The projective decomposition may depend on the incoming ensemble.
+\end{defn}
+
+
+We now prove the fact that connects the generator of a unitary group to a projective process.
+
+\begin{prop}[The unitary resolvent is state-adaptive projective]\label{UNIT-RES-PROJ}
+	Let $K$ be a bounded self-adjoint operator on a Hilbert space $\mathcal{H}$ and let $\mathcal{L}_K$ be the generator on density operators given by $\mathcal{L}_K(\rho)=\frac{[K,\rho]}{\imath\hbar}$. For every $\tau>0$, define
+	\begin{equation}
+		\Psi_\tau=(I-\tau\mathcal{L}_K)^{-1}.
+	\end{equation}
+	Then $\Psi_\tau$ is an affine completely positive trace-preserving map. Moreover, for every density operator $\rho$, there is a projective decomposition $\{P_a^\rho\}$ of the identity such that
+	\begin{equation}
+		\Psi_\tau(\rho)=\sum_aP_a^\rho\rho P_a^\rho.
+	\end{equation}
+\end{prop}
+
+\begin{proof}
+	Let $\mathcal{T}_t^K(\rho)=e^{tK/(\imath\hbar)}\rho e^{-tK/(\imath\hbar)}$. We first recall how the integral representation of the inverse arises in the scalar case. Since
+	\begin{equation}
+		\frac{d}{ds}\left(e^{-s}e^{as}\right)=-(1-a)e^{-s}e^{as},
+	\end{equation}
+	integration from zero to infinity gives
+	\begin{equation}
+		(1-a)\int_0^\infty e^{-s}e^{as}\,ds
+		=-\left[e^{-s}e^{as}\right]_{s=0}^{s=\infty}=1,
+	\end{equation}
+	whenever the boundary term at infinity vanishes. Therefore $(1-a)^{-1}=\int_0^\infty e^{-s}e^{as}\,ds$.
+
+	We now replace the scalar $a$ with the map $\tau\mathcal{L}_K$. Since $e^{\tau s\mathcal{L}_K}(\rho)=\mathcal{T}_{\tau s}^K(\rho)$, the corresponding candidate for the inverse is
+	\begin{equation}\label{RES-AVERAGE}
+		\Psi_\tau(\rho)=\int_0^\infty e^{-s}\mathcal{T}_{\tau s}^K(\rho)\,ds.
+	\end{equation}
+	To verify the identity directly, note that $\frac{d}{ds}\mathcal{T}_{\tau s}^K=\tau\mathcal{L}_K\mathcal{T}_{\tau s}^K$. Consequently,
+	\begin{equation}
+		\frac{d}{ds}\left(e^{-s}\mathcal{T}_{\tau s}^K\right)
+		=-e^{-s}(I-\tau\mathcal{L}_K)\mathcal{T}_{\tau s}^K.
+	\end{equation}
+	If $\sigma$ denotes the integral in \ref{RES-AVERAGE}, we therefore have
+	\begin{equation}
+	\begin{aligned}
+		(I-\tau\mathcal{L}_K)(\sigma)
+		&=\int_0^\infty e^{-s}(I-\tau\mathcal{L}_K)\mathcal{T}_{\tau s}^K(\rho)\,ds\\
+		&=-\left[e^{-s}\mathcal{T}_{\tau s}^K(\rho)\right]_{s=0}^{s=\infty}\\
+		&=\rho.
+	\end{aligned}
+	\end{equation}
+	The boundary term at infinity vanishes because unitary evolution preserves the trace norm, while $e^{-s}$ tends to zero; at $s=0$, $\mathcal{T}_0^K=I$. This proves that the integral in \ref{RES-AVERAGE} is $(I-\tau\mathcal{L}_K)^{-1}(\rho)$.
+
+	Equation \ref{RES-AVERAGE} expresses $\Psi_\tau$ as a statistical mixture of unitary channels. Therefore it is affine, completely positive and trace preserving.
+
+	Set $\sigma=\Psi_\tau(\rho)$ and write its spectral decomposition as $\sigma=\sum_a\lambda_aP_a^\rho$, where equal eigenvalues are grouped into the same spectral projection. From the definition of the resolvent,
+	\begin{equation}
+		\rho=(I-\tau\mathcal{L}_K)(\sigma)=\sigma-\tau\frac{[K,\sigma]}{\imath\hbar}.
+	\end{equation}
+	Since $\sigma P_a^\rho=P_a^\rho\sigma=\lambda_aP_a^\rho$, we have
+	\begin{equation}
+		P_a^\rho\frac{[K,\sigma]}{\imath\hbar}P_a^\rho=0.
+	\end{equation}
+	Consequently,
+	\begin{equation}
+		P_a^\rho\rho P_a^\rho=P_a^\rho\sigma P_a^\rho=\lambda_aP_a^\rho.
+	\end{equation}
+	Summing over the spectral projections gives $\sum_aP_a^\rho\rho P_a^\rho=\sigma=\Psi_\tau(\rho)$. Thus the same map that averages the unitary trajectory acts on each incoming ensemble as a projective measurement adapted to that ensemble.
+\end{proof}
+
+The process is close to the corresponding unitary step. The following estimates will be useful. They are uniform over density operators and pure states.
+
+\begin{prop}[Infinitesimal prediction]\label{INF-PRED}
+	Under the assumptions of Proposition \ref{UNIT-RES-PROJ}, let $M=\|K\|$. Then, as $\tau\to0$,
+	\begin{equation}
+		\|\Psi_\tau(\rho)-\mathcal{T}_\tau^K(\rho)\|_1=O\left(\frac{\tau^2M^2}{\hbar^2}\right).
+	\end{equation}
+	If $P$ is pure, let $F_\tau(P)$ be the spectral projector of $\Psi_\tau(P)$ associated with its largest eigenvalue $q_\tau(P)$. Then
+	\begin{equation}
+		1-q_\tau(P)=O\left(\frac{\tau^2M^2}{\hbar^2}\right),
+		\qquad
+		\|F_\tau(P)-\mathcal{T}_\tau^K(P)\|_1=O\left(\frac{\tau^2M^2}{\hbar^2}\right).
+	\end{equation}
+\end{prop}
+
+\begin{proof}
+	Both the resolvent and the unitary evolution have the same first-order expansion:
+	\begin{equation}
+		\Psi_\tau=I+\tau\mathcal{L}_K+O(\tau^2\|\mathcal{L}_K\|^2),
+		\qquad
+		\mathcal{T}_\tau^K=I+\tau\mathcal{L}_K+O(\tau^2\|\mathcal{L}_K\|^2).
+	\end{equation}
+	Since $\|\mathcal{L}_K\|\leq 2M/\hbar$ on trace-class operators, the first estimate follows. If $P$ is pure, $\mathcal{T}_\tau^K(P)$ is also pure. The first estimate shows that $\Psi_\tau(P)$ differs from this rank-one projector only at second order. Standard perturbation of an isolated eigenvalue then gives the two remaining estimates: the largest eigenvalue differs from one at second order, and its spectral projector differs from $\mathcal{T}_\tau^K(P)$ at second order. Moreover, the proof of Proposition \ref{UNIT-RES-PROJ} gives $P_a^P P P_a^P=\lambda_aP_a^P$. Since the left-hand side has rank at most one, every $P_a^P$ with $\lambda_a>0$ has rank one. Thus $q_\tau(P)$ is precisely the probability of the corresponding pure measurement outcome.
+\end{proof}
+
+We will also use the following characterization of affine correspondences of quantum ensembles.
+
+\begin{prop}[Affine pure-state correspondence]\label{AFF-PURE-PROJ}
+	Let $\Phi:\mathcal{D}(\mathcal{H})\to\mathcal{D}(\mathcal{H})$ be an affine map. If $\Phi$ maps the pure states bijectively onto the pure states, then there is either a unitary or an anti-unitary operator $W:\mathcal{H}\to\mathcal{H}$ such that $\Phi(\rho)=W\rho W^\dagger$ for every density operator $\rho$.
+\end{prop}
+
+\begin{proof}
+	Affinity extends $\Phi$ to a positive trace-preserving real-linear map on the self-adjoint trace-class operators. Since pure states are exactly the positive trace-one rank-one operators, the extension maps positive rank-one operators bijectively onto positive rank-one operators. The linear rank-one preserver theorem gives either $\Phi(\rho)=W\rho W^\dagger$ or, after choosing an orthonormal basis, $\Phi(\rho)=W\rho^{\mathsf T}W^\dagger$. Positivity and trace preservation make $W$ an isometry, while surjectivity on pure states makes it surjective. The first case is therefore implemented by a unitary and the second by an anti-unitary.
+\end{proof}
+
+\section{Conditions}
+
+The following condition represents the standard structure of quantum states on Hilbert space.
+\begin{condition}[Quantum states on Hilbert space]{QST:H}
+	The state space of the system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi)=\frac{\langle\phi|\psi\rangle\langle\psi|\phi\rangle}{\langle\psi|\psi\rangle\langle\phi|\phi\rangle}$. The entropy is given by the von Neumann entropy: $S(\rho)=-\tr(\rho\log\rho)$.
+\end{condition}
+
+We compare the usual mathematical characterization of unitary evolution with a physical characterization in terms of infinitesimal projective processes.
+\begin{condition}[Unitary evolution]{DR-UNIT}
+	Time evolution is represented by a strongly continuous one-parameter group of unitary operators. That is, $\Phi_t(\rho)=U_t\rho U_t^\dagger$, where $U_t:\mathcal{H}\to\mathcal{H}$, $U_0=I$, $U_{t+s}=U_tU_s$ and $U_t^\dagger U_t=U_tU_t^\dagger=I$.
+\end{condition}
+
+\begin{condition}[Projective evolution]{DR-PROJ}
+	Time evolution is the limit of repeated applications of an infinitesimal state-adaptive projective process that allows perfect prediction and perfect reconstruction. That is, evolution over elapsed time $t$ is obtained by applying the same process of duration $t/n$, $n$ times, in the limit $n\to\infty$. Moreover, the probabilities of the predicted and reconstructed state sequences tend to one.
+\end{condition}
+
+For the mathematical proof, the limit in \ref{DR-PROJ} is understood in trace norm. A predicted state sequence is an outcome branch of the repeated projective processes, and its probability is the product of the conditional probabilities along that branch. Perfect prediction means that the branch converges to the evolved state while its probability tends to one; perfect reconstruction has the analogous meaning in the opposite time direction. As usual, time evolution over elapsed time composes over adjacent intervals and the infinitesimal limit is continuous.
+
+\section{Theorem}
+
+We now prove the equivalence.
+
+\begin{thrm}
+	Over \ref{QST:H}, conditions \ref{DR-UNIT} and \ref{DR-PROJ} are equivalent.
+\end{thrm}
+
+\begin{proof}
+	We first show that unitary evolution is a limit of state-adaptive projective processes.
+
+	\ref{DR-UNIT} $\implies$ \ref{DR-PROJ}. Let $U_t=e^{tH/(\imath\hbar)}$ be the strongly continuous one-parameter unitary group and let $\mathcal{T}_t(\rho)=U_t\rho U_t^\dagger$ be its action on density operators. Suppose first that $H$ is bounded. Set $\mathcal{L}(\rho)=\frac{[H,\rho]}{\imath\hbar}$ and define the process of duration $\tau$ by
+	\begin{equation}
+		\Psi_\tau=(I-\tau\mathcal{L})^{-1}.
+	\end{equation}
+	By Proposition \ref{UNIT-RES-PROJ}, each $\Psi_\tau$ is state-adaptive projective. The resolvent exponential formula gives
+	\begin{equation}\label{RES-LIMIT}
+		\lim_{n\to\infty}\left(\Psi_{t/n}\right)^n(\rho)
+		=\lim_{n\to\infty}\left(I-\frac{t}{n}\mathcal{L}\right)^{-n}(\rho)
+		=e^{t\mathcal{L}}(\rho)
+		=\mathcal{T}_t(\rho).
+	\end{equation}
+
+	It remains to check perfect prediction. For a pure incoming state $P$, choose at each step the outcome $F_\tau(P)$ associated with the largest eigenvalue of $\Psi_\tau(P)$. Proposition \ref{INF-PRED} shows that, for some constant $C$ independent of $P$ and sufficiently small $\tau$, the failure probability at one step is at most $C\tau^2\|H\|^2/\hbar^2$. With $\tau=t/n$, the probability that all $n$ predictions succeed is therefore bounded below by
+	\begin{equation}
+		\left(1-C\frac{t^2\|H\|^2}{n^2\hbar^2}\right)^n,
+	\end{equation}
+	which tends to one. The selected state differs from the corresponding unitary step by the same second-order quantity. Since unitary conjugation is an isometry in trace norm, the errors of the $n$ selected states accumulate to at most $O(t^2\|H\|^2/(n\hbar^2))$, which tends to zero. Thus the predicted state sequence converges to the unitary trajectory. Affinity is essential here: after one unconditioned step the output is mixed, but affinity guarantees that applying $\Psi_\tau$ to that mixture gives the mixture of the processes applied to its pure components. The outcome branches can therefore be followed consistently without choosing a particular decomposition of the mixed ensemble. Replacing $H$ with $-H$ gives a state-adaptive projective process for the reconstructed sequence and proves perfect reconstruction.
+
+	Now let $H$ be unbounded. For each $\tau>0$, choose a positive cutoff $M_\tau$ such that
+	\begin{equation}\label{SLOW-CUTOFF}
+		M_\tau\longrightarrow\infty,
+		\qquad
+		\tau M_\tau^2\longrightarrow0.
+	\end{equation}
+	Let $f_\tau(x)=\max\{-M_\tau,\min\{x,M_\tau\}\}$ and set $H_\tau=f_\tau(H)$ through the spectral calculus. Thus $H_\tau$ is bounded, $\|H_\tau\|\leq M_\tau$ and $f_\tau(x)\to x$ for every real $x$. Define $\mathcal{L}_\tau(\rho)=\frac{[H_\tau,\rho]}{\imath\hbar}$ and
+	\begin{equation}
+		\Psi_\tau=(I-\tau\mathcal{L}_\tau)^{-1}.
+	\end{equation}
+	Each $\Psi_\tau$ is again state-adaptive projective. For fixed $t$ and $\tau=t/n$, Proposition \ref{INF-PRED} and \ref{SLOW-CUTOFF} show that the accumulated state error and the total failure probability are both $O(t\tau M_\tau^2/\hbar^2)$ and therefore tend to zero. The one-step difference between $\Psi_\tau$ and $e^{\tau\mathcal{L}_\tau}$ has the same second-order bound. Both maps contract trace distance, so a telescoping sum bounds the difference after $n$ steps by $n$ times the one-step difference. Consequently,
+	\begin{equation}
+		\left(\Psi_{t/n}\right)^n(\rho)-e^{t\mathcal{L}_{t/n}}(\rho)\longrightarrow0
+	\end{equation}
+	in trace norm. Since the bounded spectral truncations converge to $H$, $e^{tH_{t/n}/(\imath\hbar)}$ converges strongly to $e^{tH/(\imath\hbar)}$. Unitary conjugation then converges on every trace-class operator, so
+	\begin{equation}
+		e^{t\mathcal{L}_{t/n}}(\rho)\longrightarrow\mathcal{T}_t(\rho)
+	\end{equation}
+	in trace norm. Therefore \ref{RES-LIMIT}, perfect prediction and perfect reconstruction hold for an arbitrary self-adjoint generator.
+
+	We now prove the converse.
+
+	\ref{DR-PROJ} $\implies$ \ref{DR-UNIT}. Write $\Phi_t$ for the limiting time evolution. Each finite process is affine, so every finite repetition is affine and its trace-norm limit $\Phi_t$ is affine.
+
+	Consider a pure initial state. At finite $n$, the predicted sequence identifies one branch of the repeated projective process. Affinity guarantees that the unconditioned repeated process is the mixture of all such outcome branches, independently of how any intermediate mixed ensemble is decomposed. The weight of the predicted branch is the product of its conditional probabilities. By perfect prediction, this weight tends to one and its final state tends to the predicted future state. The unconditioned output is therefore a mixture containing this branch with a weight tending to one, so its trace distance from the predicted pure state tends to zero. Consequently, $\Phi_t$ maps every pure initial state to a pure future state. Perfect reconstruction gives the converse correspondence: every pure future state reconstructs a unique pure initial state. Hence $\Phi_t$ maps the pure states bijectively onto the pure states.
+
+	Proposition \ref{AFF-PURE-PROJ} now shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. Since evolution composes, $\Phi_t=\Phi_{t/2}\circ\Phi_{t/2}$. The composition is implemented by a unitary whether $\Phi_{t/2}$ is implemented by a unitary or an anti-unitary. Therefore every $\Phi_t$ is implemented by a unitary operator $U_t$.
+
+	Evolution over adjacent time intervals composes, while the use of the same duration-dependent process makes the limiting evolution depend only on elapsed time. Therefore $\Phi_0=I$ and $\Phi_{t+s}=\Phi_t\circ\Phi_s$. Perfect reconstruction supplies the inverse evolution. The phases of the implementing unitaries may be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Continuity of the infinitesimal limit gives strong continuity of $U_t$. Thus the evolution is represented by a strongly continuous one-parameter group of unitary operators, which is condition \ref{DR-UNIT}.
+\end{proof}
+
+\section{Additional remarks}
+
+\textbf{The finite process is not unitary.} The process $\Psi_\tau$ is generally irreversible and maps pure ensembles to mixed ensembles. Its inverse $I-\tau\mathcal{L}$ is not generally positive. Reconstruction uses the distinct process $(I+\tau\mathcal{L})^{-1}$, not the mathematical inverse of $\Psi_\tau$. Only in the infinitesimal limit do prediction and reconstruction become mutually inverse unitary evolutions.
+
+\textbf{The relation to the unitary trajectory.} Equation \ref{RES-AVERAGE} shows that the finite process is not chosen arbitrarily: it is the ensemble obtained by evolving unitarily for an exponentially distributed duration with mean $\tau$. The spectral projections of this time-averaged ensemble define the projective measurement that produces the same output directly from the incoming ensemble.
+
+\textbf{Why the process is state-adaptive.} The map $\Psi_\tau$ is affine and independent of any decomposition of the incoming density operator. The projective decomposition that realizes it, however, is the spectral decomposition of $\Psi_\tau(\rho)$ and therefore depends on $\rho$. Different incoming ensembles generally undergo different projective measurements even though they are acted upon by the same affine process.
+
+\textbf{The qubit picture.} Define the Cayley transform $\mathcal{C}_\tau=(I+\tau\mathcal{L})(I-\tau\mathcal{L})^{-1}$. A direct calculation gives $\Psi_\tau=(I+\mathcal{C}_\tau)/2$. Since $\mathcal{L}$ is skew with respect to the Hilbert--Schmidt inner product, $\mathcal{C}_\tau$ is orthogonal. On the Bloch ball it is a rotation, so $\Psi_\tau$ sends a Bloch vector to the midpoint between that vector and its rotated image. This is the geometric qubit construction in generator form.
+
+\textbf{Unbounded generators.} Direct use of the resolvent of an unbounded generator still gives a completely positive trace-preserving map and the resolvent exponential formula. The bounded spectral truncations are used only to ensure that the total probability of the selected state sequence tends to one for every Hilbert-space state, including states outside the domain of the Hamiltonian.
+
+\section{Conclusion}
+
+Unitary evolution can be understood as a reversible quasi-static limit of projective processes. At every finite scale the process is a projective measurement adapted to the incoming ensemble and generally produces a mixture. As the duration tends to zero, one outcome becomes perfectly predictable, the corresponding state sequence converges to the unitary trajectory and the reverse sequence reconstructs the past with probability one. The deterministic and reversible unitary group is therefore recovered from an infinitesimal sequence of individually irreversible projective processes.
+
+\end{document}
