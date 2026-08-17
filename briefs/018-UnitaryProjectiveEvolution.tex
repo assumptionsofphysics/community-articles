@@ -28,7 +28,6 @@ We define a state-adaptive projective process as a black-box process that can be
 	A state-adaptive projective process is a process that acts as a projective measurement on each ensemble. That is, it is an affine map $\Psi:\mathcal{D}\to\mathcal{D}$ on the ensemble space such that, for every incoming ensemble $\rho$, there is a projective decomposition $\{P_a^\rho\}$ of the identity for which $\Psi(\rho)=\sum_aP_a^\rho\rho P_a^\rho$. The projective decomposition may depend on the incoming ensemble.
 \end{defn}
 
-
 We now prove the fact that connects the generator of a unitary group to a projective process.
 
 \begin{prop}[The unitary resolvent is state-adaptive projective]\label{UNIT-RES-PROJ}
@@ -142,8 +141,6 @@ We compare the usual mathematical characterization of unitary evolution with a p
 	Time evolution is the limit of repeated applications of an infinitesimal state-adaptive projective process that allows perfect prediction and perfect reconstruction. That is, evolution over elapsed time $t$ is obtained by applying the same process of duration $t/n$, $n$ times, in the limit $n\to\infty$. Moreover, the probabilities of the predicted and reconstructed state sequences tend to one.
 \end{condition}
 
-For the mathematical proof, the limit in \ref{DR-PROJ} is understood in trace norm. A predicted state sequence is an outcome branch of the repeated projective processes, and its probability is the product of the conditional probabilities along that branch. Perfect prediction means that the branch converges to the evolved state while its probability tends to one; perfect reconstruction has the analogous meaning in the opposite time direction. As usual, time evolution over elapsed time composes over adjacent intervals and the infinitesimal limit is continuous.
-
 \section{Theorem}
 
 We now prove the equivalence.
@@ -159,7 +156,7 @@ We now prove the equivalence.
 	\begin{equation}
 		\Psi_\tau=(I-\tau\mathcal{L})^{-1}.
 	\end{equation}
-	By Proposition \ref{UNIT-RES-PROJ}, each $\Psi_\tau$ is state-adaptive projective. The resolvent exponential formula gives
+	By Proposition \ref{UNIT-RES-PROJ}, each $\Psi_\tau$ is state-adaptive projective. The resolvent identity gives $(\Psi_\tau-I)/\tau=\mathcal{L}\Psi_\tau\to\mathcal{L}$, so the family is infinitesimal. The resolvent exponential formula gives
 	\begin{equation}\label{RES-LIMIT}
 		\lim_{n\to\infty}\left(\Psi_{t/n}\right)^n(\rho)
 		=\lim_{n\to\infty}\left(I-\frac{t}{n}\mathcal{L}\right)^{-n}(\rho)
@@ -187,7 +184,7 @@ We now prove the equivalence.
 	\begin{equation}
 		\Psi_\tau=(I-\tau\mathcal{L}_\tau)^{-1}.
 	\end{equation}
-	Each $\Psi_\tau$ is again state-adaptive projective. For fixed $t$ and $\tau=t/n$, Proposition \ref{INF-PRED} shows that the accumulated state error and the total failure probability are both $O(t\tau M_\tau^2/\hbar^2)$, which tends to zero by \ref{SLOW-CUTOFF}.
+	Each $\Psi_\tau$ is again state-adaptive projective. The family is infinitesimal with generator $\mathcal{L}(\rho)=\frac{[H,\rho]}{\imath\hbar}$. To see this, consider the dense core of density operators supported on a bounded spectral subspace of $H$. For each operator in this core, $H_\tau$ agrees with $H$ on its support once $M_\tau$ is sufficiently large. The resolvent identity $\Psi_\tau-I=\tau\mathcal{L}_\tau\Psi_\tau$ then gives $(\Psi_\tau(\rho)-\rho)/\tau\to\mathcal{L}(\rho)$ in trace norm. For fixed $t$ and $\tau=t/n$, Proposition \ref{INF-PRED} shows that the accumulated state error and the total failure probability are both $O(t\tau M_\tau^2/\hbar^2)$, which tends to zero by \ref{SLOW-CUTOFF}.
 
 	It remains to verify that the unconditioned process converges to the required evolution. The one-step difference between $\Psi_\tau$ and $e^{\tau\mathcal{L}_\tau}$ has the same second-order bound. Both maps contract trace distance, so a telescoping sum bounds the difference after $n$ steps by $n$ times the one-step difference. Consequently,
 	\begin{equation}
@@ -201,16 +198,44 @@ We now prove the equivalence.
 
 	We now prove the converse.
 
-	\ref{DR-PROJ} $\implies$ \ref{DR-UNIT}. Write $\Phi_t$ for the limiting time evolution. Each finite process is affine, so every finite repetition is affine and its trace-norm limit $\Phi_t$ is affine.
+	\ref{DR-PROJ} $\implies$ \ref{DR-UNIT}. The physical statement that the process is infinitesimal means mathematically that the duration-indexed family is differentiable at zero. Therefore $\Psi_0=I$ and there is a single, possibly unbounded generator $\mathcal{L}$ such that
+	\begin{equation}
+		\lim_{\tau\to0^+}\left\|\frac{\Psi_\tau(\rho)-\rho}{\tau}-\mathcal{L}(\rho)\right\|_1=0
+	\end{equation}
+	for every density operator $\rho$ in the domain of $\mathcal{L}$. Write $\Phi_t$ for the limiting time evolution. Each finite process is affine, so every finite repetition is affine and its trace-norm limit $\Phi_t$ is affine.
 
 	Consider a pure initial state. At finite $n$, the predicted sequence identifies one branch of the repeated projective process. Affinity guarantees that the unconditioned repeated process is the mixture of all such outcome branches, independently of how any intermediate mixed ensemble is decomposed. The weight of the predicted branch is the product of its conditional probabilities. By perfect prediction, this weight tends to one and its final state tends to the predicted future state. The unconditioned output is therefore a mixture containing this branch with a weight tending to one, so its trace distance from the predicted pure state tends to zero. Consequently, $\Phi_t$ maps every pure initial state to a pure future state. Perfect reconstruction gives the converse correspondence: every pure future state reconstructs a unique pure initial state. Hence $\Phi_t$ maps the pure states bijectively onto the pure states.
 
-	Proposition \ref{AFF-PURE-PROJ} now shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. Since evolution composes, $\Phi_t=\Phi_{t/2}\circ\Phi_{t/2}$. The composition is implemented by a unitary whether $\Phi_{t/2}$ is implemented by a unitary or an anti-unitary. Therefore every $\Phi_t$ is implemented by a unitary operator $U_t$.
+	Proposition \ref{AFF-PURE-PROJ} now shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. Taking the even subsequence in the limit that defines $\Phi_t$ gives
+	\begin{equation}
+		\Phi_t
+		=\lim_{n\to\infty}\left(\Psi_{t/(2n)}\right)^{2n}
+		=\left(\lim_{n\to\infty}\left(\Psi_{(t/2)/n}\right)^n\right)^2
+		=\Phi_{t/2}^2.
+	\end{equation}
+	The square is implemented by a unitary whether $\Phi_{t/2}$ is implemented by a unitary or an anti-unitary. Therefore every $\Phi_t$ is implemented by a unitary operator $U_t$.
 
-	Evolution over adjacent time intervals composes, while the use of the same duration-dependent process makes the limiting evolution depend only on elapsed time. Therefore $\Phi_0=I$ and $\Phi_{t+s}=\Phi_t\circ\Phi_s$. Perfect reconstruction supplies the inverse evolution. The phases of the implementing unitaries may be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Continuity of the infinitesimal limit gives strong continuity of $U_t$. Thus the evolution is represented by a strongly continuous one-parameter group of unitary operators, which is condition \ref{DR-UNIT}.
+	Infinitesimality gives continuity at zero. In fact, the affine maps $\Psi_\tau$ extend to positive trace-preserving linear maps and are therefore contractions in trace norm on self-adjoint trace-class operators. For $\rho$ in the domain of $\mathcal{L}$, a telescoping sum gives
+	\begin{equation}
+		\|\Phi_t(\rho)-\rho\|_1
+		\leq\lim_{n\to\infty}n\|\Psi_{t/n}(\rho)-\rho\|_1
+		=t\|\mathcal{L}(\rho)\|_1.
+	\end{equation}
+	Thus $\Phi_t(\rho)\to\rho$ as $t\to0^+$ on a dense domain, and contractivity extends the result to every density operator.
+
+	The use of the same duration-dependent process makes the limiting evolution depend only on elapsed time. Composition follows by taking common refinements. For example, for every positive integer $m$,
+	\begin{equation}
+		\Phi_{mt}
+		=\lim_{n\to\infty}\left(\Psi_{mt/(mn)}\right)^{mn}
+		=\lim_{n\to\infty}\left(\left(\Psi_{t/n}\right)^n\right)^m
+		=\Phi_t^m.
+	\end{equation}
+	The same argument gives composition for intervals whose durations have rational ratio. For arbitrary durations, take common refinements with a remaining interval whose duration tends to zero. The continuity at zero just established makes the contribution of that remaining interval tend to the identity. Therefore $\Phi_0=I$ and $\Phi_{t+s}=\Phi_t\circ\Phi_s$ for all $t,s\geq0$. Perfect reconstruction supplies the inverse evolution. The phases of the implementing unitaries may be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Continuity at zero and composition give strong continuity of $U_t$. Thus the evolution is represented by a strongly continuous one-parameter group of unitary operators, which is condition \ref{DR-UNIT}.
 \end{proof}
 
 \section{Additional remarks}
+
+\textbf{Mathematical meaning of prediction and reconstruction.} For the mathematical proof, the limit in \ref{DR-PROJ} is understood in trace norm. A predicted state sequence is an outcome branch of the repeated projective processes, and its probability is the product of the conditional probabilities along that branch. Perfect prediction means that the branch converges to the evolved state while its probability tends to one; perfect reconstruction has the analogous meaning in the opposite time direction. The continuity used in the proof is not an additional assumption: it follows from the first-order meaning of infinitesimal process.
 
 \textbf{The finite process is not unitary.} The process $\Psi_\tau$ is generally irreversible and maps pure ensembles to mixed ensembles. Its inverse $I-\tau\mathcal{L}$ is not generally positive. Reconstruction uses the distinct process $(I+\tau\mathcal{L})^{-1}$, not the mathematical inverse of $\Psi_\tau$. Only in the infinitesimal limit do prediction and reconstruction become mutually inverse unitary evolutions.
 
