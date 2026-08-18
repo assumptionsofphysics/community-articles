@@ -23,13 +23,13 @@ As representation of quantum systems through Hilbert spaces fails to satisfy bas
 
 \section{Mathematical overview}
 
-Instead of working with Hilbert spaces, we will give a characterization of a vector space that is better suited to capture physical requirements. It requires observables to be everywhere defined continuous self-adjoint operators, and ties the algebra of observable to the space definition. The space is also complete in the coarsest topology that makes both the observables and the inner product continuous.
+Instead of working with Hilbert spaces, we will give a characterization of a vector space that is better suited to capture physical requirements. It requires observables to be everywhere defined continuous self-adjoint operators, and ties their algebra to the space definition. The space is also complete in the coarsest topology that makes both the defining observables and the inner product continuous.
 
 \begin{defn}
 	A \textbf{quantum vector space} is a complete second countable complex topological vector space $V$ that satisfies the following:
 	\begin{itemize}
-		\item $V$ is equipped with an inner product $\< \cdot , \cdot \> : V \times V \to \mathbb{C}$; an observable is a continuous everywhere defined self-adjoint linear operator $X : V \to V$
-		\item $V$ is equipped with a set of defining observables $\{X_i\}_{i \in I}$ satisfying a given Lie algebra of commutation relationships $\frac{[X_i, X_j]}{\imath \hbar} = \sum\limits_k C_{ij}^k X_k$
+		\item $V$ is equipped with an inner product $\< \cdot , \cdot \> : V \times V \to \mathbb{C}$
+		\item $V$ is equipped with a set of defining observables $\{X_i\}_{i \in I}$, which are everywhere defined self-adjoint linear operators $X_i : V \to V$, satisfying a given Lie algebra of commutation relationships $\frac{[X_i, X_j]}{\imath \hbar} = \sum\limits_k C_{ij}^k X_k$
 		\item the topology is the coarsest vector space topology making the defining observables and the inner product continuous.
 	\end{itemize}
 \end{defn}
@@ -74,26 +74,26 @@ The following are conditions that we would expect any physical theory to obey, a
 	Different physical systems have a different mathematical representation. That is, the mathematical representation of different physical systems must have enough structure to tell them apart.
 \end{condition}
 
-The following condition sums up the definition of quantum states on top of quantum vector spaces. We will test this against the above requirements.
+The following condition sums up the definition of quantum states and observables on top of quantum vector spaces. We will test this against the above requirements.
 
-\begin{condition}[Quantum states on a quantum vector space]{QSTQ}
-	The state space of the system is the projective space of a quantum vector space $V$. That is, a state $\psi \in P(V)$ is represented by a ray $\psi = \{c |\psi\> \mid c \in \mathbb{C} \}$ for some $|\psi\> \in V$. The conditional probability $p : P(V) \times P(V) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\begin{condition}[Quantum states and observables]{QSTO:V}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(V)$ of a quantum vector space $V$. Observables are represented by continuous everywhere defined self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.  The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 \section{Theorem}
 
-Now we show that \ref{QSTQ} is consistent with each of the above base conditions.
+Now we show that \ref{QSTO:V} is consistent with each of the above base conditions.
 
 \begin{thrm}
-	Condition \ref{QSTQ} is consistent with \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST}.
+	Condition \ref{QSTO:V} is consistent with \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST}.
 \end{thrm}
 
 \begin{proof}
-	Observables are defined to be continuous functions over $V$. Since the inner product is also continuous, the expectations of all observables is continuous. This means \ref{QSTQ} is consistent with \ref{[B]COBS}.
+	Observables are defined to be continuous functions over $V$. Since the inner product is also continuous, the expectations of all observables is continuous. This means \ref{QSTO:V} is consistent with \ref{[B]COBS}.
 	
-	Suppose we have two frames, $A$ and $B$, each with its own set of defining observables $X_i^A$ and $X_i^B$. Since the underlying system is the same, the defining observables of $A$ must be observables in $B$ and vice-versa, as each observer must be able to transform quantities to and from all frames. Since observables are everywhere-defined, there is no domain mismatch so the observables will be well-defined in all frames. This means \ref{QSTQ} is consistent with \ref{[B]WDQ}.
+	Suppose we have two frames, $A$ and $B$, each with its own set of defining observables $X_i^A$ and $X_i^B$. Since the underlying system is the same, the defining observables of $A$ must be observables in $B$ and vice-versa, as each observer must be able to transform quantities to and from all frames. Since observables are everywhere-defined, there is no domain mismatch so the observables will be well-defined in all frames. This means \ref{QSTO:V} is consistent with \ref{[B]WDQ}.
 	
-	Lastly, an isomorphism in the category of quantum vector spaces must preserve the Lie algebraic structure. The Lie algebraic structure exactly represents the observables and the symmetries that define the physics. Since two physically distinct systems must have physically distinct Lie algebras, two systems are physically equivalent if and only if their Lie algebras of observables are equivalent. This means \ref{QSTQ} is consistent with \ref{[B]STDIST}.
+	Lastly, an isomorphism in the category of quantum vector spaces must preserve the Lie algebraic structure. The Lie algebraic structure exactly represents the observables and the symmetries that define the physics. Since two physically distinct systems must have physically distinct Lie algebras, two systems are physically equivalent if and only if their Lie algebras of observables are equivalent. This means \ref{QSTO:V} is consistent with \ref{[B]STDIST}.
 \end{proof}
 
 \section{Additional remarks}

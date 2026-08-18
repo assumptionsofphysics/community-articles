@@ -13,8 +13,8 @@ In quantum mechanics, the time evolution for an isolated system is postulated to
 \section{Conditions}
 
 The following condition represents our base theory.
-\begin{condition}[Quantum states]{QST}
-	The state space of the system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the space of density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule: $p(\psi|\phi) = \frac{\langle \phi | \psi \rangle\langle \psi | \phi \rangle}{\langle \psi | \psi \rangle\langle \phi | \phi \rangle}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+\begin{condition}[Quantum states]{QST:H}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 Within our base theory, we can derive the following.
@@ -46,7 +46,7 @@ Physically, the process is such that the output of a statistical mixture is the 
 
 \section{Theorem}
 \begin{thrm}[Schrödinger equation is information preservation]
-	Over \ref{QST}+\ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO}+\ref{EVDIFF} are equivalent.
+	Over \ref{QST:H}+\ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO}+\ref{EVDIFF} are equivalent.
 \end{thrm}
 \begin{proof}
 	\ref{DR-SCEQ} $\implies$ \ref{DR-INFO}+\ref{EVDIFF}. The Schrödinger equation gives rise to a differentiable unitary propagator $U_{t_0\to t_1}$. Therefore, the evolved and reconstructed ensembles are respectively $\rho_F=U_{t_0\to t_1}\rho_IU_{t_0\to t_1}^\dagger$ and $\rho_P=U_{t_0\to t_1}^\dagger\rho_FU_{t_0\to t_1}$. Since unitary conjugation preserves eigenvalues, and the von Neumann entropy depends only on eigenvalues, $S(\rho_I)=S(\rho_F)=S(\rho_P)$.
