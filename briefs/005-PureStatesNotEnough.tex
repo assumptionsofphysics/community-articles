@@ -33,22 +33,18 @@ Let us first give a condition that characterizes the classical state space. We c
 	The conditional probability over states is given by $p(\xi_1 | \xi_2) = 0 = p(\xi_2 | \xi_1)$ for all $\xi_1, \xi_2 \in X$, meaning that all states represent mutually exclusive events.
 \end{condition}
 
-We now characterize quantum state space in the same way. However, we break up the three elements (i.e. state, ensembles, conditional probability) into three separate conditions.\footnote{Note that we require $\mathcal{H}$ to just be a complex inner product space, and not a Hilbert space as Hilbert spaces are problematic in the infinite dimension case. Given that our requirement is weaker, the results also hold for Hilbert spaces as well.}
+We now characterize quantum state space in the same way. However, we break up the three elements (i.e. state, ensembles, conditional probability) into three separate conditions.
 
-\begin{condition}[Quantum states]{QST}
-	States are rays (i.e. \ref{QP-RAY}), ensembles are density operators (i.e. \ref{QE-DENS}) and conditional probability is the Born rule (i.e. \ref{BR-BORN}). That is, \linebreak \ref{QST} $=$ \ref{QP-RAY} $\wedge$ \ref{QE-DENS} $\wedge$ \ref{BR-BORN}
+\begin{condition}[Quantum state space only]{QP-RAY}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(V)$ of a complex topological vector space $V$.
 \end{condition}
 
-\begin{condition}[Quantum states are rays]{QP-RAY}
-	The state space of the system is represented by the projective space given by the rays of a complex vector space $\mathcal{H}$. That is, a state $\psi \in P(\mathcal{H})$ is a ray $\psi = \{c |\psi\> \mid c \in \mathbb{C} \}$ of a complex projective space.
-\end{condition}
-
-\begin{condition}[Quantum ensembles are density operators]{QE-DENS}
-	The ensemble space of the system is represented by the set of density operators acting on a complex inner product space $\mathcal{H}$. That is, an ensemble $\rho \in D(\mathcal{H})$ is a positive semi-definite trace one self-adjoint operator $\rho : \mathcal{H} \to \mathcal{H}$. 
+\begin{condition}[Quantum ensemble space]{QE-DENS}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$.
 \end{condition}
 
 \begin{condition}[Conditional expectation from Born rule]{BR-BORN}
-	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+	The conditional probability $p : \mathcal{P} \times \mathcal{P} \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
 \end{condition}
 
 \section{Theorems}
@@ -56,11 +52,11 @@ We now characterize quantum state space in the same way. However, we break up th
 The main observation is that we can satisfy \ref{QP-RAY} and \ref{CST} at the same time. The complex nature of the inner product space makes sure that the projective space is symplectic, and therefore it can be used in the context of classical mechanics.
 
 \begin{thrm}
-	Conditions \ref{QP-RAY} and \ref{CST} are consistent. In fact, they are consistent if and only if $1\leq\dim(\mathcal{H})<\infty$.
+	Conditions \ref{QP-RAY} and \ref{CST} are consistent. In fact, they are consistent if and only if $1\leq\dim(V)<\infty$.
 \end{thrm}
 
 \begin{proof}
-	Suppose \ref{QP-RAY} and \ref{CST} are assumed. Then the state space $X$ is both a symplectic manifold and a complex projective space. Since $X$ is a symplectic manifold, then $2 \leq \dim(X) < \infty$. This means that $1 \leq \dim(\mathcal{H}) < \infty$. We can then define statistical ensembles and entropy as given by \ref{QP-RAY}.
+	Suppose \ref{QP-RAY} and \ref{CST} are assumed. Then the state space $X$ is both a symplectic manifold and a complex projective space. Since $X$ is a symplectic manifold, then $2 \leq \dim(X) < \infty$. This means that $1 \leq \dim(V) < \infty$.
 \end{proof}
 
 We can, in fact, provide a simple example which is interesting to understand the difference between the hybrid and the true quantum case.
@@ -89,7 +85,7 @@ We now see that the notion of classical ensemble and quantum ensembles are diffe
 Lastly, we can show that each quantum ensemble is an equivalence class of classical distributions over the pure states.
 
 \begin{thrm}
-	Over \ref{QST}, let $M^1(P(\mathcal{H}))$ be the set of probability measures, non necessarily absolutely continuous, over the states. Then there exists an equivalence relationship $\sim \; \subseteq M^1(P(\mathcal{H})) \times M^1(P(\mathcal{H}))$ such that $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
+	Over \ref{QE-DENS}, let $M^1(P(\mathcal{H}))$ be the set of probability measures, non necessarily absolutely continuous, over the states. Then there exists an equivalence relationship $\sim \; \subseteq M^1(P(\mathcal{H})) \times M^1(P(\mathcal{H}))$ such that $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
 \end{thrm}
 
 \begin{proof}
