@@ -58,13 +58,13 @@ The following condition represents the standard structure of quantum states on H
 \end{condition}
 
 Time evolution must preserve statistical mixtures.
-\begin{condition}[Evolution of mixtures]{[B]EVMIX}
-	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $T_{t_0,t_1}:D(\mathcal{H})\to D(\mathcal{H})$ such that $T_{t_0,t_0}=I$, $T_{t_1,t_2}\circ T_{t_0,t_1}=T_{t_0,t_2}$ and $(\rho,t_0,t_1)\mapsto T_{t_0,t_1}(\rho)$ is jointly continuous.
+\begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
+	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, let $\mathcal{D}$ be the ensemble space of the system, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}\to \mathcal{D}$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
 \end{condition}
 
 We are going to restrict the dynamics to the time-independent case.
 \begin{condition}[Time-independent evolution]{EVTI}
-	Evolution depends only on elapsed time. That is, $T_{t_0,t_1}=T_{t_1-t_0}$.
+	Evolution depends only on elapsed time. That is, $\Phi_{t_0 \to t_1}=\Phi_{t_1-t_0}$.
 \end{condition}
 
 Lastly, these are the five conditions whose equivalence we want to prove.
@@ -77,7 +77,7 @@ Lastly, these are the five conditions whose equivalence we want to prove.
 \end{condition}
 
 \begin{condition}[Unitary evolution]{DR-UNIT}
-	Time evolution is represented by a strongly continuous one-parameter group of unitary operators. That is, $T_t(\rho)=U_t\rho U_t^\dagger$, where $U_t:\mathcal{H}\to\mathcal{H}$, $U_0=I$, $U_{t+s}=U_tU_s$ and $U_t^\dagger U_t=U_tU_t^\dagger=I$.
+	Time evolution is represented by a strongly continuous one-parameter group of unitary operators. That is, $\Phi_t(\rho)=U_t\rho U_t^\dagger$, where $U_t:\mathcal{H}\to\mathcal{H}$, $U_0=I$, $U_{t+s}=U_tU_s$ and $U_t^\dagger U_t=U_tU_t^\dagger=I$.
 \end{condition}
 
 \begin{condition}[Bijective map]{DR-EV}
@@ -103,9 +103,9 @@ Now we show the equivalence of the time evolution characterizations.
 \begin{proof}
 	We first show that each physical condition gives unitary evolution.
 
-	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{DR-EV}, $T_t$ maps pure states bijectively onto pure states. By \ref{[B]EVMIX}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $T_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $T_t=T_{t/2}\circ T_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $T_t$ is implemented by a unitary.
+	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{DR-EV}, $\Phi_t$ maps pure states bijectively onto pure states. By \ref{[B]EVMIX}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $\Phi_t=\Phi_{t/2}\circ \Phi_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $\Phi_t$ is implemented by a unitary.
 
-	The composition law gives a continuous projective unitary representation of elapsed time. The phases can be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Joint continuity of $T_t$ gives strong continuity of $U_t$. The inverses define $U_{-t}=U_t^\dagger$, yielding a strongly continuous one-parameter unitary group. Therefore \ref{DR-UNIT} holds.
+	The composition law gives a continuous projective unitary representation of elapsed time. The phases can be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Joint continuity of $\Phi_t$ gives strong continuity of $U_t$. The inverses define $U_{-t}=U_t^\dagger$, yielding a strongly continuous one-parameter unitary group. Therefore \ref{DR-UNIT} holds.
 
 	\ref{DR-PROB} $\implies$ \ref{DR-EV}. Two states are the same if and only if their conditional probability is one. Therefore
 	\begin{equation}
