@@ -58,12 +58,12 @@ The following condition represents the standard structure of quantum states on H
 \end{condition}
 
 Time evolution must preserve statistical mixtures.
-\begin{condition}[Evolution of mixtures]{[B]MIXEV}
+\begin{condition}[Evolution of mixtures]{[B]EVMIX}
 	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $T_{t_0,t_1}:D(\mathcal{H})\to D(\mathcal{H})$ such that $T_{t_0,t_0}=I$, $T_{t_1,t_2}\circ T_{t_0,t_1}=T_{t_0,t_2}$ and $(\rho,t_0,t_1)\mapsto T_{t_0,t_1}(\rho)$ is jointly continuous.
 \end{condition}
 
 We are going to restrict the dynamics to the time-independent case.
-\begin{condition}[Time-independent evolution]{TIEV}
+\begin{condition}[Time-independent evolution]{EVTI}
 	Evolution depends only on elapsed time. That is, $T_{t_0,t_1}=T_{t_1-t_0}$.
 \end{condition}
 
@@ -97,13 +97,13 @@ Lastly, these are the five conditions whose equivalence we want to prove.
 Now we show the equivalence of the time evolution characterizations.
 
 \begin{thrm}
-	Over \ref{QST:H}+\ref{[B]MIXEV}+\ref{TIEV}, conditions \ref{DR-SCEQ}, \ref{DR-UNIT}, \ref{DR-EV}, \ref{DR-PROB} and \ref{DR-INFO} are equivalent.
+	Over \ref{QST:H}+\ref{[B]EVMIX}+\ref{EVTI}, conditions \ref{DR-SCEQ}, \ref{DR-UNIT}, \ref{DR-EV}, \ref{DR-PROB} and \ref{DR-INFO} are equivalent.
 \end{thrm}
 
 \begin{proof}
 	We first show that each physical condition gives unitary evolution.
 
-	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{DR-EV}, $T_t$ maps pure states bijectively onto pure states. By \ref{[B]MIXEV}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $T_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $T_t=T_{t/2}\circ T_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $T_t$ is implemented by a unitary.
+	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{DR-EV}, $T_t$ maps pure states bijectively onto pure states. By \ref{[B]EVMIX}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $T_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $T_t=T_{t/2}\circ T_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $T_t$ is implemented by a unitary.
 
 	The composition law gives a continuous projective unitary representation of elapsed time. The phases can be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Joint continuity of $T_t$ gives strong continuity of $U_t$. The inverses define $U_{-t}=U_t^\dagger$, yielding a strongly continuous one-parameter unitary group. Therefore \ref{DR-UNIT} holds.
 
