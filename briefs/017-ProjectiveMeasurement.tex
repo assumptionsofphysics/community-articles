@@ -10,7 +10,7 @@
 \maketitle
 
 \begin{abstract}
-	We characterize a projective measurement as a black-box process that returns the a priori post-measurement ensemble. We show that this process can be understood as equilibration under a Lindblad equation or as selection of the closest ensemble commuting with the measured observable. In finite dimension, closeness can be expressed either through Hilbert--Schmidt distance or relative entropy.
+	We characterize a projective measurement as a black-box process that returns the a priori post-measurement ensemble. We show that this process can be understood as equilibration under a Lindblad equation or as selection of the closest ensemble, in terms of Hilbert--Schmidt distance, commuting with the measured observable. If we restrict to ensembles with finite entropy, closeness can be expressed through the relative entropy.
 \end{abstract}
 
 \section{Introduction}
@@ -26,9 +26,9 @@ The following condition represents the standard structure of quantum states and 
 	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
-This optional condition is used for the finite-dimensional case.
-\begin{condition}[Finite-dimensional system]{FD}
-	The space of ensembles of the system is finite-dimensional.
+This base condition states the ensembles have finite entropy.
+\begin{condition}[Entropy is finite]{[B]FINENT}
+	All ensembles have a well-defined finite entropy. Therefore, mathematical objects representing ensemble with infinite entropy are unphysical, and should be discarded.
 \end{condition}
 
 We now give four characterizations of the projective-measurement prediction.
@@ -53,7 +53,7 @@ We now give four characterizations of the projective-measurement prediction.
 We now prove the equivalence.
 
 \begin{thrm}
-	Over \ref{QSTO:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QSTO:H}+\ref{FD}, condition \ref{EQ-KL} is also equivalent to the others.
+	Over \ref{QSTO:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QSTO:H}+\ref{[B]FINENT}, condition \ref{EQ-KL} is also equivalent to the others.
 \end{thrm}
 
 \begin{proof}
@@ -101,7 +101,9 @@ We now prove the equivalence.
 	\end{equation}
 	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer, so \ref{EQ-HS} and \ref{EQ-MEAS} define the same map.
 
-	Under \ref{FD}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
+	Under \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since, under \ref{[B]FINENT}, ensembles must have finite entropy, the ensemble space is restricted to those density operators that have finite entropy. Consequently, the domain of $\Phi_X$ is restricted to those elements that are associated to finite entropy output. We want to show that KL minimization recovers the same output on the same domain.
+	
+	If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
 	\begin{equation}
 	\begin{aligned}
 	D(\rho\Vert\sigma)
@@ -110,14 +112,23 @@ We now prove the equivalence.
 	&=D(\rho\Vert\mathcal{P}_X(\rho))+D(\mathcal{P}_X(\rho)\Vert\sigma).
 	\end{aligned}
 	\end{equation}
-	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus \ref{EQ-KL} and \ref{EQ-MEAS} define the same map in finite dimension, completing the proof.
+	We also have
+	\begin{equation}
+	\begin{aligned}
+		D(\rho\Vert\mathcal{P}_X(\rho))
+		&=\tr(\rho\log\rho)-\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))= S(\mathcal{P}_X(\rho)) - S(\rho),
+	\end{aligned}
+	\end{equation}
+	which means the KL divergence between the two ensembles is well-defined and finite if and only if $S(\Phi_X(\rho))$ is finite.
+	
+	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus \ref{EQ-KL} and \ref{EQ-MEAS} define the same map on ensembles of finite entropy, completing the proof.
 \end{proof}
 
 \section{Additional remarks}
 
 \textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
 
-\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ may be infinite. It can then happen that every density operator commuting with $X$ has infinite relative entropy from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. This is why \ref{FD} is included in the theorem. More generally, the equivalence holds for those incoming ensembles for which $D(\rho\Vert\mathcal{P}_X(\rho))$ is finite. This is likely a problem with the Hilbert space formalism, as it also does not guarantee that all density operators have finite entropy.
+\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ may be infinite. It can then happen that every density operator commuting with $X$ has infinite relative entropy from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. This is why \ref{[B]FINENT} is included in the theorem. Since ensembles with infinite entropy are physically ill-defined, this is a problem with the Hilbert space formalism, as it also does not guarantee that all density operators have finite entropy.
 
 \textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has purely continuous spectrum, and they fail on the continuous part when both discrete and continuous spectra are present. In fact, the pinching map cannot be defined there as a sum over eigenspace projections. An operator $\rho$ supported on a non-atomic spectral sector and commuting with $X$ would be decomposable in the spectral representation of $X$ and cannot be a non-zero trace-class operator. Similarly, fixed points of the Lindblad equation supported on that sector would not be density operators. In other words, there are no density-operator equilibria or equilibration processes on the continuous part of the spectrum.
 
