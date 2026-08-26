@@ -57,7 +57,7 @@ We now prove the equivalence.
 \end{thrm}
 
 \begin{proof}
-	Let $X=\sum_xxP_x$ and define $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. Condition \ref{EQ-MEAS} states that $\Phi_X=\mathcal{P}_X$. We show directly that each of the other conditions defines the same map.
+	Let $\Phi_X$ denote the black-box spectral equilibration process associated with $X=\sum_xxP_x$, and define the pinching map $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. Condition \ref{EQ-MEAS} states that $\Phi_X=\mathcal{P}_X$. We show directly that each of the other conditions also characterizes $\Phi_X$ as the map $\mathcal{P}_X$.
 
 	\ref{EQ-LIND} $\iff$ \ref{EQ-MEAS}. Since the $P_x$ are the projectors onto the eigenspaces associated with each $x$, we can write the density matrix as
 	\begin{equation}
@@ -93,15 +93,15 @@ We now prove the equivalence.
 	\begin{equation}
 		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_1=0,
 	\end{equation}
-	which means $\lim\limits_{t\to\infty} \rho(t) = \mathcal{P}_X(\rho(0))$. Therefore \ref{EQ-LIND} and \ref{EQ-MEAS} define the same black-box process.
+	which means $\lim\limits_{t\to\infty} \rho(t) = \mathcal{P}_X(\rho(0))$. Thus the Lindblad characterization returns $\mathcal{P}_X$, so \ref{EQ-LIND} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$.
 
 	\ref{EQ-HS} $\iff$ \ref{EQ-MEAS}. An operator commutes with $X$ if and only if it is block diagonal with respect to the eigenspaces of $X$. Therefore, $[\sigma,X]=0$, $\sigma$ has no off-diagonal blocks and $\mathcal{P}_X(\sigma)=\sigma$ are all equivalent statements. The difference $\rho-\mathcal{P}_X(\rho)$ contains only off-diagonal blocks, while $\mathcal{P}_X(\rho)-\sigma$ contains only diagonal blocks. They are orthogonal in the Hilbert--Schmidt inner product, and hence
 	\begin{equation}
 		\|\rho-\sigma\|^2_{HS}=\|\rho-\mathcal{P}_X(\rho)\|^2_{HS}+\|\mathcal{P}_X(\rho)-\sigma\|^2_{HS}.
 	\end{equation}
-	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer, so \ref{EQ-HS} and \ref{EQ-MEAS} define the same map.
+	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer. Thus the Hilbert--Schmidt characterization returns $\mathcal{P}_X$, so \ref{EQ-HS} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$.
 
-	Under \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since, under \ref{[B]FINENT}, ensembles must have finite entropy, the ensemble space is restricted to those density operators that have finite entropy. Consequently, the domain of $\Phi_X$ is restricted to those elements that are associated to finite entropy output. We want to show that KL minimization recovers the same output on the same domain.
+	Under \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since ensembles must have finite entropy, the admissible domain of the pinching map is restricted to those density operators $\rho$ for which both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite. We show that KL minimization returns $\mathcal{P}_X$ on this same domain.
 	
 	If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
 	\begin{equation}
@@ -119,16 +119,16 @@ We now prove the equivalence.
 		&=\tr(\rho\log\rho)-\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))= S(\mathcal{P}_X(\rho)) - S(\rho),
 	\end{aligned}
 	\end{equation}
-	which means the KL divergence between the two ensembles is well-defined and finite if and only if $S(\Phi_X(\rho))$ is finite.
+	which means the KL divergence between the two ensembles is well-defined and finite if and only if $S(\mathcal{P}_X(\rho))$ is finite.
 	
-	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus \ref{EQ-KL} and \ref{EQ-MEAS} define the same map on ensembles of finite entropy, completing the proof.
+	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus the relative-entropy characterization returns $\mathcal{P}_X$, so \ref{EQ-KL} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$ on ensembles of finite entropy, completing the proof.
 \end{proof}
 
 \section{Additional remarks}
 
 \textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
 
-\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ may be infinite. It can then happen that every density operator commuting with $X$ has infinite relative entropy from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. This is why \ref{[B]FINENT} is included in the theorem. Since ensembles with infinite entropy are physically ill-defined, this is a problem with the Hilbert space formalism, as it also does not guarantee that all density operators have finite entropy.
+\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
 
 \textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has purely continuous spectrum, and they fail on the continuous part when both discrete and continuous spectra are present. In fact, the pinching map cannot be defined there as a sum over eigenspace projections. An operator $\rho$ supported on a non-atomic spectral sector and commuting with $X$ would be decomposable in the spectral representation of $X$ and cannot be a non-zero trace-class operator. Similarly, fixed points of the Lindblad equation supported on that sector would not be density operators. In other words, there are no density-operator equilibria or equilibration processes on the continuous part of the spectrum.
 
