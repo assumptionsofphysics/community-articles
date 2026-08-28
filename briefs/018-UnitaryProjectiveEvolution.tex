@@ -48,10 +48,10 @@ We now prove the fact that connects the generator of a unitary group to a projec
 	\end{equation}
 	integration from zero to infinity gives
 	\begin{equation}
-		(1-a)\int_0^\infty e^{-s}e^{as}\,ds
+		(1-a)\int_0^{\infty} e^{-s}e^{as}\,ds
 		=-\left[e^{-s}e^{as}\right]_{s=0}^{s=\infty}=1,
 	\end{equation}
-	whenever the boundary term at infinity vanishes. Therefore $(1-a)^{-1}=\int_0^\infty e^{-s}e^{as}\,ds$.
+	whenever the boundary term at infinity vanishes (i.e. when $\operatorname{Re}(a)<1$). Therefore $(1-a)^{-1}=\int_0^{\infty} e^{-s}e^{as}\,ds$.
 
 	We now replace the scalar $a$ with the map $\tau\mathcal{L}_K$. Since $e^{\tau s\mathcal{L}_K}(\rho)=\mathcal{T}_{\tau s}^K(\rho)$, the corresponding candidate for the inverse is
 	\begin{equation}\label{RES-AVERAGE}
@@ -66,22 +66,22 @@ We now prove the fact that connects the generator of a unitary group to a projec
 	\begin{equation}
 	\begin{aligned}
 		(I-\tau\mathcal{L}_K)(\sigma)
-		&=\int_0^\infty e^{-s}(I-\tau\mathcal{L}_K)\mathcal{T}_{\tau s}^K(\rho)\,ds\\
-		&=-\left[e^{-s}\mathcal{T}_{\tau s}^K(\rho)\right]_{s=0}^{s=\infty}\\
-		&=\rho.
+		&=(I-\tau\mathcal{L}_K)\int_0^\infty e^{-s}\mathcal{T}_{\tau s}^K(\rho)\,ds
+		=\int_0^\infty e^{-s}(I-\tau\mathcal{L}_K)\mathcal{T}_{\tau s}^K(\rho)\,ds\\
+		&=\int_0^\infty - \frac{d}{ds}\left(e^{-s}\mathcal{T}_{\tau s}^K(\rho)\right)\,ds=-\left[e^{-s}\mathcal{T}_{\tau s}^K(\rho)\right]_{s=0}^{s=\infty}=\rho.
 	\end{aligned}
 	\end{equation}
 	The boundary term at infinity vanishes because unitary evolution preserves the trace norm, while $e^{-s}$ tends to zero; at $s=0$, $\mathcal{T}_0^K=I$. This proves that the integral in \ref{RES-AVERAGE} is $(I-\tau\mathcal{L}_K)^{-1}(\rho)$.
 
 	Equation \ref{RES-AVERAGE} expresses $\Psi_\tau$ as a statistical mixture of unitary channels. Therefore it is affine, completely positive and trace preserving.
 
-	Set $\sigma=\Psi_\tau(\rho)$ and write its spectral decomposition as $\sigma=\sum_a\lambda_aP_a^\rho$, where equal eigenvalues are grouped into the same spectral projection. From the definition of the resolvent,
+	Recalling that $\sigma=\Psi_\tau(\rho)$, its spectral decomposition can be written as $\sigma=\sum_a\lambda_aP_a^\rho$, where equal eigenvalues are grouped into the same spectral projection. From the definition of the resolvent,
 	\begin{equation}
 		\rho=(I-\tau\mathcal{L}_K)(\sigma)=\sigma-\tau\frac{[K,\sigma]}{\imath\hbar}.
 	\end{equation}
 	Since $\sigma P_a^\rho=P_a^\rho\sigma=\lambda_aP_a^\rho$, we have
 	\begin{equation}
-		P_a^\rho\frac{[K,\sigma]}{\imath\hbar}P_a^\rho=0.
+		P_a^\rho\frac{[K,\sigma]}{\imath\hbar}P_a^\rho= \frac{P_a^\rho K \sigma P_a^\rho - P_a^\rho \sigma K P_a^\rho}{\imath\hbar}=\frac{\lambda_a P_a^\rho K P_a^\rho - \lambda_a P_a^\rho K P_a^\rho}{\imath\hbar} =0.
 	\end{equation}
 	Consequently,
 	\begin{equation}
@@ -90,14 +90,14 @@ We now prove the fact that connects the generator of a unitary group to a projec
 	Summing over the spectral projections gives $\sum_aP_a^\rho\rho P_a^\rho=\sigma=\Psi_\tau(\rho)$. Thus the same map that averages the unitary trajectory acts on each incoming ensemble as a projective measurement adapted to that ensemble.
 \end{proof}
 
-The process is close to the corresponding unitary step. The following estimates will be useful. They are uniform over density operators and pure states.
+The process is close to the corresponding unitary step. The following estimates will be useful, as they are uniform over density operators and pure states.
 
-\begin{prop}[Infinitesimal prediction]\label{INF-PRED}
+\begin{prop}\label{INF-PRED}
 	Under the assumptions of Proposition \ref{UNIT-RES-PROJ}, let $M=\|K\|$. Then, as $\tau\to0$,
 	\begin{equation}
 		\|\Psi_\tau(\rho)-\mathcal{T}_\tau^K(\rho)\|_1=O\left(\frac{\tau^2M^2}{\hbar^2}\right).
 	\end{equation}
-	If $P$ is pure, let $F_\tau(P)$ be the spectral projector of $\Psi_\tau(P)$ associated with its largest eigenvalue $q_\tau(P)$. Then
+	If $P$ is a pure state, let $F_\tau(P)$ be the spectral projector of $\Psi_\tau(P)$ associated with its largest eigenvalue $q_\tau(P)$. Then
 	\begin{equation}
 		1-q_\tau(P)=O\left(\frac{\tau^2M^2}{\hbar^2}\right),
 		\qquad
@@ -129,7 +129,7 @@ We will also use the following characterization of affine correspondences of qua
 
 The following condition represents the standard structure of quantum states on Hilbert space.
 \begin{condition}[Quantum states]{QST:H}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 We compare the usual mathematical characterization of unitary evolution with a physical characterization in terms of infinitesimal projective processes.
@@ -143,7 +143,7 @@ We compare the usual mathematical characterization of unitary evolution with a p
 
 \section{Theorem}
 
-We now prove the equivalence.
+We now prove the following equivalence.
 
 \begin{thrm}
 	Over \ref{QST:H}, conditions \ref{DR-UNIT} and \ref{DR-PROJ} are equivalent.
@@ -170,7 +170,7 @@ We now prove the equivalence.
 	\end{equation}
 	which tends to one. The selected state differs from the corresponding unitary step by the same second-order quantity. Since unitary conjugation is an isometry in trace norm, the errors of the $n$ selected states accumulate to at most $O(t^2\|H\|^2/(n\hbar^2))$, which tends to zero. Thus the predicted state sequence converges to the unitary trajectory. Affinity is essential here: after one unconditioned step the output is mixed, but affinity guarantees that applying $\Psi_\tau$ to that mixture gives the mixture of the processes applied to its pure components. The outcome branches can therefore be followed consistently without choosing a particular decomposition of the mixed ensemble. Replacing $H$ with $-H$ gives a state-adaptive projective process for the reconstructed sequence and proves perfect reconstruction.
 
-	Now let $H$ be unbounded. The previous argument cannot be applied directly because its one-step estimates contain $\|H\|^2$. We therefore need bounded operators $H_\tau$ with two properties. First, their unitary evolutions must converge to the unitary evolution generated by $H$. Second, the one-step errors must still vanish after $t/\tau$ repetitions. Since the one-step errors are of order $\tau^2\|H_\tau\|^2$, their accumulated contribution is of order $t\tau\|H_\tau\|^2$. We must therefore arrange that $H_\tau$ approaches $H$ while $\tau\|H_\tau\|^2$ tends to zero.
+	Now let $H$ be unbounded. The previous argument cannot be applied directly because its one-step estimates contain $\|H\|^2$. We therefore need bounded operators $H_\tau$ with two properties. First, their unitary evolutions must converge to the unitary evolution generated by $H$. Second, the one-step errors must still vanish after $n=t/\tau$ repetitions. Since the one-step errors are of order $\tau^2\|H_\tau\|^2$, their accumulated contribution is of order $t\tau\|H_\tau\|^2$. We must therefore arrange that $H_\tau$ approaches $H$ while $\tau\|H_\tau\|^2$ tends to zero.
 
 	For each $\tau>0$, choose a positive cutoff $M_\tau$ such that
 	\begin{equation}\label{SLOW-CUTOFF}
@@ -178,7 +178,7 @@ We now prove the equivalence.
 		\qquad
 		\tau M_\tau^2\longrightarrow0.
 	\end{equation}
-	Let $f_\tau(x)=\max\{-M_\tau,\min\{x,M_\tau\}\}$ and set $H_\tau=f_\tau(H)$ through the spectral calculus. Thus $H_\tau$ is bounded, $\|H_\tau\|\leq M_\tau$ and $f_\tau(x)\to x$ for every real $x$. The first limit in \ref{SLOW-CUTOFF} therefore ensures that $e^{tH_\tau/(\imath\hbar)}$ converges strongly to $e^{tH/(\imath\hbar)}$ for every fixed $t$. The second limit ensures that the accumulated errors vanish.
+	Let $f_\tau(x)=\max\{-M_\tau,\min\{x,M_\tau\}\}$ and set $H_\tau=f_\tau(H)$. Thus $H_\tau$ is bounded, $\|H_\tau\|\leq M_\tau$ and $f_\tau(x)\to x$ for every real $x$. The first limit in \ref{SLOW-CUTOFF} therefore ensures that $e^{tH_\tau/(\imath\hbar)}$ converges strongly to $e^{tH/(\imath\hbar)}$ for every fixed $t$. The second limit ensures that the accumulated errors vanish.
 
 	Define $\mathcal{L}_\tau(\rho)=\frac{[H_\tau,\rho]}{\imath\hbar}$ and
 	\begin{equation}
