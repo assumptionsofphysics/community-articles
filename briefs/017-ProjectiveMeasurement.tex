@@ -23,12 +23,12 @@ We treat measurement as a black-box process. The description refers only to inco
 
 The following condition represents the standard structure of quantum states and observables on Hilbert space.
 \begin{condition}[Quantum states and observables]{QSTO:H}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 This base condition states the ensembles have finite entropy.
 \begin{condition}[Entropy is finite]{[B]FINENT}
-	All ensembles have a well-defined finite entropy. Therefore, mathematical objects representing ensemble with infinite entropy are unphysical, and should be discarded.
+	All ensembles have a well-defined finite entropy. Therefore, mathematical objects representing ensembles with infinite entropy are unphysical, and should be discarded.
 \end{condition}
 
 We now give four characterizations of the projective-measurement prediction.
@@ -128,7 +128,7 @@ We now prove the equivalence.
 
 \textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
 
-\textbf{Infinite-dimensional relative entropy.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
+\textbf{Relative entropy in infinite dimensions.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
 
 \textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has purely continuous spectrum, and they fail on the continuous part when both discrete and continuous spectra are present. In fact, the pinching map cannot be defined there as a sum over eigenspace projections. An operator $\rho$ supported on a non-atomic spectral sector and commuting with $X$ would be decomposable in the spectral representation of $X$ and cannot be a non-zero trace-class operator. Similarly, fixed points of the Lindblad equation supported on that sector would not be density operators. In other words, there are no density-operator equilibria or equilibration processes on the continuous part of the spectrum.
 
