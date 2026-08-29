@@ -54,7 +54,7 @@ We first show that an affine continuous map is a bijection on pure states if and
 
 The following condition represents the standard structure of quantum states on Hilbert space.
 \begin{condition}[Quantum states]{QST:H}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 Time evolution must preserve statistical mixtures.
@@ -114,7 +114,7 @@ Now we show the equivalence of the time evolution characterizations.
 
 	\ref{DR-INFO} $\implies$ \ref{DR-UNIT}. Pure ensembles are exactly the ensembles with zero von Neumann entropy. Since the entropy is the same in both directions, pure ensembles map bijectively onto pure ensembles. Affinity and continuity then allow us to apply Proposition \ref{AFF-PURE}, and the same composition argument gives \ref{DR-UNIT}.
 
-	We now show that unitary evolution gives all three physical conditions. Given the evolved future states $\psi_F=U_t\psi_I$ and $\phi_F=U_t\phi_I$, the corresponding reconstructed past states are $\psi_P=U_t^\dagger\psi_F=\psi_I$ and $\phi_P=U_t^\dagger\phi_F=\phi_I$. Since $U_t$ and $U_t^\dagger$ are bijective, \ref{DR-UNIT} implies \ref{DR-EV}. Moreover,
+	We now show that unitary evolution gives all three physical conditions. Given the evolved future states $\psi_F=U_t\psi_I$ and $\phi_F=U_t\phi_I$, their corresponding reconstructed past states are the initial states $U_t^\dagger\psi_F=\psi_I$ and $U_t^\dagger\phi_F=\phi_I$. Since $U_t$ and $U_t^\dagger$ are bijective, \ref{DR-UNIT} implies \ref{DR-EV}. Moreover,
 	\begin{equation}
 		p(\psi_I\mid\phi_I)=p(\psi_F\mid\phi_F)=p(\psi_P\mid\phi_P),
 	\end{equation}
@@ -126,7 +126,7 @@ Now we show the equivalence of the time evolution characterizations.
 
 	It remains to connect the unitary group to the Schrödinger equation. By Stone's theorem, every strongly continuous one-parameter unitary group has a unique self-adjoint generator $H$ such that
 	\begin{equation}
-		U_t=e^{-\imath tH/\hbar}.
+		U_t=e^{\frac{Ht}{\imath \hbar}}.
 	\end{equation}
 	For every $\psi(0)\in\Dom(H)$, the curve $\psi(t)=U_t\psi(0)$ is differentiable and satisfies \ref{DR-SCEQ}. Conversely, a time-independent self-adjoint Hamiltonian defines through the same expression a strongly continuous one-parameter unitary group. Therefore \ref{DR-SCEQ} and \ref{DR-UNIT} are equivalent, completing the proof.
 \end{proof}
@@ -134,12 +134,12 @@ Now we show the equivalence of the time evolution characterizations.
 
 \section{Additional remarks}
 
-\textbf{The Hamiltonian domain.} For an unbounded self-adjoint Hamiltonian, the Schrödinger equation is not defined on every vector of the Hilbert space. The unitary operators $e^{-\imath tH/\hbar}$ are defined everywhere, but the derivative is guaranteed only for initial vectors in $\Dom(H)$. The group formulation is therefore the more general statement of time evolution.
+\textbf{The Hamiltonian domain.} For an unbounded self-adjoint Hamiltonian, the Schrödinger equation is not defined on every vector of the Hilbert space. The unitary operators $e^{\frac{Ht}{\imath \hbar}}$ are defined everywhere, but the derivative is guaranteed only for initial vectors in $\Dom(H)$. The group formulation is therefore the more general statement of time evolution.
 
 \textbf{The phase of the unitary.} Evolution of density operators does not determine the overall phase of $U_t$. Consequently, its self-adjoint generator is determined only up to an additive multiple of the identity. This does not change states, conditional probabilities or entropy.
 
 \section{Conclusion}
 
-We have seen that the Schrödinger equation can be characterized in different ways, based on bijective maps of pure states, preservation of probability and conservation of entropy. Conceptually, all these are equivalent to saying that the system is isolated, as future and past states are determined, and only determined, by the present state of the system.
+We have seen that the Schrödinger equation can be characterized in different ways, based on bijective maps of pure states, preservation of conditional probability and conservation of entropy. Conceptually, all these are equivalent to saying that the system is isolated, as future and past states are determined, and only determined, by the present state of the system.
 
 \end{document}
