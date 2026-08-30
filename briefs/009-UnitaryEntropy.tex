@@ -14,14 +14,14 @@ In quantum mechanics, the time evolution for an isolated system is postulated to
 
 The following condition represents our base theory.
 \begin{condition}[Quantum states]{QST:H}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 Within our base theory, we can derive the following.
 \begin{coro}[Born rule is entropy]\label{QM-ENT-PROB}
 	Let $\psi, \phi \in \mathcal{P}(\mathcal{H})$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
 \end{coro}
-The expression of the entropy as a function of $\lambda$ is recovered with a straight calculation. The function is strictly decreasing and therefore invertible.
+The expression of the entropy as a function of $\lambda$ is recovered with a straightforward calculation. The function is strictly decreasing and therefore invertible.
 
 Time evolution in quantum mechanics is given by the following.
 \begin{condition}[Schrödinger equation]{DR-SCEQ}
