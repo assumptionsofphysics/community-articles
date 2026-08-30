@@ -42,7 +42,7 @@ The following are conditions that we would expect any physical theory to obey, a
 The following condition sums up the standard definition of quantum states and observables on top of Hilbert spaces. We will test this against the above requirements.
 
 \begin{condition}[Quantum states and observables]{QSTO:H}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy: $S(\rho) = -\tr(\rho \log \rho)$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
 \section{Theorem}
@@ -54,7 +54,7 @@ Now we show that \ref{QSTO:H} is inconsistent with each of the above base condit
 \end{thrm}
 
 \begin{proof}
-	Let $O$ be an unbounded observable, like position, momentum, energy or number of particles. Since the Hilbert space is a normed space, and on normed spaces \href{https://en.wikipedia.org/wiki/Bounded_operator#Equivalence_of_boundedness_and_continuity}{boundedness is equivalent to continuity}, the observable is not continuous. For example, if $|i\>$ represent the energy levels for a Harmonic oscillator, the sequence $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
+	Let $O$ be an unbounded observable, like position, momentum, energy or number of particles. Since the Hilbert space is a normed space, and on normed spaces \href{https://en.wikipedia.org/wiki/Bounded_operator#Equivalence_of_boundedness_and_continuity}{boundedness is equivalent to continuity}, the observable is not continuous. For example, if $|i\>$ represent the energy levels for a harmonic oscillator, the sequence $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
 	
 	Moreover, by the \href{https://en.wikipedia.org/wiki/Hellinger%E2%80%93Toeplitz_theorem}{Hellinger–Toeplitz theorem} an everywhere-defined symmetric operator on a Hilbert space must be bounded, which means $O$ is not an everywhere-defined operator. Given that we can always connect two states through a unitary, we can find a unitary $U$ that connects operators with different domains.
 	
@@ -65,22 +65,24 @@ Now we show that \ref{QSTO:H} is inconsistent with each of the above base condit
 		\frac{1}{\pi (y^2 + 1)} dy &= \frac{e^{-x^2}}{\sqrt{\pi}} dx.
 		\end{aligned}
 	\end{equation}
-	Since the Gaussian wave packet is Schwartz, $\psi(x)$ will be in domain of $X$. However, $\phi(y)$ goes to zero at infinity like $\frac{1}{y^2}$, which means it is not Schwartz and it is not in the domain of $Y$. Therefore, position is well-defined for the first observer but not for the second (e.g. the variance of the position for the second observer is infinite). This means \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
+	Since the Gaussian wave packet is Schwartz, $\psi(x)$ will be in the domain of $X$. However, $\phi(y)$ goes to zero at infinity like $\frac{1}{y^2}$, which means it is not Schwartz and it is not in the domain of $Y$. Therefore, position is well-defined for the first observer but not for the second (e.g. the variance of the position for the second observer is infinite). This means \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
 	
-	Lastly, recall that $L^2(\mathbb{R}^n)$ is a separable Hilbert space for any $n$ and that all separable Hilbert spaces are isomorphic. Since the quantum state spaces $n$ degrees of freedom is $L^2(\mathbb{R}^n)$, we would have, for example, that the state space for a single particle and the state space for all the particles in the universe are mathematically indistinguishable. This means \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
+	Lastly, recall that $L^2(\mathbb{R}^n)$ is a separable Hilbert space for any $n$ and that all separable Hilbert spaces are isomorphic. Since the quantum state space for $n$ degrees of freedom is $L^2(\mathbb{R}^n)$, we would have, for example, that the state space for a single particle and the state space for all the particles in the universe are mathematically indistinguishable. This means \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
 \end{proof}
 
 \section{Additional remarks}
 
-There are other problems of a more practical nature. We highlight them for completion.
+There are other problems of a more practical nature. We highlight them for completeness.
 
 \textbf{Point-wise values not well-defined.} The wave function $\psi(x)$ is not defined at each point. The ray of a Hilbert space, in fact, is the equivalence class of all such wave-functions that behave the same in the inner product. If $\psi(x)$ and $\phi(x)$ are different over a measure zero set, then the two wave functions are equivalent. This means that the values at each point of $\psi(x)$ are not uniquely defined. This goes against the physical intuition of interpreting $|\psi(x)|^2$ as the probability density, as that is conceptually uniquely defined.
 
-\textbf{Commutators relationship must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
+\textbf{Commutator relationships must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
+
+\textbf{Schrödinger equation not well-defined}. Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be an integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
 
 \section{Conclusion}
 
-It should be understood that all the issues presented here are failures of the mathematical modeling, not failures of physicist to correctly apply the mathematical model. Therefore, the solution is not to find workarounds for these issues, but to fix the mathematical model to better reflect the physical requirements.
+It should be understood that all the issues presented here are failures of the mathematical modeling, not failures of physicists to correctly apply the mathematical model. Therefore, the solution is not to find workarounds for these issues, but to fix the mathematical model to better reflect the physical requirements.
 
 \end{document}
 
