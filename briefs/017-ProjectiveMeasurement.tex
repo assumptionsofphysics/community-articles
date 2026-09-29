@@ -28,7 +28,7 @@ The following condition represents the standard structure of quantum states and 
 
 This base condition states the ensembles have finite entropy.
 \begin{condition}[Entropy is finite]{[B]FINENT}
-	All ensembles have a well-defined finite entropy. Therefore, mathematical objects representing ensembles with infinite entropy are unphysical, and should be discarded.
+	All ensembles have a well-defined finite entropy.
 \end{condition}
 
 We now give four characterizations of the projective-measurement prediction.
@@ -53,7 +53,7 @@ We now give four characterizations of the projective-measurement prediction.
 We now prove the equivalence.
 
 \begin{thrm}
-	Over \ref{QSTO:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QSTO:H}+\ref{[B]FINENT}, condition \ref{EQ-KL} is also equivalent to the others.
+	Over \ref{QSTO:H}, conditions \ref{EQ-MEAS}, \ref{EQ-LIND} and \ref{EQ-HS} are equivalent. Over \ref{QSTO:H} constrained by \ref{[B]FINENT}, condition \ref{EQ-KL} is also equivalent to the others.
 \end{thrm}
 
 \begin{proof}
@@ -101,7 +101,7 @@ We now prove the equivalence.
 	\end{equation}
 	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer. Thus the Hilbert--Schmidt characterization returns $\mathcal{P}_X$, so \ref{EQ-HS} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$.
 
-	Under \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since ensembles must have finite entropy, the admissible domain of the pinching map is restricted to those density operators $\rho$ for which both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite. We show that KL minimization returns $\mathcal{P}_X$ on this same domain.
+	Under the constraint \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since ensembles must have finite entropy, the admissible domain of the pinching map is restricted to those density operators $\rho$ for which both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite. We show that KL minimization returns $\mathcal{P}_X$ on this same domain.
 	
 	If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
 	\begin{equation}
@@ -129,6 +129,8 @@ We now prove the equivalence.
 \textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
 
 \textbf{Relative entropy in infinite dimensions.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
+
+\textbf{Constrained background theory.} In the second part of the theorem, the background theory is not \ref{QSTO:H}+\ref{[B]FINENT}, the logical conjunction of the two conditions. This would simply exclude the infinite-dimensional case because \ref{[B]FINENT} is not satisfied by all density operators. The background theory is instead \ref{QSTO:H} constrained by \ref{[B]FINENT}: the infinite-dimensional case is retained, while density operators with infinite entropy are removed from the ensemble space.
 
 \textbf{Observables with continuous spectra.} Note that all four conditions fail when $X$ has purely continuous spectrum, and they fail on the continuous part when both discrete and continuous spectra are present. In fact, the pinching map cannot be defined there as a sum over eigenspace projections. An operator $\rho$ supported on a non-atomic spectral sector and commuting with $X$ would be decomposable in the spectral representation of $X$ and cannot be a non-zero trace-class operator. Similarly, fixed points of the Lindblad equation supported on that sector would not be density operators. In other words, there are no density-operator equilibria or equilibration processes on the continuous part of the spectrum.
 
