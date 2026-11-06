@@ -14,7 +14,7 @@
 \maketitle
 	
 \begin{abstract}
-	We show that Hilbert spaces cannot faithfully represent the set of states for a physical system. In particular, since observables are not guaranteed to be continuous and well-defined over the whole space, small changes in state can correspond to large changes in expectation values and states cannot be equivalently expressed in all frames. Moreover, since all separable infinite-dimensional Hilbert spaces are isomorphic, the state spaces for systems with different number of particles are indistinguishable.
+	We show that Hilbert spaces cannot faithfully represent the set of states for a physical system. In particular, since observables are not guaranteed to be continuous and well-defined over the whole space, small changes in state can correspond to large changes in expectation values and states cannot be equivalently expressed in all frames. Moreover, since all separable infinite-dimensional Hilbert spaces are isomorphic, the state spaces for systems with different numbers of particles are indistinguishable.
 \end{abstract}
 
 \section{Introduction}
@@ -36,7 +36,7 @@ The theorem relies on standard mathematical results and examples that showcase t
 \end{prop}
 
 \begin{proof}
-	The following proposition collects two standard results from functional analysis; we include a proof for completeness.
+	This proposition collects two standard results from functional analysis; we include a proof for completeness.
 	
 	First, suppose that $D(A)=\mathcal{H}$. We show that the graph
 	of $A$ is closed. Let $x_n\to x$ and $Ax_n\to y$ in
@@ -66,7 +66,7 @@ The theorem relies on standard mathematical results and examples that showcase t
 			\|y_n\|
 			&=\frac{\|u_n\|}{\|Au_n\|}
 			=\frac{1}{\|Au_n\|}
-			<\frac1n\longrightarrow0,\\
+			<\frac{1}{n}\longrightarrow0,\\
 			\|Ay_n\|
 			&=\left\|A\left(\frac{u_n}{\|Au_n\|}\right)\right\|
 			=\frac{\|Au_n\|}{\|Au_n\|}
@@ -337,7 +337,7 @@ The following are conditions that we would expect any physical theory to obey, a
 \end{condition}
 
 \begin{condition}[Measurable quantities well-defined in all frames]{[B]WDQ}
-	All states can equivalently be expressed in all frames. At a minimum, if a state has finite variance for position in one frame, it should also have finite variance in position in another frames.
+	All states can equivalently be expressed in all frames. At a minimum, if a state has finite variance for position in one frame, it should also have finite variance in position in another frame.
 \end{condition}
 
 \begin{condition}[Distinguishability of different systems]{[B]STDIST}
@@ -359,19 +359,19 @@ Now we show that \ref{QSTO:H} is inconsistent with each of the above base condit
 \end{thrm}
 
 \begin{proof}
-	First, let us show that \ref{QSTO:H} is inconsistent with \ref{[B]COBS}. Condition \ref{QSTO:H} is applicable to all quantum system, therefore it has to apply to a standard one-dimensional harmonic oscillator. Let $N$ be the standard $N$ operator. This satisfies the conditions for \ref{numberOperatorExample}. If $|i\>$ are the energy levels, $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
+	First, let us show that \ref{QSTO:H} is inconsistent with \ref{[B]COBS}. Condition \ref{QSTO:H} is applicable to all quantum systems; therefore, it has to apply to a standard one-dimensional harmonic oscillator. Let $N$ be the standard number operator. This satisfies the conditions for \ref{numberOperatorExample}. If $|i\>$ are the energy levels, $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
 	
-	The fundamental reason is that convergence of the probability distribution alone does not guarantee the convergence of the mean for an unbounded random variable. While this is also true in classical probability, one can, in principle put a cutoff on all variables, and work only with joint probability distributions in that compact region. Quantum mechanics does not allow that, so the topology (i.e. what constitute small changes of preparations) has to be consistent with the choice of defining observable for each system.
+	The fundamental reason is that convergence of the probability distribution alone does not guarantee the convergence of the mean for an unbounded random variable. While this is also true in classical probability, one can, in principle, put a cutoff on all variables and work only with joint probability distributions in that compact region. Quantum mechanics does not allow that, so the topology (i.e. what constitutes small changes of preparations) has to be consistent with the choice of defining observable for each system.
 	
-	Let us now show that \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}. Consider a quantum system described by a single spatial degree of freedom. Let $x$ be the position variable used by the first observer, $\mathcal{H}_x = L^2(\mathbb{R}, dx)$ be the corresponding Hilbert space and $X$ be the corresponding position operator. As shown in \ref{coordinateExample}, $f(x) = \tan\left(\frac{\pi}{2}\erf(x)\right)$ is a smooth bijection over $\mathbb{R}$, and therefore we can let $y = f(x)$ be the position variable for a second observer, $\mathcal{H}_y = L^2(\mathbb{R}, dy)$ be the corresponding Hilbert space,  $Y$ be the corresponding position operator and $U$ be the unitary transformation that represents the coordinate transformation. That is, $|\phi(y)\> = U |\psi(x)\>$.
+	Let us now show that \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}. Consider a quantum system described by a single spatial degree of freedom. Let $x$ be the position variable used by the first observer, $\mathcal{H}_x = L^2(\mathbb{R}, dx)$ be the corresponding Hilbert space and $X$ be the corresponding position operator. As shown in \ref{coordinateExample}, $f(x) = \tan\left(\frac{\pi}{2}\erf(x)\right)$ is a smooth bijection over $\mathbb{R}$, and therefore we can let $y = f(x)$ be the position variable for a second observer, $\mathcal{H}_y = L^2(\mathbb{R}, dy)$ be the corresponding Hilbert space, $Y$ be the corresponding position operator and $U$ be the unitary transformation that represents the coordinate transformation. That is, $|\phi(y)\> = U |\psi(x)\>$.
 	
-	Now, recall that a normalized state $|\psi\>$ is in the domain of a self-adjoint operator $O$ if and only if $\|O\psi\|^2 = \<O \psi | O \psi \> = E[O^2 | \psi] < \infty$. That is, if and only if the second moment, and therefore the variance is finite. As shown in \ref{coordinateExample}, if we pick the Gaussian wave packet $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ in the coordinates of the first observer, it is the domain of $X$ and therefore has finite variance. However, this transforms to $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$ for the second observer, which is not in the domain of $Y$, and therefore its second moment diverges. The same state, then, has finite variance in position for the first observer while undefined variance in position for the second observer. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
+	Now, recall that a normalized state $|\psi\>$ is in the domain of a self-adjoint operator $O$ if and only if $\|O\psi\|^2 = \<O \psi | O \psi \> = E[O^2 | \psi] < \infty$. That is, if and only if the second moment, and therefore the variance, is finite. As shown in \ref{coordinateExample}, if we pick the Gaussian wave packet $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ in the coordinates of the first observer, it is in the domain of $X$ and therefore has finite variance. However, this transforms to $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$ for the second observer, which is not in the domain of $Y$, and therefore its second moment diverges. The same state, then, has finite variance in position for the first observer while undefined variance in position for the second observer. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
 	
-	The problem is that unbounded operators have only a dense domain in a Hilbert space, and is therefore possible to have two position variable with different domains. While coordinate transformation may produce similar problems in classical mechanics, one can again work with joint probability distributions with compact support, which bound all moments.
+	The problem is that unbounded operators have only a dense domain in a Hilbert space, and it is therefore possible to have two position variables with different domains. While coordinate transformations may produce similar problems in classical mechanics, one can again work with joint probability distributions with compact support, which bound all moments.
 	
-	Lastly, we show that \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}. Consider two systems with different number of continuous degrees of freedom $n$ and $m$. Under \ref{QSTO:H}, these would be represented by $L^2(\mathbb{R}^n)$ and $L^2(\mathbb{R}^m)$ respectively. By \ref{infiniteEquivalent}, these are isomorphic, which means that there exists a unitary $U : L^2(\mathbb{R}^n) \to L^2(\mathbb{R}^m)$ between the two representation. This induces bijections between rays, density operators, and self-adjoint operators. The Born rule and the entropy are preserved. This means that two systems with different number of degrees of freedom can share the same mathematical representation. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
+	Lastly, we show that \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}. Consider two systems with different numbers of continuous degrees of freedom $n$ and $m$. Under \ref{QSTO:H}, these would be represented by $L^2(\mathbb{R}^n)$ and $L^2(\mathbb{R}^m)$ respectively. By \ref{infiniteEquivalent}, these are isomorphic, which means that there exists a unitary $U : L^2(\mathbb{R}^n) \to L^2(\mathbb{R}^m)$ between the two representations. This induces bijections between rays, density operators, and self-adjoint operators. The Born rule and the entropy are preserved. This means that two systems with different numbers of degrees of freedom can share the same mathematical representation. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
 	
-	This third failure is not related to the problems of continuity as Schwartz spaces present the same problem.
+	This third failure is not related to the problems of continuity, as Schwartz spaces present the same problem.
 \end{proof}
 
 \section{Additional remarks}
@@ -382,7 +382,7 @@ There are other problems of a more practical nature. We highlight them for compl
 
 \textbf{Commutator relationships must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
 
-\textbf{Schrödinger equation not well-defined}. Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be a square-integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
+\textbf{Schrödinger equation not well-defined.} Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be a square-integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
 
 \section{Conclusion}
 
