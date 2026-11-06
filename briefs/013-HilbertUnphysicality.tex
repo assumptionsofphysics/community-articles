@@ -23,20 +23,325 @@ In this note we present some problems with using Hilbert spaces to represent sta
 
 While these problems are largely known in the mathematical community, they are a surprise to most physicists, as they usually do not impact calculations in physically meaningful cases. They, therefore, represent obstacles to a crisp understanding of the theory, not to the application of the theory to experimental settings.
 
+\section{Mathematical prerequisites}
+
+The theorem relies on standard mathematical results and examples that showcase those results. The proofs are not particularly physically interesting, and their physical significance is discussed in the proof of the main theorem.
+
+\begin{prop}\label{unboundedDiscontinuous}
+	Let $\mathcal{H}$ be a complex Hilbert space and let
+	$A:D(A)\subseteq\mathcal{H}\to\mathcal{H}$ be an unbounded
+	self-adjoint operator. Then $D(A)\neq\mathcal{H}$, and $A$ is
+	not continuous when $D(A)$ carries the norm inherited from
+	$\mathcal{H}$.
+\end{prop}
+
+\begin{proof}
+	The following proposition collects two standard results from functional analysis; we include a proof for completeness.
+	
+	First, suppose that $D(A)=\mathcal{H}$. We show that the graph
+	of $A$ is closed. Let $x_n\to x$ and $Ax_n\to y$ in
+	$\mathcal{H}$. Since $A$ is self-adjoint, for every
+	$z\in\mathcal{H}$,
+	\begin{equation*}
+		\begin{aligned}
+			\langle z,y\rangle
+			&=\lim_{n\to\infty}\langle z,Ax_n\rangle =\lim_{n\to\infty}\langle Az,x_n\rangle =\langle Az,x\rangle =\langle z,Ax\rangle.
+		\end{aligned}
+	\end{equation*}
+	Thus $\langle z,y-Ax\rangle=0$ for every $z$. Taking
+	$z=y-Ax$ gives $\|y-Ax\|^2=0$, so $y=Ax$ and the graph
+	is closed. The closed graph theorem now implies that $A$
+	is bounded, contradicting the hypothesis. Therefore
+	$D(A)\neq\mathcal{H}$.
+	
+	To prove discontinuity, unboundedness allows us to choose,
+	for every positive integer $n$, a vector $u_n\in D(A)$ with
+	$\|u_n\|=1$ and $\|Au_n\|>n$. Define
+	\begin{equation*}
+		y_n=\frac{u_n}{\|Au_n\|}.
+	\end{equation*}
+	Since $D(A)$ is a vector space, $y_n\in D(A)$. Moreover,
+	\begin{equation*}
+		\begin{aligned}
+			\|y_n\|
+			&=\frac{\|u_n\|}{\|Au_n\|}
+			=\frac{1}{\|Au_n\|}
+			<\frac1n\longrightarrow0,\\
+			\|Ay_n\|
+			&=\left\|A\left(\frac{u_n}{\|Au_n\|}\right)\right\|
+			=\frac{\|Au_n\|}{\|Au_n\|}
+			=1.
+		\end{aligned}
+	\end{equation*}
+	Thus $y_n\to0$ but $Ay_n\not\to A0=0$. Hence $A$ is
+	not continuous at zero.
+\end{proof}
+
+\begin{prop}\label{numberOperatorExample}
+	Let $\mathcal{H}=\ell^2(\mathbb{N}_0)$ with orthonormal basis
+	$(e_n)_{n\geq0}$. Define
+	\begin{equation*}
+		\begin{aligned}
+			D(N)&=\left\{\sum_{n=0}^{\infty}a_ne_n\in\mathcal{H}:
+			\sum_{n=0}^{\infty}n^2|a_n|^2<\infty\right\},\\
+			N\left(\sum_{n=0}^{\infty}a_ne_n\right)
+			&=\sum_{n=0}^{\infty}na_ne_n.
+		\end{aligned}
+	\end{equation*}
+	Then $N$ is an unbounded self-adjoint operator, and its
+	expectation function
+	\begin{equation*}
+		E_N(x)=\frac{\langle x,Nx\rangle}{\|x\|^2},
+		\qquad x\in D(N)\setminus\{0\},
+	\end{equation*}
+	is not continuous in the Hilbert norm, even when restricted
+	to normalized vectors.
+\end{prop}
+
+\begin{proof}
+	The domain contains all finite linear combinations of the
+	basis vectors, so it is dense. For $x,y\in D(N)$,
+	\begin{equation*}
+		\langle x,Ny\rangle
+		=\sum_{n=0}^{\infty}\overline{x_n}\,ny_n
+		=\sum_{n=0}^{\infty}\overline{nx_n}\,y_n
+		=\langle Nx,y\rangle.
+	\end{equation*}
+	Thus $N$ is symmetric. Conversely, if $z\in D(N^*)$ and
+	$h=N^*z$, testing the adjoint identity on $e_n$ gives
+	\begin{equation*}
+		n\overline{z_n}
+		=\langle z,Ne_n\rangle
+		=\langle h,e_n\rangle
+		=\overline{h_n}.
+	\end{equation*}
+	Hence $h_n=nz_n$. Since $h\in\mathcal{H}$,
+	$\sum_n n^2|z_n|^2=\|h\|^2<\infty$, so $z\in D(N)$
+	and $N^*z=Nz$. Therefore $N^*=N$. Moreover,
+	$\|Ne_n\|=n$ while $\|e_n\|=1$, so $N$ is unbounded.
+	
+	For every positive integer $j$, define
+	\begin{equation*}
+		x_j=\sqrt{1-\frac{1}{j}}\,e_0
+		+\sqrt{\frac{1}{j}}\,e_j.
+	\end{equation*}
+	These finite linear combinations belong to $D(N)$, and
+	orthonormality gives
+	\begin{equation*}
+		\begin{aligned}
+			\|x_j\|^2
+			&=1-\frac{1}{j}+\frac{1}{j}=1,\\
+			\|x_j-e_0\|^2
+			&=\left(\sqrt{1-\frac{1}{j}}-1\right)^2+\frac{1}{j}\\
+			&=2-2\sqrt{1-\frac{1}{j}}\longrightarrow0.
+		\end{aligned}
+	\end{equation*}
+	However, $Ne_0=0$ and
+	\begin{equation*}
+		\begin{aligned}
+			Nx_j
+			&=\sqrt{1-\frac{1}{j}}\,Ne_0
+			+\sqrt{\frac{1}{j}}\,Ne_j=j\sqrt{\frac{1}{j}}\,e_j.
+		\end{aligned}
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		\begin{aligned}
+			E_N(x_j)
+			&=\langle x_j,Nx_j\rangle=j\sqrt{1-\frac{1}{j}}\sqrt{\frac{1}{j}}\,
+			\langle e_0,e_j\rangle
+			+j\left(\sqrt{\frac{1}{j}}\right)^2
+			\langle e_j,e_j\rangle=0+j\frac{1}{j}=1,
+		\end{aligned}
+	\end{equation*}
+	whereas $E_N(e_0)=\langle e_0,Ne_0\rangle=0$.
+	Thus $x_j\to e_0$ but $E_N(x_j)\not\to E_N(e_0)$,
+	which proves the claimed discontinuity.
+\end{proof}
+
+\begin{prop}\label{coordinateExample}
+	Let $\mathcal{H}_x=L^2(\mathbb{R},dx)$ and
+	$\mathcal{H}_y=L^2(\mathbb{R},dy)$. Let $X$ and $Y$ be
+	the multiplication operators
+	\begin{equation*}
+		\begin{aligned}
+			(X\psi)(x)&=x\psi(x),
+			& D(X)&=\{\psi\in\mathcal{H}_x:x\psi(x)\in\mathcal{H}_x\},\\
+			(Y\phi)(y)&=y\phi(y),
+			& D(Y)&=\{\phi\in\mathcal{H}_y:y\phi(y)\in\mathcal{H}_y\}.
+		\end{aligned}
+	\end{equation*}
+	The function
+	\begin{equation*}
+		f(x)=\tan\left(\frac{\pi}{2}\erf(x)\right)
+	\end{equation*}
+	is a smooth increasing bijection of $\mathbb{R}$. Writing
+	$g=f^{-1}$, the map
+	\begin{equation*}
+		(U\psi)(y)=\psi(g(y))\sqrt{g'(y)}
+	\end{equation*}
+	is unitary from $\mathcal{H}_x$ to $\mathcal{H}_y$ and maps
+	the normalized function
+	\begin{equation*}
+		\psi(x)=\sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}
+		\quad\text{to}\quad
+		\phi(y)=\sqrt{\frac{1}{\pi(1+y^2)}}.
+	\end{equation*}
+	However, $\psi\in D(X)$ while $\phi\notin D(Y)$.
+	The transported operator $UXU^{-1}$ is the maximal
+	multiplication operator by $g(y)$, with domain $UD(X)$.
+\end{prop}
+
+\begin{proof}
+	Since $\erf'(x)=\frac{2}{\sqrt{\pi}}e^{-x^2}$,
+	\begin{equation*}
+		\begin{aligned}
+			f'(x)
+			&=\frac{\pi}{2}\frac{2}{\sqrt{\pi}}e^{-x^2}
+			\sec^2\left(\frac{\pi}{2}\erf(x)\right)=\sqrt{\pi}e^{-x^2}(1+f(x)^2)>0.
+		\end{aligned}
+	\end{equation*}
+	Moreover, $\erf(x)\to\pm1$ as $x\to\pm\infty$, so
+	$f(x)\to\pm\infty$. Thus $f$ is a smooth increasing
+	bijection with smooth inverse $g$, and
+	\begin{equation*}
+		g'(y)=\frac{1}{f'(g(y))}
+		=\frac{e^{g(y)^2}}{\sqrt{\pi}(1+y^2)}.
+	\end{equation*}
+	
+	The change of variables $x=g(y)$ gives
+	\begin{equation*}
+		\|U\psi\|^2
+		=\int_{\mathbb{R}}|\psi(g(y))|^2g'(y)\,dy
+		=\int_{\mathbb{R}}|\psi(x)|^2\,dx
+		=\|\psi\|^2.
+	\end{equation*}
+	Define
+	\begin{equation*}
+		(V\phi)(x)=\phi(f(x))\sqrt{f'(x)}.
+	\end{equation*}
+	Similarly,
+	\begin{equation*}
+		\|V\phi\|^2
+		=\int_{\mathbb{R}}|\phi(f(x))|^2f'(x)\,dx
+		=\int_{\mathbb{R}}|\phi(y)|^2\,dy.
+	\end{equation*}
+	Using $g(f(x))=x$, $f(g(y))=y$ and the derivatives
+	of these identities, we obtain
+	\begin{equation*}
+		\begin{aligned}
+			(VU\psi)(x)
+			&=\psi(g(f(x)))\sqrt{g'(f(x))f'(x)}
+			=\psi(x),\\
+			(UV\phi)(y)
+			&=\phi(f(g(y)))\sqrt{f'(g(y))g'(y)}
+			=\phi(y).
+		\end{aligned}
+	\end{equation*}
+	Therefore $U$ is a linear isometry with inverse $V$,
+	and hence is unitary.
+	
+	The Gaussian is normalized because
+	\begin{equation*}
+		\|\psi\|^2
+		=\frac{1}{\sqrt{\pi}}
+		\int_{\mathbb{R}}e^{-x^2}\,dx=1.
+	\end{equation*}
+	Its image is
+	\begin{equation*}
+		\begin{aligned}
+			(U\psi)(y)
+			&=\sqrt{\frac{e^{-g(y)^2}}{\sqrt{\pi}}}
+			\sqrt{\frac{e^{g(y)^2}}{\sqrt{\pi}(1+y^2)}}=\sqrt{\frac{1}{\pi(1+y^2)}}=\phi(y).
+		\end{aligned}
+	\end{equation*}
+	Unitarity implies $\|\phi\|=1$. Integration by parts gives
+	\begin{equation*}
+		\begin{aligned}
+			\|X\psi\|^2
+			&=\frac{1}{\sqrt{\pi}}
+			\int_{\mathbb{R}}x^2e^{-x^2}\,dx =-\frac{1}{2\sqrt{\pi}}
+			\int_{\mathbb{R}}x\frac{d}{dx}e^{-x^2}\,dx=-\frac{1}{2\sqrt{\pi}}
+			\left[xe^{-x^2}\right]_{-\infty}^{\infty}
+			+\frac{1}{2\sqrt{\pi}}
+			\int_{\mathbb{R}}e^{-x^2}\,dx =\frac{1}{2}.
+		\end{aligned}
+	\end{equation*}
+	Thus $\psi\in D(X)$. In contrast,
+	\begin{equation*}
+		\begin{aligned}
+			\int_{\mathbb{R}}y^2|\phi(y)|^2\,dy
+			&=\frac{2}{\pi}\lim_{R\to\infty}
+			\int_0^R\frac{y^2}{1+y^2}\,dy=\frac{2}{\pi}\lim_{R\to\infty}
+			\left(R-\arctan R\right)
+			=\infty.
+		\end{aligned}
+	\end{equation*}
+	Hence $\phi\notin D(Y)$.
+	
+	Finally, for $\eta\in\mathcal{H}_x$, change of variables gives
+	\begin{equation*}
+		\int_{\mathbb{R}}|g(y)(U\eta)(y)|^2\,dy
+		=\int_{\mathbb{R}}x^2|\eta(x)|^2\,dx.
+	\end{equation*}
+	Thus $g\,U\eta\in\mathcal{H}_y$ if and only if
+	$\eta\in D(X)$, establishing the asserted domain.
+	On this domain,
+	\begin{equation*}
+		(U X\eta)(y)
+		=g(y)\eta(g(y))\sqrt{g'(y)}
+		=g(y)(U\eta)(y).
+	\end{equation*}
+	Therefore $UXU^{-1}$ is the maximal multiplication
+	operator by $g(y)$.
+\end{proof}
+
+We recall a standard classification result for Hilbert spaces,
+with a short proof for completeness.
+
+\begin{prop}\label{infiniteEquivalent}
+	Any two separable infinite-dimensional complex Hilbert spaces
+	are unitarily isomorphic. In particular,
+	$L^2(\mathbb{R}^n)$ and $L^2(\mathbb{R}^k)$ are unitarily
+	isomorphic for all positive integers $n,k$.
+\end{prop}
+
+\begin{proof}
+	Let $(e_j)_{j\geq0}$ and $(f_j)_{j\geq0}$ be countable
+	orthonormal bases of $\mathcal{H}$ and $\mathcal{K}$.
+	Define
+	\begin{equation*}
+		U\left(\sum_{j=0}^{\infty}a_je_j\right)
+		=\sum_{j=0}^{\infty}a_jf_j.
+	\end{equation*}
+	By Parseval's identity, both series converge precisely when
+	$\sum_j|a_j|^2<\infty$. Thus $U$ is well-defined, linear,
+	and has inverse given by exchanging the two bases.
+	For $x=\sum_j a_je_j$ and $y=\sum_j b_je_j$,
+	\begin{equation*}
+		\langle Ux,Uy\rangle
+		=\sum_{j=0}^{\infty}\overline{a_j}b_j
+		=\langle x,y\rangle.
+	\end{equation*}
+	Hence $U$ is unitary. Since $L^2(\mathbb{R}^n)$ is
+	separable and infinite-dimensional for every positive
+	integer $n$, the particular case follows.
+\end{proof}
+
 \section{Conditions}
 
 The following are conditions that we would expect any physical theory to obey, and therefore they should be considered part of a base theory for all of physics.
 
 \begin{condition}[Continuity of measurable quantities]{[B]COBS}
-	Small state changes lead to small changes of measurable quantities. That is, the expectation of a quantity is a continuous function of the state.
+	Small state changes lead to small changes of measurable quantities. At a minimum, the expectation of a quantity is a continuous function of the state.
 \end{condition}
 
 \begin{condition}[Measurable quantities well-defined in all frames]{[B]WDQ}
-	All states can equivalently be expressed in all frames. That is, if a quantity is well-defined in one frame, the corresponding quantity in another frame will be well-defined.
+	All states can equivalently be expressed in all frames. At a minimum, if a state has finite variance for position in one frame, it should also have finite variance in position in another frames.
 \end{condition}
 
 \begin{condition}[Distinguishability of different systems]{[B]STDIST}
-	Different physical systems have a different mathematical representation. That is, the mathematical representation of different physical systems must have enough structure to tell them apart.
+	Different physical systems have a different mathematical representation. At a minimum, physical systems with a different number of degrees of freedom should not have the same mathematical representation.
 \end{condition}
 
 The following condition sums up the standard definition of quantum states and observables on top of Hilbert spaces. We will test this against the above requirements.
@@ -54,31 +359,30 @@ Now we show that \ref{QSTO:H} is inconsistent with each of the above base condit
 \end{thrm}
 
 \begin{proof}
-	Let $O$ be an unbounded observable, like position, momentum, energy or number of particles. Since the Hilbert space is a normed space, and on normed spaces \href{https://en.wikipedia.org/wiki/Bounded_operator#Equivalence_of_boundedness_and_continuity}{boundedness is equivalent to continuity}, the observable is not continuous. For example, if $|i\>$ represent the energy levels for a harmonic oscillator, the sequence $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
+	First, let us show that \ref{QSTO:H} is inconsistent with \ref{[B]COBS}. Condition \ref{QSTO:H} is applicable to all quantum system, therefore it has to apply to a standard one-dimensional harmonic oscillator. Let $N$ be the standard $N$ operator. This satisfies the conditions for \ref{numberOperatorExample}. If $|i\>$ are the energy levels, $\sqrt{\frac{j-1}{j}}|0\> + \sqrt{\frac{1}{j}}|j\>$ converges to the ground state as $j \to \infty$, while the expectation of $N$ converges to $1$. This means \ref{QSTO:H} is inconsistent with \ref{[B]COBS}.
 	
-	Moreover, by the \href{https://en.wikipedia.org/wiki/Hellinger%E2%80%93Toeplitz_theorem}{Hellinger–Toeplitz theorem} an everywhere-defined symmetric operator on a Hilbert space must be bounded, which means $O$ is not an everywhere-defined operator. Given that we can always connect two states through a unitary, we can find a unitary $U$ that connects operators with different domains.
+	The fundamental reason is that convergence of the probability distribution alone does not guarantee the convergence of the mean for an unbounded random variable. While this is also true in classical probability, one can, in principle put a cutoff on all variables, and work only with joint probability distributions in that compact region. Quantum mechanics does not allow that, so the topology (i.e. what constitute small changes of preparations) has to be consistent with the choice of defining observable for each system.
 	
-	For example, let $X$ be the position operator in one frame and let $Y$ be the position operator in another frame connected by the change of coordinates $y(x) = \tan \left(\frac{\pi}{2} \erf(x) \right)$. This means that the first observer will use $X$ to describe and measure the position of the object, while the second will use $Y$. Let $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ be a Gaussian wave packet in the first frame. The same packet in the second frame will be $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$. This is because the square of the wave function must transform like a density and
-	\begin{equation}
-		\begin{aligned}
-		d\left(\frac{\tan^{-1}(y)}{\pi}\right) &= d \left(\frac{\erf (x)}{2}\right) \\
-		\frac{1}{\pi (y^2 + 1)} dy &= \frac{e^{-x^2}}{\sqrt{\pi}} dx.
-		\end{aligned}
-	\end{equation}
-	Since the Gaussian wave packet is Schwartz, $\psi(x)$ will be in the domain of $X$. However, $\phi(y)$ goes to zero at infinity like $\frac{1}{y^2}$, which means it is not Schwartz and it is not in the domain of $Y$. Therefore, position is well-defined for the first observer but not for the second (e.g. the variance of the position for the second observer is infinite). This means \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
+	Let us now show that \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}. Consider a quantum system described by a single spatial degree of freedom. Let $x$ be the position variable used by the first observer, $\mathcal{H}_x = L^2(\mathbb{R}, dx)$ be the corresponding Hilbert space and $X$ be the corresponding position operator. As shown in \ref{coordinateExample}, $f(x) = \tan\left(\frac{\pi}{2}\erf(x)\right)$ is a smooth bijection over $\mathbb{R}$, and therefore we can let $y = f(x)$ be the position variable for a second observer, $\mathcal{H}_y = L^2(\mathbb{R}, dy)$ be the corresponding Hilbert space,  $Y$ be the corresponding position operator and $U$ be the unitary transformation that represents the coordinate transformation. That is, $|\phi(y)\> = U |\psi(x)\>$.
 	
-	Lastly, recall that $L^2(\mathbb{R}^n)$ is a separable Hilbert space for any $n$ and that all separable Hilbert spaces are isomorphic. Since the quantum state space for $n$ degrees of freedom is $L^2(\mathbb{R}^n)$, we would have, for example, that the state space for a single particle and the state space for all the particles in the universe are mathematically indistinguishable. This means \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
+	Now, recall that a normalized state $|\psi\>$ is in the domain of a self-adjoint operator $O$ if and only if $\|O\psi\|^2 = \<O \psi | O \psi \> = E[O^2 | \psi] < \infty$. That is, if and only if the second moment, and therefore the variance is finite. As shown in \ref{coordinateExample}, if we pick the Gaussian wave packet $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ in the coordinates of the first observer, it is the domain of $X$ and therefore has finite variance. However, this transforms to $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$ for the second observer, which is not in the domain of $Y$, and therefore its second moment diverges. The same state, then, has finite variance in position for the first observer while undefined variance in position for the second observer. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]WDQ}.
+	
+	The problem is that unbounded operators have only a dense domain in a Hilbert space, and is therefore possible to have two position variable with different domains. While coordinate transformation may produce similar problems in classical mechanics, one can again work with joint probability distributions with compact support, which bound all moments.
+	
+	Lastly, we show that \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}. Consider two systems with different number of continuous degrees of freedom $n$ and $m$. Under \ref{QSTO:H}, these would be represented by $L^2(\mathbb{R}^n)$ and $L^2(\mathbb{R}^m)$ respectively. By \ref{infiniteEquivalent}, these are isomorphic, which means that there exists a unitary $U : L^2(\mathbb{R}^n) \to L^2(\mathbb{R}^m)$ between the two representation. This induces bijections between rays, density operators, and self-adjoint operators. The Born rule and the entropy are preserved. This means that two systems with different number of degrees of freedom can share the same mathematical representation. Therefore \ref{QSTO:H} is inconsistent with \ref{[B]STDIST}.
+	
+	This third failure is not related to the problems of continuity as Schwartz spaces present the same problem.
 \end{proof}
 
 \section{Additional remarks}
 
 There are other problems of a more practical nature. We highlight them for completeness.
 
-\textbf{Point-wise values not well-defined.} The wave function $\psi(x)$ is not defined at each point. The ray of a Hilbert space, in fact, is the equivalence class of all such wave-functions that behave the same in the inner product. If $\psi(x)$ and $\phi(x)$ are different over a measure zero set, then the two wave functions are equivalent. This means that the values at each point of $\psi(x)$ are not uniquely defined. This goes against the physical intuition of interpreting $|\psi(x)|^2$ as the probability density, as that is conceptually uniquely defined.
+\textbf{Point-wise values not well-defined.} The wave function $\psi(x)$ is not defined at each point. A vector of $L^2$, in fact, is the equivalence class of all such wave-functions that behave the same in the inner product. If $\psi(x)$ and $\phi(x)$ are different over a measure zero set, then the two wave functions are equivalent. This means that the values at each point of $\psi(x)$ are not uniquely defined. This goes against the physical intuition of interpreting $|\psi(x)|^2$ as the probability density, as that is conceptually uniquely defined.
 
 \textbf{Commutator relationships must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
 
-\textbf{Schrödinger equation not well-defined}. Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be an integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
+\textbf{Schrödinger equation not well-defined}. Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be a square-integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
 
 \section{Conclusion}
 
