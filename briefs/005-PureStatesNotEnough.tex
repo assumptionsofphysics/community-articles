@@ -21,61 +21,55 @@
 
 While most efforts within the foundations of quantum mechanics focus on pure states, we show they are not enough to characterize quantum mechanics. It is the space of statistical ensemble that marks the difference and, therefore, statistical mechanics plays a crucial role in the difference between the two theories.
 
-\section{Classical and quantum conditions}
+\section{Conditions}
 
-Let us first give a condition that characterizes the classical state space. We characterize the states, the ensembles and their conditional probability.
+Since we want to compare the classical and quantum state space structures layer by layer, we break them up along similar lines: states and the convex structure of statistical ensembles.
 
-\begin{condition}[Classical state space]{CST}
-	The state space is represented by a symplectic manifold $(X,\omega)$, typically charted by conjugate quantities (i.e. local Darboux coordinates) $(q_i,p_i) \in \mathbb{R}^{2n}$, where $n$ is the number of independent degrees of freedom (DOF). The count of configurations for each DOF over a region $\Sigma$ is given $\int_{\Sigma} dp^i dq_i = \int_{\Sigma} \omega$ and the count of states is given by the Liouville measure $\mu(U) = \int_U dq^1\cdots dq^n dp_1 \cdots dp_n = \int_U \omega^n$.
-	
-	The ensemble space is represented by the set of probability distributions $\rho(q^i, p_i)$ (i.e. probability measures that are absolutely continuous with respect to the Liouville measure).
-	
-	The conditional probability over states is given by $p(\xi_1 | \xi_2) = 0 = p(\xi_2 | \xi_1)$ for all $\xi_1, \xi_2 \in X$, meaning that all states represent mutually exclusive events.
+The first two conditions just define the states, the full descriptions of the respective systems.
+
+\begin{condition}[Classical state space only]{CP}
+	The state space of a classical system is represented by a symplectic manifold $(X,\omega)$.
 \end{condition}
 
-We now characterize quantum state space in the same way. However, we break up the three elements (i.e. state, ensembles, conditional probability) into three separate conditions.
-
 \begin{condition}[Quantum state space only]{QP-RAY}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(V)$ of a complex topological vector space $V$.
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a complex Hilbert space $\mathcal{H}$.
+\end{condition}
+
+The next conditions specify the ensemble spaces and identify convex combinations with statistical mixtures.
+
+\begin{condition}[Classical ensemble space]{CE}
+	The statistical ensembles of a classical system are represented by probability measures over its state space. Statistical mixtures are represented by convex combinations of these measures.
 \end{condition}
 
 \begin{condition}[Quantum ensemble space]{QE-DENS}
-	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$.
+	The statistical ensembles of a quantum system are represented by density operators $\mathcal{D}(\mathcal{H})$. Statistical mixtures are represented by convex combinations of density operators.
 \end{condition}
 
-\begin{condition}[Conditional expectation from Born rule]{BR-BORN}
-	The conditional probability $p : \mathcal{P} \times \mathcal{P} \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+Finally, we state the exclusivity condition whose relationship to these layers we want to investigate.
+
+\begin{condition}[Classical--quantum exclusivity]{CQE}
+	A non-trivial system, one that allows more than one possible state, cannot admit both a classical and a quantum representation.
 \end{condition}
 
 \section{Theorems}
 
-The main observation is that we can satisfy \ref{QP-RAY} and \ref{CST} at the same time. The complex nature of the inner product space makes sure that the projective space is symplectic, and therefore it can be used in the context of classical mechanics.
+The first theorem shows that, if we limit the mathematical representation to the state space definition, systems can be represented both by quantum Hilbert spaces and classical symplectic spaces.
 
 \begin{thrm}
-	Conditions \ref{QP-RAY} and \ref{CST} are consistent. In fact, they are consistent if and only if $1\leq\dim(V)<\infty$.
+	Over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Suppose \ref{QP-RAY} and \ref{CST} are assumed. Then the state space $X$ is both a symplectic manifold and a complex projective space. Since $X$ is a symplectic manifold, then $2 \leq \dim(X) < \infty$. This means that $1 \leq \dim(V) < \infty$.
+	Recall that finite-dimensional complex projective spaces are symplectic spaces when equipped with the Fubini–Study symplectic form. Consider, then, the state space for a fixed-magnitude magnetic dipole, described by its orientation. This will be represented by a two-sphere, which is both a symplectic manifold and a complex projective line. Similarly, consider the state space of a qubit. This will be represented by a Bloch sphere, which is both a complex projective line and a symplectic manifold. Both these systems are non-trivial. Moreover, over \ref{CP}+\ref{QP-RAY}, both systems can be represented with both a classical and a quantum representation. This means that, over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
 \end{proof}
 
-We can, in fact, provide a simple example which is interesting to understand the difference between the hybrid and the true quantum case.
-
-\begin{example}[Classical qubit]
-	Let $\mathcal{H}$ be a two dimensional Hilbert space. The projective space is a two-sphere, which is a symplectic manifold with Darboux coordinate $z$ and $\theta_{xy}$. The Liouville measure is given by the areas on the sphere (i.e. the solid angle). The statistical ensembles are given by probability measures $\rho(z,\theta_{xy})$. Moreover, Hamiltonian evolution can be defined as exactly those diffeomorphism for which the volume, and therefore the entropy, is conserved. Quantum evolution corresponds exactly to rotations, which is the sub-case in which the Hamiltonian is linear (i.e. a function of a direction in the embedding three dimensional space of the sphere).
-\end{example}
-
-\begin{remark}
-	While the space of pure states of the classical and quantum qubits are the same, and therefore we still have a notion of superposition and other elements of quantum mechanics, the space of ensembles is radically different. The Born rule would have to be $p(\psi\vert\phi) = \delta_{\psi \phi}$, consistently with classical statistical mechanics, as all pure states are mutually exclusive.
-\end{remark}
-
-We now see that the notion of classical ensemble and quantum ensembles are different.
+The second theorem shows that, if we include ensembles, the mathematical representation of classical and quantum systems diverge.
 
 \begin{thrm}
-	Conditions \ref{QE-DENS} and \ref{CST} are inconsistent.
+	Over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
 \end{thrm}
 \begin{proof}
-	Suppose \ref{QE-DENS} and \ref{CST} are assumed. Fix a two-dimensional subspace $A$. By \ref{CST}, the space of ensembles with support in $A$ correspond to the space of absolutely continuous probability measures over a sphere, which is an infinite dimensional space. By \ref{QE-DENS}, the space of ensembles with support in $A$ correspond to the Bloch ball, which is three dimensional. This is a contradiction, which means \ref{QE-DENS} and \ref{CST} are inconsistent.
+	For a system $S$ to violate \ref{CQE} over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS} its state space $X$ must first allow to be represented as both a symplectic manifold and a complex projective space. Suppose $S$ has such a property. Let $|\psi_0\>, |\psi_1\> \in \mathcal{H}$ be two normalized orthogonal state vectors in terms of the quantum representation, and $|\phi_{\pm} \>= \sqrt{\frac{1}{2}}(|\psi_0\> \pm |\psi_1\>)$. Consider the equal mixtures of the respective pairs in terms of density operators. We have $\frac{1}{2} \rho_{\psi_0} + \frac{1}{2} \rho_{\psi_1} = \frac{1}{2} \rho_{\phi_{+}} + \frac{1}{2} \rho_{\phi_{-}}$. Now consider the equal mixture of the respective pairs in terms of probability measures. We have $\frac{1}{2} \delta_{\psi_0} + \frac{1}{2} \delta_{\psi_1} \neq \frac{1}{2} \delta_{\phi_{+}} + \frac{1}{2} \delta_{\phi_{-}}$. That is, density operators allows multiple decompositions in terms of pure states while classical probability distributions do not. Given that, physically, a statistical mixture has a well-defined result, it cannot be represented in two inconsistent ways. Therefore, \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
 \end{proof}
 
 \begin{insight}
