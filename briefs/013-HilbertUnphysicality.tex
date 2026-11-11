@@ -352,7 +352,7 @@ The following condition sums up the standard definition of quantum states and ob
 
 \section{Theorem}
 
-In theorem, we want to check whether \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST} are guaranteed by the representation provided by the background condition. It turns out they aren't.
+In this theorem, we want to check whether \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST} are guaranteed by the representation provided by the background condition. It turns out they aren't.
 
 \begin{thrm}
 	Over \ref{QSTO:H}, conditions \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST} are not guaranteed.
@@ -365,7 +365,7 @@ In theorem, we want to check whether \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STD
 	
 	Let us now show that \ref{[B]WDQ} is not guaranteed over \ref{QSTO:H}. Consider a quantum system described by a single spatial degree of freedom. Let $x$ be the position variable used by the first observer, $\mathcal{H}_x = L^2(\mathbb{R}, dx)$ be the corresponding Hilbert space and $X$ be the corresponding position operator. As shown in \ref{coordinateExample}, $f(x) = \tan\left(\frac{\pi}{2}\erf(x)\right)$ is a smooth bijection over $\mathbb{R}$, and therefore we can let $y = f(x)$ be the position variable for a second observer, $\mathcal{H}_y = L^2(\mathbb{R}, dy)$ be the corresponding Hilbert space, $Y$ be the corresponding position operator and $U$ be the unitary transformation that represents the coordinate transformation. That is, $|\phi(y)\> = U |\psi(x)\>$.
 	
-	Now, recall that a normalized state $|\psi\>$ is in the domain of a self-adjoint operator $O$ if and only if $\|O\psi\|^2 = \<O \psi | O \psi \> = E[O^2 | \psi] < \infty$. That is, if and only if the second moment, and therefore the variance, is finite. As shown in \ref{coordinateExample}, if we pick the Gaussian wave packet $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ in the coordinates of the first observer, it is in the domain of $X$ and therefore has finite variance. However, this transforms to $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$ for the second observer, which is not in the domain of $Y$, and therefore its second moment diverges. The same state, then, has finite variance in position for the first observer while undefined variance in position for the second observer. Therefore \ref{[B]WDQ} is not guaranteed over \ref{QSTO:H}.
+	Now, recall that a normalized state $|\psi\>$ is in the domain of a self-adjoint operator $O$ if and only if $\|O\psi\|^2 = \<O \psi | O \psi \> = E[O^2 | \psi] < \infty$. That is, if and only if the second moment, and therefore the variance, is finite. As shown in \ref{coordinateExample}, if we pick the Gaussian wave packet $\psi(x) = \sqrt{\frac{e^{-x^2}}{\sqrt{\pi}}}$ in the coordinates of the first observer, it is in the domain of $X$ and therefore has finite variance. However, this transforms to $\phi(y) = \sqrt{\frac{1}{\pi (y^2 + 1)}}$ for the second observer, which is not in the domain of $Y$, and therefore its second moment diverges. The same state, then, has finite variance in position for the first observer while it has undefined variance in position for the second observer. Therefore \ref{[B]WDQ} is not guaranteed over \ref{QSTO:H}.
 	
 	The problem is that unbounded operators have only a dense domain in a Hilbert space, and it is therefore possible to have two position variables with different domains. While coordinate transformations may produce similar problems in classical mechanics, one can again work with joint probability distributions with compact support, which bound all moments.
 	
@@ -382,7 +382,7 @@ There are other problems of a more practical nature. We highlight them for compl
 
 \textbf{Commutator relationships must be restricted.} Commutation relationships like $\frac{[X,P]}{\imath\hbar} = I$ are not technically correct because of operator domains. Operators on the left, in fact, are not defined on the whole of $\mathcal{H}$ as they are unbounded. However, the identity $I$ is well-defined over the whole space. Therefore, the relationship is not literally true in a Hilbert space, and must be restricted to the appropriate domain.
 
-\textbf{Schrödinger equation not well-defined.} Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be a square-integrable function. Therefore, the domain in which the equation is valid is only the domain of $H$, which, if it is an unbounded operator, is different from the whole space.
+\textbf{Schrödinger equation not well-defined.} Note that the Schrödinger equation is not necessarily defined on all functions. In fact, functions in the Hilbert space are not necessarily differentiable and therefore the momentum operator may not be well-defined. Similarly, $V(x) \psi(x)$ may not be a square-integrable function. Therefore, the equation is valid only on the domain of $H$. If $H$ is unbounded, this domain differs from the whole space.
 
 \section{Conclusion}
 
