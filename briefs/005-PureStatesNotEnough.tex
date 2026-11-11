@@ -19,7 +19,7 @@
 
 \section{Introduction}
 
-While most efforts within the foundations of quantum mechanics focus on pure states, we show they are not enough to characterize quantum mechanics. It is the space of statistical ensemble that marks the difference and, therefore, statistical mechanics plays a crucial role in the difference between the two theories.
+While most efforts within the foundations of quantum mechanics focus on pure states, we show they are not enough to characterize quantum mechanics. It is the space of statistical ensembles that marks the difference and, therefore, statistical mechanics plays a crucial role in the difference between the two theories.
 
 \section{Conditions}
 
@@ -65,13 +65,13 @@ In general, we want to understand whether \ref{CQE} is guaranteed by the represe
 	Recall that finite-dimensional complex projective spaces are symplectic spaces when equipped with the Fubini–Study symplectic form. Consider, then, the state space for a fixed-magnitude magnetic dipole, described by its orientation. Under \ref{CP}, this will be represented by a two-sphere, which is both a symplectic manifold and a complex projective line. Similarly, consider the state space of a qubit. Under \ref{QP-RAY}, this will be represented by a Bloch sphere, which is both a complex projective line and a symplectic manifold. Both these systems are non-trivial. Moreover, over \ref{CP}+\ref{QP-RAY}, both systems can be represented with both a classical and a quantum representation. This means that, over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
 \end{proof}
 
-The second theorem shows that, if we include ensembles, the mathematical representation of classical and quantum systems diverge.
+The second theorem shows that, if we include ensembles, the mathematical representations of classical and quantum systems diverge.
 
 \begin{thrm}
 	Over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
 \end{thrm}
 \begin{proof}
-	For a system $S$ to violate \ref{CQE} over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS} its state space $X$ must first allow to be represented as both a symplectic manifold and a complex projective space. Suppose $S$ has such a property. Let $|\psi_0\>, |\psi_1\> \in \mathcal{H}$ be two normalized orthogonal state vectors in terms of the quantum representation, and $|\phi_{\pm} \>= \sqrt{\frac{1}{2}}(|\psi_0\> \pm |\psi_1\>)$. Consider the equal mixtures of the respective pairs in terms of density operators. We have $\frac{1}{2} \rho_{\psi_0} + \frac{1}{2} \rho_{\psi_1} = \frac{1}{2} \rho_{\phi_{+}} + \frac{1}{2} \rho_{\phi_{-}}$. Now consider the equal mixture of the respective pairs in terms of probability measures. We have $\frac{1}{2} \delta_{\psi_0} + \frac{1}{2} \delta_{\psi_1} \neq \frac{1}{2} \delta_{\phi_{+}} + \frac{1}{2} \delta_{\phi_{-}}$. That is, density operators allows multiple decompositions in terms of pure states while classical probability distributions do not. Given that, physically, a statistical mixture has a well-defined result, it cannot be represented in two inconsistent ways. Therefore, \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
+	For a system $S$ to violate \ref{CQE} over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, its state space $X$ must first admit representations as both a symplectic manifold and a complex projective space. Suppose $S$ has such a property. Let $|\psi_0\>, |\psi_1\> \in \mathcal{H}$ be two normalized orthogonal state vectors in terms of the quantum representation, and $|\phi_{\pm} \>= \sqrt{\frac{1}{2}}(|\psi_0\> \pm |\psi_1\>)$. Consider the equal mixtures of the respective pairs in terms of density operators. We have $\frac{1}{2} \rho_{\psi_0} + \frac{1}{2} \rho_{\psi_1} = \frac{1}{2} \rho_{\phi_{+}} + \frac{1}{2} \rho_{\phi_{-}}$. Now consider the equal mixtures of the respective pairs in terms of probability measures. We have $\frac{1}{2} \delta_{\psi_0} + \frac{1}{2} \delta_{\psi_1} \neq \frac{1}{2} \delta_{\phi_{+}} + \frac{1}{2} \delta_{\phi_{-}}$. That is, density operators allow multiple decompositions in terms of pure states while classical probability distributions do not. Given that, physically, a statistical mixture has a well-defined result, it cannot be represented in two inconsistent ways. Therefore, over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
 \end{proof}
 
 Note that the ensemble space structure of quantum mechanics does not automatically imply the Born rule, which is an additional condition. However, imposing the Born rule implies the structure of the ensembles. In fact, in textbooks, it is often constructed once the Born rule is imposed. Also, while the Born rule is typically used to define measurements and unitary evolution, one can invert this as well. If one is given the space of all valid measurements and valid unitaries, one can recover the Born rule. In this sense, we have the following insight.
@@ -80,7 +80,7 @@ Note that the ensemble space structure of quantum mechanics does not automatical
 	The space of statistical ensembles is necessary to distinguish between classical and quantum spaces.
 \end{insight}
 
-Lastly, note that each quantum ensemble can be understood as an equivalence class of classical distributions over the pure states that gives that particular ensemble. While the classical state allows any random variable, we can imagine fewer random variables are available. For example, if we take the case of a classical magnetic dipole and suppose that we can characterize states through the average magnetic moment, the space of ensemble would reduce to the Bloch ball.
+Lastly, note that each quantum ensemble can be understood as an equivalence class of classical distributions over the pure states that give that particular ensemble. While the classical description allows any random variable, we can imagine fewer random variables are available. For example, if we take the case of a classical magnetic dipole and suppose that we can characterize states through the average magnetic moment, the space of ensembles would reduce to the Bloch ball.
 
 \section{Conclusion}
 
