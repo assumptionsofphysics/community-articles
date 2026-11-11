@@ -48,19 +48,21 @@ The next conditions specify the ensemble spaces and identify convex combinations
 Finally, we state the exclusivity condition whose relationship to these layers we want to investigate.
 
 \begin{condition}[Classical--quantum exclusivity]{CQE}
-	A non-trivial system, one that allows more than one possible state, cannot admit both a classical and a quantum representation.
+	A system cannot be both classical and quantum.
 \end{condition}
+
+By system here we mean the model, not the physical object. For example, an electron could be modeled as either a classical or quantum particle depending on the circumstances. Conversely, a classical harmonic oscillator could be realized by masses on springs or electrical circuits. A system is assumed to have at least two distinct states, as a system with only one possible state cannot produce different outputs (e.g. cannot be present or not present) and, therefore, is indistinguishable as a separate system. 
 
 \section{Theorems}
 
-The first theorem shows that, if we limit the mathematical representation to the state space definition, systems can be represented both by quantum Hilbert spaces and classical symplectic spaces.
+In general, we want to understand whether \ref{CQE} is guaranteed by the representations provided by the background conditions. The first theorem shows that, if we limit the mathematical representation to the state space definition, systems can be represented both by quantum Hilbert spaces and classical symplectic spaces.
 
 \begin{thrm}
 	Over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Recall that finite-dimensional complex projective spaces are symplectic spaces when equipped with the Fubini–Study symplectic form. Consider, then, the state space for a fixed-magnitude magnetic dipole, described by its orientation. This will be represented by a two-sphere, which is both a symplectic manifold and a complex projective line. Similarly, consider the state space of a qubit. This will be represented by a Bloch sphere, which is both a complex projective line and a symplectic manifold. Both these systems are non-trivial. Moreover, over \ref{CP}+\ref{QP-RAY}, both systems can be represented with both a classical and a quantum representation. This means that, over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
+	Recall that finite-dimensional complex projective spaces are symplectic spaces when equipped with the Fubini–Study symplectic form. Consider, then, the state space for a fixed-magnitude magnetic dipole, described by its orientation. Under \ref{CP}, this will be represented by a two-sphere, which is both a symplectic manifold and a complex projective line. Similarly, consider the state space of a qubit. Under \ref{QP-RAY}, this will be represented by a Bloch sphere, which is both a complex projective line and a symplectic manifold. Both these systems are non-trivial. Moreover, over \ref{CP}+\ref{QP-RAY}, both systems can be represented with both a classical and a quantum representation. This means that, over \ref{CP}+\ref{QP-RAY}, \ref{CQE} is not guaranteed.
 \end{proof}
 
 The second theorem shows that, if we include ensembles, the mathematical representation of classical and quantum systems diverge.
@@ -72,21 +74,13 @@ The second theorem shows that, if we include ensembles, the mathematical represe
 	For a system $S$ to violate \ref{CQE} over \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS} its state space $X$ must first allow to be represented as both a symplectic manifold and a complex projective space. Suppose $S$ has such a property. Let $|\psi_0\>, |\psi_1\> \in \mathcal{H}$ be two normalized orthogonal state vectors in terms of the quantum representation, and $|\phi_{\pm} \>= \sqrt{\frac{1}{2}}(|\psi_0\> \pm |\psi_1\>)$. Consider the equal mixtures of the respective pairs in terms of density operators. We have $\frac{1}{2} \rho_{\psi_0} + \frac{1}{2} \rho_{\psi_1} = \frac{1}{2} \rho_{\phi_{+}} + \frac{1}{2} \rho_{\phi_{-}}$. Now consider the equal mixture of the respective pairs in terms of probability measures. We have $\frac{1}{2} \delta_{\psi_0} + \frac{1}{2} \delta_{\psi_1} \neq \frac{1}{2} \delta_{\phi_{+}} + \frac{1}{2} \delta_{\phi_{-}}$. That is, density operators allows multiple decompositions in terms of pure states while classical probability distributions do not. Given that, physically, a statistical mixture has a well-defined result, it cannot be represented in two inconsistent ways. Therefore, \ref{CP}+\ref{CE}+\ref{QP-RAY}+\ref{QE-DENS}, \ref{CQE} is guaranteed.
 \end{proof}
 
+Note that the ensemble space structure of quantum mechanics does not automatically imply the Born rule, which is an additional condition. However, imposing the Born rule implies the structure of the ensembles. In fact, in textbooks, it is often constructed once the Born rule is imposed. Also, while the Born rule is typically used to define measurements and unitary evolution, one can invert this as well. If one is given the space of all valid measurements and valid unitaries, one can recover the Born rule. In this sense, we have the following insight.
+
 \begin{insight}
 	The space of statistical ensembles is necessary to distinguish between classical and quantum spaces.
 \end{insight}
 
-Lastly, we can show that each quantum ensemble is an equivalence class of classical distributions over the pure states.
-
-\begin{thrm}
-	Over \ref{QE-DENS}, let $M^1(P(\mathcal{H}))$ be the set of probability measures, non necessarily absolutely continuous, over the states. Then there exists an equivalence relationship $\sim \; \subseteq M^1(P(\mathcal{H})) \times M^1(P(\mathcal{H}))$ such that $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
-\end{thrm}
-
-\begin{proof}
-	Note that $D(\mathcal{H})$ is a convex set with $P(\mathcal{H})$ as extreme points. Therefore, for every probability measure $\mu \in M^1(P(\mathcal{H}))$, there exists an element $\rho \in D(\mathcal{H})$ represented by $\mu$ in the sense of Choquet theory. That is, for every continuous linear functional $f : D(\mathcal{H}) \to \mathbb{R}$, $f(\rho) = \int f(\psi) d\mu$. Let $r : M^1(P(\mathcal{H})) \to D(\mathcal{H})$ be the map between the probability measure and the ensemble it represents. Define $\mu_1 \sim \mu_2$ if $r(\mu_1) = r(\mu_2)$. Then $D(\mathcal{H}) \equiv M^1(P(\mathcal{H}))_{/\sim}$.
-\end{proof}
-
-The equivalence class keeps track of all possible decompositions of mixed ensembles in terms of pure ensembles. Note that $r$ defined about is affine, so any affine function of quantum ensembles is also an affine functional of the probability measures over quantum states. The converse is not true, and those are exactly the random variables that would distinguish between different possible preparations of the same ensemble.
+Lastly, note that each quantum ensemble can be understood as an equivalence class of classical distributions over the pure states that gives that particular ensemble. While the classical state allows any random variable, we can imagine fewer random variables are available. For example, if we take the case of a classical magnetic dipole and suppose that we can characterize states through the average magnetic moment, the space of ensemble would reduce to the Bloch ball.
 
 \section{Conclusion}
 
