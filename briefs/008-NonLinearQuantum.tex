@@ -19,7 +19,7 @@
 
 \section{Introduction}
 
-It is often stated that the linearity of quantum mechanics is a critical part of the theory. That is, that physical concepts, like observables and time evolution, must be represented with linear structures. Here we show that this linearity is not actually a physical requirement, and one can, in fact, represent quantum theory with non-linear objects. This means that linearity is more a convenient choice of representation than a physically meaningful requirement.
+It is often stated that the linearity of quantum mechanics is a critical part of the theory. That is, physical concepts, like observables and time evolution, must be represented with linear structures. Here we show that this linearity is not actually a physical requirement, and one can, in fact, represent quantum theory with non-linear objects. This means that linearity is more a convenient choice of representation than a physically meaningful requirement.
 
 \section{Mathematical prerequisites}
 
@@ -172,7 +172,7 @@ We can sum up the definitions of a state space in quantum mechanics with the fol
 
 The following condition requires other physical objects to be represented by linear structures and operations on $\mathcal{H}$.
 \begin{condition}[Linear vector space representation]{QMLIN}
-	Quantum superpositions, observables, and time evolution are represented by linear structures over the Hilbert space associated to the state space. That is, quantum superpositions are represented by vector addition, observables by self-adjoint operators and system evolution by unitary operators.
+	Quantum superpositions, observables, and time evolution are represented by linear structures over the Hilbert space associated with the state space. That is, quantum superpositions are represented by vector addition, observables by self-adjoint operators and system evolution by unitary operators.
 \end{condition}
 
 \section{Theorem}
@@ -214,9 +214,9 @@ The following condition requires other physical objects to be represented by lin
 \end{figure}
 
 \begin{proof}
-	To show that \ref{QMLIN} is neither guaranteed nor ruled out over \ref{QST:H}, it suffices to provide two valid representations for a single quantum system that satisfy \ref{QST:H}, one satisfying \ref{QMLIN} and one not. Consider a spin $\frac{1}{2}$ system represented in the usual way by a two-dimensional Hilbert space $\mathcal{H}$. That satisfies both \ref{QST:H} and \ref{QMLIN}, therefore \ref{QMLIN} is not ruled out over \ref{QST:H}.
+	To show that \ref{QMLIN} is neither guaranteed nor ruled out over \ref{QST:H}, it suffices to provide two valid representations for a single quantum system that satisfy \ref{QST:H}, one satisfying \ref{QMLIN} and one not. Consider a spin $\frac{1}{2}$ system represented in the usual way by a two-dimensional Hilbert space $\mathcal{H}$. This representation satisfies both \ref{QST:H} and \ref{QMLIN}; therefore \ref{QMLIN} is not ruled out over \ref{QST:H}.
 	
-	Now consider $m$ as defined by \ref{nonlinearMap} with $v = |z^+\>$ and $w = | z^- \>$. Note that $\frac{|a|^2}{|a|^2+|b|^2} = p(z^+|\psi)$ with $|\psi\rangle=a|z^+\rangle+b|z^-\rangle$. This means that the phase shift introduced by the map is proportional to the probability of measuring $z^+$. Since $m$ is a bijection, physical representatives on $\mathcal{H}$ transported through $m$ will be physical representatives on $m(\mathcal{H})$. Since $m$ preserves rays, the state representation is unchanged. Similarly, density operators will be left unchanged together with their entropy. The Born rule is left unchanged as it is the cosine square of the Fubini--Study distance. Therefore, \ref{QST:H} remains valid on $m(\mathcal{H})$.
+	Now consider $m$ as defined by \ref{nonlinearMap} with $v = |z^+\>$ and $w = | z^- \>$. Note that $\frac{|a|^2}{|a|^2+|b|^2} = p(z^+|\psi)$ with $|\psi\rangle=a|z^+\rangle+b|z^-\rangle$. This means that the phase shift introduced by the map is proportional to the probability of measuring $z^+$. Since $m$ is a bijection, physical representatives on $\mathcal{H}$ transported through $m$ will be physical representatives on $m(\mathcal{H})$. Since $m$ preserves rays, the state representation is unchanged. Similarly, density operators will be left unchanged together with their entropy. The Born rule is left unchanged as it is the square of the cosine of the Fubini--Study distance. Therefore, \ref{QST:H} remains valid on $m(\mathcal{H})$.
 	
 	However, by \ref{nonlinearMap} and \ref{nonlinearOperators}, linear combinations and linear operators do not correspond, in general, to transported linear combinations and linear operators. Therefore, quantum superposition in one representation will not, in general, map to the same linear combinations. Similarly, observables will not be, in general, represented by self-adjoint operators and time evolution will not be, in general, represented by unitary maps.
 	
