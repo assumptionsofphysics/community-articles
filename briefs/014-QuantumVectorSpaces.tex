@@ -19,7 +19,7 @@
 
 \section{Introduction}
 
-As representation of quantum systems through Hilbert spaces fails to satisfy basic physical requirements, we look for an alternative that is both more physically meaningful and mathematically elegant. In the current form, we have developed a well-motivated and well-behaved structure for the topology, the observables and the inner product. The structure reproduces features of Schwartz space and recovers assumptions that most physicists expect but are not true in Hilbert spaces.
+As representation of quantum systems through Hilbert spaces fails to guarantee basic physical requirements, we look for an alternative that is both more physically meaningful and mathematically elegant. In the current form, we have developed a well-motivated and well-behaved structure for the topology, the observables and the inner product. The structure reproduces features of Schwartz space and recovers assumptions that most physicists expect but are not true in Hilbert spaces.
 
 \section{Mathematical overview}
 
@@ -63,15 +63,15 @@ Instead of working with Hilbert spaces, we will give a characterization of a vec
 The following are conditions that we would expect any physical theory to obey, and therefore they should be considered part of a base theory for all of physics.
 
 \begin{condition}[Continuity of measurable quantities]{[B]COBS}
-	Small state changes lead to small changes of measurable quantities. That is, the expectation of a quantity is a continuous function of the state.
+	Small state changes lead to small changes of measurable quantities. At a minimum, the expectation of a quantity is a continuous function of the state.
 \end{condition}
 
 \begin{condition}[Measurable quantities well-defined in all frames]{[B]WDQ}
-	All states can equivalently be expressed in all frames. That is, if a quantity is well-defined in one frame, the corresponding quantity in another frame will be well-defined.
+	All states can equivalently be expressed in all frames. At a minimum, if a state has finite variance for position in one frame, it should also have finite variance in position in another frame.
 \end{condition}
 
 \begin{condition}[Distinguishability of different systems]{[B]STDIST}
-	Different physical systems have a different mathematical representation. That is, the mathematical representation of different physical systems must have enough structure to tell them apart.
+	Systems with a different number of degrees of freedom are distinct.
 \end{condition}
 
 The following condition sums up the definition of quantum states and observables on top of quantum vector spaces. We will test this against the above requirements.
@@ -82,27 +82,27 @@ The following condition sums up the definition of quantum states and observables
 
 \section{Theorem}
 
-Now we show that \ref{QSTO:V} is consistent with each of the above base conditions.
+Now we show that the representation given by \ref{QSTO:V} guarantees each of the above base conditions.
 
 \begin{thrm}
-	Condition \ref{QSTO:V} is consistent with \ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST}.
+	Over \ref{QSTO:V}, conditions\ref{[B]COBS}, \ref{[B]WDQ} and \ref{[B]STDIST} are guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Observables are defined to be continuous functions over $V$. Since the inner product is also continuous, the expectations of all observables are continuous. This means \ref{QSTO:V} is consistent with \ref{[B]COBS}.
+	Let $O$ be an observable. Over \ref{QSTO:V}, observables are continuous everywhere-defined self-adjoint operators. Moreover, the inner product is continuous. Therefore, the expectation of the observable $E[O|\psi] = \frac{ \< \psi | O \psi \>}{\<\psi|\psi\>}$ is a continuous function of $\psi$. This means that \ref{[B]COBS} is guaranteed over \ref{QSTO:V}.
 	
-	Suppose we have two frames, $A$ and $B$, each with its own set of defining observables $X_i^A$ and $X_i^B$. Since the underlying system is the same, the defining observables of $A$ must be observables in $B$ and vice-versa, as each observer must be able to transform quantities to and from all frames. Since observables are everywhere-defined, there is no domain mismatch so the observables will be well-defined in all frames. This means \ref{QSTO:V} is consistent with \ref{[B]WDQ}.
+	Suppose we have two frames, $A$ and $B$, each with its own set of defining observables $X_i^A$ and $X_i^B$. Since the underlying system is the same, the defining observables of $A$ must be observables in $B$ and vice-versa, as each observer must be able to transform quantities to and from all frames. Since observables are everywhere-defined, there is no domain mismatch so the observables will be well-defined in all frames. In other words, coordinate transformation are limited to those that preserve the topology. This means that \ref{[B]WDQ} is guaranteed over \ref{QSTO:V}.
 	
-	Lastly, an isomorphism in the category of quantum vector spaces must preserve the Lie algebraic structure. The Lie algebraic structure exactly represents the observables and the symmetries that define the physics. Since two physically distinct systems must have physically distinct Lie algebras, two systems are physically equivalent if and only if their Lie algebras of observables are equivalent. This means \ref{QSTO:V} is consistent with \ref{[B]STDIST}.
+	Lastly, an isomorphism in the category of quantum vector spaces must preserve the Lie algebraic structure. Suppose we have two systems with respectively $n$ and $m$ continuous degrees of freedom where $n \neq m$. The corresponding spaces will be equipped with defining observables $\{X^i, P_i, I\}$ and Heisenberg algebra $\frac{[X^i, P_j]}{\imath \hbar} = \delta^i_j I$. The algebras have respectively dimension of $2n+1$ and $2m+1$ and are not therefore isomorphic. This means that \ref{[B]STDIST} is guaranteed over \ref{QSTO:V}.
 \end{proof}
 
 \section{Additional remarks}
 
 \textbf{Second countability vs separability.} It is standard to ask Hilbert spaces to be separable. For metrizable LCTVS, the two requirements are identical. For LCTVS in general, they are not. Second countability implies separability, but not vice-versa. From \href{https://assumptionsofphysics.org/autogen/AssumptionsOfPhysicsDraft.pdf#section.2.1.4}{Physical Mathematics}, we know that any set of physically definable objects is second countable in the natural topology. The most natural space to consider is the set of ensembles, which, if second countable, would force the set of pure states to be second countable, as they are a subspace of the first. If the pure states are second countable, we can always extend the topology to the vector space to preserve second countability.
 
-\textbf{Number of defining observables.} For a field theory, we would expect the defining observables to be at least countable. Separability/second countability would allow us to find a countable subset of observables from a bigger set that generates the same topology.
+\textbf{Number of defining observables.} For a field theory, we would expect the defining observables to be at least countable. Second countability would allow us to find a countable subset of observables from a bigger set that generates the same topology.
 
-\textbf{Completeness of the Lie algebra.} There is still a known problem with the current definition in that it allows spaces with the algebra that is, in some sense, not ``complete.'' For example, a Hilbert space with the defining observables of a qubit would be, with the current definition, a quantum vector space. A Schwartz space with only position in the defining observable would be, with the current definition, a quantum vector space. Both of these cases are pathological: the first has ``too many vectors,'' as it is the tensor product of the qubit and another space whose elements cannot be distinguished with the defining observables; the second has ``too few observables,'' as not all elements of the vector space on which the defining observables are defined can be distinguished with the defining observables. Addressing this gap is an open problem.
+\textbf{Completeness of the Lie algebra.} There is still a known problem with the current definition in that it allows spaces with the algebra that is, in some sense, not ``complete.'' For example, a Hilbert space with the defining observables of a qubit would be, with the current definition, a quantum vector space. The completion of the Schwartz space in the topology generated by position and the inner product would be, with the current definition, a quantum vector space with position operators as the only defining observables. Both of these cases are pathological: the first has ``too many vectors,'' as it is the tensor product of the qubit and another space whose elements cannot be distinguished with the defining observables; the second has ``too few observables,'' as not all elements of the vector space on which the defining observables are defined can be distinguished with the defining observables. Addressing this gap is an open problem.
 
 \textbf{Symmetric vs self-adjoint.} In the current structure, there is no difference between symmetric and self-adjoint, as all operators are defined on the whole space. In retrospect, this is the most natural solution from both the mathematical (i.e. in all other branches of math maps are defined on the full space) and the physical (i.e. physicists seldom differentiate between the two properties) standpoint. What is lost is that not all self-adjoint operators generate a unitary transformation, but this is not as useful as it may seem. Symmetrized polynomials of position and momentum, in fact, are not always self-adjoint, and to understand which ones are the integrability of the system must be checked. This change brings quantum mechanics more in line with Hamiltonian mechanics, in which all functions are equivalent, though some do not generate a complete vector field.
 
