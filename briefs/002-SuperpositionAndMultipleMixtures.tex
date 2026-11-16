@@ -6,79 +6,129 @@
 \tags{Superposition, Mixed states}
 
 \begin{document}
-	
+
 \maketitle
-	
+
 \begin{abstract}
-	We show that the possibility of superpositions in quantum mechanics coincides with the possibility of multiple decompositions of statistical ensembles into pure states.
+	We show that a pure state is a non-trivial superposition of two other pure states if and only if there exists an ensemble that can be prepared both as a non-trivial mixture of those two states and as a non-trivial mixture containing the given state.
 \end{abstract}
 
 \section{Introduction}
 
-Given that the addition of state vectors in quantum mechanics does not represent a physically realizable operation, it is difficult to give quantum superpositions a direct, physically meaningful interpretation. Here we show that the existence of superpositions is equivalent to the existence of a statistical ensemble that can be prepared as a statistical mixture of different pure states, which is a physically meaningful operation. Given that mixtures of different classical states always yield a different ensemble, this insight also tells us why classical superpositions are not possible.
+Given that the addition of state vectors in quantum mechanics does not represent a physically realizable operation, it is difficult to give quantum superpositions a direct, physically meaningful interpretation. Here we show that a pure state is a non-trivial superposition of two other pure states if and only if there exists a statistical ensemble that can be prepared both as a non-trivial mixture of those two states and as a non-trivial mixture containing the given state, which is a physically meaningful operation. Given that classical ensembles have unique decompositions into pure states, this insight also tells us why classical superpositions are not possible.
 
-\section{Premises and conditions}
+\section{Mathematical prerequisites}
 
-Let us first describe the relevant premises and conditions. The base premise is that we are working with quantum states with their standard representation in terms of complex vector spaces.
+We first prove a result relating linear combinations of vectors to convex combinations of density operators. Let $\mathcal{H}$ be a complex Hilbert space. We use $\psi\in\mathcal{P}(\mathcal{H})$ for rays, $|\psi\>\in\mathcal{H}$ for non-zero vector representatives and $\rho_\psi=\frac{|\psi\>\<\psi|}{\<\psi|\psi\>}$ for the corresponding rank-one density operators.
 
-\begin{condition}[Quantum states]{QST}
-	The state of a quantum system is represented by a ray of a complex inner product space $\mathcal{H}$ associated to that system. An ensemble is represented by a density operator $\rho : \mathcal{H} \to \mathcal{H}$, that is a positive semi-definite trace one self-adjoint operator.
+\begin{prop}\label{superpositionDecompositions}
+	Let $\psi_1,\psi_2\in\mathcal{P}(\mathcal{H})$ be distinct rays and let $\phi\in\mathcal{P}(\mathcal{H})$. The following are equivalent:
+	\begin{itemize}
+		\item $|\phi\>=c_1|\psi_1\>+c_2|\psi_2\>$ for some $c_1,c_2\neq0$.
+		\item There exist a density operator $\rho$ and a ray $\hat{\phi}$ such that $\rho=p_1\rho_{\psi_1}+p_2\rho_{\psi_2}=p_\phi\rho_\phi+p_{\hat{\phi}}\rho_{\hat{\phi}}$, with $\phi\notin\{\psi_1,\psi_2\}$, $p_1,p_2,p_\phi,p_{\hat{\phi}} \in (0,1)$ and $p_1+p_2=p_\phi+p_{\hat{\phi}}=1$.
+	\end{itemize}
+\end{prop}
+
+\begin{proof}
+	First, suppose $|\phi\>=c_1|\psi_1\>+c_2|\psi_2\>$ with $c_1,c_2\neq0$. Define $|\hat{\phi}\>=c_1|\psi_1\>-c_2|\psi_2\>$. Since $|\psi_1\>$ and $|\psi_2\>$ are linearly independent, both vectors are non-zero and $\phi$ differs from $\psi_1$ and $\psi_2$. Moreover, $\hat{\phi}$ differs from $\phi$: proportionality would require the same factor to be both $1$ and $-1$ when comparing the two coefficients. Expanding the outer products gives
+	\begin{equation*}
+		\begin{aligned}
+			|\phi\>\<\phi|
+			&=|c_1|^2|\psi_1\>\<\psi_1|
+			+c_1c_2^*|\psi_1\>\<\psi_2|  +c_2c_1^*|\psi_2\>\<\psi_1|
+			+|c_2|^2|\psi_2\>\<\psi_2|,\\
+			|\hat{\phi}\>\<\hat{\phi}|
+			&=|c_1|^2|\psi_1\>\<\psi_1|
+			-c_1c_2^*|\psi_1\>\<\psi_2|-c_2c_1^*|\psi_2\>\<\psi_1|
+			+|c_2|^2|\psi_2\>\<\psi_2|.
+		\end{aligned}
+	\end{equation*}
+	The cross terms cancel, so
+	\begin{equation*}
+		|\phi\>\<\phi|+|\hat{\phi}\>\<\hat{\phi}|
+		=2|c_1|^2|\psi_1\>\<\psi_1|
+		+2|c_2|^2|\psi_2\>\<\psi_2|.
+	\end{equation*}
+	Let $N=\<\phi|\phi\>+\<\hat{\phi}|\hat{\phi}\>$. Taking the trace of the previous identity gives
+	\begin{equation*}
+		N=2|c_1|^2\<\psi_1|\psi_1\>
+		+2|c_2|^2\<\psi_2|\psi_2\>.
+	\end{equation*}
+	Define $p_\phi=\frac{\<\phi|\phi\>}{N}$, $p_{\hat{\phi}}=\frac{\<\hat{\phi}|\hat{\phi}\>}{N}$, $p_1=\frac{2|c_1|^2\<\psi_1|\psi_1\>}{N}$ and $p_2=\frac{2|c_2|^2\<\psi_2|\psi_2\>}{N}$. All four weights are strictly positive, and
+	\begin{equation*}
+		\begin{aligned}
+			p_\phi+p_{\hat{\phi}}
+			&=\frac{\<\phi|\phi\>+\<\hat{\phi}|\hat{\phi}\>}{N}=1,\\
+			p_1+p_2
+			&=\frac{2|c_1|^2\<\psi_1|\psi_1\>
+			+2|c_2|^2\<\psi_2|\psi_2\>}{N}=1.
+		\end{aligned}
+	\end{equation*}
+	Thus each weight is also strictly less than one. Define the density operator $\rho=p_\phi\rho_\phi+p_{\hat{\phi}}\rho_{\hat{\phi}}$. Substituting the weights and the normalized outer products, we find
+	\begin{equation*}
+		\begin{aligned}
+			\rho
+			&=\frac{\<\phi|\phi\>}{N}
+			\frac{|\phi\>\<\phi|}{\<\phi|\phi\>}
+			+\frac{\<\hat{\phi}|\hat{\phi}\>}{N}
+			\frac{|\hat{\phi}\>\<\hat{\phi}|}{\<\hat{\phi}|\hat{\phi}\>} =\frac{|\phi\>\<\phi|+|\hat{\phi}\>\<\hat{\phi}|}{N}\\
+			&=\frac{2|c_1|^2|\psi_1\>\<\psi_1|
+			+2|c_2|^2|\psi_2\>\<\psi_2|}{N} =p_1\rho_{\psi_1}+p_2\rho_{\psi_2}.
+		\end{aligned}
+	\end{equation*}
+	This proves the second statement.
+
+	Conversely, suppose the second statement holds. Let $V$ be the span of $|\psi_1\>$ and $|\psi_2\>$, and let $|v\>\in V^\perp$. The first decomposition gives $\<v|\rho|v\>=0$. Using the second decomposition, we obtain
+	\begin{equation*}
+		\begin{aligned}
+			0=\<v|\rho|v\>
+			&=p_\phi\frac{|\<v|\phi\>|^2}{\<\phi|\phi\>}
+			+p_{\hat{\phi}}\frac{|\<v|\hat{\phi}\>|^2}{\<\hat{\phi}|\hat{\phi}\>}.
+		\end{aligned}
+	\end{equation*}
+	Both terms are non-negative and $p_\phi>0$, so $\<v|\phi\>=0$. This holds for every $|v\>\in V^\perp$. Since $V$ is finite-dimensional and therefore closed, $|\phi\>\in(V^\perp)^\perp=V$. Hence $|\phi\>=c_1|\psi_1\>+c_2|\psi_2\>$. Neither coefficient can vanish, since $\phi\notin\{\psi_1,\psi_2\}$. This proves the first statement.
+\end{proof}
+
+\section{Conditions}
+
+We now state the conditions for the theorem, starting with the background representation of quantum states, ensembles and statistical mixtures.
+
+\begin{condition}[Ensembles and quantum states]{QE-DENS}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$, with pure-state ensembles represented by the corresponding rank-one density operators. Statistical mixtures are represented by convex combinations of density operators.
 \end{condition}
 
-The first condition states that one state can be expressed as a superposition of two other states.
+For the following conditions, fix two distinct pure states $\psi_1,\psi_2$ and a pure state $\phi$. A non-trivial mixture is a statistical mixture of distinct states in which both components occur with non-zero probability.
+
+The first condition states how $\phi$ is represented in relation to $\psi_1$ and $\psi_2$.
 
 \begin{condition}[Superposition of pure states]{QSUP-PUR}
-	A pure state $\phi$ can be expressed as a superposition of $\psi_1$ and $\psi_2$. That is, $|\phi\> = c_1 |\psi_1\> + c_2 | \psi_2\>$ with $|\psi_1\>, |\psi_2\>$ linearly independent and $c_1,c_2\neq 0$.
+	The state $\phi$ is represented by the ray of a non-trivial linear combination of representatives of $\psi_1$ and $\psi_2$. That is, $|\phi\>=c_1|\psi_1\>+c_2|\psi_2\>$ with $c_1,c_2\neq0$.
 \end{condition}
 
-The second condition states that we can find a mixed state $\rho$ that can be expressed as a mixture of $\psi_1$ and $\psi_2$ as well as a mixture of $\phi$ and something else.
+The second condition states that the same statistical ensemble can be prepared by mixing different pure states.
 
-\begin{condition}[Multiple decomposition of mixtures]{QSUP-MIX}
-	There exists a mixed state $\rho$ that is a mixture of $\psi_1$ and $\psi_2$ and also a mixture of $\phi$ and some other state. That is, $\rho = p_{1} \rho_{\psi_1} + p_{2} \rho_{\psi_2} = p_{\phi} \rho_{\phi} + p_{\hat{\phi}} \rho_{\hat{\phi}}$ with $\rho_{\phi} \notin \{\rho_{\psi_1}, \rho_{\psi_2} \}$, $p_{1},p_{2},p_{\phi},p_{\hat{\phi}} \in (0,1)$ and $p_{1}+p_{2}=p_{\phi}+p_{\hat{\phi}}=1$.
+\begin{condition}[Multiple decompositions of mixtures]{QSUP-MIX}
+	There exists a statistical ensemble that can be prepared both as a non-trivial mixture of $\psi_1$ and $\psi_2$ and as a non-trivial mixture of $\phi$ and another pure state, with $\phi$ distinct from $\psi_1$ and $\psi_2$.
 \end{condition}
 
 \section{Theorem}
 
-The claim is that the two conditions are equivalent over the base premise.
+The claim is that the two conditions are equivalent over the background representation.
 
 \begin{thrm}
-	Conditions \ref{QSUP-PUR} and \ref{QSUP-MIX} are equivalent over \ref{QST}.
+	Over \ref{QE-DENS}, conditions \ref{QSUP-PUR} and \ref{QSUP-MIX} are equivalent for any two distinct pure states $\psi_1,\psi_2$ and any pure state $\phi$.
 \end{thrm}
 
-\begin{demonstration}
-	 Let us show that \ref{QSUP-PUR} implies \ref{QSUP-MIX}. Let $|\phi\> = c_1 |\psi_1\> + c_2 |\psi_2\>$. We define $|\hat{\phi}\> = c_1 |\psi_1\> - c_2 |\psi_2\>$. We have:
-	\begin{equation}
-		\begin{aligned}
-			| \phi \> \< \phi | &= c_1 c_1^* | \psi_1 \> \< \psi_1 | + c_1 c_2^* | \psi_1 \> \< \psi_2 | + c_2 c_1^* | \psi_2 \> \< \psi_1 | + c_2 c_2^* | \psi_2 \> \< \psi_2 | \\
-			| \hat{\phi} \> \< \hat{\phi} | &= c_1 c_1^* | \psi_1 \> \< \psi_1 | - c_1 c_2^* | \psi_1 \> \< \psi_2 | - c_2 c_1^* | \psi_2 \> \< \psi_1 | + c_2 c_2^* | \psi_2 \> \< \psi_2 | \\
-			| \phi \> \< \phi | &+ | \hat{\phi} \> \< \hat{\phi} | = 2 |c_1|^2 | \psi_1 \> \< \psi_1 | + 2 |c_2|^2 | \psi_2 \> \< \psi_2 |
-		\end{aligned}
-	\end{equation}\begin{equation}
-		\begin{aligned}
-			p_{\phi} &= \frac{\<\phi|\phi\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} 
-			&p_{\hat{\phi}} = \frac{\<\hat{\phi}|\hat{\phi}\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \\
-			p_{1} &= \frac{2 |c_1|^2 \< \psi_1 | \psi_1 \> }{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} 
-			&p_{2} = \frac{2 |c_2|^2 \< \psi_2 | \psi_2 \> }{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>}
-		\end{aligned}
-	\end{equation}
-	\begin{equation}
-		\begin{aligned}
-			\rho = p_{\phi} \rho_{\phi} + p_{\hat{\phi}} \rho_{\hat{\phi}} &= \frac{\<\phi|\phi\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \phi \> \< \phi |}{\< \phi | \phi \>} + \frac{\<\hat{\phi}|\hat{\phi}\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \hat{\phi} \> \< \hat{\phi} |}{\< \hat{\phi} | \hat{\phi} \>} \\
-			&=\frac{1}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \left(| \phi \> \< \phi | + | \hat{\phi} \> \< \hat{\phi} |\right) \\
-			&=\frac{1}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \left(2 |c_1|^2 | \psi_1 \> \< \psi_1 | + 2 |c_2|^2 | \psi_2 \> \< \psi_2 |\right) \\
-			&=\frac{2 |c_1|^2 \< \psi_1 | \psi_1 \>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \psi_1 \> \< \psi_1 |}{\< \psi_1 | \psi_1 \>} + \frac{2 |c_2|^2 \< \psi_2 | \psi_2 \>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \psi_2 \> \< \psi_2 |}{\< \psi_2 | \psi_2 \>} \\
-			&=p_{1} \rho_{\psi_1} + p_{2} \rho_{\psi_2} \\
-		\end{aligned}
-	\end{equation}
-	Note that $p_{\phi} + p_{\hat{\phi}}=1$, which means $\rho$ is a statistical mixture with the given probabilities. This also means that $p_1 + p_2 = 1$ as well. We therefore have a mixed state that can be expressed either as a mixture of $\psi_1$ and $\psi_2$ or of $\phi$ and $\hat{\phi}$.
-	
-	Let us now show that \ref{QSUP-MIX} implies \ref{QSUP-PUR}. Suppose that $\rho = p_{\phi} \rho_{\phi} + p_{\hat{\phi}} \rho_{\hat{\phi}} = p_{1} \rho_{\psi_1} + p_{2} \rho_{\psi_2}$. Since $\rho$ is the mixture of two pure states, it is supported by a two dimensional subspace. Since $\rho$ is a mixture of $\rho_{\psi_1}$ and $\rho_{\psi_2}$, the subspace is the span of $\psi_1$ and $\psi_2$. Since $\phi$ must be in that subspace as well, it must be a superposition of $\psi_1$ and $\psi_2$.
-	
-	Combining the two results, $\phi$ is a superposition of $\psi_1$ and $\psi_2$ if and only if there is mixed state $\rho$ that can be expressed as a mixture of both $\psi_1$ and $\psi_2$ as well as a mixture of $\phi$ and some other state.
-\end{demonstration}
+\begin{proof}
+	\ref{QSUP-PUR} $\implies$ \ref{QSUP-MIX}.
+	By Proposition \ref{superpositionDecompositions}, the linear combination in \ref{QSUP-PUR} gives a density operator $\rho$ with two decompositions, one using $\psi_1,\psi_2$ and the other using $\phi,\hat{\phi}$, with all weights strictly positive. The construction gives $\phi\neq\hat{\phi}$ and $\phi\notin\{\psi_1,\psi_2\}$. By \ref{QE-DENS}, both convex combinations represent preparations of the same ensemble by statistical mixing. Both mixtures are non-trivial, so \ref{QSUP-MIX} holds.
+
+	\ref{QSUP-MIX} $\implies$ \ref{QSUP-PUR}.
+	By \ref{QE-DENS}, the two preparations in \ref{QSUP-MIX} are represented by two convex decompositions of the same density operator. Non-triviality makes all weights strictly positive, and $\phi$ differs from $\psi_1$ and $\psi_2$. Proposition \ref{superpositionDecompositions} therefore gives $|\phi\>=c_1|\psi_1\>+c_2|\psi_2\>$ with $c_1,c_2\neq0$. Thus \ref{QSUP-PUR} holds.
+\end{proof}
 
 \section{Conclusion}
 
 Reducing pure state superpositions to properties of statistical mixtures means reducing an abstract mathematical property to a physically and operationally well-defined one. Therefore, it can provide more insights into the physics described by the math.
-	
+
 \end{document}
