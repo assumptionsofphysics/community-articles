@@ -32,10 +32,10 @@ defines the entropy for quantum ensembles. Here we show that once one is assumed
 
 \section{Mathematical prerequisite}
 
-We prove a useful mathematical result that follows from the affine structure of euclidean balls.
+We prove a useful mathematical result that follows from the affine structure of Euclidean balls.
 
 \begin{prop}\label{affineBall}
-	Let $B=\{r\in\mathbb{R}^n:\|r\|\leq1\}$ be an n-dimensional ball and let $u\in\mathbb{R}^n$ with $\|u\|=1$ be a point on the surface. If $f:B\to[0,1]$ is an affine function of $B$, with $f(u)=1$ and $f(-u)=0$, then
+	Let $B=\{r\in\mathbb{R}^n:\|r\|\leq1\}$ be an $n$-dimensional ball and let $u\in\mathbb{R}^n$ with $\|u\|=1$ be a point on the surface. If $f:B\to[0,1]$ is an affine function on $B$, with $f(u)=1$ and $f(-u)=0$, then
 	\begin{equation*}
 		f(r)=\frac{1+u\cdot r}{2}.
 	\end{equation*}
@@ -125,7 +125,7 @@ We are now ready to state and prove the theorem.
 			{\<\psi|\psi\>\<\phi|\phi\>},
 		\end{aligned}
 	\end{equation*}
-	where $\theta_{\psi\phi}$ is the angle between their Bloch vectors. This includes coincident states, for which $\theta_{\psi\phi}=0$. Therefore the conditional probability between two states is given by the Born rule. Which means \ref{BR-ORME} implies \ref{BR-BORN}.
+	where $\theta_{\psi\phi}$ is the angle between their Bloch vectors. This includes coincident states, for which $\theta_{\psi\phi}=0$. Therefore the conditional probability between two states is given by the Born rule. This means \ref{BR-ORME} implies \ref{BR-BORN}.
 	
 	\ref{BR-ORME} $\implies$ \ref{BR-ENT}.
 	Let $\rho$ be an arbitrary density operator. Choose an orthonormal basis of eigenvectors and write its spectral decomposition as
@@ -144,7 +144,7 @@ We are now ready to state and prove the theorem.
 			=-\sum_i\lambda_i\log\lambda_i =-\tr(\rho\log\rho).
 		\end{aligned}
 	\end{equation*}
-	Here $0\log0=0$, and the equality also holds when the entropy is infinite. Since $\rho$ was arbitrary, the entropy is given by the von Neumann entropy. Which means \ref{BR-ORME} implies \ref{BR-ENT}.
+	Here $0\log0=0$, and the equality also holds when the entropy is infinite. Since $\rho$ was arbitrary, the entropy is given by the von Neumann entropy. This means \ref{BR-ORME} implies \ref{BR-ENT}.
 	
 	\ref{BR-ENT} $\implies$ \ref{BR-ORME}.
 	Let $\psi,\phi$ be orthogonal pure states. For every $\lambda\in[0,1]$, the mixture $\rho_\lambda=\lambda\rho_\psi+(1-\lambda)\rho_\phi$ has eigenvalues $\lambda$ and $1-\lambda$, with any remaining eigenvalues zero. By \ref{BR-ENT}, $S(\rho_\lambda) = - \lambda \log\lambda - (1-\lambda) \log(1-\lambda)$. Thus the entropy of their mixtures obeys the Shannon formula for every mixing weight. By \ref{[B]MUTEX}, $\psi$ and $\phi$ are mutually exclusive. Therefore \ref{BR-ENT} implies \ref{BR-ORME}.
@@ -281,6 +281,6 @@ We are now ready to state and prove the theorem.
 
 \section{Conclusion}
 
-Once we identify the space of ensembles with the ones given by the density operators, assuming the Born rule, the von Neumann entropy or mutual exclusivity for orthogonal states is equivalent. The main extra requirement is the consistency between mutual exclusivity as defined over the conditional probability (i.e. $\psi$ and $\phi$ are mutually exclusive if and only if preparing one gives zero probability of having prepared the other) or over the entropy (i.e. $\phi$ and $\psi$ are mutually exclusive if and only if the entropy of all their statistical mixtures is the Shannon entropy). These conditions are additional, and are not implied by the ensemble space of density operators.
+Once we identify the space of ensembles with the space of density operators, assuming the Born rule, the von Neumann entropy or mutual exclusivity for orthogonal states is equivalent. The main extra requirement is the consistency between mutual exclusivity as defined over the conditional probability (i.e. $\psi$ and $\phi$ are mutually exclusive if and only if preparing one gives zero probability of having prepared the other) and over the entropy (i.e. $\phi$ and $\psi$ are mutually exclusive if and only if the entropy of all their statistical mixtures is the Shannon entropy). These conditions are additional, and are not implied by the ensemble space of density operators.
 	
 \end{document}
