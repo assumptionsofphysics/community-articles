@@ -15,7 +15,7 @@
 \maketitle
 	
 \begin{abstract}
-	We show that the Born rule in quantum mechanics coincides with the definition of entropy. That is, assuming that conditional probability is given by the Born rule is equivalent to assuming that the entropy is given by the von Neumann entropy.
+	We show that the following conditions are equivalent: conditional probability is given by the Born rule, the entropy is given by the von Neumann entropy and mutual exclusivity corresponds to orthogonality.
 \end{abstract}
 
 \section{Introduction}
@@ -28,161 +28,259 @@ defines conditional probability for two states: the probability of measuring sta
 \begin{equation}
 	S(\rho) = - \tr(\rho \log \rho)
 \end{equation}
-defines the entropy for quantum ensembles. Here we show that any of the two can be defined on top of the other, meaning that they impose the same structure.
+defines the entropy for quantum ensembles. Here we show that once one is assumed, the other is implied. Moreover, we also show that just requiring that mutual exclusivity corresponds to orthogonality is also equivalent to those definitions, and therefore represents a conceptually simpler and crisper requirement.
 
-\section{Core insight}
+\section{Mathematical prerequisite}
 
-Let us first show that, once the full framework of quantum mechanics is assumed, there is an invertible function between the Born rule and the entropy of equal mixtures of two states.
+We prove a useful mathematical result that follows from the affine structure of euclidean balls.
 
-\begin{prop}[Born rule is entropy]\label{QM-ENT-PROB}
-	Let $\psi, \phi \in P[\mathcal{H}]$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
+\begin{prop}\label{affineBall}
+	Let $B=\{r\in\mathbb{R}^n:\|r\|\leq1\}$ be an n-dimensional ball and let $u\in\mathbb{R}^n$ with $\|u\|=1$ be a point on the surface. If $f:B\to[0,1]$ is an affine function of $B$, with $f(u)=1$ and $f(-u)=0$, then
+	\begin{equation*}
+		f(r)=\frac{1+u\cdot r}{2}.
+	\end{equation*}
 \end{prop}
 
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}[scale = 1]
-		\draw (0,0) circle (2);
-		\node at (-2.3,0) {$-$};
-		\node at (2.3,0) {$+$};
-		\node at (2,1.4) {$\psi$};
-		\node at (2,-1.4) {$\phi$};
-		\draw (-2,0) -- (2,0);
-		\begin{scope}
-			\clip(0,0) circle (2);
-			\draw (0,0) -- (2,1.4);
-			\draw (0,0) -- (2,-1.4);
-			\draw (1.634,1.4) -- (1.634,-1.4);
-		\end{scope}
-		\fill (1.634,0) circle (0.05);
-		\node at (1.8,.2) {$\rho$};
-	\end{tikzpicture}
-	\caption{Geometric diagonalization of an equal mixture of two states.}\label{rp-qm-geometricDiagonalization}
-\end{figure}
-
 \begin{proof}
-	We want to show that there exists an invertible relationship between the Born rule and the entropy for equal mixtures of two states. To gain better insight, let us construct the proof geometrically as in Fig. \ref{rp-qm-geometricDiagonalization}. Let $\psi$ and $\phi$ be two pure states. Their equal mixture $\rho=\frac{1}{2}\rho_{\psi} + \frac{1}{2}\rho_{\phi}$ will be the midpoint between them. To calculate the entropy, we need to diagonalize $\rho$ and calculate the Shannon entropy from the eigenvalues. To diagonalize $\rho$ we need to express it as a mixture of two orthogonal states $+$ and $-$. But $+$ and $-$ will be orthogonal only if they are opposite points on the Bloch sphere. Therefore, $\rho$ is diagonalized by $+$ and $-$ if and only if it lies on the axis identified by $+$ and $-$ as we see in Fig. \ref{rp-qm-geometricDiagonalization}. Geometrically, we will have $\rho = \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-}$. Using trigonometry we have:
-	\begin{equation}
-		\begin{aligned}
-			\rho &= \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-} = \frac{1+\cos \theta_{\psi+}}{2}\rho_{+} + \frac{1-\cos \theta_{\psi+}}{2}\rho_{-}.
-		\end{aligned}
-	\end{equation}
-	
-	Now recall that, geometrically, the Born rule represents the cosine square of the half-angle between two states. That is,
-	\begin{equation}
-		\begin{aligned}
-			p(\psi|\phi) &= \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>} = \cos^2 \frac{\theta_{\psi\phi}}{2} = \cos^2 \theta_{\psi+} \\
-			\rho &= \frac{1+\sqrt{p(\phi|\psi)}}{2}\rho_{+} + \frac{1-\sqrt{p(\phi|\psi)}}{2}\rho_{-}.
-		\end{aligned}
-	\end{equation}
-	
-	Since $+$ and $-$ are orthogonal, the entropy of $\rho$ is
-	\begin{equation}
-		\begin{aligned}
-			S(\rho) = - \tr(\rho \log \rho) = - \frac{1+\sqrt{p(\phi|\psi)}}{2} \log \frac{1+\sqrt{p(\phi|\psi)}}{2} - \frac{1-\sqrt{p(\phi|\psi)}}{2} \log \frac{1-\sqrt{p(\phi|\psi)}}{2}.
-		\end{aligned}
-	\end{equation}
-	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\def\xi{0.25};
-			\def\vi{1.25};
-			\def\m{1};
-			\def\b{1};
-			\pgfplotsset{ticks=none}
-			\begin{axis}[
-				width=5.3cm,
-				height=4.5cm,				
-				axis lines=middle,
-				axis line style={-},
-				clip=false,
-				xlabel=$p(\phi | \psi)$,
-				xlabel style={below=5pt},
-				ylabel=$S\left(\frac{1}{2} \rho_{\phi} + \frac{1}{2} \rho_{\psi}\right)$,
-				ylabel style={above=2pt, left},
-				xmin=0,xmax=1.1,
-				ymin=0,ymax=0.8,
-				domain=0:4,
-				]
-				\addplot[black,samples=69]{ - ((1+sqrt(x))/2) * ln((1+sqrt(x))/2) - ((1-sqrt(x))/2) * ln((1-sqrt(x))/2)}
-				node [pos=0,left] {$1$};
-			\end{axis}
-		\end{tikzpicture}
-		\caption {Entropy of a mixture of two pure states as a function of their Born rule.} \label{fig_rp_qm_entropyVsProb}
-	\end{figure}
-	The relationship is plotted in Fig. \ref{fig_rp_qm_entropyVsProb}: it is strictly decreasing and, therefore, invertible. If we are given the entropy of all equal mixtures of pairs of states we would be able to recover the Born rule and vice-versa.
+	By affinity, write $f(r)=c+d\cdot r$ for some $c \in \mathbb{R}$ and $d \in \mathbb{R}^n$. Since $f(u)\neq f(-u)$, we have $d\neq0$. By Cauchy--Schwarz, the minimum and maximum of $d\cdot r$ on $B$ are $-\|d\|$ and $\|d\|$, attained at $r=-\frac{d}{\|d\|}$ and $r=\frac{d}{\|d\|}$ respectively. Since $f$ takes values in $[0,1]$ and attains both endpoints, we have $c-\|d\|=0$ and $c+\|d\|=1$. Thus $c=\|d\|=\frac{1}{2}$. Moreover, $f(u)=1$ gives $d\cdot u=\frac{1}{2}$, so
+	\begin{equation*}
+		\|2d-u\|^2
+		=4\|d\|^2-4d\cdot u+\|u\|^2
+		=1-2+1=0.
+	\end{equation*}
+	Therefore $d=\frac{u}{2}$, and
+	\begin{equation*}
+		f(r)=c+d\cdot r=\frac{1+u\cdot r}{2}.
+	\end{equation*}
 \end{proof}
 
-\begin{coro}[Orthogonality is mutual exclusivity]\label{rp-qm-orthoIsMutex}
-	Given $\psi, \phi \in P[\mathcal{H}]$, $\<\phi|\psi\> = 0 \iff p(\phi | \psi) = 0 \iff S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) = 1$.
-\end{coro}
+\section{Conditions}
 
-\section{Premises and conditions}
+We now state the conditions for the theorem, starting with the background conditions. The following condition provides the standard Hilbert space representation without specifying the Born rule or the entropy.
 
-We now want to state the overall claim in terms of dependency of definitions.
+\begin{condition}[Ensembles and quantum states]{QE-DENS}
+	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$.
+\end{condition}
+In terms of notation, we will use $\psi \in \mathcal{P}(\mathcal{H})$ for states, $|\psi\> \in \mathcal{H}$ for (typically normalized) vector representatives and $\rho_{\psi} \in \mathcal{D}(\mathcal{H})$ for a density operator representing a pure state.
 
-The following condition represents our base theory, and defines the space of ensembles together with basic necessary requirements for conditional probability and entropy.
+The following condition states a standard rule for conditional probabilities.
 
-\begin{condition}[Ensembles and quantum states]{EQST}
-	The space of ensembles $E(\mathcal{H}$) of a quantum system is represented by the convex space of all density operators (i.e positive semi-definite trace one self-adjoint operators) over a suitable separable inner product space $\mathcal{H}$. The state space is the set of extreme points, which coincides with the projective space $P(\mathcal{H})$. The ensemble space is equipped with a function $S : E(\mathcal{H}) \to \mathbb{R}$ where $S(\rho)$ returns the entropy for ensemble $\rho$. The ensemble space is also equipped with a function $p(\cdot | \cdot) : P(\mathcal{H}) \times E(\mathcal{H}) \to [0,1]$, where $p(\psi | \rho)$ returns the probability of finding $\psi$ having prepared $\rho$. This function is affine in the second argument (i.e. $p(\phi | \sum p_i \psi_i) = \sum_i p_i p(\phi | \psi_i)$ ) and returns one if and only if the initial and final states are the same (i.e. $p(\phi | \psi) = 1 \iff \phi = \psi$ for all $\psi, \phi \in P(\mathcal{H})$).
+\begin{condition}[Probabilities of statistical mixtures]{[B]PMIX}
+	The conditional probability of a statistical mixture is the statistical mixture of the conditional probabilities. That is,
+	$p(\psi\mid\sum_i \lambda_i\rho_i)=\sum_i \lambda_i p(\psi\mid\rho_i)$.
 \end{condition}
 
-\begin{coro}
-	Since every ensemble $\rho$ can be expressed as the convex combination of pure states, and $p$ is affine in its second argument, $p$ is fully specified by its values on pure states.
-\end{coro}
-
-The following condition links the inner product to the conditional probability.
-
-\begin{condition}[Born rule]{BR-BORN}
-	The conditional probability $p$ is given by the Born rule: $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
-\end{condition}
-
-The following condition imposes that the entropy is the von Neumann entropy.
-
-\begin{condition}[Von Neumann entropy]{BR-ENT}
-	The entropy function $S$ is given by the Shannon entropy: $S(\rho) = - \tr(\rho \log \rho)$.
-\end{condition}
-
-The following condition makes sure that mutual exclusivity is consistently defined across conditional probability and entropy.
+The following condition makes the properties of mutual exclusivity explicit. The concept itself is the idea that only one outcome can happen at a time. This can be characterized in terms of probabilities and entropy.
 
 \begin{condition}[Mutual exclusivity conditions]{[B]MUTEX}
-	Let $\psi_i \in P(\mathcal{H})$ be a countable sequence of states. Then $p(\psi_i | \psi_j) = 0$ for all $i \neq j$ if and only if $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$.
+	Let $\psi_i \in \mathcal{P}$ be a countable sequence of states. Then the following are equivalent:
+	\begin{itemize}
+		\item $\psi_i$ are mutually exclusive
+		\item $p(\psi_i | \psi_j) = \delta_{ij}$
+		\item the entropy obeys $S(\sum_i p_i \rho_{\psi_i}) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$.
+	\end{itemize}
 \end{condition}
 
+We now state the conditions we will want to prove equivalent.
+
+\begin{condition}[Conditional probability from Born rule]{BR-BORN}
+	The conditional probability between two states is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\end{condition}
+
+\begin{condition}[Von Neumann entropy]{BR-ENT}
+	The entropy function is given by the von Neumann entropy. That is, $S(\rho) = - \tr(\rho \log \rho)$.
+\end{condition}
+
+\begin{condition}[Orthogonality is mutual exclusivity]{BR-ORME}
+	Mutual exclusivity is represented by orthogonality. That is, $\psi$ and $\phi$ are mutually exclusive if $\<\psi | \phi \> = 0$.
+\end{condition}
+
+\section{Theorem}
+
+We are now ready to state and prove the theorem.
+
 \begin{thrm}
-	Over \ref{EQST}, if two conditions among \ref{BR-BORN}, \ref{BR-ENT} and \ref{[B]MUTEX} are assumed, the third is implied.
+	Over \ref{QE-DENS}+\ref{[B]MUTEX}+\ref{[B]PMIX}, conditions \ref{BR-BORN}, \ref{BR-ENT} and \ref{BR-ORME} are equivalent and are not guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Let us show that \ref{BR-BORN} and \ref{BR-ENT} imply \ref{[B]MUTEX}. Given a sequence of states $\psi_i \in P(\mathcal{H})$, we can find a sequence of normalized representatives $|\psi_i\>$. Suppose $\psi_i$ are pairwise orthogonal, then $|\psi_i\>$ are orthogonal as well. Let $\rho = \sum_i p_i \psi_i$. Then $ - \rho \log \rho = - \sum_i p_i \log p_i \psi_i$ and $-\tr(\rho \log \rho) = - \sum_i p_i \log p_i$. Conversely, suppose $|\psi_i \>$ is a sequence of normalized representatives of not necessarily pairwise orthogonal states. Since $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$, in particular we will have $S\left(\frac{1}{2} \rho_{\psi_i} + \frac{1}{2} \rho_{\psi_j} \right) = 1$ for all $i \neq j$. By \ref{rp-qm-orthoIsMutex}, $p(\psi_i|\psi_j) = 0$ for all $i \neq j$.
+	\ref{BR-BORN} $\implies$ \ref{BR-ORME}.
+	Let $\psi,\phi$ be orthogonal pure states. By \ref{BR-BORN}, $p(\psi|\psi)=p(\phi|\phi)=1$, and $p(\psi|\phi)=p(\phi|\psi)=0$.
+	By \ref{[B]MUTEX}, the two preparations are mutually exclusive. Therefore orthogonal pure states are mutually exclusive. This means that \ref{BR-BORN} implies \ref{BR-ORME}.
 	
-	Let us show that \ref{BR-BORN} and \ref{[B]MUTEX} imply \ref{BR-ENT}. Given an ensemble $\rho \in E(\mathcal{H})$ we can find a sequence of orthogonal states $\psi_i$ such that $\rho = \sum_i p_i \psi_i$. Since they are orthogonal, by \ref{BR-BORN} we have $p(\psi_i|\psi_j) = \frac{\< \psi_i | \psi_j \>\< \psi_j | \psi_i \>}{\< \psi_i | \psi_i \>\< \psi_j | \psi_j \>} = 0$ for all $i \neq j$. By \ref{[B]MUTEX}, $S(\rho) = - \sum_i p_i \log p_i = - \tr(\sum_i p_i \log p_i \psi_i) = - \tr(\rho \log \rho)$.
+	\ref{BR-ORME} $\implies$ \ref{BR-BORN}.
+	Consider two pure states $\psi,\phi$ and a two-dimensional subspace containing representatives of both. Let $\psi^\perp$ be the state orthogonal to $\psi$ in this subspace. By \ref{BR-ORME}, $\psi$ and $\psi^\perp$ are mutually exclusive. Condition \ref{[B]MUTEX} therefore gives
+	\begin{equation*}
+		p(\psi|\psi)=1,
+		\qquad
+		p(\psi|\psi^\perp)=0.
+	\end{equation*}
+	By \ref{[B]PMIX}, $p(\psi|\rho)$ is an affine function on the corresponding Bloch ball, taking values in $[0,1]$. It takes the values $1$ and $0$ at the opposite poles $\psi$ and $\psi^\perp$. Proposition \ref{affineBall} gives
+	\begin{equation*}
+		\begin{aligned}
+			p(\psi|\phi)
+			&=\frac{1+\cos\theta_{\psi\phi}}{2}
+			=\cos^2\left(\frac{\theta_{\psi\phi}}{2}\right)
+			=\frac{\<\phi|\psi\>\<\psi|\phi\>}
+			{\<\psi|\psi\>\<\phi|\phi\>},
+		\end{aligned}
+	\end{equation*}
+	where $\theta_{\psi\phi}$ is the angle between their Bloch vectors. This includes coincident states, for which $\theta_{\psi\phi}=0$. Therefore the conditional probability between two states is given by the Born rule. Which means \ref{BR-ORME} implies \ref{BR-BORN}.
 	
-	Let us show that \ref{BR-ENT} and \ref{[B]MUTEX} imply \ref{BR-BORN}. Let $\psi, \phi \in P(\mathcal{H})$. By the same arguments used in the proof of \ref{rp-qm-geometricDiagonalization}, $\< \phi | \psi \> = 0$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) = 1$ and, by \ref{[B]MUTEX}, if and only if $p(\phi | \psi) = 0$. Therefore, we recover the idea that orthogonality from the inner product corresponds to mutual exclusivity in terms of conditional probabilities. Now, let $\psi, \phi \in P(\mathcal{H})$ not necessarily orthogonal, and let $V \subseteq E(\mathcal{H})$ be the convex set of all ensembles that have support on the subspace defined by the span of $\psi$ and $\phi$. This will be a Bloch ball and will contain a unique state $\psi^{\perp}$ that is orthogonal to $\psi$. Consider $p(\psi | \rho)$ where $\rho \in V$. This is an affine function of the Bloch ball that will give one only on $\psi$ and zero only on $\psi^{\perp}$. Given that the range of $p$ is $[0,1]$, $p$ must take its extreme values on $\psi$ and $\phi$. Therefore, $\psi$ and $\psi^{\perp}$ must be opposite points on the ball, and $p(\psi | \phi)$ is given by the normalized distance between $\psi^{\perp}$ and the plane on which $\phi$ resides as shown in Fig. \ref{rp-qm-geometricConditionalProbability}. Following the same trigonometric arguments in the proof of \ref{rp-qm-geometricDiagonalization}, $p(\psi | \phi) = \frac{1 + \cos \theta_{\phi\psi}}{2} = \cos^2 \frac{\theta_{\psi\phi}}{2} = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$, which recovers \ref{BR-BORN}.
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}[scale = 1, >=Triangle]
-		\draw (0,0) circle (2);
-		\node at (0,-2) [below] {$\psi^{\perp}$};
-		\node at (0,2) [above] {$\psi$};
-		\node at ($(0,0)!0.78!(1.4,2)$) [above right]  {$\phi$};
-		\draw (0,-2) -- (0,2);
-		\draw (0,-2) -- (0,2);
-		\begin{scope}
-			\clip(0,0) circle (2);
-			\draw (0,0) -- (1.4,2);
-			\draw (1.4,1.634) -- (-1.4,1.634);
-		\end{scope}
-		\draw[decorate,decoration={brace, amplitude = 6pt, raise = 0pt}] (0,-2) -- (0,1.634) node[midway, xshift = -18pt]{\footnotesize $p(\psi | \phi)$};
-		\draw [->] (2.5,-2) node[below] {$0$} -- node[right] {$p(\psi | \cdot )$} (2.5,2) node[above] {$1$};
-	\end{tikzpicture}
-	\caption{Recovering the Born rule as an affine function of the ensemble space.}\label{rp-qm-geometricConditionalProbability}
-\end{figure}
+	\ref{BR-ORME} $\implies$ \ref{BR-ENT}.
+	Let $\rho$ be an arbitrary density operator. Choose an orthonormal basis of eigenvectors and write its spectral decomposition as
+	\begin{equation*}
+		\rho=\sum_i\lambda_i\rho_{\psi_i},
+		\qquad
+		\lambda_i\geq0,
+		\qquad
+		\sum_i\lambda_i=1.
+	\end{equation*}
+	The states $\psi_i$ are pairwise orthogonal. By \ref{BR-ORME} and \ref{[B]MUTEX}, $p(\psi_i|\psi_j)=\delta_{ij}$. Applying \ref{[B]MUTEX} to the family then gives
+	\begin{equation*}
+		\begin{aligned}
+			S(\rho)
+			&=S\left(\sum_i\lambda_i\rho_{\psi_i}\right)
+			=-\sum_i\lambda_i\log\lambda_i =-\tr(\rho\log\rho).
+		\end{aligned}
+	\end{equation*}
+	Here $0\log0=0$, and the equality also holds when the entropy is infinite. Since $\rho$ was arbitrary, the entropy is given by the von Neumann entropy. Which means \ref{BR-ORME} implies \ref{BR-ENT}.
+	
+	\ref{BR-ENT} $\implies$ \ref{BR-ORME}.
+	Let $\psi,\phi$ be orthogonal pure states. For every $\lambda\in[0,1]$, the mixture $\rho_\lambda=\lambda\rho_\psi+(1-\lambda)\rho_\phi$ has eigenvalues $\lambda$ and $1-\lambda$, with any remaining eigenvalues zero. By \ref{BR-ENT}, $S(\rho_\lambda) = - \lambda \log\lambda - (1-\lambda) \log(1-\lambda)$. Thus the entropy of their mixtures obeys the Shannon formula for every mixing weight. By \ref{[B]MUTEX}, $\psi$ and $\phi$ are mutually exclusive. Therefore \ref{BR-ENT} implies \ref{BR-ORME}.
+	
+	To show that the conditions are not guaranteed, it suffices to show a mathematical model that satisfies the background conditions while not satisfying the additional conditions. We do not need to show that this mathematical model represents a valid physical system. The general idea is to construct a model where all states have some intrinsic noise, so that no mutually exclusive pairs of states exist and perfect distinguishability fails. Consider
+	$\mathcal{H}=\mathbb{C}^2$, with pure states represented by the
+	Bloch sphere and ensembles by the full space
+	$\mathcal{D}(\mathcal{H})$. Thus \ref{QE-DENS} holds.
+	
+	Define
+	\begin{equation*}
+		f(\rho)=\frac{I}{4}+\frac{\rho}{2},
+		\qquad
+		h(t)=-t\log t-(1-t)\log(1-t),
+		\qquad
+		h_0=h\left(\frac{1}{4}\right).
+	\end{equation*}
+	Assign conditional probabilities and entropy by
+	\begin{equation*}
+		\begin{aligned}
+			p(\psi|\rho)
+			&=\frac{4}{3}\tr\left(\rho_\psi f(\rho)\right)
+			=\frac{1}{3}+\frac{2}{3}\tr(\rho_\psi\rho),\\
+			S(\rho)
+			&=-\tr\left(f(\rho)\log f(\rho)\right)-h_0.
+		\end{aligned}
+	\end{equation*}
+	The subtraction removes the constant entropy introduced by
+	the noise on pure preparations.
+	
+	These are valid binary-test probabilities. For each $\psi$,
+	define the available test by the two effects
+	\begin{equation*}
+		E_\psi=\frac{I}{3}+\frac{2}{3}\rho_\psi,
+		\qquad
+		I-E_\psi=\frac{2}{3}(I-\rho_\psi).
+	\end{equation*}
+	The eigenvalues of $E_\psi$ are $1$ and $\frac{1}{3}$, so
+	$0\leq E_\psi\leq I$. The two outcome probabilities are
+	$\tr(E_\psi\rho)=p(\psi|\rho)$ and $1-p(\psi|\rho)$.
+	Take these tests and their classical randomizations and
+	post-processings as the available measurements. None can
+	perfectly distinguish two preparations: the first outcome
+	always has probability at least $\frac{1}{3}$, while the
+	second never has probability greater than $\frac{2}{3}$.
+	Randomization and post-processing cannot give perfect
+	discrimination when none of the constituent tests does.
+	Thus there are no mutually exclusive pairs of preparations.
+	
+	We first verify \ref{[B]PMIX}. For any finite or countable
+	statistical mixture, with $q_i\geq0$ and $\sum_iq_i=1$,
+	\begin{equation*}
+		\begin{aligned}
+			p\left(\psi\middle|\sum_iq_i\rho_i\right)
+			=\frac{1}{3}
+			+\frac{2}{3}\sum_iq_i\tr(\rho_\psi\rho_i)
+			=\sum_iq_i\left(
+			\frac{1}{3}+\frac{2}{3}\tr(\rho_\psi\rho_i)
+			\right)
+			=\sum_iq_i p(\psi|\rho_i).
+		\end{aligned}
+	\end{equation*}
+	Therefore \ref{[B]PMIX} holds. Moreover,
+	\begin{equation*}
+		\frac{1}{3}\leq p(\psi|\rho)\leq1,
+		\qquad p(\psi|\psi)=1.
+	\end{equation*}
+	
+	Next, we establish the entropy bounds. If $\rho$ has
+	eigenvalues $t$ and $1-t$, then $f(\rho)$ has eigenvalues
+	$\frac{1}{4}+\frac{t}{2}$ and
+	$\frac{3}{4}-\frac{t}{2}$. Both lie in
+	$[\frac{1}{4},\frac{3}{4}]$. Since $h$ is symmetric about
+	$\frac{1}{2}$ and increases on $[0,\frac{1}{2}]$,
+	\begin{equation*}
+		h_0\leq-\tr\left(f(\rho)\log f(\rho)\right)\leq\log2.
+	\end{equation*}
+	Consequently,
+	\begin{equation*}
+		0\leq S(\rho)\leq\log2-h_0<\log2.
+	\end{equation*}
+	For every pure preparation, the eigenvalues of $f(\rho_\psi)$
+	are $\frac{3}{4}$ and $\frac{1}{4}$, so
+	\begin{equation*}
+		S(\rho_\psi)=h_0-h_0=0.
+	\end{equation*}
+	
+	We can now verify \ref{[B]MUTEX} for every nonempty finite
+	or countable family. For a singleton family, mutual
+	exclusivity is trivial, the probability table is
+	$p(\psi|\psi)=1$, and its entropy is
+	$S(\rho_\psi)=0=-1\log1$. All three criteria hold.
+	
+	For a family with at least two members, no pair is mutually
+	exclusive. The probability-table criterion also fails,
+	because
+	\begin{equation*}
+		p(\psi_i|\psi_j)\geq\frac{1}{3}>0
+		\qquad\text{for }i\neq j.
+	\end{equation*}
+	Finally, choose two indices and assign them weights
+	$\frac{1}{2}$, with all remaining weights zero. Then
+	\begin{equation*}
+		S\left(\frac{1}{2}\rho_{\psi_i}
+		+\frac{1}{2}\rho_{\psi_j}\right)
+		\leq\log2-h_0
+		<\log2
+		=-2\frac{1}{2}\log\frac{1}{2}.
+	\end{equation*}
+	Thus the entropy does not obey the Shannon formula for
+	every choice of weights. All three criteria fail for
+	every such family. Therefore \ref{[B]MUTEX} holds.
+	
+	Nevertheless, all three additional conditions fail.
+	For orthogonal $\psi,\phi$,
+	\begin{equation*}
+		p(\psi|\phi)=\frac{1}{3}\neq0,
+	\end{equation*}
+	so \ref{BR-BORN} fails. Those orthogonal states are not
+	mutually exclusive, so \ref{BR-ORME} fails. Finally,
+	\begin{equation*}
+		S\left(\frac{I}{2}\right)
+		=\log2-h_0
+		\neq\log2
+		=-\tr\left(\frac{I}{2}\log\frac{I}{2}\right),
+	\end{equation*}
+	so \ref{BR-ENT} fails.
+	
+	This model satisfies
+	\ref{QE-DENS}+\ref{[B]PMIX}+\ref{[B]MUTEX}
+	while violating \ref{BR-BORN}, \ref{BR-ORME} and
+	\ref{BR-ENT}. Therefore these conditions are not guaranteed.
 \end{proof}
 
 \section{Conclusion}
 
-Once we identify the space of ensembles with the ones given by the density operators, assuming the Born rule is equivalent to assuming the von Neumann entropy. The only extra requirement is the consistency between mutual exclusivity as defined over the conditional probability (i.e. $\psi$ and $\phi$ are mutually exclusive if and only if preparing one gives zero probability of having prepared the other) or over the entropy (i.e. $\phi$ and $\psi$ are mutually exclusive if and only if the entropy of their mixture is the Shannon entropy).
+Once we identify the space of ensembles with the ones given by the density operators, assuming the Born rule, the von Neumann entropy or mutual exclusivity for orthogonal states is equivalent. The main extra requirement is the consistency between mutual exclusivity as defined over the conditional probability (i.e. $\psi$ and $\phi$ are mutually exclusive if and only if preparing one gives zero probability of having prepared the other) or over the entropy (i.e. $\phi$ and $\psi$ are mutually exclusive if and only if the entropy of all their statistical mixtures is the Shannon entropy). These conditions are additional, and are not implied by the ensemble space of density operators.
 	
 \end{document}
