@@ -5,121 +5,216 @@
 \usetikzlibrary{decorations.pathreplacing}
 
 
-\title{Classical uncertainty principle}
+\title{Classical uncertainty relation}
 \author{Gabriele Carcassi}
 \category{Classical mechanics}
-\tags{Uncertainty principle, Entropy}
+\tags{Uncertainty relation, Entropy}
 
 \begin{document}
-	
+
 \maketitle
-	
+
 \begin{abstract}
-	We show that the lower bound on the entropy given by the third law of thermodynamics gives rise the classical uncertainty principle $ \sigma_q \sigma_p \geq \frac{\hbar}{e}$. For non-conjugate variables, the relationship becomes $\sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln |\{f,g\}|]}$, where $E[\ln |\{f,g\}|]$ is the expectation of the logarithm of the absolute value of the Poisson bracket.
+	We show that a zero lower bound on physical entropy, motivated by the third law of thermodynamics, gives rise to the classical uncertainty relation $\sigma_q\sigma_p\geq\frac{\hbar}{e}$. For non-conjugate variables, the relation becomes $\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}$, where $E[\ln|\{f,g\}|]$ is the expectation of the logarithm of the absolute value of the Poisson bracket.
 \end{abstract}
 
 \section{Introduction}
 
-The third law of thermodynamics states that the entropy of a system cannot be negative, imposing a lower bound on the entropy of any system. Here we show incorporating that bound in classical statistical mechanics recover a classical version of the quantum uncertainty principle:
-$$ \sigma_q \sigma_p \geq \frac{h}{2\pi e} = \frac{\hbar}{e}. $$
-In this context, $h$ is defined as a region of phase space for which a uniform distribution has zero entropy. The $2\pi e$ factor appears because the gaussian is the distribution that minimizes the uncertainty.
+The third law of thermodynamics provides a physical reference for zero entropy. Here we show that imposing a non-negative entropy in classical statistical mechanics gives a classical version of the quantum uncertainty relation:
+\begin{equation}
+	\sigma_q\sigma_p\geq\frac{h}{2\pi e}=\frac{\hbar}{e}.
+\end{equation}
+In this context, $h$ is the phase-space area for which a uniform distribution has zero entropy, and $\hbar=\frac{h}{2\pi}$. The $2\pi e$ factor appears because the product of two independent Gaussian distributions minimizes the uncertainty at fixed entropy.
 
-Note: for convenience, the entropy is measured in nats, meaning that we use the natural logarithm and we set the Boltzman constant to $k_B=1$. Since we are looking at zero entropy, a change of units does not change the result.
+For convenience, entropy is measured in nats, meaning that we use the natural logarithm and set the Boltzmann constant to $k_B=1$. Since we are looking at zero entropy, a change of entropy units does not change the result.
 
-\section{Information vs physical entropy}
+\section{Mathematical prerequisites}
 
-\begin{condition}[Classical phase space]{CPS}
-	The space of states for a classical system with $n$ degrees of freedom (DOFs) is given by all possible values of position and momentum $(q_i,p_i) \in \mathbb{R}^{2n}$. The count of configurations for each DOF over a region $\Sigma$ is given $\int_{\Sigma} dp^i dq_i = \int_{\Sigma} \omega$ and the count of states is given by the Liouville measure $\mu(U) = \int_U dq^1\cdots dq^n dp_1 \cdots dp_n = \int_U \omega^n$.
-	
-	A statistical ensemble is given by a probability distribution $\rho(q^i, p_i)$ (i.e. a probability measure that is absolutely continuous with respect to the Liouville measure). The entropy is given by the Gibbs/Shannon entropy
-	$$ S[\rho] = - \int_M \rho \ln (h^n \rho) \, dq^1\cdots dq^n dp_1 \cdots dp_n,$$
-	where $h$ is a constant with units of phase space areas.
-\end{condition}
+We first establish the mathematical results relating entropy, uncertainty and changes of variables. For a probability density $\rho$ on $\mathbb{R}^{2n}$, define $S[\rho]=-\int\rho\ln(h^n\rho)\,d\mu$, where $h>0$ is fixed, $\mu$ is Lebesgue measure and $0\ln0=0$. The entropy is understood wherever the integral is well-defined, including extended values. We write $E$ for expectation with respect to the density under consideration.
 
-Note that we introduced a constant $h$ to make the formula of the entropy dimensionally correct. The physical meaning of $h$ is connected to regions corresponding to zero entropy.
-
-\begin{coro}
-	Let $\rho_U$ be the uniform probability distribution over a region $U$ of phase space. Then $S[\rho_U] = 0$ if and only if $\mu(U) = h^n$.
-\end{coro}
+\begin{prop}\label{uniformEntropy}
+	Let $\rho_U$ be the uniform probability density over a measurable region $U$ with $0<\mu(U)<\infty$. Then $S[\rho_U]=0$ if and only if $\mu(U)=h^n$.
+\end{prop}
 
 \begin{proof}
-	The entropy for a uniform distribution reduces to $S[\rho_U] = \ln \frac{\mu(U)}{h^n}$. The logarithm is zero if and only if $\frac{\mu(U)}{h^n} = 1$.
+	The entropy for a uniform distribution reduces to $S[\rho_U]=\ln\frac{\mu(U)}{h^n}$. The logarithm is zero if and only if $\frac{\mu(U)}{h^n}=1$.
 \end{proof}
 
-The third law of thermodynamics imposes that the entropy of every physical system is non-negative. If a classical statistical ensemble corresponds to a physically realizable state, then its entropy must be non-negative as well. We have the following condition.
+\begin{prop}\label{entropyVariance}
+	Let $\sigma(q,p)$ be a probability density with finite variances $\sigma_q^2,\sigma_p^2>0$. Then $S[\sigma]\leq\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)$, or equivalently $\sigma_q\sigma_p\geq\frac{h}{2\pi e}e^{S[\sigma]}$. Equality holds if and only if $q$ and $p$ are independent Gaussian variables. The entropy may take the value $-\infty$, with $e^{-\infty}=0$.
+\end{prop}
 
-\begin{condition}[Lower entropic bound]{ZENT}
-	The entropy of each independent DOF must be non-negative. That is, if $q$ and $p$ form an independent DOF, then $S[\rho(q,p)] \geq 0$ where $\rho(q,p)$ is the marginal over the DOF.
+\begin{proof}
+	We first find the stationary densities for the product of the variances at a fixed finite entropy $S$. We use Lagrange multipliers to vary $\sigma_q^2\sigma_p^2=\int(q-\mu_q)^2\rho\,dqdp\int(p-\mu_p)^2\rho\,dqdp$, where $\mu_q$ and $\mu_p$ are the means of $q$ and $p$, under two constraints: $\rho$ integrates to $1$ and its entropy is $S$. We have
+	\begin{equation*}
+		\begin{aligned}
+			L={}&\int(q-\mu_q)^2\rho\,dqdp
+			\int(p-\mu_p)^2\rho\,dqdp\\
+			&+\lambda_1\left(\int\rho\,dqdp-1\right)
+			+\lambda_2\left(-\int\rho\ln(h\rho)\,dqdp-S\right),\\
+			\delta L={}&\int\delta\rho\big[
+			(q-\mu_q)^2\sigma_p^2+\sigma_q^2(p-\mu_p)^2\\
+			&\hspace{5em}+\lambda_1-\lambda_2\ln(h\rho)-\lambda_2
+			\big]\,dqdp=0,\\
+			\lambda_2\ln(h\rho)={}&\lambda_1-\lambda_2
+			+(q-\mu_q)^2\sigma_p^2+\sigma_q^2(p-\mu_p)^2,\\
+			\rho={}&\frac{1}{h}
+			e^{\frac{\lambda_1-\lambda_2}{\lambda_2}}
+			e^{\frac{(q-\mu_q)^2\sigma_p^2}{\lambda_2}}
+			e^{\frac{\sigma_q^2(p-\mu_p)^2}{\lambda_2}}.
+		\end{aligned}
+	\end{equation*}
+	Integrability requires $\lambda_2<0$. We recognize the stationary density as the product of two independent Gaussians. Using the standard expression, we find
+	\begin{equation*}
+		\begin{aligned}
+			\rho
+			&=\frac{1}{2\pi\sigma_q\sigma_p}
+			e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}}
+			e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}},\\
+			S[\rho]
+			&=\ln\left(\frac{2\pi\sigma_q\sigma_p}{h}\right)
+			+\frac{\sigma_q^2}{2\sigma_q^2}
+			+\frac{\sigma_p^2}{2\sigma_p^2}\\
+			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right),\\
+			\sigma_q\sigma_p
+			&=\frac{h}{2\pi e}e^{S[\rho]}.
+		\end{aligned}
+	\end{equation*}
+
+	To verify that this gives the global bound, let $\sigma$ be an arbitrary density with finite variances, and take $\rho$ to be the Gaussian above with the same means and variances as $\sigma$. Write $E[\,\cdot\mid\sigma]$ for expectation with respect to $\sigma$. Consider the KL divergence $D(\sigma\Vert\rho)=\int\sigma\ln\left(\frac{\sigma}{\rho}\right)\,dqdp$. The inequality $u\ln u-u+1\geq0$, with equality only at $u=1$, gives $D\geq0$ by setting $u=\frac{\sigma}{\rho}$ and integrating against $\rho$. Equality holds if and only if $\sigma=\rho$ almost everywhere. Moreover,
+	\begin{equation*}
+		\begin{aligned}
+			D(\sigma\Vert\rho)
+			&=\int\sigma\ln(h\sigma)\,dqdp
+			-\int\sigma\ln(h\rho)\,dqdp\\
+			&=-S[\sigma]
+			+\ln\left(\frac{2\pi\sigma_q\sigma_p}{h}\right)
+			+\frac{E[(q-\mu_q)^2\mid\sigma]}{2\sigma_q^2}
+			+\frac{E[(p-\mu_p)^2\mid\sigma]}{2\sigma_p^2}\\
+			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)-S[\sigma]
+			\geq0.
+		\end{aligned}
+	\end{equation*}
+	Since $\ln(h\rho(q,p))$ is a quadratic function, the expectation $E[\ln(h\rho(q,p))\mid\sigma]$ is finite for all $\sigma$ with finite variance. Thus the identity is also valid when $D=+\infty$ and $S[\sigma]=-\infty$; finite variances preclude $S[\sigma]=+\infty$. Rearranging gives the stated bound, with equality precisely for the product of two independent Gaussian densities.
+\end{proof}
+
+\begin{prop}\label{entropyCoordinates}
+	Let $(q,p)\mapsto(f(q,p),g(q,p))$ be a continuously differentiable change of variables with continuously differentiable inverse. Let $\rho_{qp}$ and $\rho_{fg}$ be the two densities of the same probability distribution. If $S[\rho_{qp}]$ is well-defined and $\ln|\{f,g\}|$ is integrable, then $S[\rho_{fg}]=S[\rho_{qp}]+E[\ln|\{f,g\}|]$.
+\end{prop}
+
+\begin{proof}
+	The Poisson bracket is the Jacobian determinant of the transformation:
+	\begin{equation*}
+		\{f,g\}
+		=\partial_q f\,\partial_p g-\partial_p f\,\partial_q g
+		=\left|\begin{array}{cc}
+			\partial_q f&\partial_p f\\
+			\partial_q g&\partial_p g
+		\end{array}\right|.
+	\end{equation*}
+	Therefore $\rho_{qp}(q,p)=\rho_{fg}(f,g)|\{f,g\}|$. The absolute value allows either orientation. In integrals over $f,g$, functions of $q,p$ are evaluated using the inverse transformation. We have
+	\begin{equation*}
+		\begin{aligned}
+			S[\rho_{qp}]
+			&=-\int\rho_{qp}\ln(h\rho_{qp})\,dqdp\\
+			&=-\int\rho_{fg}|\{f,g\}|
+			\ln\left(h\rho_{fg}|\{f,g\}|\right)\,dqdp\\
+			&=-\int\rho_{fg}
+			\ln\left(h\rho_{fg}|\{f,g\}|\right)\,dfdg\\
+			&=-\int\rho_{fg}\ln(h\rho_{fg})\,dfdg
+			-\int\rho_{fg}\ln|\{f,g\}|\,dfdg\\
+			&=S[\rho_{fg}]-E[\ln|\{f,g\}|].
+		\end{aligned}
+	\end{equation*}
+	The logarithmic expectation is finite by assumption, so this identity also holds for extended entropy values. Rearranging proves the result.
+\end{proof}
+
+\section{Conditions}
+
+We now state the conditions for the theorems, starting with the classical phase-space representation. This includes pure states, ensembles, configuration counting and entropy.
+
+\begin{condition}[Classical phase space]{CPS}
+	The state space of a classical system with $n$ degrees of freedom (DOFs) is represented by $M=\mathbb{R}^{2n}$ with canonical coordinates $(q^i,p_i)$ and symplectic form $\omega=\sum_i dq^i\wedge dp_i$. The count of configurations for each DOF is represented by its canonical phase-space area, and the count of states by the Liouville measure $\mu(U)=\int_U dq^1\cdots dq^n dp_1\cdots dp_n=\int_U\frac{\omega^n}{n!}$.
+
+	A statistical ensemble is represented by a probability density $\rho(q^i,p_i)$ relative to the Liouville measure, and statistical mixtures by convex combinations of densities. The entropy is given by the Gibbs/Shannon formula $S[\rho]=-\int_M\rho\ln(h^n\rho)\,d\mu$, where $h>0$ is a fixed constant with units of phase-space area.
 \end{condition}
 
-The goal is to show that the following condition follows from the previous.
+The constant $h$ makes the entropy formula dimensionally correct and fixes its zero. By Proposition \ref{uniformEntropy}, a uniform ensemble has zero entropy exactly when its phase-space volume is $h^n$.
 
-\begin{condition}[Classical uncertainty principle]{CUP}
-	The uncertainty on each DOF is bounded by
-	$$ \sigma_q \sigma_p \geq \frac{\hbar}{e}. $$
-	The equality is obtained if and only if position and momentum are independent gaussian distributions.
-	
-	If $f$ and $g$ are two non-conjugate variables that span a DOF (i.e. there exists two conjugate variables $q$ and $p$ such that $(f(q,p), g(q,p))$ is invertible), then
-	$$ \sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln \{f,g\}]}.$$
+Connecting statistical mechanics to thermodynamics, the third law of thermodynamics will impose that the entropy of all statistical ensembles must be non-negative. This also includes the entropy of every marginal of each independent degree of freedom. We state this requirement independently of its representation.
+
+\begin{condition}[Lower entropic bound]{[B]ZENT}
+	Given a statistical ensemble, the entropy of the marginal of each independent degree of freedom is well-defined and non-negative.
 \end{condition}
+
+Under \ref{CPS}, this means $S[\rho(q,p)]\geq0$ for the marginal describing the independent DOF. The representation does not guarantee this requirement: densities concentrated in sufficiently small phase-space regions have negative entropy. We therefore constrain the admissible ensembles by \ref{[B]ZENT}.
+
+The goal is to show that this constraint guarantees the following uncertainty relation. The formulas apply whenever the indicated variances and expectations are well-defined.
+
+\begin{condition}[Classical uncertainty relation]{CUR}
+	The uncertainty on each independent DOF is bounded by $\sigma_q\sigma_p\geq\frac{\hbar}{e}$, where $\hbar=\frac{h}{2\pi}$. Equality is obtained if and only if position and momentum are independent Gaussian variables with zero joint entropy.
+
+	If $f$ and $g$ are two variables that span the same DOF through a continuously differentiable invertible transformation with continuously differentiable inverse, and the product of their physical units is the same as for $q,p$, then $\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}$, provided the logarithm of the absolute Poisson bracket has finite expectation.
+\end{condition}
+
+\section{Theorems}
+
+We first show that the classical representation alone guarantees neither the physical lower bound on entropy nor the uncertainty relation. We then show that constraining the representation by the entropic lower bound guarantees the uncertainty relation.
 
 \begin{thrm}
-	Condition \ref{ZENT} imples \ref{CUP} over \ref{CPS}.
+	Over \ref{CPS}, neither \ref{[B]ZENT} nor \ref{CUR} is guaranteed.
 \end{thrm}
 
 \begin{proof}
-We first show that the product of two independent gaussians minimizes the uncertainty for a given value of the entropy. We use Lagrange multipliers to minimize the product of the variances $\sigma_q^2 \sigma_p^2 \equiv \int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp$, where $\mu_q$ and $\mu_p$ are the mean position and momentum, under two constraints: $\rho$ integrates to 1 and its entropy is $S$. We have:
+	Consider one independent DOF, represented by $\mathbb{R}^2$ with its canonical symplectic form. Let $\rho(q,p)=\frac{1}{2\pi\sigma_q\sigma_p}e^{-\frac{q^2}{2\sigma_q^2}}e^{-\frac{p^2}{2\sigma_p^2}}$, where $\sigma_q=s>0$ and $\sigma_p=\frac{h}{4\pi e s}$. This is a normalized product of two centered Gaussian densities, with standard deviations $\sigma_q$ and $\sigma_p$. It is therefore an ensemble admitted by \ref{CPS}.
 
-\begin{align*}
-	L = &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
-	&+ \lambda_1(\int \rho dqdp - 1) + \lambda_2(- \int \rho \ln (h \rho) \, dqdp - S)\\
-	\delta L = &\int \delta \rho [(q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 +  \lambda_1 - \lambda_2 \ln (h \rho) - \lambda_2 ] dqdp = 0 \\
-	\lambda_2 \ln (h \rho) = &\lambda_1 - \lambda_2 + (q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 \\
-	\rho = &\frac{1}{h} e^{\frac{\lambda_1 - \lambda_2}{\lambda_2}}e^{\frac{(q-\mu_q)^2 \sigma_p^2}{\lambda_2}}e^{\frac{\sigma_q^2 (p-\mu_p)^2}{\lambda_2}}
-\end{align*}
-We recognize the distribution as the product of two independent Gaussians. We can therefore use the standard expression and calculate the entropy, which must be zero. We find:
-\begin{align*}
-	\rho_{\mathcal{c}} = &\frac{1}{ 2 \pi \sigma_q \sigma_p} e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}} e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}} \\
-	S[\rho] &= \ln \left( 2\pi e \frac{\sigma_q\sigma_p}{h}  \right) = S  \\
-	\sigma_q \sigma_p &= \frac{h}{2 \pi e} e^{S[\rho]} = \frac{\hbar}{e} e^{S[\rho]}
-\end{align*}
-where $\hbar = \frac{h}{2\pi}$. Since, by \ref{ZENT}, $S[\rho] \geq 0$, we have
-\begin{equation}\label{rp-cm-classicalUncertaintyPrinciple}
-	\sigma_q \sigma_p \geq \frac{\hbar}{e}
-\end{equation}
-for each DOF. Note that equality hold exactly when they the joint distribution is the product of two independent gaussians.
-
-Now, let $(q,p)$ and $(f,g)$ related by an invertible transformation. Moreover, let the product of their physical units be the same. Note that the Poisson bracket is exactly the Jacobian determinant of the tranformation. In fact
-\begin{equation}
-	\{f, g\} = \partial_q f \, \partial_p g - \partial_p f \, \partial_q g = \left|\begin{array}{ c c }
-		\partial_q f & \partial_p f \\
-		\partial_q g & \partial_p g \\
-	\end{array} \right|.
-\end{equation}
-Therefore, $\rho_{qp}(q,p) = \rho_{fg}(f,g) |\{f,g\}|$ and $|\{f,g\}|$ will be a pure number. Note the absolute value, as the Poisson bracket can be negative for if the map is not orientation preserving. If assume the transformation is order preserving, we have
-\begin{align*}
-	0 \leq S[\rho_{qp}] &= - \int \rho_{qp} \ln (h \rho_{qp}) dq dp \\ &=  - \int \rho_{fg} \{f,g\} \ln (h \rho_{fg} \{f,g\} ) dq dp \\
-	&= - \int \rho_{fg} \ln (h \rho_{fg} \{f,g\} ) df dg \\
-	&= - \int \rho_{fg} \ln (h \rho_{fg} ) df dg - \int \rho_{fg} \ln ( \{f,g\} ) df dg \\
-	&= - \int \rho_{fg} \ln (h \rho_{fg} ) df dg - \int \rho_{fg} \ln ( \{f,g\} ) df dg \\
-\end{align*}
-which means
-\begin{align*}
-	- \int \rho(f,g) \ln (h \rho(f,g) ) df dg \geq E[ \ln ( \{f,g\} ) ].
-\end{align*}
-The entropy as calculated on the new variable, then, have a lower bound given by the expectation of the logarithm of the Poisson bracket. Using again the fact that gaussian distributions minimize uncertainty, and noting the entropy does not change under non-orientation preserving changes of variables, we have
-\begin{equation}
-	\sigma_f \sigma_g \geq \frac{\hbar}{e} e^{E[\ln |\{f,g\}|]}.
-\end{equation}
+	Using the Gibbs/Shannon entropy specified by \ref{CPS}, we find
+	\begin{equation*}
+		\begin{aligned}
+			S[\rho]
+			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)=\ln\left(\frac{2\pi e}{h}\frac{h}{4\pi e}\right)
+			=-\ln2<0.
+		\end{aligned}
+	\end{equation*}
+	Thus \ref{[B]ZENT} fails. Moreover,
+	\begin{equation*}
+		\sigma_q\sigma_p
+		=\frac{h}{4\pi e}
+		=\frac{\hbar}{2e}
+		<\frac{\hbar}{e},
+	\end{equation*}
+	so the canonical uncertainty bound in \ref{CUR} also fails. Since \ref{CPS} admits this ensemble, neither condition is guaranteed.
 \end{proof}
 
-\begin{remark}
-	The converse $\ref{CUP} \implies \ref{ZENT}$ does not hold. One can introduce an arbitrarily large correlation to $q$ and $p$ that would increase the uncertainty on those variables while keeping the entropy the same. Therefore, putting a lower bound on the uncertainty does not put a lower bound on the entropy.
-\end{remark}
+We now impose the physical lower bound on entropy.
+
+\begin{thrm}
+	Over \ref{CPS} constrained by \ref{[B]ZENT}, condition \ref{CUR} is guaranteed.
+\end{thrm}
+
+\begin{proof}
+	Let $\rho(q,p)$ be the marginal describing an independent DOF. By \ref{CPS}, its physical entropy is represented by the Gibbs/Shannon formula, and by \ref{[B]ZENT}, $S[\rho]\geq0$. Proposition \ref{entropyVariance} therefore gives
+	\begin{equation}\label{rp-cm-classicalUncertaintyRelation}
+		\sigma_q\sigma_p
+		\geq\frac{h}{2\pi e}e^{S[\rho]}
+		\geq\frac{h}{2\pi e}
+		=\frac{\hbar}{e}.
+	\end{equation}
+	Equality holds if and only if the first inequality is saturated by independent Gaussian variables and the second by $S[\rho]=0$. This proves the canonical uncertainty relation and its equality condition. The calculation concerns finite variances; if a variance is infinite, the product is unbounded and the inequality is automatic.
+
+	Now let $f,g$ be variables satisfying the transformation conditions in \ref{CUR}. Proposition \ref{entropyCoordinates} gives $S[\rho_{fg}]=S[\rho_{qp}]+E[\ln|\{f,g\}|]\geq E[\ln|\{f,g\}|]$. Applying Proposition \ref{entropyVariance} to the transformed density gives
+	\begin{equation*}
+		\begin{aligned}
+			\sigma_f\sigma_g
+			&\geq\frac{h}{2\pi e}e^{S[\rho_{fg}]} \geq\frac{h}{2\pi e}e^{E[\ln|\{f,g\}|]} =\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}.
+		\end{aligned}
+	\end{equation*}
+	Again, an infinite variance makes the product unbounded. Thus both uncertainty relations in \ref{CUR} follow.
+\end{proof}
 
 \section{Conclusion}
 
-We have found a classical analogue of the quantum uncertainty principle due to the lower bound on the entropy. Note this lower bound on the entropy is already present in quantum mechanics as pure states have zero entropy. We conclude that, in general, the uncertainty principle is a consequence of the entropic lower bound.
+We have found a classical analogue of the quantum uncertainty relation due to the lower bound on entropy. This lower bound is already present in quantum mechanics, where pure states have zero entropy and mixed states have non-negative entropy. The unrestricted classical representation guarantees neither the entropic lower bound nor the uncertainty relation. We conclude that the classical uncertainty relation is a consequence of the entropic lower bound imposed on the classical representation.
 
 \end{document}
 
