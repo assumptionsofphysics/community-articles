@@ -15,7 +15,7 @@
 \maketitle
 
 \begin{abstract}
-	We show that a zero lower bound on physical entropy, motivated by the third law of thermodynamics, gives rise to the classical uncertainty relation $\sigma_q\sigma_p\geq\frac{\hbar}{e}$. For non-conjugate variables, the relation becomes $\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}$, where $E[\ln|\{f,g\}|]$ is the expectation of the logarithm of the absolute value of the Poisson bracket.
+	We show that, for ensembles with finite entropy, a zero lower bound on physical entropy is equivalent to the generalized classical uncertainty relation $\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|\mid\rho_{qp}]}$ in every coordinate system where the expectation $E[\ln|\{f,g\}]$ is well-defined. This implies the canonical bound $\sigma_q\sigma_p\geq\frac{\hbar}{e}$, which is a weaker condition and does not imply the entropic lower bound.
 \end{abstract}
 
 \section{Introduction}
@@ -24,11 +24,14 @@ The third law of thermodynamics provides a physical reference for zero entropy. 
 \begin{equation}
 	\sigma_q\sigma_p\geq\frac{h}{2\pi e}=\frac{\hbar}{e}.
 \end{equation}
-In this context, $h$ is the phase-space area for which a uniform distribution has zero entropy, and $\hbar=\frac{h}{2\pi}$. The $2\pi e$ factor appears because the product of two independent Gaussian distributions minimizes the uncertainty at fixed entropy.
+In this context, $h$ is the phase-space area for which a uniform distribution has zero entropy, and $\hbar=\frac{h}{2\pi}$. The $2\pi e$ factor appears because the product of two independent Gaussian distributions minimizes the uncertainty at fixed entropy. For a generic pair of variable, the relationship becomes:
+\begin{equation*}
+	\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|\mid\rho_{qp}]}.
+\end{equation*}
+
+We also establish the converse: if the generalized uncertainty relation holds in every coordinate system, the entropy must be non-negative. Both directions follow from an exact equality separating the entropy, the KL divergence to a product Gaussian, and the coordinate adjustment. Suitable coordinates make the KL contribution vanish or approach zero, allowing the uncertainty bound to recover the entropy bound.
 
 For convenience, entropy is measured in nats, meaning that we use the natural logarithm and set the Boltzmann constant to $k_B=1$. Since we are looking at zero entropy, a change of entropy units does not change the result.
-
-We also establish the converse: if the generalized uncertainty relation holds in every admissible coordinate system, the entropy must be non-negative. Both directions follow from an exact equality separating the entropy, the KL divergence to a product Gaussian, and the coordinate adjustment. Suitable coordinates make the KL contribution vanish or approach zero, allowing the uncertainty bound to recover the entropy bound. The physical results are stated under a separate requirement that ensembles have finite entropy. The mathematical extension to measurable densities also treats well-defined infinite entropy; the additional issues are discussed separately.
 
 \section{Mathematical prerequisites}
 
@@ -54,7 +57,7 @@ This first proposition quantifies the uncertainty relationship in a generic set 
 	\begin{equation*}
 		S[G_{fg}]=S[\rho_{qp}]+\bigl(S[\rho_{fg}]-S[\rho_{qp}]\bigr)+\bigl(S[G_{fg}]-S[\rho_{fg}]\bigr).
 	\end{equation*}
-	The first difference is the coordinate contribution $E[\ln J_T\mid\rho_{qp}]$. For the second difference, note that, since $G_{fg}$ is a Gaussian with the same mean and variance of $\rho_{fg}$, calculations show that $\int \rho_{fg} \ln G_{fg} df dg = \int G_{fg}  \ln G_{fg} df dg$. Therefore $S[G_{fg}]-S[\rho_{fg}] = D(\rho_{fg}\Vert G_{fg})$ is the Kullback--Leibler (KL) divergence between the two distributions.
+	The first difference is the coordinate contribution $E[\ln J_T\mid\rho_{qp}]$. For the second difference, note that, since $G_{fg}$ is a Gaussian with the same means and variances as $\rho_{fg}$, calculations show that $\int \rho_{fg} \ln G_{fg} df dg = \int G_{fg}  \ln G_{fg} df dg$. Therefore $S[G_{fg}]-S[\rho_{fg}] = D(\rho_{fg}\Vert G_{fg})$ is the Kullback--Leibler (KL) divergence between the two distributions.
 
 	Substituting these contributions and the Gaussian entropy formula \cite[Section 8.4]{CoverThomas} gives
 	\begin{equation*}
@@ -116,12 +119,10 @@ We now state the conditions for the theorems, starting with the classical phase-
 The constant $h$ makes the entropy formula dimensionally correct and fixes its zero. For an ensemble $\rho_U$ uniform over a region $U$ with $0<\mu(U)<\infty$, the entropy is $S[\rho_U]=\ln\left(\frac{\mu(U)}{h^n}\right)$, which vanishes exactly when its phase-space volume is $h^n$.
 
 The representation alone does not guarantee that this entropy is finite or even well-defined. We therefore impose finiteness as a separate physical requirement.
-
 \begin{condition}[Entropy is finite]{[B]FINENT}
 	All ensembles have a well-defined finite entropy.
 \end{condition}
-
-This requirement also applies to the marginal ensembles describing individual DOFs. In the physical theorems below, we use \ref{CST} constrained by \ref{[B]FINENT}: the representation is retained, while ensembles that violate the requirement are excluded.
+This requirement also applies to the marginal ensembles describing individual DOFs.
 
 Connecting statistical mechanics to thermodynamics, the third law motivates a non-negative entropy for physical ensembles. We impose this lower bound on the marginal of each independent DOF, independently of its representation.
 
@@ -133,7 +134,10 @@ Under \ref{CST}, this means $S[\rho]=S[\rho_{qp}]\geq0$ for the marginal over an
 
 We now state the general uncertainty relationship we want to study.
 \begin{condition}[Generalized classical uncertainty relation]{GCUR}
-	For each independent DOF and every admissible change of coordinates $(q,p)\mapsto(f,g)$, the uncertainties satisfy $$\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|\mid\rho_{qp}]}.$$ 
+	For each independent DOF and every global $C^1$ coordinate pair $(f,g)$, not necessarily canonical, such that $E[\left|\ln|\{f,g\}|\right|\mid\rho_{qp}]<\infty$, the uncertainties satisfy
+	\begin{equation*}
+		\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|\mid\rho_{qp}]}.
+	\end{equation*}
 	Equality is obtained if and only if $S[\rho]=0$ and $\rho_{fg}$ is the product of two Gaussians.
 \end{condition}
 The product of the physical units of $f,g$ must be the same as for $q,p$. Recall that the coordinate change may map $\mathbb{R}^2$ onto any open coordinate region, including a bounded one, and admissibility requires $E[\left|\ln|\{f,g\}|\right|\mid\rho_{qp}]<\infty$.
@@ -145,19 +149,19 @@ Since $\{q,p\}=1$, the relationship for canonical variables reduces to the follo
 
 \section{Theorems}
 
-We first show that the classical representation alone guarantees neither the physical lower bound on entropy nor the uncertainty relation. We then show that constraining the representation by the entropic lower bound guarantees the uncertainty relation.
+We can now formulate the theorems. The background is \ref{CST} constrained by \ref{[B]FINENT}: the representation is overall retained, while ensembles that violate the requirement are excluded. We first show that this does not guarantee the entropic lower bound or either uncertainty relation.
 
 \begin{thrm}
-	Over \ref{CPS}, neither \ref{[B]ZENT} nor \ref{CUR} is guaranteed.
+	Over \ref{CST} constrained by \ref{[B]FINENT}, none of \ref{[B]ZENT}, \ref{CUR} and \ref{GCUR} is guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Consider one independent DOF, represented by $\mathbb{R}^2$ with its canonical symplectic form. Let $\rho(q,p)=\frac{1}{2\pi\sigma_q\sigma_p}e^{-\frac{q^2}{2\sigma_q^2}}e^{-\frac{p^2}{2\sigma_p^2}}$, where $\sigma_q=s>0$ and $\sigma_p=\frac{h}{4\pi e s}$. This is a normalized product of two centered Gaussian densities, with standard deviations $\sigma_q$ and $\sigma_p$. It is therefore an ensemble admitted by \ref{CPS}.
+	Consider one independent DOF, represented by $\mathbb{R}^2$ with its canonical symplectic form. Let $\rho$ have canonical density $\rho_{qp}=\frac{1}{2\pi\sigma_q\sigma_p}e^{-\frac{q^2}{2\sigma_q^2}}e^{-\frac{p^2}{2\sigma_p^2}}$, where $\sigma_q>0$ and $\sigma_p=\frac{h}{4\pi e \sigma_q }$. This is a normalized product of two centered Gaussians, with standard deviations $\sigma_q$ and $\sigma_p$. It is an ensemble admitted by \ref{CST}, and its entropy is finite.
 
-	Using the Gibbs/Shannon entropy specified by \ref{CPS}, we find
+	Using the Gibbs/Shannon entropy specified by \ref{CST}, we find
 	\begin{equation*}
 		\begin{aligned}
-			S[\rho]
+			S[\rho]=S[\rho_{qp}]
 			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)=\ln\left(\frac{2\pi e}{h}\frac{h}{4\pi e}\right)
 			=-\ln2<0.
 		\end{aligned}
@@ -169,78 +173,243 @@ We first show that the classical representation alone guarantees neither the phy
 		=\frac{\hbar}{2e}
 		<\frac{\hbar}{e},
 	\end{equation*}
-	so the canonical uncertainty bound in \ref{CUR} also fails. Since \ref{CPS} admits this ensemble, neither condition is guaranteed.
+	so \ref{CUR} also fails. The canonical coordinate pair $(q,p)$ has Poisson bracket $1$ and satisfies the integrability requirement, so \ref{GCUR} fails as well. The counterexample satisfies \ref{[B]FINENT}; hence none of the three conditions is guaranteed.
 \end{proof}
 
-We now impose the physical lower bound on entropy.
+We now impose the physical lower bound on entropy and show that this recovers the classical uncertainty relationships.
 
-\begin{thrm}
-	Over \ref{CPS} constrained by \ref{[B]ZENT}, condition \ref{CUR} is guaranteed.
+\begin{thrm}\label{entropyImpliesUncertainty}
+	Over \ref{CST} constrained by \ref{[B]FINENT} and \ref{[B]ZENT}, both \ref{CUR} and \ref{GCUR} are guaranteed.
 \end{thrm}
 
 \begin{proof}
-	Let $\rho(q,p)$ be the marginal describing an independent DOF. By \ref{CPS}, its physical entropy is represented by the Gibbs/Shannon formula, and by \ref{[B]ZENT}, $S[\rho]\geq0$. Proposition \ref{entropyVariance} therefore gives
-	\begin{equation}\label{rp-cm-classicalUncertaintyRelation}
-		\sigma_q\sigma_p
-		\geq\frac{h}{2\pi e}e^{S[\rho]}
-		\geq\frac{h}{2\pi e}
-		=\frac{\hbar}{e}.
-	\end{equation}
-	Equality holds if and only if the first inequality is saturated by independent Gaussian variables and the second by $S[\rho]=0$. This proves the canonical uncertainty relation and its equality condition. The calculation concerns finite variances; if a variance is infinite, the product is unbounded and the inequality is automatic.
-
-	Now let $f,g$ be variables satisfying the transformation conditions in \ref{CUR}. Proposition \ref{entropyCoordinates} gives $S[\rho_{fg}]=S[\rho_{qp}]+E[\ln|\{f,g\}|]\geq E[\ln|\{f,g\}|]$. Applying Proposition \ref{entropyVariance} to the transformed density gives
+	Let $\rho$ be the marginal describing an independent DOF. By \ref{CST}, $S[\rho]=S[\rho_{qp}]$; by \ref{[B]FINENT} and \ref{[B]ZENT}, this entropy is finite and non-negative. For any global $C^1$ coordinate pair $(f,g)$ satisfying the integrability requirement in \ref{GCUR} and having finite variances, put $T=(f,g)$, so $J_T=|\{f,g\}|$. Since $S[\rho]\geq0$ and $D(\rho_{fg}\Vert G_{fg})\geq0$, Proposition \ref{entropyVarianceIdentity} gives
 	\begin{equation*}
-		\begin{aligned}
-			\sigma_f\sigma_g
-			&\geq\frac{h}{2\pi e}e^{S[\rho_{fg}]} \geq\frac{h}{2\pi e}e^{E[\ln|\{f,g\}|]} =\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}.
-		\end{aligned}
+		\sigma_f\sigma_g=\frac{\hbar}{e}e^{S[\rho]}e^{E[\ln J_T\mid\rho_{qp}]}e^{D(\rho_{fg}\Vert G_{fg})}\geq\frac{\hbar}{e}e^{E[\ln J_T\mid\rho_{qp}]}.
 	\end{equation*}
-	Again, an infinite variance makes the product unbounded. Thus both uncertainty relations in \ref{CUR} follow.
+	This recovers the inequality in \ref{GCUR}. The equality holds if and only if $S[\rho]=0$ and $D(\rho_{fg}\Vert G_{fg})=0$, which recovers the equality condition in \ref{GCUR}. An infinite variance makes the product unbounded, so the inequality remains automatic. For finite variances, a canonical coordinate pair $(q,p)$ is such that $\{q,p\} = 1$, which gives
+	\begin{equation}\label{rp-cm-classicalUncertaintyRelation}
+		\sigma_q\sigma_p=\frac{\hbar}{e}e^{S[\rho]}e^{D(\rho_{qp}\Vert G_{qp})}\geq\frac{\hbar}{e}.
+	\end{equation}
+	Equality holds if and only if $S[\rho]=0$ and $D(\rho_{qp}\Vert G_{qp})=0$, that is, position and momentum are independent Gaussian variables with zero joint entropy. Thus \ref{CUR}, including its equality condition, follows as well.
 \end{proof}
+
+The next theorem shows that the canonical bound alone does not recover the entropy bound.
+
+\begin{thrm}
+	Over \ref{CST} constrained by \ref{[B]FINENT} and \ref{CUR}, condition \ref{[B]ZENT} is not guaranteed.
+\end{thrm}
+
+\begin{proof}
+	Let $X,Y$ be independent standard Gaussian random variables. Choose $s>0$, put $c=\frac{h}{4\pi e s}$, and define $q=sX$ and $p=c(2\sqrt{2}X+Y)$. This invertible linear map has Jacobian determinant $sc>0$, so it defines a distribution $\rho$ with normalized positive smooth density $\rho_{qp}=\frac{1}{2\pi sc}e^{-\frac{1}{2}((\frac{q}{s})^2+(\frac{p}{c}-2\sqrt{2}\frac{q}{s})^2)}$. Its means are zero, and
+	\begin{equation*}
+		\sigma_q^2=s^2,\qquad \sigma_p^2=c^2(8+1)=9c^2,\qquad
+		\sigma_q\sigma_p=3sc=\frac{3h}{4\pi e}>\frac{h}{2\pi e}.
+	\end{equation*}
+	The two variables are correlated, with $E[qp\mid\rho_{qp}]=2\sqrt{2}sc>0$. Thus the bound in \ref{CUR} holds strictly, and its equality criterion is respected. Directly from the density, the entropy is
+	\begin{equation*}
+		S[\rho]=S[\rho_{qp}]=\ln\left(\frac{2\pi sc}{h}\right)+\frac{E[X^2+Y^2\mid\rho_{qp}]}{2}
+		=\ln\left(\frac{2\pi e\,sc}{h}\right)
+		=\ln\left(\frac{2\pi e}{h}\frac{h}{4\pi e}\right)=-\ln2.
+	\end{equation*}
+	It is finite but negative, so \ref{[B]FINENT} holds and \ref{[B]ZENT} fails.
+
+	In contrast, the global coordinate pair $f=q$, $g=p-2\sqrt{2}\frac{c}{s}q$ has Poisson bracket $1$ and gives $f=sX$, $g=cY$. Its uncertainty product is $sc=\frac{h}{4\pi e}<\frac{h}{2\pi e}$, so this ensemble violates \ref{GCUR}.
+\end{proof}
+
+The last theorem shows that requiring the generalized relation for every global coordinate pair specified in \ref{GCUR} recovers the entropic bound.
+
+\begin{thrm}\label{uncertaintyImpliesEntropy}
+	Over \ref{CST} constrained by \ref{[B]FINENT}, condition \ref{GCUR} guarantees \ref{[B]ZENT}. Consequently, \ref{GCUR} and \ref{[B]ZENT} are equivalent over this constrained representation.
+\end{thrm}
+
+\begin{proof}
+	Let $\rho$ describe the marginal over an independent DOF. By \ref{CST} and \ref{[B]FINENT}, $S[\rho]=S[\rho_{qp}]$ is finite. The inequality in \ref{GCUR} says $U_\rho(T)\geq0$ for every global $C^1$ coordinate pair $(f,g)$ satisfying its integrability requirement, where $T=(f,g)$. For finite variances, Proposition \ref{entropyVarianceIdentity} therefore gives
+	\begin{equation*}
+		0\leq U_\rho(T)=S[\rho]+D(\rho_{fg}\Vert G_{fg}).
+	\end{equation*}
+	If $\rho_{qp}$ is positive and smooth, Proposition \ref{smoothEntropyCoordinates} gives a global coordinate pair with a product Gaussian density, so the divergence vanishes and $S[\rho]\geq0$. For a general measurable coordinate density, Proposition \ref{measurableEntropyCoordinates} gives global coordinate pairs $(f_j,g_j)$ satisfying the integrability requirement and having finite variances. With $T_j=(f_j,g_j)$,
+	\begin{equation*}
+		0\leq U_\rho(T_j)=S[\rho]+D(\rho_{f_jg_j}\Vert G_j)\longrightarrow S[\rho].
+	\end{equation*}
+	Hence $S[\rho]\geq0$ in either case, which recovers \ref{[B]ZENT}. Since this is the reverse implication of Theorem \ref{entropyImpliesUncertainty}, \ref{GCUR} and \ref{[B]ZENT} are equivalent over the given background.
+\end{proof}
+
+\section{Additional remarks}
+
+\textbf{Finiteness of entropy.} Finiteness and non-negativity are separate physical requirements. The representation \ref{CST} provides a convex ensemble space and an entropy formula, but the formula may yield infinite or undefined values. Condition \ref{[B]FINENT} constrains the representation to ensembles of finite entropy. It does not already impose \ref{[B]ZENT}, as the Gaussian counterexamples show.
+
+\textbf{Convexity of the ensemble space.} With the reference volume fixed, the finite-entropy domain remains convex. If $\rho$ and $\sigma$ have finite entropy and $\rho_\lambda=\lambda\rho+(1-\lambda)\sigma$, with $0<\lambda<1$, the log-density ratios to $\rho_\lambda$ have finite absolute expectations because their positive parts are bounded by $-\ln\lambda$ and $-\ln(1-\lambda)$ and their negative parts are integrable. It follows that $S[\rho_\lambda]$ is finite, and
+\begin{equation*}
+	0\leq S[\rho_\lambda]-\lambda S[\rho]-(1-\lambda)S[\sigma]
+	=\lambda D(\rho\Vert\rho_\lambda)+(1-\lambda)D(\sigma\Vert\rho_\lambda)
+	\leq-\lambda\ln\lambda-(1-\lambda)\ln(1-\lambda).
+\end{equation*}
+By contrast, admitting every density with well-defined extended entropy does not preserve convexity: a mixture of densities with disjoint supports and entropies $+\infty$ and $-\infty$ has undefined entropy.
+
+\textbf{Infinite and undefined entropy.} Proposition \ref{measurableEntropyCoordinates} extends the mathematical equivalence to well-defined infinite $S[\rho_{qp}]$, which equals $S[\rho]$ under \ref{CST}. If $S[\rho_{qp}]=-\infty$, the generalized relation fails in some admissible bounded coordinate system. If $S[\rho_{qp}]=+\infty$, every admissible frame has infinite differential entropy and at least one infinite variance, making the relation automatic. Undefined $S[\rho_{qp}]$ has the same consequence for the variances, so the generalized inequalities alone cannot guarantee entropy existence. This is why the physical converse is stated with \ref{[B]FINENT} as a separate constraint.
+
+\textbf{Entropy and variance.} Finite $S[\rho]=S[\rho_{qp}]$ does not require finite canonical variances. The converse uses coordinate changes with finite output variances.
+
+\textbf{Bounded coordinate ranges.} Bounded coordinate ranges retain every point of phase space through an invertible map; their boundedness holds for every distribution once the coordinates are fixed. Admissibility of the logarithmic Jacobian is checked for the ensemble under consideration.
 
 \section{Conclusion}
 
-We have found a classical analogue of the quantum uncertainty relation due to the lower bound on entropy. This lower bound is already present in quantum mechanics, where pure states have zero entropy and mixed states have non-negative entropy. The unrestricted classical representation guarantees neither the entropic lower bound nor the uncertainty relation. We conclude that the classical uncertainty relation is a consequence of the entropic lower bound imposed on the classical representation.
+We have found a classical analogue of the quantum uncertainty relation due to the lower bound on entropy. This lower bound is already present in quantum mechanics, where pure states have zero entropy and mixed states have non-negative entropy. The classical representation, even when constrained to finite entropy, guarantees neither non-negative entropy nor the uncertainty relations. The exact equality separates the coordinate-adjusted uncertainty into the physical entropy and a non-negative Gaussian KL contribution. Suitable coordinates eliminate or approximate away that contribution. Within this constrained representation, non-negative entropy is therefore equivalent to the generalized uncertainty relation in every admissible coordinate system. The canonical uncertainty bound alone is weaker.
 
-\end{document}
+\iffalse
 
-\begin{lemma}[Fischer's inequality]\label{FischerInequality}
-	Let $M$, $A$, $C$ be positive-semidefinite matrixes such that
-	$$M = \begin{bmatrix}
-		A & B \\ B^{\dagger} & C
-	\end{bmatrix}.$$
-	Then $\det(A) \det(B) \geq \det(M)$ with the equality holding if and only if $B = 0$.
+% The appendix is left for the Lean verification
+
+\appendix
+\section{Measurable densities and extended entropy}\label{measurableAppendix}
+
+We give the details behind Proposition \ref{measurableEntropyCoordinates}. Write $a_+=\max(a,0)$ and $a_-=\max(-a,0)$, and define $S_+[\rho_{qp}]=\int\rho_{qp}(\ln(h\rho_{qp}))_-$ and $S_-[\rho_{qp}]=\int\rho_{qp}(\ln(h\rho_{qp}))_+$. Differential entropy is $S_+-S_-$ when these are not both infinite. Adding the constant $\ln h$ does not change whether either logarithmic part is integrable. The auxiliary constructions use numerical coordinates in fixed units. In the first two subsections, unlabelled integrals are over the original $q,p$ plane, and $\eta_0,\eta_j$ denote auxiliary coordinate densities on that plane.
+
+The standard coordinate entropy formula \cite[Lemma 2]{RioulCosta} gives $S[\rho_{fg}]=S[\rho_{qp}]+E[\ln J_T\mid\rho_{qp}]$ for well-defined extended entropy, since admissibility makes the logarithmic Jacobian integrable. The Gaussian maximum-entropy bound \cite[Section 8.6]{CoverThomas} gives $S[\rho_{fg}]\leq\ln\left(\frac{2\pi e\,\sigma_f\sigma_g}{h}\right)$ when the variances are finite. It excludes $S[\rho_{fg}]=+\infty$ and is automatic when $S[\rho_{fg}]=-\infty$.
+
+\subsection{A smooth reference density}
+
+\begin{lemma}\label{smoothReference}
+	If $\int\rho_{qp}(\ln\rho_{qp})_-<\infty$, there is a bounded positive smooth probability density $\eta_0$ on the $q,p$ plane such that $E[|\ln\eta_0|\mid\rho_{qp}]<\infty$.
 \end{lemma}
 
-\begin{defn}
-	Let $\rho(\xi^a)$ be a probability distribution over classical phase space with $n$ DOFs. The covariance matrix $\Sigma$ is defined as 	$$\Sigma = [cov(\xi^a, \xi^b)] = \begin{bmatrix}
-		\Sigma_{11} & \Sigma_{12} & \dots & \Sigma_{1n} \\
-		\Sigma_{21} & \Sigma_{22} & \dots & \Sigma_{2n} \\
-		\vdots & \vdots & \ddots & \vdots \\
-		\Sigma_{n1} & \Sigma_{n2} & \dots & \Sigma_{nn} \\
-	\end{bmatrix},$$
-	where $$\Sigma_{ii} = \begin{bmatrix} \sigma^2_{q^i} & cov(q^i,p_i) \\ cov(p_i, q^i) & \sigma^2_{p_i} \end{bmatrix}$$ represents the covariance matrix of the marginals within the $i$-th DOF and $\Sigma_{ij}$ represents the covariance, and therefore the correlation, between two DOFs.
-\end{defn}
-
-\begin{prop}
-	Given a covariance matrix $\Sigma$, 
-	\begin{equation}
-		\prod_{i=1}^{n} \sigma^2_{q^i}\sigma^2_{p^i} \geq \prod_{i=1}^{n} \det(\Sigma_{ii}) \geq \Sigma.
-	\end{equation}
-\end{prop}
 \begin{proof}
-	The claim follows by applying \ref{FischerInequality} multiple times. Let $\Sigma_{>ii}$ be the block matrix formed by all block matrices with indexes greater than $i$. Then
-	\begin{align}
-	 \det(M) &\leq \det(\Sigma_{11}) \det(\Sigma_{>22}) \leq \det(\Sigma_{11}) \det(\Sigma_{22}) \det(\Sigma_{>33}) \leq \dots \leq \prod_{i=1}^{n} \det(\Sigma_{ii}).
-	\end{align}
-	Within each $\Sigma_{ii}$, $\det(\Sigma_{ii}) \leq \det(\sigma^2_{q^i}) \det(\sigma^2_{p_i}) = \sigma^2_{q^i}\sigma^2_{p^i}$.
+	Set $a=\min(\rho_{qp},1)$, and let $\gamma_{qp}$ be the standard two-dimensional Gaussian coordinate density. Partition the plane, with $x=(q,p)$, into $A_0=\{|x|<1\}$ and $A_n=\{n\leq|x|<n+1\}$ for $n\geq1$. The boundaries have zero probability.
+
+	For a non-negative smooth unit-mass mollifier $\kappa$ supported in the unit ball, put $\kappa_\varepsilon(x)=\frac{1}{\varepsilon^2}\kappa(\frac{x}{\varepsilon})$ and $b_n=(a1_{A_n})*\kappa_{\varepsilon_n}$, with $0<\varepsilon_n<\frac{1}{4}$. These functions satisfy $0\leq b_n\leq1$ and $\int b_n=\int_{A_n}a$. As $\varepsilon_n\to0$, $b_n\to a$ almost everywhere on $A_n$. Since $a>0$ at $\rho$-almost every point, dominated convergence allows $\varepsilon_n$ to be chosen so that $B_n=\{x\in A_n:b_n(x)<\frac{a(x)}{2}\}$ satisfies
+	\begin{equation*}
+		\int_{B_n}\rho_{qp}\leq\frac{2^{-(n+1)}}{1+(n+1)^2}.
+	\end{equation*}
+	The supports of the $b_n$ lie within distance $\frac{1}{4}$ of their annuli, so they form a locally finite family with uniformly bounded overlap. Consequently, $\widetilde\eta_0=\gamma_{qp}+\sum_{n=0}^{\infty}b_n$ is positive, smooth and bounded. Its integral is $Z=1+\int a\in(1,2]$. Let $\eta_0=\widetilde\eta_0/Z$.
+
+	On $A_n\setminus B_n$, we have $\eta_0\geq\frac{a}{4}$, and hence $(\ln\eta_0)_-\leq(\ln\rho_{qp})_-+\ln4$. On $B_n$, use $\eta_0\geq\frac{\gamma_{qp}}{2}$ and $|x|<n+1$ to obtain
+	\begin{equation*}
+		(\ln\eta_0)_-\leq\ln(4\pi)+\frac{(n+1)^2}{2}.
+	\end{equation*}
+	The first bound is integrable by hypothesis. The contribution from the bad sets is bounded by
+	\begin{equation*}
+		\sum_{n=0}^{\infty}
+		\left(\ln(4\pi)+\frac{(n+1)^2}{2}\right)
+		\frac{2^{-(n+1)}}{1+(n+1)^2}<\infty.
+	\end{equation*}
+	Finally, $(\ln\eta_0)_+$ is bounded. Thus $E[|\ln\eta_0|\mid\rho_{qp}]<\infty$.
 \end{proof}
 
-\begin{equation}
-	\Sigma = \begin{bmatrix}
-		\Sigma_{11} & \Sigma_{12} & \dots & \Sigma_{1n} \\
-		\Sigma_{21} & \Sigma_{22} & \dots & \Sigma_{2n} \\
-		\vdots & \vdots & \ddots & \vdots \\
-		\Sigma_{n1} & \Sigma_{n2} & \dots & \Sigma_{nn} \\
-	\end{bmatrix}
-\end{equation}
+\subsection{Approximation with logarithmic control}
+
+\begin{lemma}\label{smoothLogApproximation}
+	If $S[\rho_{qp}]\in\mathbb{R}\cup\{-\infty\}$, there are positive smooth probability densities $\eta_j$ on the $q,p$ plane with $E[|\ln\eta_j|\mid\rho_{qp}]<\infty$ such that $D(\rho_{qp}\Vert\eta_j)\to0$ when $S[\rho_{qp}]$ is finite, and $E[\ln\eta_j\mid\rho_{qp}]\to+\infty$ when $S[\rho_{qp}]=-\infty$.
+\end{lemma}
+
+\begin{proof}
+	In both cases $S_+[\rho_{qp}]<\infty$, so Lemma \ref{smoothReference} provides $\eta_0$. The Donsker--Varadhan variational formula \cite[Theorem 3.3]{Rezakhanlou} gives
+	\begin{equation*}
+		D(\rho_{qp}\Vert\eta_0)
+		=\sup_{\phi\in C_b(\mathbb{R}^2)}
+		\left(E[\phi\mid\rho_{qp}]-\ln E[e^\phi\mid\eta_0]\right),
+	\end{equation*}
+	including the value $+\infty$. The supremum can be restricted to smooth compactly supported functions. To see this, multiply a bounded continuous test function by smooth cutoffs on expanding balls. The expectations of the function and its exponential converge by dominated convergence under $\rho$ and $\eta_0$. Each resulting continuous compactly supported function is uniformly approximable by mollification, preserving both expectations in the limit.
+
+	Choose smooth compactly supported $\phi_j$ such that $A_j=E[\phi_j\mid\rho_{qp}]-\ln Z_j\to D(\rho_{qp}\Vert\eta_0)$, where $Z_j=E[e^{\phi_j}\mid\eta_0]$. Define $\eta_j=\eta_0e^{\phi_j}/Z_j$. Each is a positive smooth probability density, and $\ln\eta_j=\ln\eta_0+\phi_j-\ln Z_j$, so
+	\begin{equation*}
+		E[|\ln\eta_j|\mid\rho_{qp}]\leq E[|\ln\eta_0|\mid\rho_{qp}]+\|\phi_j\|_\infty+|\ln Z_j|<\infty.
+	\end{equation*}
+	For finite $S[\rho_{qp}]$, the divergence $D(\rho_{qp}\Vert\eta_0)$ is finite, so
+	\begin{equation*}
+		D(\rho_{qp}\Vert\eta_j)=D(\rho_{qp}\Vert\eta_0)-A_j\longrightarrow0.
+	\end{equation*}
+	If $S[\rho_{qp}]=-\infty$, then $E[\ln\rho_{qp}\mid\rho_{qp}]=+\infty$ and $D(\rho_{qp}\Vert\eta_0)=+\infty$. Thus
+	\begin{equation*}
+		E[\ln\eta_j\mid\rho_{qp}]
+		=E[\ln\eta_0\mid\rho_{qp}]+A_j\longrightarrow+\infty.
+	\end{equation*}
+	Every individual logarithmic expectation is finite.
+\end{proof}
+
+\subsection{Finite entropy}
+
+Suppose $S[\rho_{qp}]$ is finite. Lemma \ref{smoothLogApproximation} gives $\eta_j$ with $d_j=D(\rho_{qp}\Vert\eta_j)\to0$. Let $\gamma_{fg}$ be the centered product Gaussian coordinate density of Proposition \ref{smoothEntropyCoordinates}, with $S[\gamma_{fg}]=0$ and standard deviations $s,t$. The Greene--Shiohama theorem gives a smooth diffeomorphism $T_j:\mathbb{R}^2\to\mathbb{R}^2$ transporting each $\eta_j$ to this same $\gamma_{fg}$.
+
+Write $\rho_{f_jg_j}$ for the density of the same distribution $\rho$ in the coordinates given by $T_j$. The Jacobian cancels in the ratio $\frac{\rho_{f_jg_j}}{\gamma_{fg}}=\frac{\rho_{qp}}{\eta_j}$ at corresponding points, so changing variables gives
+\begin{equation*}
+	D(\rho_{f_jg_j}\Vert\gamma_{fg})=\int\rho_{qp}\ln\left(\frac{\rho_{qp}}{\eta_j}\right)\,dqdp=d_j.
+\end{equation*}
+
+To verify finite variances, put $Q_j=\frac{f_j^2}{s^2}+\frac{g_j^2}{t^2}$ and $v_M=\min(\frac{Q_j}{4},M)$. The entropy variational inequality \cite[Theorem 3.3]{Rezakhanlou} and $E[e^{Q_j/4}\mid\gamma_{fg}]=2$ give
+\begin{equation*}
+	E[v_M\mid\rho_{f_jg_j}]\leq d_j+\ln E[e^{v_M}\mid\gamma_{fg}]\leq d_j+\ln2.
+\end{equation*}
+Monotone convergence as $M\to\infty$ yields $E[Q_j\mid\rho_{f_jg_j}]\leq4(d_j+\ln2)<\infty$. Thus both coordinate variances are finite; they are positive because an absolutely continuous distribution cannot concentrate on a coordinate line. Since $\ln\gamma_{fg}$ is a constant minus $\frac{Q_j}{2}$, its absolute expectation is finite. The transport identity gives $\ln J_{T_j}=\ln\eta_j-\ln\gamma_{fg}(T_j)$, hence
+\begin{equation*}
+	E[|\ln J_{T_j}|\mid\rho_{qp}]\leq E[|\ln\eta_j|\mid\rho_{qp}]+E[|\ln\gamma_{fg}|\mid\rho_{f_jg_j}]<\infty.
+\end{equation*}
+Thus every $T_j$ is admissible and $S[\rho_{f_jg_j}]$ is finite.
+
+Let $G_j$ be the product Gaussian coordinate density with the same separate means and variances as $\rho_{f_jg_j}$. The function $\ln(\frac{G_j}{\gamma_{fg}})$ is a sum of quadratic polynomials in the separate coordinates, so its expectations under $\rho_{f_jg_j}$ and $G_j$ agree. All are finite. Consequently,
+\begin{equation*}
+	\begin{aligned}
+		D(\rho_{f_jg_j}\Vert\gamma_{fg})
+		&=D(\rho_{f_jg_j}\Vert G_j)+\int\rho_{f_jg_j}\ln\left(\frac{G_j}{\gamma_{fg}}\right)\,df_jdg_j\\
+		&=D(\rho_{f_jg_j}\Vert G_j)+D(G_j\Vert\gamma_{fg}).
+	\end{aligned}
+\end{equation*}
+It follows that $0\leq D(\rho_{f_jg_j}\Vert G_j)\leq d_j\to0$. Proposition \ref{entropyVarianceIdentity} now gives
+\begin{equation*}
+	U_\rho(T_j)=S[\rho_{qp}]+D(\rho_{f_jg_j}\Vert G_j)\longrightarrow S[\rho_{qp}].
+\end{equation*}
+For every other admissible transformation, Proposition \ref{entropyVarianceIdentity} gives $U_\rho(T)\geq S[\rho_{qp}]$ when both variances are finite; an infinite variance makes this automatic. This proves \eqref{entropyCoordinateInfimum} for finite $S[\rho_{qp}]$ without any original variance assumption.
+
+\subsection{Infinite and undefined entropy}
+
+Suppose $S[\rho_{qp}]=-\infty$. Lemma \ref{smoothLogApproximation} gives positive smooth densities $\eta_j$ with $E[|\ln\eta_j|\mid\rho_{qp}]<\infty$ and $E[\ln\eta_j\mid\rho_{qp}]\to+\infty$. Transport each $\eta_j$ to the uniform coordinate density $\frac{1}{4}$ on $B=(-1,1)^2$. The resulting smooth diffeomorphism has $J_{T_j}=4\eta_j$, so it is admissible and
+\begin{equation*}
+	\begin{aligned}
+		E[\ln J_{T_j}\mid\rho_{qp}]
+		&=\ln4+E[\ln\eta_j\mid\rho_{qp}]\longrightarrow+\infty,\\
+		\sigma_{f_j}^2&\leq1,\qquad \sigma_{g_j}^2\leq1,\\
+		U_\rho(T_j)
+		&\leq\ln\left(\frac{2\pi e}{h}\right)
+		-E[\ln J_{T_j}\mid\rho_{qp}]\longrightarrow-\infty.
+	\end{aligned}
+\end{equation*}
+Hence the infimum is $-\infty$.
+
+For the remaining cases, set $L=-\ln(h\rho_{qp})$ and $L_T=-\ln(h\rho_{fg}(T))$. The coordinate-density identity gives $L_T=L+\ln J_T$. Since positive and negative parts are $1$-Lipschitz,
+\begin{equation*}
+	|(L_T)_+-L_+|\leq|\ln J_T|,
+	\qquad
+	|(L_T)_--L_-|\leq|\ln J_T|.
+\end{equation*}
+An admissible transformation therefore preserves whether each differential-entropy part is finite or infinite.
+
+A coordinate density $\sigma_{fg}$ with two finite variances necessarily has finite positive differential-entropy part. Indeed, for a nondegenerate Gaussian coordinate density $G_{fg}$, the quadratic logarithm has $E[|\ln G_{fg}|\mid\sigma_{fg}]<\infty$. Setting $r=\frac{\sigma_{fg}}{G_{fg}}$ and using $-r\ln r\leq\frac{1}{e}$ for $0\leq r\leq1$ gives
+\begin{equation*}
+	\int\sigma_{fg}(\ln\sigma_{fg})_-
+	\leq\int\sigma_{fg}\left(\ln\frac{\sigma_{fg}}{G_{fg}}\right)_-+\int\sigma_{fg}(\ln G_{fg})_-
+	\leq\frac{1}{e}+E[|\ln G_{fg}|\mid\sigma_{fg}]<\infty.
+\end{equation*}
+Thus if $S[\rho_{qp}]=+\infty$, every admissible frame has at least one infinite variance and $U_\rho(T)=+\infty$. This proves the proposition in the last extended case.
+
+If both differential-entropy parts are infinite, the same argument again gives $U_\rho(T)=+\infty$ in every admissible frame. All generalized inequalities then hold, but $S[\rho_{qp}]$ is undefined. Conversely, the constructions above show that a finite-variance admissible frame exists whenever $S_+[\rho_{qp}]<\infty$. Therefore, among distributions whose initial differential entropy is defined, the absence of every admissible frame with two finite variances is equivalent to $S[\rho_{qp}]=+\infty$.\label{measurableAppendixEnd}
+
+\fi
+
+\begin{thebibliography}{9}
+	\bibitem{RioulCosta}
+	O. Rioul and M. H. M. Costa, \emph{On some almost properties}, 2016 Information Theory and Applications Workshop (ITA), 1--5.
+	\href{https://doi.org/10.1109/ITA.2016.7888134}{doi:10.1109/ITA.2016.7888134}.
+
+	\bibitem{CoverThomas}
+	T. M. Cover and J. A. Thomas, \emph{Elements of Information Theory}, second edition, Wiley, Hoboken, 2006.
+
+	\bibitem{GreeneShiohama}
+	R. E. Greene and K. Shiohama, \emph{Diffeomorphisms and volume-preserving embeddings of noncompact manifolds}, Transactions of the American Mathematical Society \textbf{255} (1979), 403--414.
+	\href{https://doi.org/10.1090/S0002-9947-1979-0542888-3}{doi:10.1090/S0002-9947-1979-0542888-3}.
+
+	\bibitem{Rezakhanlou}
+	F. Rezakhanlou, \emph{Lectures on the Large Deviation Principle} (2017), Theorem 3.3.
+	\url{https://math.berkeley.edu/~rezakhan/LD.pdf}.
+\end{thebibliography}
+
+\end{document}
