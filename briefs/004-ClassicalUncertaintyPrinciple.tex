@@ -28,15 +28,16 @@ In this context, $h$ is the phase-space area for which a uniform distribution ha
 
 For convenience, entropy is measured in nats, meaning that we use the natural logarithm and set the Boltzmann constant to $k_B=1$. Since we are looking at zero entropy, a change of entropy units does not change the result.
 
+We also establish the converse: if the generalized uncertainty relation holds in every admissible coordinate system, the entropy must be non-negative. Both directions follow from an exact equality separating the entropy, the KL divergence to a product Gaussian, and the coordinate adjustment. Suitable coordinates make the KL contribution vanish or approach zero, allowing the uncertainty bound to recover the entropy bound. The physical results are stated under a separate requirement that ensembles have finite entropy. The mathematical extension to measurable densities also treats well-defined infinite entropy; the additional issues are discussed separately.
+
 \section{Mathematical prerequisites}
 
-We distinguish a probability distribution $\rho$ from its coordinate density $\rho(x)$, also written $\rho_x$, where $x$ denotes the full coordinate tuple. For $\rho\ll\mu$, we reserve $S[\rho]=-\int\ln(h^n\frac{d\rho}{d\mu})\,d\rho$ for entropy relative to a fixed reference volume $\mu$. The differential entropy in coordinates $x$ is $S[\rho_x]=-\int\rho_x\ln(h^n\rho_x)\,d^{2n}x$. Thus $S[\rho]=S[\rho_x]$ when $d\mu=d^{2n}x$; in \ref{CST}, this holds in canonical coordinates.
+First some notation. Since we need to transform the same distribution over different coordinates, the functions $\rho_{qp}(q,p)$ and $\rho_{fg}(f,g)$, shortened to $\rho_{qp}$ and $\rho_{fg}$, represent the same distribution as expressed in different coordinates. The Shannon differential entropy $S[\rho_{qp}]=-\int\rho_{qp}\ln(h \rho_{qp})\,dqdp$ is calculated on the given coordinates. Similarly for expectations $E[A\mid\rho_{qp}]=\int A(q,p)\rho_{qp}\,dqdp$. Where indicated, infinite variance or entropy is allowed. We use the extended variance $\sigma_X^2=\inf_{a\in\mathbb{R}}E[(X-a)^2\mid\rho_{qp}]\in[0,+\infty]$, which remains defined even when the mean does not exist.
 
-For a pair of coordinates, $\rho_{qp}$ and $\rho_{fg}$ abbreviate $\rho(q,p)$ and $\rho(f,g)$. Throughout, $h>0$ is fixed, $0\ln0=0$, and entropy is understood wherever the integral is well-defined, including extended values. Expectations specify the coordinate density used for integration: $E[A\mid\rho_{qp}]=\int A(q,p)\rho_{qp}\,dqdp$ and $E[B\mid\rho_{fg}]=\int B(f,g)\rho_{fg}\,dfdg$. Functions are expressed in the coordinates of the indicated density; in particular, $J_T$ is a function of $q,p$.
-
-We allow extended variances, defining $\sigma_X^2=\inf_{a\in\mathbb{R}}E[(X-a)^2\mid\rho_x]$ for a quantity $X$ expressed in coordinates $x$. This agrees with the ordinary variance when finite and takes the value $+\infty$ otherwise, without requiring a finite mean first.
-
-For a distribution $\rho$ with density $\rho_{qp}$, an admissible coordinate change is a $C^1$ diffeomorphism $T=(f,g):\mathbb{R}^2\to U$ onto an open region $U\subseteq\mathbb{R}^2$, with $C^1$ inverse and $E[|\ln J_T|\mid\rho_{qp}]<\infty$, where $J_T=|\det DT|$ is the absolute Jacobian determinant. The region $U$ may be bounded. A coordinate density on $U$ is extended by zero when regarded as a function on $\mathbb{R}^2$.
+\begin{defn}
+	For a distribution $\rho$ with density $\rho_{qp}$, an admissible coordinate transformation is a $C^1$ diffeomorphism $T=(f,g):\mathbb{R}^2\to U$ onto an open region $U\subseteq\mathbb{R}^2$, with $C^1$ inverse and $E[|\ln J_T|\mid\rho_{qp}]<\infty$, where $J_T=|\det DT|$ is the absolute Jacobian determinant.
+\end{defn}
+The region $U$ may be bounded. A coordinate density on $U$ is extended by zero when regarded as a function on $\mathbb{R}^2$.
 
 This first proposition quantifies the uncertainty relationship in a generic set of coordinates $(f,g)$ based on the entropy in a reference coordinate system $(q,p)$, the entropy change due to the coordinate change and the entropy difference from a Gaussian with matching variances, since the Gaussian minimizes the spread at fixed entropy.
 
@@ -77,6 +78,30 @@ The next proposition is based on the result that any smooth probability density 
 	\end{equation*}
 	Thus $T$ is admissible. The coordinate entropy formula gives $0=S[\rho_{fg}]=S[\rho_{qp}]+E[\ln J_T\mid\rho_{qp}]$, proving the result.
 \end{proof}
+
+The next proposition extends the result to measurable probability densities, including well-defined infinite entropy. In the finite-entropy case, the KL contribution can be made arbitrarily small. For an admissible coordinate change, write $U_\rho(T)=\ln\left(\frac{2\pi e\,\sigma_f\sigma_g}{h}\right)-E[\ln J_T\mid\rho_{qp}]$, with $U_\rho(T)=+\infty$ if a variance is infinite. When the variances and $S[\rho_{qp}]$ are finite, Proposition \ref{entropyVarianceIdentity} gives
+\begin{equation*}
+	U_\rho(T)=S[\rho_{qp}]+D(\rho_{fg}\Vert G_{fg})\geq S[\rho_{qp}].
+\end{equation*}
+
+\begin{prop}\label{measurableEntropyCoordinates}
+	Let $\rho_{qp}(q,p)$ be a probability density with well-defined entropy $S[\rho_{qp}]$, including extended values. Then
+	\begin{equation}\label{entropyCoordinateInfimum}
+		\inf_T U_\rho(T)=S[\rho_{qp}],
+	\end{equation}
+	where the infimum is over smooth admissible coordinate changes. If $S[\rho_{qp}]$ is finite, there are smooth admissible $T_j=(f_j,g_j):\mathbb{R}^2\to\mathbb{R}^2$ with finite coordinate variances and $D(\rho_{f_jg_j}\Vert G_j)\to0$, where $G_j$ is the product Gaussian matching the separate means and variances of $\rho_{f_jg_j}$. In particular, $U_\rho(T_j)\to S[\rho_{qp}]$.
+\end{prop}
+
+\noindent\emph{Proof sketch.}
+For finite $S[\rho_{qp}]$, choose positive smooth coordinate densities $\eta_j$ on the $q,p$ plane such that $d_j=D(\rho_{qp}\Vert\eta_j)\to0$ and $E[|\ln\eta_j|\mid\rho_{qp}]<\infty$.
+
+Transport each $\eta_j$ to the same product Gaussian $\gamma_{fg}$ on $\mathbb{R}^2$. Invariance of relative entropy gives $D(\rho_{f_jg_j}\Vert\gamma_{fg})=d_j$. The entropy variational inequality ensures finite coordinate variances; together with the logarithmic control of $\eta_j$, this also ensures admissibility. Let $G_j$ be the product Gaussian matching the separate means and variances of $\rho_{f_jg_j}$. The Gaussian moment identity gives $0\leq D(\rho_{f_jg_j}\Vert G_j)\leq d_j\to0$. Proposition \ref{entropyVarianceIdentity} then gives
+\begin{equation*}
+	U_\rho(T_j)=S[\rho_{qp}]+D(\rho_{f_jg_j}\Vert G_j)\longrightarrow S[\rho_{qp}].
+\end{equation*}
+Together with the lower bound, this proves \eqref{entropyCoordinateInfimum} for finite entropy.
+
+If $S[\rho_{qp}]=-\infty$, the same approximation provides smooth densities $\eta_j$ with finite logarithmic expectations tending to $+\infty$. Transporting them to a fixed uniform density on a bounded rectangle keeps the variances bounded while $E[\ln J_{T_j}\mid\rho_{qp}]\to+\infty$, so $U_\rho(T_j)\to-\infty$. If $S[\rho_{qp}]=+\infty$, every admissible frame retains infinite differential entropy and must have an infinite variance. Thus $U_\rho(T)=+\infty$ in every frame.
 
 \section{Conditions}
 
