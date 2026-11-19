@@ -30,103 +30,52 @@ For convenience, entropy is measured in nats, meaning that we use the natural lo
 
 \section{Mathematical prerequisites}
 
-We first establish the mathematical results relating entropy, uncertainty and changes of variables. For a probability density $\rho$ on $\mathbb{R}^{2n}$, define $S[\rho]=-\int\rho\ln(h^n\rho)\,d\mu$, where $h>0$ is fixed, $\mu$ is Lebesgue measure and $0\ln0=0$. The entropy is understood wherever the integral is well-defined, including extended values. We write $E$ for expectation with respect to the density under consideration.
+We distinguish a probability distribution $\rho$ from its coordinate density $\rho(x)$, also written $\rho_x$, where $x$ denotes the full coordinate tuple. For $\rho\ll\mu$, we reserve $S[\rho]=-\int\ln(h^n\frac{d\rho}{d\mu})\,d\rho$ for entropy relative to a fixed reference volume $\mu$. The differential entropy in coordinates $x$ is $S[\rho_x]=-\int\rho_x\ln(h^n\rho_x)\,d^{2n}x$. Thus $S[\rho]=S[\rho_x]$ when $d\mu=d^{2n}x$; in \ref{CST}, this holds in canonical coordinates.
 
-\begin{prop}\label{uniformEntropy}
-	Let $\rho_U$ be the uniform probability density over a measurable region $U$ with $0<\mu(U)<\infty$. Then $S[\rho_U]=0$ if and only if $\mu(U)=h^n$.
+For a pair of coordinates, $\rho_{qp}$ and $\rho_{fg}$ abbreviate $\rho(q,p)$ and $\rho(f,g)$. Throughout, $h>0$ is fixed, $0\ln0=0$, and entropy is understood wherever the integral is well-defined, including extended values. Expectations specify the coordinate density used for integration: $E[A\mid\rho_{qp}]=\int A(q,p)\rho_{qp}\,dqdp$ and $E[B\mid\rho_{fg}]=\int B(f,g)\rho_{fg}\,dfdg$. Functions are expressed in the coordinates of the indicated density; in particular, $J_T$ is a function of $q,p$.
+
+We allow extended variances, defining $\sigma_X^2=\inf_{a\in\mathbb{R}}E[(X-a)^2\mid\rho_x]$ for a quantity $X$ expressed in coordinates $x$. This agrees with the ordinary variance when finite and takes the value $+\infty$ otherwise, without requiring a finite mean first.
+
+For a distribution $\rho$ with density $\rho_{qp}$, an admissible coordinate change is a $C^1$ diffeomorphism $T=(f,g):\mathbb{R}^2\to U$ onto an open region $U\subseteq\mathbb{R}^2$, with $C^1$ inverse and $E[|\ln J_T|\mid\rho_{qp}]<\infty$, where $J_T=|\det DT|$ is the absolute Jacobian determinant. The region $U$ may be bounded. A coordinate density on $U$ is extended by zero when regarded as a function on $\mathbb{R}^2$.
+
+This first proposition quantifies the uncertainty relationship in a generic set of coordinates $(f,g)$ based on the entropy in a reference coordinate system $(q,p)$, the entropy change due to the coordinate change and the entropy difference from a Gaussian with matching variances, since the Gaussian minimizes the spread at fixed entropy.
+
+\begin{prop}\label{entropyVarianceIdentity}
+	Let $\rho_{qp}(q,p)$ be a probability density with finite entropy $S[\rho_{qp}]$. Let $T: (q,p) \mapsto (f(q,p),g(q,p))$ be an admissible coordinate change such that $\rho_{fg}(f,g)$ has finite variances $(\sigma_f^2,\sigma_g^2)$. Let $G_{fg}$ be the product of two Gaussians with the same means and variances. Then
+	\begin{equation}\label{entropyVarianceEquality}
+		\sigma_f\sigma_g=\frac{h}{2\pi e}e^{S[\rho_{qp}]}e^{E[\ln J_T\mid\rho_{qp}]}e^{D(\rho_{fg}\Vert G_{fg})}
+	\end{equation}
+	where $J_T$ is the absolute Jacobian determinant of $T$.
 \end{prop}
 
 \begin{proof}
-	The entropy for a uniform distribution reduces to $S[\rho_U]=\ln\frac{\mu(U)}{h^n}$. The logarithm is zero if and only if $\frac{\mu(U)}{h^n}=1$.
+	Admissibility and the standard coordinate-transformation law for differential entropy \cite[Lemma 2]{RioulCosta} ensure that $S[\rho_{fg}]$ is finite as well. Adding and subtracting the intermediate entropies gives
+	\begin{equation*}
+		S[G_{fg}]=S[\rho_{qp}]+\bigl(S[\rho_{fg}]-S[\rho_{qp}]\bigr)+\bigl(S[G_{fg}]-S[\rho_{fg}]\bigr).
+	\end{equation*}
+	The first difference is the coordinate contribution $E[\ln J_T\mid\rho_{qp}]$. For the second difference, note that, since $G_{fg}$ is a Gaussian with the same mean and variance of $\rho_{fg}$, calculations show that $\int \rho_{fg} \ln G_{fg} df dg = \int G_{fg}  \ln G_{fg} df dg$. Therefore $S[G_{fg}]-S[\rho_{fg}] = D(\rho_{fg}\Vert G_{fg})$ is the Kullback--Leibler (KL) divergence between the two distributions.
+
+	Substituting these contributions and the Gaussian entropy formula \cite[Section 8.4]{CoverThomas} gives
+	\begin{equation*}
+		\ln\left(\frac{2\pi e\,\sigma_f\sigma_g}{h}\right)=S[G_{fg}]=S[\rho_{qp}]+E[\ln J_T\mid\rho_{qp}]+D(\rho_{fg}\Vert G_{fg}).
+	\end{equation*}
+	Exponentiating proves \eqref{entropyVarianceEquality}.
 \end{proof}
 
-\begin{prop}\label{entropyVariance}
-	Let $\sigma(q,p)$ be a probability density with finite variances $\sigma_q^2,\sigma_p^2>0$. Then $S[\sigma]\leq\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)$, or equivalently $\sigma_q\sigma_p\geq\frac{h}{2\pi e}e^{S[\sigma]}$. Equality holds if and only if $q$ and $p$ are independent Gaussian variables. The entropy may take the value $-\infty$, with $e^{-\infty}=0$.
+The next proposition is based on the result that any smooth probability density that is nowhere zero can be transformed into a zero entropy Gaussian with a smooth transformation. The entropy in the reference coordinate system, then, becomes equal to minus the entropy change induced by the transformation.
+
+\begin{prop}\label{smoothEntropyCoordinates}
+	Let $\rho_{qp}(q,p)$ be a positive smooth probability density with finite $S[\rho_{qp}]$. There is a smooth admissible coordinate change for which $\rho_{fg}$ is a product Gaussian with $S[\rho_{fg}]=0$. In these coordinates, $\sigma_f\sigma_g=\frac{h}{2\pi e}$ and $S[\rho_{qp}]=-E[\ln J_T\mid\rho_{qp}]$.
 \end{prop}
 
 \begin{proof}
-	We first find the stationary densities for the product of the variances at a fixed finite entropy $S$. We use Lagrange multipliers to vary $\sigma_q^2\sigma_p^2=\int(q-\mu_q)^2\rho\,dqdp\int(p-\mu_p)^2\rho\,dqdp$, where $\mu_q$ and $\mu_p$ are the means of $q$ and $p$, under two constraints: $\rho$ integrates to $1$ and its entropy is $S$. We have
-	\begin{equation*}
-		\begin{aligned}
-			L={}&\int(q-\mu_q)^2\rho\,dqdp
-			\int(p-\mu_p)^2\rho\,dqdp\\
-			&+\lambda_1\left(\int\rho\,dqdp-1\right)
-			+\lambda_2\left(-\int\rho\ln(h\rho)\,dqdp-S\right),\\
-			\delta L={}&\int\delta\rho\big[
-			(q-\mu_q)^2\sigma_p^2+\sigma_q^2(p-\mu_p)^2\\
-			&\hspace{5em}+\lambda_1-\lambda_2\ln(h\rho)-\lambda_2
-			\big]\,dqdp=0,\\
-			\lambda_2\ln(h\rho)={}&\lambda_1-\lambda_2
-			+(q-\mu_q)^2\sigma_p^2+\sigma_q^2(p-\mu_p)^2,\\
-			\rho={}&\frac{1}{h}
-			e^{\frac{\lambda_1-\lambda_2}{\lambda_2}}
-			e^{\frac{(q-\mu_q)^2\sigma_p^2}{\lambda_2}}
-			e^{\frac{\sigma_q^2(p-\mu_p)^2}{\lambda_2}}.
-		\end{aligned}
-	\end{equation*}
-	Integrability requires $\lambda_2<0$. We recognize the stationary density as the product of two independent Gaussians. Using the standard expression, we find
-	\begin{equation*}
-		\begin{aligned}
-			\rho
-			&=\frac{1}{2\pi\sigma_q\sigma_p}
-			e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}}
-			e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}},\\
-			S[\rho]
-			&=\ln\left(\frac{2\pi\sigma_q\sigma_p}{h}\right)
-			+\frac{\sigma_q^2}{2\sigma_q^2}
-			+\frac{\sigma_p^2}{2\sigma_p^2}\\
-			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right),\\
-			\sigma_q\sigma_p
-			&=\frac{h}{2\pi e}e^{S[\rho]}.
-		\end{aligned}
-	\end{equation*}
+	Choose $s,t>0$ with $st=\frac{h}{2\pi e}$, and let $G_{fg}(f,g)=\frac{1}{2\pi st}e^{-\frac{f^2}{2s^2}}e^{-\frac{g^2}{2t^2}}$. Its entropy is $S[G_{fg}]=\ln\left(\frac{2\pi e\,st}{h}\right)=0$. By the smooth volume-transport theorem of Greene and Shiohama \cite[Theorem 1]{GreeneShiohama}, there is a smooth diffeomorphism $T:\mathbb{R}^2\to\mathbb{R}^2$ with $\rho_{qp}(q,p)=G_{fg}(T(q,p))J_T(q,p)$. The two volume forms have the same total mass, and every end has finite volume because that total mass is finite. Thus $\rho_{fg}=G_{fg}$.
 
-	To verify that this gives the global bound, let $\sigma$ be an arbitrary density with finite variances, and take $\rho$ to be the Gaussian above with the same means and variances as $\sigma$. Write $E[\,\cdot\mid\sigma]$ for expectation with respect to $\sigma$. Consider the KL divergence $D(\sigma\Vert\rho)=\int\sigma\ln\left(\frac{\sigma}{\rho}\right)\,dqdp$. The inequality $u\ln u-u+1\geq0$, with equality only at $u=1$, gives $D\geq0$ by setting $u=\frac{\sigma}{\rho}$ and integrating against $\rho$. Equality holds if and only if $\sigma=\rho$ almost everywhere. Moreover,
+	Finite $S[\rho_{qp}]$ gives $E[|\ln\rho_{qp}|\mid\rho_{qp}]<\infty$. Also $E[|\ln G_{fg}(T)|\mid\rho_{qp}]=E[|\ln G_{fg}|\mid G_{fg}]<\infty$, so
 	\begin{equation*}
-		\begin{aligned}
-			D(\sigma\Vert\rho)
-			&=\int\sigma\ln(h\sigma)\,dqdp
-			-\int\sigma\ln(h\rho)\,dqdp\\
-			&=-S[\sigma]
-			+\ln\left(\frac{2\pi\sigma_q\sigma_p}{h}\right)
-			+\frac{E[(q-\mu_q)^2\mid\sigma]}{2\sigma_q^2}
-			+\frac{E[(p-\mu_p)^2\mid\sigma]}{2\sigma_p^2}\\
-			&=\ln\left(\frac{2\pi e\,\sigma_q\sigma_p}{h}\right)-S[\sigma]
-			\geq0.
-		\end{aligned}
+		E[|\ln J_T|\mid\rho_{qp}]\leq E[|\ln\rho_{qp}|\mid\rho_{qp}]+E[|\ln G_{fg}|\mid G_{fg}]<\infty.
 	\end{equation*}
-	Since $\ln(h\rho(q,p))$ is a quadratic function, the expectation $E[\ln(h\rho(q,p))\mid\sigma]$ is finite for all $\sigma$ with finite variance. Thus the identity is also valid when $D=+\infty$ and $S[\sigma]=-\infty$; finite variances preclude $S[\sigma]=+\infty$. Rearranging gives the stated bound, with equality precisely for the product of two independent Gaussian densities.
-\end{proof}
-
-\begin{prop}\label{entropyCoordinates}
-	Let $(q,p)\mapsto(f(q,p),g(q,p))$ be a continuously differentiable change of variables with continuously differentiable inverse. Let $\rho_{qp}$ and $\rho_{fg}$ be the two densities of the same probability distribution. If $S[\rho_{qp}]$ is well-defined and $\ln|\{f,g\}|$ is integrable, then $S[\rho_{fg}]=S[\rho_{qp}]+E[\ln|\{f,g\}|]$.
-\end{prop}
-
-\begin{proof}
-	The Poisson bracket is the Jacobian determinant of the transformation:
-	\begin{equation*}
-		\{f,g\}
-		=\partial_q f\,\partial_p g-\partial_p f\,\partial_q g
-		=\left|\begin{array}{cc}
-			\partial_q f&\partial_p f\\
-			\partial_q g&\partial_p g
-		\end{array}\right|.
-	\end{equation*}
-	Therefore $\rho_{qp}(q,p)=\rho_{fg}(f,g)|\{f,g\}|$. The absolute value allows either orientation. In integrals over $f,g$, functions of $q,p$ are evaluated using the inverse transformation. We have
-	\begin{equation*}
-		\begin{aligned}
-			S[\rho_{qp}]
-			&=-\int\rho_{qp}\ln(h\rho_{qp})\,dqdp\\
-			&=-\int\rho_{fg}|\{f,g\}|
-			\ln\left(h\rho_{fg}|\{f,g\}|\right)\,dqdp\\
-			&=-\int\rho_{fg}
-			\ln\left(h\rho_{fg}|\{f,g\}|\right)\,dfdg\\
-			&=-\int\rho_{fg}\ln(h\rho_{fg})\,dfdg
-			-\int\rho_{fg}\ln|\{f,g\}|\,dfdg\\
-			&=S[\rho_{fg}]-E[\ln|\{f,g\}|].
-		\end{aligned}
-	\end{equation*}
-	The logarithmic expectation is finite by assumption, so this identity also holds for extended entropy values. Rearranging proves the result.
+	Thus $T$ is admissible. The coordinate entropy formula gives $0=S[\rho_{fg}]=S[\rho_{qp}]+E[\ln J_T\mid\rho_{qp}]$, proving the result.
 \end{proof}
 
 \section{Conditions}
