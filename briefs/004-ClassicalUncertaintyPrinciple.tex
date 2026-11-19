@@ -107,28 +107,40 @@ If $S[\rho_{qp}]=-\infty$, the same approximation provides smooth densities $\et
 
 We now state the conditions for the theorems, starting with the classical phase-space representation. This includes pure states, ensembles, configuration counting and entropy.
 
-\begin{condition}[Classical phase space]{CPS}
+\begin{condition}[Classical states]{CST}
 	The state space of a classical system with $n$ degrees of freedom (DOFs) is represented by $M=\mathbb{R}^{2n}$ with canonical coordinates $(q^i,p_i)$ and symplectic form $\omega=\sum_i dq^i\wedge dp_i$. The count of configurations for each DOF is represented by its canonical phase-space area, and the count of states by the Liouville measure $\mu(U)=\int_U dq^1\cdots dq^n dp_1\cdots dp_n=\int_U\frac{\omega^n}{n!}$.
 
-	A statistical ensemble is represented by a probability density $\rho(q^i,p_i)$ relative to the Liouville measure, and statistical mixtures by convex combinations of densities. The entropy is given by the Gibbs/Shannon formula $S[\rho]=-\int_M\rho\ln(h^n\rho)\,d\mu$, where $h>0$ is a fixed constant with units of phase-space area.
+	The space of statistical ensembles is given by the convex space of probability densities $\rho(q^i,p_i)$. The Gibbs/Shannon entropy is $S[\rho]=-\int_M\rho_{qp}\ln(h^n\rho_{qp})\,d\mu=S[\rho_{qp}]$, where $h>0$ is a fixed constant with units of phase-space area.
 \end{condition}
 
-The constant $h$ makes the entropy formula dimensionally correct and fixes its zero. By Proposition \ref{uniformEntropy}, a uniform ensemble has zero entropy exactly when its phase-space volume is $h^n$.
+The constant $h$ makes the entropy formula dimensionally correct and fixes its zero. For an ensemble $\rho_U$ uniform over a region $U$ with $0<\mu(U)<\infty$, the entropy is $S[\rho_U]=\ln\left(\frac{\mu(U)}{h^n}\right)$, which vanishes exactly when its phase-space volume is $h^n$.
 
-Connecting statistical mechanics to thermodynamics, the third law of thermodynamics will impose that the entropy of all statistical ensembles must be non-negative. This also includes the entropy of every marginal of each independent degree of freedom. We state this requirement independently of its representation.
+The representation alone does not guarantee that this entropy is finite or even well-defined. We therefore impose finiteness as a separate physical requirement.
+
+\begin{condition}[Entropy is finite]{[B]FINENT}
+	All ensembles have a well-defined finite entropy.
+\end{condition}
+
+This requirement also applies to the marginal ensembles describing individual DOFs. In the physical theorems below, we use \ref{CST} constrained by \ref{[B]FINENT}: the representation is retained, while ensembles that violate the requirement are excluded.
+
+Connecting statistical mechanics to thermodynamics, the third law motivates a non-negative entropy for physical ensembles. We impose this lower bound on the marginal of each independent DOF, independently of its representation.
 
 \begin{condition}[Lower entropic bound]{[B]ZENT}
 	Given a statistical ensemble, the entropy of the marginal of each independent degree of freedom is well-defined and non-negative.
 \end{condition}
 
-Under \ref{CPS}, this means $S[\rho(q,p)]\geq0$ for the marginal describing the independent DOF. The representation does not guarantee this requirement: densities concentrated in sufficiently small phase-space regions have negative entropy. We therefore constrain the admissible ensembles by \ref{[B]ZENT}.
+Under \ref{CST}, this means $S[\rho]=S[\rho_{qp}]\geq0$ for the marginal over an independent DOF. In other coordinates $f,g$, the same invariant entropy is $S[\rho]=S[\rho_{fg}]-E[\ln J_T\mid\rho_{qp}]$. Even finite-entropy ensembles can violate the lower bound: densities concentrated in sufficiently small phase-space regions have negative entropy.
 
-The goal is to show that this constraint guarantees the following uncertainty relation. The formulas apply whenever the indicated variances and expectations are well-defined.
+We now state the general uncertainty relationship we want to study.
+\begin{condition}[Generalized classical uncertainty relation]{GCUR}
+	For each independent DOF and every admissible change of coordinates $(q,p)\mapsto(f,g)$, the uncertainties satisfy $$\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|\mid\rho_{qp}]}.$$ 
+	Equality is obtained if and only if $S[\rho]=0$ and $\rho_{fg}$ is the product of two Gaussians.
+\end{condition}
+The product of the physical units of $f,g$ must be the same as for $q,p$. Recall that the coordinate change may map $\mathbb{R}^2$ onto any open coordinate region, including a bounded one, and admissibility requires $E[\left|\ln|\{f,g\}|\right|\mid\rho_{qp}]<\infty$.
 
+Since $\{q,p\}=1$, the relationship for canonical variables reduces to the following.
 \begin{condition}[Classical uncertainty relation]{CUR}
-	The uncertainty on each independent DOF is bounded by $\sigma_q\sigma_p\geq\frac{\hbar}{e}$, where $\hbar=\frac{h}{2\pi}$. Equality is obtained if and only if position and momentum are independent Gaussian variables with zero joint entropy.
-
-	If $f$ and $g$ are two variables that span the same DOF through a continuously differentiable invertible transformation with continuously differentiable inverse, and the product of their physical units is the same as for $q,p$, then $\sigma_f\sigma_g\geq\frac{\hbar}{e}e^{E[\ln|\{f,g\}|]}$, provided the logarithm of the absolute Poisson bracket has finite expectation.
+	The uncertainty on each independent DOF, in the canonical coordinates $q,p$ of the representation, is bounded by $\sigma_q\sigma_p\geq\frac{\hbar}{e}$. Equality is obtained if and only if position and momentum are independent Gaussians with zero joint entropy.
 \end{condition}
 
 \section{Theorems}
