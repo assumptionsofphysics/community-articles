@@ -12,42 +12,41 @@
 \maketitle
 
 \begin{abstract}
-	We show that the Schrödinger equation is equivalent to determinism and reversibility, which can be characterized in multiple ways: unitary evolution, one-to-one correspondence between past and future states, preservation of conditional probability or conservation of information entropy. The result holds in the infinite-dimensional case.
+	For time-independent dynamics, we show that the Schrödinger equation is equivalent to determinism and reversibility, which can be characterized in multiple ways: unitary evolution, one-to-one correspondence between past and future states, preservation of conditional probability or conservation of information entropy. The result holds in the infinite-dimensional case.
 \end{abstract}
 
 \section{Introduction}
 
-In quantum mechanics, time evolution for an isolated system is postulated to follow the Schrödinger equation. This is equivalent to saying that evolution is represented by a strongly continuous one-parameter group of unitary operators. Here we show that the same evolution can be characterized in more physical terms as deterministic and reversible evolution: the future can be predicted from the past and the past reconstructed from the future. This same assumption can be implemented by requiring a one-to-one correspondence between states, preservation of conditional probability or conservation of information entropy.
+In quantum mechanics, time evolution for an isolated system is postulated to follow the Schrödinger equation. In the time-independent case, this is equivalent to saying that evolution is represented by a strongly continuous one-parameter group of unitary operators. Here we show that the same evolution can be characterized in more physical terms as deterministic and reversible evolution: the future can be predicted from the past and the past reconstructed from the future. This same assumption can be implemented by requiring a one-to-one correspondence between states, preservation of conditional probability or conservation of information entropy.
 
 \section{Mathematical prerequisites}
 
-We first show that an affine continuous map is a bijection on pure states if and only if it is a bijection on the whole ensemble space, and if and only if it is implemented by either a unitary or an anti-unitary.
+We first show that a continuous affine map that is bijective on pure states is implemented by either a unitary or an anti-unitary. The key is that affinity forces the map to preserve the geometry of every two-dimensional subspace. We write $\rho_\psi$ for the rank-one projector representing a ray $\psi$.
 
 \begin{prop}[Affine pure-state correspondence]\label{AFF-PURE}
-	Let $D(\mathcal{H})$ be the space of density operators of a Hilbert space $\mathcal{H}$. Let $T:D(\mathcal{H})\to D(\mathcal{H})$ be a trace-norm continuous affine map. Then the following are equivalent:
-	\begin{itemize}
-		\item $T$ is bijective on the pure states;
-		\item $T$ is bijective on all density operators;
-		\item there exists either a unitary or an anti-unitary operator $W:\mathcal{H}\to\mathcal{H}$ such that $T(\rho)=W\rho W^\dagger$ for every $\rho\in D(\mathcal{H})$.
-	\end{itemize}
+	Let $\mathcal{D}(\mathcal{H})$ be the space of density operators of a nonzero separable complex Hilbert space $\mathcal{H}$. Let $T:\mathcal{D}(\mathcal{H})\to\mathcal{D}(\mathcal{H})$ be a trace-norm continuous affine map. If $T$ maps pure states bijectively onto pure states, then there exists either a unitary or an anti-unitary operator $W:\mathcal{H}\to\mathcal{H}$ such that $T(\rho)=W\rho W^\dagger$ for every $\rho\in\mathcal{D}(\mathcal{H})$.
 \end{prop}
 
 \begin{proof}
-	Suppose first that $T$ maps pure states bijectively onto pure states. The affine map on density operators extends to a positive trace-preserving real-linear map on the self-adjoint trace-class operators. For a positive trace-class operator $A\neq 0$, set
-	\begin{equation}
-		\widetilde{T}(A)=\tr(A)T\left(\frac{A}{\tr(A)}\right).
-	\end{equation}
-	Affinity makes this extension additive on the positive cone, and every self-adjoint trace-class operator is the difference of two positive ones. This gives a continuous real-linear map on the self-adjoint trace-class operators.
-	
-	Pure states are exactly the positive trace-one rank-one operators. Therefore $\widetilde{T}$ maps rank-one positive operators bijectively onto rank-one positive operators. The standard linear rank-one preserver result gives two non-degenerate possibilities: $\widetilde{T}(A)=WAW^\dagger$ or, after choosing an orthonormal basis, $\widetilde{T}(A)=WA^{\mathsf T}W^\dagger$. The remaining possibility would map all pure states to the same pure state and is excluded by bijectivity. Positivity and preservation of the trace force $W$ to preserve the norm and the bijection on pure states forces its range to be the whole Hilbert space. Consequently, $W$ is unitary in the first case. In the second case, the transpose can be absorbed into complex conjugation and the resulting operator is anti-unitary. Thus the first condition implies the third.
+	If $\dim\mathcal{H}=1$, take $W=I$. Otherwise, let $E$ be a two-dimensional subspace with $I_E=P+Q$ for orthogonal rank-one projectors $P,Q$, and put $\tau=\frac{P+Q}{2}=\frac{I_E}{2}$. Since $T(P)$ and $T(Q)$ are distinct pure states, the support $F$ of $T(\tau)$ is two-dimensional.
 
-	A unitary or anti-unitary operator is invertible, and conjugation by it maps density operators onto density operators. Therefore the third condition implies the second.
+	For every density operator $\rho$ supported on $E$, $I_E-\rho$ is also a density operator and $\tau=\frac{\rho+(I_E-\rho)}{2}$. By affinity, $T(\tau)=\frac{T(\rho)+T(I_E-\rho)}{2}$. Positivity forces both summands to be supported on $F$. Thus $T$ maps the Bloch ball on $E$ into the Bloch ball on $F$.
 
-	Lastly, suppose $T$ maps the ensemble space bijectively onto itself. Since $T$ is affine and bijective, its inverse is affine as well. Affine bijections map extreme points bijectively onto extreme points, and the extreme points of $D(\mathcal{H})$ are exactly the pure states. Therefore the second condition implies the first, completing the proof.
+	In Bloch coordinates, affinity gives $\mathbf{r}\mapsto\mathbf{a}+M\mathbf{r}$, with $M$ a real $3\times3$ matrix. Injectivity on pure states makes $M$ invertible: otherwise opposite unit vectors in its kernel would have the same image. Since pure states map to pure states, for every unit vector $\mathbf{r}$,
+	\begin{equation*}
+		\|\mathbf{a}+M\mathbf{r}\|^2=\|\mathbf{a}-M\mathbf{r}\|^2=1,\qquad 4\mathbf{a}\cdot M\mathbf{r}=0.
+	\end{equation*}
+	The last equality follows by subtraction. Invertibility of $M$ forces $\mathbf{a}=0$, so $M$ preserves unit vectors and, by linearity, all lengths and inner products. Since $\tr(RS)=\frac{1+\mathbf{r}\cdot\mathbf{s}}{2}$ for pure states $R,S$ with Bloch vectors $\mathbf{r},\mathbf{s}$, $T$ preserves their transition probabilities. Every pair of distinct pure states spans such a subspace, so this holds throughout $\mathcal{H}$.
+
+	By Wigner's theorem \cite[Theorem~5.29]{Landsman2017}, there is a unitary or anti-unitary $W$ such that $T(P)=WPW^\dagger$ for every pure state $P$. Affinity gives $T(\rho)=W\rho W^\dagger$ for finite mixtures. For an infinite-rank density operator $\rho=\sum_n p_nP_n$, with orthogonal $P_n$, $p_n>0$ and $\sum_n p_n=1$, put $s_N=\sum_{n=1}^Np_n$ and $\rho_N=\frac{1}{s_N}\sum_{n=1}^Np_nP_n$. Then
+	\begin{equation*}
+		\|\rho_N-\rho\|_1=\sum_{n=1}^Np_n\left(\frac{1}{s_N}-1\right)+\sum_{n>N}p_n=2(1-s_N)\longrightarrow0.
+	\end{equation*}
+	Continuity gives $T(\rho)=\lim_NT(\rho_N)=\lim_NW\rho_NW^\dagger=W\rho W^\dagger$, completing the proof.
 \end{proof}
 
 \begin{remark}
-	In finite dimensions, it suffices that $T$ is injective on the pure states $P(\mathcal{H})$, as the compactness of $P(\mathcal{H})$ will force $T$ to be bijective on $P(\mathcal{H})$. In infinite dimensions, this does not work: the map $|n\> \mapsto |n+1\>$, which shifts the energy levels of a harmonic oscillator, is a counterexample.
+	In finite dimensions, it suffices that $T$ maps pure states injectively into pure states: the Bloch-ball argument above makes this restriction an isometry, and compactness forces it to be surjective. In infinite dimensions, this does not work: the map $|n\> \mapsto |n+1\>$, which shifts the energy levels of a harmonic oscillator, is a counterexample.
 \end{remark}
 
 \section{Conditions}
@@ -56,6 +55,8 @@ The following condition represents the standard structure of quantum states on H
 \begin{condition}[Quantum states]{QST:H}
 	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
+
+We use base-two logarithms and the trace-norm topology on density operators.
 
 Time evolution must preserve statistical mixtures.
 \begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
@@ -69,8 +70,9 @@ We are going to restrict the dynamics to the time-independent case.
 
 Lastly, these are the five conditions whose equivalence we want to prove.
 \begin{condition}[Schrödinger equation]{DR-SCEQ}
-	The evolution follows the equation $\frac{d}{dt} \psi(t) = \frac{H(t)}{\imath \hbar} \psi(t)$, where $H(t)$ is a self-adjoint operator.
+	The evolution follows $\frac{d}{dt} \psi(t) = \frac{H(t)}{\imath \hbar} \psi(t)$, where $H(t)$ is a self-adjoint operator.
 \end{condition}
+This shared condition allows $H(t)$ to depend on time; under \ref{EVTI}, a single time-independent Hamiltonian can be chosen.
 
 \begin{condition}[Unitary evolution]{DR-UNIT}
 	Time evolution is represented by a strongly continuous one-parameter group of unitary operators. That is, $\Phi_t(\rho)=U_t\rho U_t^\dagger$, where $U_t:\mathcal{H}\to\mathcal{H}$, $U_0=I$, $U_{t+s}=U_tU_s$ and $U_t^\dagger U_t=U_tU_t^\dagger=I$.
@@ -87,6 +89,7 @@ Lastly, these are the five conditions whose equivalence we want to prove.
 \begin{condition}[Conservation of information entropy]{DR-INFO}
 	Future and past ensembles have the same information entropy. That is, if $\rho_I$ is an initial ensemble, $\rho_F$ is the corresponding evolved future ensemble and $\rho_P$ is the corresponding reconstructed past ensemble, then $S(\rho_I) = S(\rho_F) = S(\rho_P)$.
 \end{condition}
+Every present state must admit both a future and a past description. Reconstruction describes what the present tells us about the past and is not assumed to be the inverse of evolution. Both describe the same physical process: when reconstruction assigns a definite past state and that past state predicts a definite present state, the two descriptions of the present must agree.
 
 \section{Theorem}
 
@@ -99,9 +102,9 @@ Now we show the equivalence of the time evolution characterizations.
 \begin{proof}
 	We first show that each physical condition gives unitary evolution.
 
-	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{DR-EV}, $\Phi_t$ maps pure states bijectively onto pure states. By \ref{[B]EVMIX}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $\Phi_t=\Phi_{t/2}\circ \Phi_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $\Phi_t$ is implemented by a unitary.
+	\ref{DR-EV} $\implies$ \ref{DR-UNIT}. By \ref{EVTI}, write evolution for elapsed time $t\geq0$ as $\Phi_t$. By \ref{DR-EV}, every pure state has a definite future and past state. Consistency of these descriptions makes evolution and reconstruction inverses on pure states. Since every present state has a past, $\Phi_t$ is onto pure states; since reconstruction recovers the original state, it is also injective. By \ref{[B]EVMIX}, it is continuous and affine. Proposition \ref{AFF-PURE} shows that each $\Phi_t$ is implemented by either a unitary or an anti-unitary operator. The anti-unitary case is excluded by composition. In fact, $\Phi_t=\Phi_{t/2}\circ \Phi_{t/2}$, and the composition of two maps implemented by an anti-unitary is implemented by a unitary. Therefore every $\Phi_t$ is implemented by a unitary.
 
-	The composition law gives a continuous projective unitary representation of elapsed time. The phases can be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$. Joint continuity of $\Phi_t$ gives strong continuity of $U_t$. The inverses define $U_{-t}=U_t^\dagger$, yielding a strongly continuous one-parameter unitary group. Therefore \ref{DR-UNIT} holds.
+	Since these maps are trace-norm isometries, their inverses extend them to a continuous group. The composition law gives a continuous projective unitary representation of $(\mathbb{R},+)$. The standard lifting result \cite[Theorem~5.59]{Landsman2017} allows the phases to be chosen so that $U_0=I$ and $U_{t+s}=U_tU_s$, with $U_t$ strongly continuous. Therefore \ref{DR-UNIT} holds.
 
 	\ref{DR-PROB} $\implies$ \ref{DR-EV}. Two states are the same if and only if their conditional probability is one. Therefore
 	\begin{equation}
@@ -112,19 +115,19 @@ Now we show the equivalence of the time evolution characterizations.
 	\end{equation}
 	and the same argument applies to the reconstructed past states. Therefore \ref{DR-PROB} implies \ref{DR-EV}, which implies \ref{DR-UNIT} by the previous argument.
 
-	\ref{DR-INFO} $\implies$ \ref{DR-UNIT}. Pure ensembles are exactly the ensembles with zero von Neumann entropy. Since the entropy is the same in both directions, pure ensembles map bijectively onto pure ensembles. Affinity and continuity then allow us to apply Proposition \ref{AFF-PURE}, and the same composition argument gives \ref{DR-UNIT}.
+	\ref{DR-INFO} $\implies$ \ref{DR-UNIT}. Pure ensembles are exactly the ensembles with zero von Neumann entropy, so evolution and reconstruction both preserve purity. Let $\psi$ be a present pure state, $\psi_P$ its reconstructed past state, and $\psi_{P_F}$ the evolution of $\psi_P$ back to the present. Reconstruction assigns $\psi_P$ with certainty given $\psi$, while evolution assigns $\psi_{P_F}$ with certainty given $\psi_P$. These descriptions of the same process must agree, so $\psi_{P_F}=\psi$. The same reasoning applies to reconstructing an evolved state. Thus evolution and reconstruction are inverses on pure states, giving \ref{DR-EV} and hence \ref{DR-UNIT}.
 
-	We now show that unitary evolution gives all three physical conditions. Given the evolved future states $\psi_F=U_t\psi_I$ and $\phi_F=U_t\phi_I$, their corresponding reconstructed past states are the initial states $U_t^\dagger\psi_F=\psi_I$ and $U_t^\dagger\phi_F=\phi_I$. Since $U_t$ and $U_t^\dagger$ are bijective, \ref{DR-UNIT} implies \ref{DR-EV}. Moreover,
+	We now show that unitary evolution gives all three physical conditions. For present states $\psi_I,\phi_I$, their evolved future states are represented by $\rho_{\psi_F}=U_t\rho_{\psi_I}U_t^\dagger$ and $\rho_{\phi_F}=U_t\rho_{\phi_I}U_t^\dagger$, while their reconstructed past states are represented by $\rho_{\psi_P}=U_t^\dagger\rho_{\psi_I}U_t$ and $\rho_{\phi_P}=U_t^\dagger\rho_{\phi_I}U_t$. Since $U_t$ and $U_t^\dagger$ are bijective, \ref{DR-UNIT} implies \ref{DR-EV}. Moreover,
 	\begin{equation}
 		p(\psi_I\mid\phi_I)=p(\psi_F\mid\phi_F)=p(\psi_P\mid\phi_P),
 	\end{equation}
-	so \ref{DR-PROB} holds. Lastly, let $\rho_F=U_t\rho_IU_t^\dagger$ and $\rho_P=U_t^\dagger\rho_FU_t=\rho_I$. Unitary conjugation preserves eigenvalues, including multiplicities. Since the von Neumann entropy depends only on those eigenvalues,
+	so \ref{DR-PROB} holds. Lastly, let $\rho_F=U_t\rho_IU_t^\dagger$ and $\rho_P=U_t^\dagger\rho_IU_t$. Unitary conjugation preserves eigenvalues, including multiplicities. Since the von Neumann entropy depends only on those eigenvalues,
 	\begin{equation}
 		S(\rho_I)=S(\rho_F)=S(\rho_P),
 	\end{equation}
-	and \ref{DR-INFO} holds.
+	and \ref{DR-INFO} holds, including when the entropy is infinite.
 
-	It remains to connect the unitary group to the Schrödinger equation. By Stone's theorem, every strongly continuous one-parameter unitary group has a unique self-adjoint generator $H$ such that
+	It remains to connect the unitary group to the Schrödinger equation. By Stone's theorem \cite[Theorem~5.73]{Landsman2017}, every strongly continuous one-parameter unitary group has a unique self-adjoint generator $H$ such that
 	\begin{equation}
 		U_t=e^{\frac{Ht}{\imath \hbar}}.
 	\end{equation}
@@ -141,5 +144,11 @@ Now we show the equivalence of the time evolution characterizations.
 \section{Conclusion}
 
 We have seen that the Schrödinger equation can be characterized in different ways, based on bijective maps of pure states, preservation of conditional probability and conservation of entropy. Conceptually, all these are equivalent to saying that the system is isolated, as future and past states are determined, and only determined, by the present state of the system.
+
+\begin{thebibliography}{9}
+	\bibitem{Landsman2017}
+	K. Landsman, \emph{Foundations of Quantum Theory: From Classical Concepts to Operator Algebras}, Springer, 2017.
+	\href{https://doi.org/10.1007/978-3-319-51777-3}{doi:10.1007/978-3-319-51777-3}.
+\end{thebibliography}
 
 \end{document}
