@@ -1,66 +1,171 @@
 \documentclass{techbrief}
-\title{Schrödinger equation is equivalent to information conservation}
+
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{compat=1.18}
+
+\title{Unitary evolution is equivalent to entropy conservation}
 \author{Gabriele Carcassi}
 \category{Quantum mechanics}
-\tags{Schrödinger equation, entropy, unitary evolution}
+\tags{Unitary evolution, entropy, information conservation}
+
 \begin{document}
-	\maketitle
-	\begin{abstract}We show that the Schrödinger equation is equivalent to preservation of the von Neumann entropy. That is, the time evolution of a quantum system follows the Schrödinger equation if and only if it preserves information entropy.\end{abstract}
+
+\maketitle
+
+\begin{abstract}
+	We show that, for time-independent quantum dynamics, unitary evolution is equivalent to preservation of the von Neumann entropy across evolved future and reconstructed past ensembles. The key is that the entropy of an equal mixture of two pure states determines their transition probability: preserving entropy preserves the geometry of quantum states. The result holds in finite and infinite dimensions.
+\end{abstract}
+
 \section{Introduction}
 
-In quantum mechanics, the time evolution for an isolated system is postulated to follow the Schrödinger equation (i.e. unitary evolution). Here we show that, once the basic structure of quantum theory is assumed, the same equation is equivalent to requiring the conservation of information entropy. Conceptually, this states that the time evolution is deterministic and reversible if and only if the amount of information given to identify the initial state is exactly the same as the information given to identify the final state, which is an information theoretic way to characterize determinism and reversibility.
+In quantum mechanics, the time evolution for an isolated system is postulated to be unitary. Here we show that, once the basic structure of quantum theory is assumed, time-independent unitary evolution is equivalent to requiring the conservation of information entropy. Conceptually, the amount of information given to identify the present state is exactly the same as the information given to identify a future or past state, which is an information theoretic way to characterize determinism and reversibility.
+
+The core insight is that the entropy of an equal mixture of two pure states determines their transition probability. Entropy conservation therefore preserves not only purity, but also the geometry of the state space. We first establish this relationship mathematically, then use it to prove the equivalence.
+
+\section{Mathematical prerequisites}
+
+Let $\mathcal{P}(\mathcal{H})$ and $\mathcal{D}(\mathcal{H})$ be the projective space and the density operators of a non-trivial separable complex Hilbert space $\mathcal{H}$. For a ray $\psi$, let $|\psi\>$ be a normalized vector representative and $\rho_\psi=|\psi\>\<\psi|$ its rank-one projector. Write $S(\rho)=-\tr(\rho\log\rho)$, with logarithms in base two and $0\log0=0$. Density operators carry the trace-norm topology, and rays carry the topology of their rank-one projectors.
+
+\begin{prop}[Overlap and mixture entropy]\label{QM-ENT-PROB}
+	Let $\psi,\phi\in\mathcal{P}(\mathcal{H})$ and $\lambda=\tr(\rho_\psi\rho_\phi)=|\<\psi|\phi\>|^2$. Then
+	\begin{equation}
+		S\left(\frac{1}{2}\rho_\psi+\frac{1}{2}\rho_\phi\right)
+		=-\frac{1+\sqrt{\lambda}}{2}\log\frac{1+\sqrt{\lambda}}{2}-\frac{1-\sqrt{\lambda}}{2}\log\frac{1-\sqrt{\lambda}}{2}.
+	\end{equation}
+	The right-hand side is strictly decreasing in $\lambda\in[0,1]$. Thus the entropy of the equal mixture and the overlap uniquely determine each other.
+\end{prop}
+
+\begin{figure}[ht]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=0.8]
+			\coordinate (psi) at (35:2);
+			\coordinate (phi) at (-35:2);
+			\coordinate (rho) at ({2*cos(35)},0);
+			\draw (0,0) circle (2);
+			\node at (-2.3,0) {$-$};
+			\node at (2.3,0) {$+$};
+			\node[above right] at (psi) {$\psi$};
+			\node[below right] at (phi) {$\phi$};
+			\draw (-2,0) -- (2,0);
+			\draw (0,0) -- (psi);
+			\draw (0,0) -- (phi);
+			\draw (psi) -- (phi);
+			\draw (0.6,0) arc[start angle=0,end angle=35,radius=0.6];
+			\node at (17.5:1.05) {\scriptsize $\theta_{\psi+}$};
+			\fill (rho) circle (0.05);
+			\node[below left] at (rho) {$\rho$};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.52\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=6cm,height=4.6cm,
+				axis lines=left,
+				xlabel={$\lambda=|\<\psi|\phi\>|^2$},
+				ylabel={$S\left(\frac{1}{2}\rho_\psi+\frac{1}{2}\rho_\phi\right)$},
+				xmin=0,xmax=1.04,ymin=0,ymax=1.04,
+				xtick={0,1},ytick={0,1},
+				domain=0:0.9999,samples=100]
+				\addplot[black] {(-((1+sqrt(x))/2)*ln((1+sqrt(x))/2)-((1-sqrt(x))/2)*ln((1-sqrt(x))/2))/ln(2)};
+				\addplot[black,only marks,mark=*,mark size=1pt] coordinates {(0,1) (1,0)};
+			\end{axis}
+		\end{tikzpicture}
+	\end{minipage}
+	\caption{Left: geometric diagonalization of an equal mixture of two pure states in their Bloch ball. The mixture is the midpoint of the chord, and the opposite poles $+$ and $-$ give its eigenstates. Right: its entropy is a strictly decreasing function of the overlap.}\label{figMixtureEntropy}
+\end{figure}
+
+\begin{proof}
+	If $\psi=\phi$, the mixture is pure, $\lambda=1$ and both sides are zero. If $\psi$ and $\phi$ are orthogonal, the mixture has eigenvalues $\frac{1}{2}$ and $\frac{1}{2}$, $\lambda=0$ and both sides equal $1$.
+
+	Otherwise, their representatives span a two-dimensional subspace. The mixture $\rho=\frac{1}{2}\rho_\psi+\frac{1}{2}\rho_\phi$ is supported on this subspace and is the midpoint between their Bloch vectors, as in Fig.~\ref{figMixtureEntropy}. To diagonalize $\rho$, express it as a mixture of the orthogonal states $+$ and $-$ at the ends of the diameter through $\rho$, choosing $+$ on the same side as $\rho$. Let $\theta_{\psi+}$ be the angle between the Bloch vectors of $\psi$ and $+$. Since $+$ bisects the angle between $\psi$ and $\phi$, the Bloch angle between the latter is $\theta_{\psi\phi}=2\theta_{\psi+}$.
+
+	The coefficients of $\rho_+$ and $\rho_-$ are the fractional distances along the diameter. With the Bloch-ball radius normalized to one, trigonometry gives
+	\begin{equation*}
+		\rho=\frac{\overline{-\rho}}{\overline{-+}}\rho_++\frac{\overline{\rho+}}{\overline{-+}}\rho_-=\frac{1+\cos\theta_{\psi+}}{2}\rho_++\frac{1-\cos\theta_{\psi+}}{2}\rho_-.
+	\end{equation*}
+	The overlap is the cosine squared of half the Bloch angle, so
+	\begin{equation*}
+		\lambda=|\<\psi|\phi\>|^2=\cos^2\left(\frac{\theta_{\psi\phi}}{2}\right)=\cos^2\theta_{\psi+},\qquad \cos\theta_{\psi+}=\sqrt{\lambda}.
+	\end{equation*}
+	The positive square root is selected because $0<\theta_{\psi+}<\frac{\pi}{2}$. Therefore $\rho$ has eigenvalues $\frac{1+\sqrt{\lambda}}{2}$ and $\frac{1-\sqrt{\lambda}}{2}$, with all remaining eigenvalues zero. Substitution into $-\tr(\rho\log\rho)$ gives the stated formula.
+
+	Writing the right-hand side as $F(\lambda)$, for $0<\lambda<1$ we have
+	\begin{equation*}
+		F'(\lambda)=\frac{1}{4\sqrt{\lambda}}\log\left(\frac{1-\sqrt{\lambda}}{1+\sqrt{\lambda}}\right)<0.
+	\end{equation*}
+	Continuity at the endpoints, where $F(0)=1$ and $F(1)=0$, establishes strict monotonicity on $[0,1]$ and therefore invertibility.
+\end{proof}
 
 \section{Conditions}
 
-The following condition represents our base theory.
+The following condition represents the standard structure of quantum states on Hilbert space.
 \begin{condition}[Quantum states]{QST:H}
 	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
-Within our base theory, we can derive the following.
-\begin{coro}[Born rule is entropy]\label{QM-ENT-PROB}
-	Let $\psi, \phi \in \mathcal{P}(\mathcal{H})$ be two quantum states. The probability of measuring $\phi$ having prepared $\psi$ is uniquely determined by the entropy of their equal mixture and vice versa. More precisely, $p(\phi|\psi) = \lambda$ if and only if $S\left(\frac{1}{2} \rho_{\psi} + \frac{1}{2} \rho_{\phi} \right) =  - \frac{1+\sqrt{\lambda}}{2} \log \frac{1+\sqrt{\lambda}}{2} - \frac{1-\sqrt{\lambda}}{2} \log \frac{1-\sqrt{\lambda}}{2}.$
-\end{coro}
-The expression of the entropy as a function of $\lambda$ is recovered with a straightforward calculation. The function is strictly decreasing and therefore invertible.
+Time evolution must preserve statistical mixtures.
+\begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
+	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, let $\mathcal{D}$ be the ensemble space of the system, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}\to \mathcal{D}$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
+\end{condition}
+Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, this is a base condition. Under \ref{QST:H}, continuity is understood in the trace norm.
 
-Time evolution in quantum mechanics is given by the following.
-\begin{condition}[Schrödinger equation]{DR-SCEQ}
-	The evolution follows the equation $\frac{d}{dt} \psi(t) = \frac{H(t)}{\imath \hbar} \psi(t)$, where $H(t)$ is a self-adjoint operator.
+We restrict the dynamics to the time-independent case.
+\begin{condition}[Time-independent evolution]{EVTI}
+	Evolution depends only on elapsed time. That is, $\Phi_{t_0 \to t_1}=\Phi_{t_1-t_0}$.
 \end{condition}
 
-We will want to show that the previous condition is equivalent to the following conditions.
-\begin{condition}[Differentiable evolution]{EVDIFF}
-	The evolution is differentiable.
+We will show that the following representation of evolution is equivalent to a physical requirement on entropy.
+\begin{condition}[Unitary evolution]{DR-UNIT}
+	Time evolution is represented by a strongly continuous one-parameter group of unitary operators. That is, $\Phi_t(\rho)=U_t\rho U_t^\dagger$, where $U_t:\mathcal{H}\to\mathcal{H}$, $U_0=I$, $U_{t+s}=U_tU_s$ and $U_t^\dagger U_t=U_tU_t^\dagger=I$.
 \end{condition}
 
 \begin{condition}[Conservation of information entropy]{DR-INFO}
 	Future and past ensembles have the same information entropy. That is, if $\rho_I$ is an initial ensemble, $\rho_F$ is the corresponding evolved future ensemble and $\rho_P$ is the corresponding reconstructed past ensemble, then $S(\rho_I) = S(\rho_F) = S(\rho_P)$.
 \end{condition}
-
-Note that \ref{DR-SCEQ} respects the following condition:
-\begin{condition}[Evolution preserves statistical mixtures]{[B]EVMIX}
-	The evolution of a statistical mixture is the statistical mixture of the evolutions. That is, let $\mathcal{D}$ be the ensemble space of the system, the evolution from each $t_0$ to each $t_1$, with $t_1\geq t_0$, is given by an affine map $\Phi_{t_0 \to t_1}:\mathcal{D}\to \mathcal{D}$ such that $\Phi_{t_0 \to t_0}=I$, $\Phi_{t_1 \to t_2}\circ \Phi_{t_0 \to t_1}=\Phi_{t_0 \to t_2}$ and $(\rho,t_0,t_1)\mapsto \Phi_{t_0 \to t_1}(\rho)$ is jointly continuous.
-\end{condition}
-Physically, the process is such that the output of a statistical mixture is the statistical mixture of the outputs. Since this is a physical requirement, we will take it as part of our base theory.
+Here any present ensemble has both an evolved future ensemble and a reconstructed past ensemble. Reconstruction describes what the present preparation tells us about the past, and is not assumed to be the inverse of evolution. However, both describe the same physical process: when a present pure state reconstructs a definite past state and that past state predicts a definite present state, the two descriptions of the present must agree. This consistency will establish the inverse relationship when entropy conservation forces both evolution and reconstruction to preserve purity.
 
 \section{Theorem}
-\begin{thrm}[Schrödinger equation is information preservation]
-	Over \ref{QST:H}+\ref{[B]EVMIX}, conditions \ref{DR-SCEQ} and \ref{DR-INFO}+\ref{EVDIFF} are equivalent.
+
+\begin{thrm}[Unitary evolution is entropy conservation]
+	Over \ref{QST:H}+\ref{[B]EVMIX}+\ref{EVTI}, conditions \ref{DR-UNIT} and \ref{DR-INFO} are equivalent.
 \end{thrm}
+
 \begin{proof}
-	\ref{DR-SCEQ} $\implies$ \ref{DR-INFO}+\ref{EVDIFF}. The Schrödinger equation gives rise to a differentiable unitary propagator $U_{t_0\to t_1}$. Therefore, the evolved and reconstructed ensembles are respectively $\rho_F=U_{t_0\to t_1}\rho_IU_{t_0\to t_1}^\dagger$ and $\rho_P=U_{t_0\to t_1}^\dagger\rho_FU_{t_0\to t_1}$. Since unitary conjugation preserves eigenvalues, and the von Neumann entropy depends only on eigenvalues, $S(\rho_I)=S(\rho_F)=S(\rho_P)$.
-	
-	For \ref{DR-INFO}+\ref{EVDIFF} $\implies$ \ref{DR-SCEQ}, consider the evolution $\Phi_{t_0\to t_1}:\mathcal{D}(\mathcal{H})\to\mathcal{D}(\mathcal{H})$. To show that it is induced by a unitary map on $\mathcal{H}$, we proceed in steps.
-	
-	\emph{Step 1: Pure states correspond to pure states.} Pure states are the unique ensembles with $S(\rho)=0$. Since entropy is preserved across evolved and reconstructed ensembles, pure initial states correspond bijectively to pure future states.
-	
-	\emph{Step 2: The map on vectors is unitary.} Let $\psi_F$ and $\phi_F$ be the future states corresponding to any two initial states $\psi_I$ and $\phi_I$. Consider their equal mixtures. By \ref{[B]EVMIX}, $\Phi_{t_0\to t_1}(\frac{1}{2}\rho_{\psi_I}+\frac{1}{2}\rho_{\phi_I})=\frac{1}{2}\rho_{\psi_F}+\frac{1}{2}\rho_{\phi_F}$. By \ref{DR-INFO}, the two mixtures have the same entropy. Since by \ref{QM-ENT-PROB} the entropy of an equal mixture of two pure states is an invertible function of their conditional probability, $p(\psi_F|\phi_F)=p(\psi_I|\phi_I)$ for all pairs of states. The bijective map on pure states therefore preserves the modulus of the inner product. By Wigner's theorem, it is induced by either a unitary or an anti-unitary map $U_{t_0\to t_1}$ on $\mathcal{H}$. Joint continuity and $\Phi_{t_0\to t_0}=I$ exclude the anti-unitary case, so $U_{t_0\to t_1}$ is unitary.
-	
-	\emph{Step 3: Unitary implies Schrödinger.} Since the evolution is differentiable, $U_{t_0\to t_0+dt}=I+A(t_0)dt+o(dt)$. Unitarity implies $A(t_0)=-A(t_0)^\dagger$. Setting $A(t_0)=\frac{H(t_0)}{i\hbar}$ with $H(t_0)=H(t_0)^\dagger$ recovers the Schrödinger equation.
+	\ref{DR-INFO} $\implies$ \ref{DR-UNIT}. By \ref{EVTI}, write the forward evolution for an elapsed time $t\geq0$ as $\Phi_t$. We proceed in three steps.
+
+	\emph{Step 1: Pure states correspond bijectively to pure states.} Pure ensembles are exactly those with zero von Neumann entropy. By \ref{DR-INFO}, the evolution and reconstruction of a pure state therefore give pure states.
+
+	Let $\psi$ be a pure state at time $t$, let $\psi_P$ be its reconstructed state at time $0$, and let $\psi_{P_F}$ be the evolution of $\psi_P$ back to time $t$. Reconstruction assigns $\psi_P$ with certainty given $\psi$, while evolution assigns $\psi_{P_F}$ with certainty given $\psi_P$. These describe the same process and must agree on the state at time $t$, so $\psi_{P_F}=\psi$. The same reasoning shows that reconstructing the evolution of a pure state returns the original state. Thus evolution and reconstruction are inverses on pure states, and $\Phi_t$ maps pure states bijectively onto pure states. This is the physical consistency step; it does not assume an inverse for general ensemble evolution.
+
+	\emph{Step 2: Transition probabilities are preserved.} Let $\psi_F$ and $\phi_F$ be the evolved states corresponding to any two pure states $\psi$ and $\phi$. By \ref{[B]EVMIX},
+	\begin{equation*}
+		\Phi_t\left(\frac{1}{2}\rho_\psi+\frac{1}{2}\rho_\phi\right)=\frac{1}{2}\rho_{\psi_F}+\frac{1}{2}\rho_{\phi_F}.
+	\end{equation*}
+	By \ref{DR-INFO}, these mixtures have the same entropy. Proposition~\ref{QM-ENT-PROB} and \ref{QST:H} therefore give $p(\psi_F|\phi_F)=p(\psi|\phi)$: the map on pure states preserves transition probabilities.
+
+	\emph{Step 3: Evolution is represented by a unitary group.} By Wigner's theorem \cite[Theorem~5.29]{Landsman2017}, each map on pure states is implemented by a unitary or an anti-unitary operator. Since $\Phi_t=\Phi_{t/2}\circ\Phi_{t/2}$, its implementer can always be chosen unitary: the square of either type is unitary. These maps are trace-norm isometries, so their inverses extend the evolution to a continuous group. The standard lifting result for $(\mathbb{R},+)$ \cite[Theorem~5.59]{Landsman2017} allows the phases to be chosen to give a strongly continuous unitary group $U_t$. Thus $\Phi_t(\rho_\psi)=U_t\rho_\psi U_t^\dagger$ for every pure state. Affinity gives the same formula for every finite mixture.
+
+	For an infinite-rank density operator, write its spectral decomposition as $\rho=\sum_n a_n\rho_{\psi_n}$, where $a_n>0$ and $\sum_n a_n=1$. Put $s_N=\sum_{n=1}^N a_n$ and $\rho_N=\frac{1}{s_N}\sum_{n=1}^N a_n\rho_{\psi_n}$. Orthogonality gives
+	\begin{equation*}
+		\|\rho-\rho_N\|_1=\sum_{n=1}^N a_n\left(\frac{1}{s_N}-1\right)+\sum_{n>N}a_n=2(1-s_N)\longrightarrow0.
+	\end{equation*}
+	By continuity of $\Phi_t$ and of unitary conjugation, $\Phi_t(\rho)=\lim_N\Phi_t(\rho_N)=\lim_N U_t\rho_N U_t^\dagger=U_t\rho U_t^\dagger$. Therefore \ref{DR-UNIT} holds on the whole ensemble space.
+
+	\ref{DR-UNIT} $\implies$ \ref{DR-INFO}. Given a present ensemble $\rho_I$, its evolved future and reconstructed past ensembles for elapsed time $t\geq0$ are $\rho_F=U_t\rho_IU_t^\dagger$ and $\rho_P=U_t^\dagger\rho_IU_t$. Unitary conjugation preserves eigenvalues, including multiplicities. Since the von Neumann entropy depends only on eigenvalues, $S(\rho_I)=S(\rho_F)=S(\rho_P)$, including when the entropy is infinite. Therefore \ref{DR-INFO} holds.
 \end{proof}
 
 \section{Conclusion}
 
-We have seen that the Schrödinger equation is equivalent to the preservation of von Neumann entropy. This means that the dynamical law of quantum mechanics can be understood as the requirement that time evolution neither creates nor destroys information. This parallels the classical case where Hamiltonian evolution is equivalent to the preservation of Shannon entropy (Liouville's theorem) and of the definitional independence of degrees of freedom.
+We have seen that, for time-independent quantum dynamics, unitary evolution is equivalent to the preservation of von Neumann entropy across future and past ensembles. This means that the dynamical law can be understood as the requirement that time evolution neither creates nor destroys information. The mechanism is simple: zero entropy identifies pure states, while the entropy of their equal mixtures determines their transition probabilities. Conserving entropy therefore preserves the geometry of quantum states, which leads to unitary evolution.
+
+\begin{thebibliography}{9}
+	\bibitem{Landsman2017}
+	K. Landsman, \emph{Foundations of Quantum Theory: From Classical Concepts to Operator Algebras}, Springer, 2017.
+	\href{https://doi.org/10.1007/978-3-319-51777-3}{doi:10.1007/978-3-319-51777-3}.
+\end{thebibliography}
 
 \end{document}
