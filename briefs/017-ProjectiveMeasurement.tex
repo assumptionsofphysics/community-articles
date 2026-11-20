@@ -19,6 +19,91 @@ Projective measurement is usually presented together with state update: one meas
 
 We treat measurement as a black-box process. The description refers only to incoming and outgoing ensembles and makes no claim about the internal mechanism by which the measurement is implemented. From this point of view, the usual projective-measurement prediction can be characterized in four ways. It is the standard pinching of the incoming ensemble, the equilibrium reached under a dephasing Lindblad equation and the closest ensemble compatible with the measured observable, either through the Hilbert--Schmidt distance or the relative entropy.
 
+\section{Mathematical prerequisites}
+
+The following proposition proves equivalent mathematical characterizations of pinching that underlie the theorem. The setting is standard: $\mathcal{D}(\mathcal{H})$ is the space of density operators of a separable complex Hilbert space $\mathcal{H}$, $\|A\|_{HS}^2=\tr(A^\dagger A)$, $S(\rho)=-\tr(\rho\log\rho)$ and $D(\rho\Vert\sigma)=\tr(\rho\log\rho)-\tr(\rho\log\sigma)$, with base-two logarithms and extended relative entropy when necessary.
+
+\begin{prop}[Equivalent characterizations of the pinching map]\label{pinchingCharacterizations}
+	Let $X=\sum_x xP_x$ be a self-adjoint operator with discrete spectrum and $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$ the corresponding pinching map. Then the following characterizations of $\Phi_X:\mathcal{D}(\mathcal{H})\to\mathcal{D}(\mathcal{H})$ are equivalent:
+	\begin{itemize}
+		\item $\Phi_X(\rho)=\mathcal{P}_X(\rho)$
+		\item $\Phi_X(\rho)=\lim\limits_{t\to\infty}\rho(t)$ where $\frac{d\rho}{dt}=X\rho X-\frac{1}{2}\{X^2,\rho\}$ and $\rho(0)=\rho$
+		\item $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}\|\rho-\sigma\|^2_{HS}$.
+	\end{itemize}
+	Additionally, on the restricted domain where both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite, the following characterization is also equivalent to the previous three
+	\begin{itemize}
+		\item $\Phi_X(\rho)=\operatorname*{argmin}\limits_{\sigma\in\mathcal D(\mathcal H),\,[\sigma,X]=0}D(\rho\Vert\sigma)$.
+	\end{itemize}
+\end{prop}
+
+\begin{proof}
+	The first characterization defines $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. We show that the other characterizations give the same unique output for each $\rho$. The trace-norm topology is assumed on $\mathcal{D}(\mathcal{H})$. Also, recall that, for any self-adjoint operator $X$, $[\rho,X]=0$ if and only if $\rho$ commutes with every spectral projection of $X$.
+
+	\emph{Spectral equilibration.} Since the $P_x$ are the projectors onto the eigenspaces associated with each $x$, we can write the density matrix as
+	\begin{equation}
+		\rho=\sum_{x,y}P_x\rho P_y.
+	\end{equation}
+	This is the block-matrix decomposition of $\rho$ with respect to the eigenspaces of $X$: the terms $P_x\rho P_x$ are the diagonal blocks and the terms $P_x\rho P_y$, with $x\neq y$, are the off-diagonal blocks. We now calculate the evolution of each block. Multiplying the Lindblad equation on the left by $P_x$ and on the right by $P_y$ gives
+	\begin{equation}
+		P_x\frac{d\rho}{dt}P_y=P_xX\rho XP_y-\frac{1}{2}P_xX^2\rho P_y-\frac{1}{2}P_x\rho X^2P_y.
+	\end{equation}
+	Since $P_xX=xP_x$, $XP_y=yP_y$, $P_xX^2=x^2P_x$ and $X^2P_y=y^2P_y$, we have
+	\begin{equation}
+		\frac{d}{dt}P_x\rho(t)P_y=\left(xy-\frac{x^2}{2}-\frac{y^2}{2}\right)P_x\rho(t)P_y=-\frac{1}{2}(x-y)^2P_x\rho(t)P_y.
+	\end{equation}
+	Each block therefore satisfies a simple exponential-decay equation, whose solution is
+	\begin{equation}
+		P_x\rho(t)P_y=e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y.
+	\end{equation}
+	Note that, if $X$ is unbounded, the differential equation is initially valid only on the domain of its generator. The blockwise solution extends the resulting semigroup to every density operator. For $x=y$, the exponential is one and the diagonal block remains fixed. For $x\neq y$, the exponential tends to zero and the off-diagonal block disappears. To take the limit of all blocks at once, note that distinct blocks are orthogonal in the Hilbert--Schmidt inner product. Therefore
+	\begin{align}
+		\|\rho(t)-\mathcal{P}_X(\rho(0))\|^2_{HS}
+		&=\left\|\sum_{x\neq y}e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y\right\|^2_{HS}\\
+		&=\sum_{x\neq y}e^{-t(x-y)^2}\|P_x\rho(0)P_y\|^2_{HS}.
+	\end{align}
+	Moreover,
+	\begin{equation}
+		\sum_{x,y}\|P_x\rho(0)P_y\|^2_{HS}=\|\rho(0)\|^2_{HS}<\infty.
+	\end{equation}
+	Each term in the previous sum tends to zero and is bounded by the corresponding term in this convergent sum. Dominated convergence therefore gives
+	\begin{equation}
+		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_{HS}=0.
+	\end{equation}
+	Both $\rho(t)$ and $\mathcal{P}_X(\rho(0))$ are density operators. For density operators, Hilbert--Schmidt convergence to a density operator implies trace-norm convergence: this is the non-commutative Scheff\'e lemma. Hence
+	\begin{equation}
+		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_1=0,
+	\end{equation}
+	which proves convergence to the pinching map.
+
+	\emph{Closest commuting ensemble.} An operator commutes with $X$ if and only if it is block diagonal with respect to the eigenspaces of $X$. Therefore, $[\sigma,X]=0$, $\sigma$ has no off-diagonal blocks and $\mathcal{P}_X(\sigma)=\sigma$ are all equivalent statements. The difference $\rho-\mathcal{P}_X(\rho)$ contains only off-diagonal blocks, while $\mathcal{P}_X(\rho)-\sigma$ contains only diagonal blocks. They are orthogonal in the Hilbert--Schmidt inner product, and hence
+	\begin{equation}
+		\|\rho-\sigma\|^2_{HS}=\|\rho-\mathcal{P}_X(\rho)\|^2_{HS}+\|\mathcal{P}_X(\rho)-\sigma\|^2_{HS}.
+	\end{equation}
+	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer.
+
+	\emph{Closest commuting ensemble in information.} Suppose that $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite.
+	
+	If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
+	\begin{equation}
+	\begin{aligned}
+	D(\rho\Vert\sigma)
+	&=\tr(\rho\log\rho)-\tr(\rho\log\sigma) \\
+	&=\tr(\rho\log\rho)-\tr(\rho\log\mathcal{P}_X(\rho))+\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))-\tr(\mathcal{P}_X(\rho)\log\sigma)\\
+	&=D(\rho\Vert\mathcal{P}_X(\rho))+D(\mathcal{P}_X(\rho)\Vert\sigma).
+	\end{aligned}
+	\end{equation}
+	We also have
+	\begin{equation}
+	\begin{aligned}
+		D(\rho\Vert\mathcal{P}_X(\rho))
+		&=\tr(\rho\log\rho)-\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))= S(\mathcal{P}_X(\rho)) - S(\rho),
+	\end{aligned}
+	\end{equation}
+	which means the KL divergence between the two ensembles is well-defined and finite if and only if $S(\mathcal{P}_X(\rho))$ is finite.
+	
+	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus $\mathcal{P}_X(\rho)$ is also the unique relative-entropy minimizer.
+\end{proof}
+
 \section{Conditions}
 
 The following condition represents the standard structure of quantum states and observables on Hilbert space.
@@ -26,7 +111,7 @@ The following condition represents the standard structure of quantum states and 
 	The state space of a quantum system is represented by the projective space $\mathcal{P}(\mathcal{H})$ of a separable complex Hilbert space $\mathcal{H}$. The ensemble space is represented by the density operators $\mathcal{D}(\mathcal{H})$. Observables are represented by self-adjoint operators. The conditional probability is given by the Born rule $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$. The entropy is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
-This base condition states the ensembles have finite entropy.
+This base condition states that ensembles have finite entropy.
 \begin{condition}[Entropy is finite]{[B]FINENT}
 	All ensembles have a well-defined finite entropy.
 \end{condition}
@@ -57,78 +142,16 @@ We now prove the equivalence.
 \end{thrm}
 
 \begin{proof}
-	Let $\Phi_X$ denote the black-box spectral equilibration process associated with $X=\sum_xxP_x$, and define the pinching map $\mathcal{P}_X(\rho)=\sum_xP_x\rho P_x$. Condition \ref{EQ-MEAS} states that $\Phi_X=\mathcal{P}_X$. We show directly that each of the other conditions also characterizes $\Phi_X$ as the map $\mathcal{P}_X$.
+	Under \ref{QSTO:H}, ensembles are represented by density operators and the measured observable by $X=\sum_xxP_x$. Condition \ref{EQ-MEAS} represents the black-box process by the pinching map $\mathcal{P}_X$. By Proposition~\ref{pinchingCharacterizations}, the dephasing equilibrium in \ref{EQ-LIND} and the Hilbert--Schmidt minimizer in \ref{EQ-HS} are precisely the same map. Thus the three conditions are equivalent.
 
-	\ref{EQ-LIND} $\iff$ \ref{EQ-MEAS}. Since the $P_x$ are the projectors onto the eigenspaces associated with each $x$, we can write the density matrix as
-	\begin{equation}
-		\rho=\sum_{x,y}P_x\rho P_y.
-	\end{equation}
-	This is the block-matrix decomposition of $\rho$ with respect to the eigenspaces of $X$: the terms $P_x\rho P_x$ are the diagonal blocks and the terms $P_x\rho P_y$, with $x\neq y$, are the off-diagonal blocks. We now calculate the evolution of each block. Multiplying the Lindblad equation in \ref{EQ-LIND} on the left by $P_x$ and on the right by $P_y$ gives
-	\begin{equation}
-		P_x\frac{d\rho}{dt}P_y=P_xX\rho XP_y-\frac{1}{2}P_xX^2\rho P_y-\frac{1}{2}P_x\rho X^2P_y.
-	\end{equation}
-	Since $P_xX=xP_x$, $XP_y=yP_y$, $P_xX^2=x^2P_x$ and $X^2P_y=y^2P_y$, we have
-	\begin{equation}
-		\frac{d}{dt}P_x\rho(t)P_y=\left(xy-\frac{x^2}{2}-\frac{y^2}{2}\right)P_x\rho(t)P_y=-\frac{1}{2}(x-y)^2P_x\rho(t)P_y.
-	\end{equation}
-	Each block therefore satisfies a simple exponential-decay equation, whose solution is
-	\begin{equation}
-		P_x\rho(t)P_y=e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y.
-	\end{equation}
-	Note that, if $X$ is unbounded, the differential equation is initially valid only on the domain of its generator. The blockwise solution extends the resulting semigroup to every density operator. For $x=y$, the exponential is one and the diagonal block remains fixed. For $x\neq y$, the exponential tends to zero and the off-diagonal block disappears. To take the limit of all blocks at once, note that distinct blocks are orthogonal in the Hilbert--Schmidt inner product. Therefore
-	\begin{align}
-		\|\rho(t)-\mathcal{P}_X(\rho(0))\|^2_{HS}
-		&=\left\|\sum_{x\neq y}e^{-\frac{t}{2}(x-y)^2}P_x\rho(0)P_y\right\|^2_{HS}\\
-		&=\sum_{x\neq y}e^{-t(x-y)^2}\|P_x\rho(0)P_y\|^2_{HS}.
-	\end{align}
-	Moreover,
-	\begin{equation}
-		\sum_{x,y}\|P_x\rho(0)P_y\|^2_{HS}=\|\rho(0)\|^2_{HS}<\infty.
-	\end{equation}
-	Each term in the previous sum tends to zero and is bounded by the corresponding term in this convergent sum. Dominated convergence therefore gives
-	\begin{equation}
-		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_{HS}=0.
-	\end{equation}
-	Both $\rho(t)$ and $\mathcal{P}_X(\rho(0))$ are density operators. For density operators, Hilbert--Schmidt convergence to a density operator implies trace-norm convergence: this is the non-commutative Scheff\'e lemma. Hence
-	\begin{equation}
-		\lim\limits_{t\to\infty}\|\rho(t)-\mathcal{P}_X(\rho(0))\|_1=0,
-	\end{equation}
-	which means $\lim\limits_{t\to\infty} \rho(t) = \mathcal{P}_X(\rho(0))$. Thus the Lindblad characterization returns $\mathcal{P}_X$, so \ref{EQ-LIND} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$.
-
-	\ref{EQ-HS} $\iff$ \ref{EQ-MEAS}. An operator commutes with $X$ if and only if it is block diagonal with respect to the eigenspaces of $X$. Therefore, $[\sigma,X]=0$, $\sigma$ has no off-diagonal blocks and $\mathcal{P}_X(\sigma)=\sigma$ are all equivalent statements. The difference $\rho-\mathcal{P}_X(\rho)$ contains only off-diagonal blocks, while $\mathcal{P}_X(\rho)-\sigma$ contains only diagonal blocks. They are orthogonal in the Hilbert--Schmidt inner product, and hence
-	\begin{equation}
-		\|\rho-\sigma\|^2_{HS}=\|\rho-\mathcal{P}_X(\rho)\|^2_{HS}+\|\mathcal{P}_X(\rho)-\sigma\|^2_{HS}.
-	\end{equation}
-	The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Since $\mathcal{P}_X$ is positive and trace preserving, $\mathcal{P}_X(\rho)$ is itself a density operator. It is therefore the unique minimizer. Thus the Hilbert--Schmidt characterization returns $\mathcal{P}_X$, so \ref{EQ-HS} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$.
-
-	Under the constraint \ref{[B]FINENT}, \ref{EQ-KL} $\iff$ \ref{EQ-MEAS}. Since ensembles must have finite entropy, the admissible domain of the pinching map is restricted to those density operators $\rho$ for which both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite. We show that KL minimization returns $\mathcal{P}_X$ on this same domain.
-	
-	If $[\sigma,X]=0$, then $\log\sigma$ is block diagonal. Therefore $\tr(\rho\log\sigma)=\tr(\mathcal{P}_X(\rho)\log\sigma)$. Moreover, $\mathcal{P}_X(\rho)$ and hence $\log\mathcal{P}_X(\rho)$ are block diagonal, so $\tr(\rho\log\mathcal{P}_X(\rho))=\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))$. We can therefore insert and subtract this common quantity:
-	\begin{equation}
-	\begin{aligned}
-	D(\rho\Vert\sigma)
-	&=\tr(\rho\log\rho)-\tr(\rho\log\sigma) \\
-	&=\tr(\rho\log\rho)-\tr(\rho\log\mathcal{P}_X(\rho))+\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))-\tr(\mathcal{P}_X(\rho)\log\sigma)\\
-	&=D(\rho\Vert\mathcal{P}_X(\rho))+D(\mathcal{P}_X(\rho)\Vert\sigma).
-	\end{aligned}
-	\end{equation}
-	We also have
-	\begin{equation}
-	\begin{aligned}
-		D(\rho\Vert\mathcal{P}_X(\rho))
-		&=\tr(\rho\log\rho)-\tr(\mathcal{P}_X(\rho)\log\mathcal{P}_X(\rho))= S(\mathcal{P}_X(\rho)) - S(\rho),
-	\end{aligned}
-	\end{equation}
-	which means the KL divergence between the two ensembles is well-defined and finite if and only if $S(\mathcal{P}_X(\rho))$ is finite.
-	
-	For non-faithful $\sigma$, the identity is understood on its support; candidates whose support does not contain that of $\rho$ have infinite relative entropy. The first term does not depend on $\sigma$, while the last term is non-negative and vanishes if and only if $\sigma=\mathcal{P}_X(\rho)$. Thus the relative-entropy characterization returns $\mathcal{P}_X$, so \ref{EQ-KL} and \ref{EQ-MEAS} characterize the same black-box process $\Phi_X$ on ensembles of finite entropy, completing the proof.
+	Under the constraint \ref{[B]FINENT}, admissible incoming and outgoing ensembles must have finite entropy. The pinching process is therefore restricted to those $\rho$ for which both $S(\rho)$ and $S(\mathcal{P}_X(\rho))$ are finite. On this domain, the same proposition identifies $\mathcal{P}_X(\rho)$ as the unique relative-entropy minimizer in \ref{EQ-KL}. The fourth condition therefore characterizes the same process.
 \end{proof}
 
 \section{Additional remarks}
 
 \textbf{Equilibration as a black-box description.} Condition \ref{EQ-LIND} does not claim that every physical implementation of projective measurement has vanishing Hamiltonian and jump operator $X$. It states that the same input--output process can be described by such an equilibration. Other dynamics may have the same asymptotic map.
 
-\textbf{Relative entropy in infinite dimensions.} In an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
+\textbf{Relative entropy in infinite dimensions.} For a finite-entropy incoming ensemble $\rho$ in an infinite-dimensional Hilbert space, $D(\rho\Vert\mathcal{P}_X(\rho))$ can be infinite only when $S(\mathcal{P}_X(\rho))=+\infty$. In that case, every ensemble commuting with $X$ is infinitely distant from $\rho$, so the minimization in \ref{EQ-KL} does not determine a unique closest ensemble. Since ensembles with infinite entropy are physically ill-defined, the real problem is the Hilbert space formalism, as it does not guarantee finite entropy for all density operators.
 
 \textbf{Constrained background theory.} In the second part of the theorem, the background theory is not \ref{QSTO:H}+\ref{[B]FINENT}, the logical conjunction of the two conditions. This would simply exclude the infinite-dimensional case because \ref{[B]FINENT} is not satisfied by all density operators. The background theory is instead \ref{QSTO:H} constrained by \ref{[B]FINENT}: the infinite-dimensional case is retained, while density operators with infinite entropy are removed from the ensemble space.
 
